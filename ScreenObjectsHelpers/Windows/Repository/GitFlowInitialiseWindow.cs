@@ -66,6 +66,15 @@ namespace ScreenObjectsHelpers.Windows.Repository
             else
                 return false;
         }
+        public void SetAllTextboxes(string testString)
+        {
+            SetTextboxContent(ProductionBranchTextbox, testString);
+            SetTextboxContent(DevelopmentBranchTextbox, testString);
+            SetTextboxContent(FeatureBranchTextbox, testString);
+            SetTextboxContent(ReleaseBranchTextbox, testString);
+            SetTextboxContent(HotfixBranchTextbox, testString);
+            SetTextboxContent(VersionTagTextbox, testString);
+        }
         #endregion
 
     }
