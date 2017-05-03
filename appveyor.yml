@@ -7,23 +7,29 @@ init:
 before_build:
 - cmd: >-
 
-    %windir%\system32\reg.exe import Disable_Explorer_Auto_Complete_popup.reg
-
     set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
 
-    git config --global core.excludesfile "%USERPROFILE%\.gitignore_global"    
+    git config --global core.excludesfile "%USERPROFILE%\.gitignore_global"
+
+    git config --global user.email test@atlassian.com
+    
+    git config --global user.name QAAutomation
     
     nuget restore
     
-    curl -o %localappdata%\RDP.7z https://transfer.sh/k3QWp/RD_19v_21.04.7z
+    curl -o %localappdata%\ST_Local.7z https://transfer.sh/zdF7y/19v_03.May.7z
     
-    7z e C:\Users\appveyor\AppData\Local\rdp.7z -y -oC:\Users\appveyor\AppData\Local -spf
+    7z e C:\Users\appveyor\AppData\Local\ST_Local.7z -y -oC:\Users\appveyor\AppData\Local -spf
     
-    curl -o "%localappdata%\Google\Chrome\User Data\Default\Cookie" https://transfer.sh/zaTfF/27-04-bb-gh
+    curl -o %localappdata%\configs.7z https://transfer.sh/xfIAw/configs_03.May.7z
     
-    curl -o %localappdata%\chrome.vbs https://transfer.sh/BSZvW/chrome.vbs
+    7z e C:\Users\appveyor\AppData\Local\configs.7z -y -oC:\Users\appveyor\AppData\Local -spf
+
+    cscript %localappdata%\configs\chrome_default.vbs
     
-    cscript %localappdata%\chrome.vbs
+    %windir%\system32\reg.exe import %localappdata%\configs\Disable_Explorer_Auto_Complete_popup.reg
+
+    %localappdata%\configs\SeleniumAuth.exe
 build:
   verbosity: minimal
 after_test:
