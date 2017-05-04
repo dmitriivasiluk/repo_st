@@ -124,6 +124,7 @@
     <Compile Include="Windows\GeneralWindow.cs" />
     <Compile Include="Windows\Options\UpdatesTab.cs" />
     <Compile Include="Windows\ProxyAuthenticationWindow.cs" />
+    <Compile Include="Windows\Repository\GitFlowInitialiseWindow.cs" />
     <Compile Include="Windows\Repository\RepositoryTab.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\CreateTab.cs" />

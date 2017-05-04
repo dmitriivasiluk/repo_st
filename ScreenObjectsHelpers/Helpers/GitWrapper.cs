@@ -114,6 +114,5 @@ namespace ScreenObjectsHelpers.Helpers
             _disposed = true;
             _gitRepository.Dispose();
         }
-
     }
 }

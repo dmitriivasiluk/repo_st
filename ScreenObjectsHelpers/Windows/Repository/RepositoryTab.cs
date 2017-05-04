@@ -34,7 +34,11 @@ namespace ScreenObjectsHelpers.Windows.Repository
         #endregion
 
         #region Methods
-
+        public GitFlowInitialiseWindow ClickGitFlowButton()
+        {
+            ClickButton(GitFlowButton);
+            return new GitFlowInitialiseWindow(MainWindow);
+        }
         #endregion
     }
 }

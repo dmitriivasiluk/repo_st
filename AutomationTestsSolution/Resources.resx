@@ -121,4 +121,7 @@
   <data name="customactions" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\customactions.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="opentabs_for_clear_repo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\opentabs_for_clear_repo.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
+  </data>
 </root>

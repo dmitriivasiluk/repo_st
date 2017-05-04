@@ -21,6 +21,7 @@ namespace ScreenObjectsHelpers.Helpers
         public const string bookmarksXml = "bookmarks.xml";
         public const string opentabsXml = "opentabs.xml";
         public const string accountsJson = "accounts.json";
+        public const string currentUserProfile = "%userprofile%";
 
         //Constants for Clone Tab tests
         public const string gitRepoType = "Git";
@@ -51,5 +52,12 @@ namespace ScreenObjectsHelpers.Helpers
         public const string gitInitFolderForAddTest = @"%userprofile%\Documents\TEST_GitInit_AddTab";
         public const string hgInitFolderForAddTest = @"%userprofile%\Documents\TEST_HgInit_AddTab";
         public const string pathToEmbeddedHg = @"%localappdata%\Atlassian\SourceTree\hg_local\hg.exe";
+
+        //Constants for GitFlow Initialise window
+        public const string defaultProductionBranch = "master";
+        public const string defaultDevelopmentBranch = "develop";
+        public const string defaultFeatureBranch = "feature/";
+        public const string defaultReleaseBranch = "release/";
+        public const string defaultHotfixBranch = "hotfix/";
     }
 }
