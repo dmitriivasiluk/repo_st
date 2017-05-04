@@ -113,30 +113,30 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
-        public void ConnectBitbucketServerAccountTest(
-            string atlassianLoginEmail,
-            string atlassianPassword,
-            string hostUrl,
-            string bitBucketLogin,
-            string bitbucketPassword)
-        {
-            InstallationWindow installWindow = new InstallationWindow(MainWindow);
-            installWindow.CheckLicenceAgreementCheckbox();
-            installWindow.ClickContinueButton();
-            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
+        //[TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
+        //public void ConnectBitbucketServerAccountTest(
+        //    string atlassianLoginEmail,
+        //    string atlassianPassword,
+        //    string hostUrl,
+        //    string bitBucketLogin,
+        //    string bitbucketPassword)
+        //{
+        //    InstallationWindow installWindow = new InstallationWindow(MainWindow);
+        //    installWindow.CheckLicenceAgreementCheckbox();
+        //    installWindow.ClickContinueButton();
+        //    AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
+        //    installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
-            installWindow.ClickContinueButton();
+        //    installWindow.ClickContinueButton();
 
-            // Don't have any HostURL to BitbucketServer for check this functionality.
-            installWindow.FillAuthenticationBitBucketServer(hostUrl, bitBucketLogin, bitbucketPassword);
+        //    // Don't have any HostURL to BitbucketServer for check this functionality.
+        //    installWindow.FillAuthenticationBitBucketServer(hostUrl, bitBucketLogin, bitbucketPassword);
 
-            //string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-            // This is ensure that authentication was successful, because we are located on next step "Install tools"
-            //Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
-        }
+        //    //string actualTitleOfNextStep = installWindow.DownloadingVersionText();
+        //    // This is ensure that authentication was successful, because we are located on next step "Install tools"
+        //    //Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
+        //}
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "incorrectPassword")]
         public void ConnectGitHubIncorrectCredentialsNegativeTest(
@@ -471,50 +471,50 @@ namespace AutomationTestsSolution.Tests
             Assert.IsTrue(isRepositoryCloned);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public", @"Documents\CloneBasicBitBucketServer")]
-        public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
-            string atlassianLoginEmail,
-            string atlassianPassword,
-            string urlServer,
-            string bitBucketLogin,
-            string bitBucketPassword,
-            string nameOfRepo,
-            string subFolderInUserProfile)
-        {
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-            Utils.RemoveDirectory(pathToNewFolder);
+        //[TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public", @"Documents\CloneBasicBitBucketServer")]
+        //public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
+        //    string atlassianLoginEmail,
+        //    string atlassianPassword,
+        //    string urlServer,
+        //    string bitBucketLogin,
+        //    string bitBucketPassword,
+        //    string nameOfRepo,
+        //    string subFolderInUserProfile)
+        //{
+        //    string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+        //    string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
+        //    Utils.RemoveDirectory(pathToNewFolder);
 
-            InstallationWindow installWindow = new InstallationWindow(MainWindow);
-            installWindow.CheckLicenceAgreementCheckbox();
-            installWindow.ClickContinueButton();
-            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
+        //    InstallationWindow installWindow = new InstallationWindow(MainWindow);
+        //    installWindow.CheckLicenceAgreementCheckbox();
+        //    installWindow.ClickContinueButton();
+        //    AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
+        //    installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
-            installWindow.ClickContinueButton();
+        //    installWindow.ClickContinueButton();
 
-            installWindow.FillAuthenticationBitBucketServer(urlServer, bitBucketLogin, bitBucketPassword);
+        //    installWindow.FillAuthenticationBitBucketServer(urlServer, bitBucketLogin, bitBucketPassword);
 
-            // WE need any BitBucket server to pass this test!
+        //    // WE need any BitBucket server to pass this test!
 
-            //installWindow.ClickContinueButton(); // step remotes
+        //    //installWindow.ClickContinueButton(); // step remotes
 
-            //installWindow.WaitCompleteInstallToolsProgressBar();
+        //    //installWindow.WaitCompleteInstallToolsProgressBar();
 
-            //installWindow.ClickContinueButton(); // step install tools
+        //    //installWindow.ClickContinueButton(); // step install tools
 
-            //installWindow.SelectRepositoryByName(nameOfRepo);
-            //Directory.CreateDirectory(pathToNewFolder);
-            //installWindow.BrowseDestinationPath(pathToNewFolder);
+        //    //installWindow.SelectRepositoryByName(nameOfRepo);
+        //    //Directory.CreateDirectory(pathToNewFolder);
+        //    //installWindow.BrowseDestinationPath(pathToNewFolder);
 
-            //installWindow.ClickContinueButton();
+        //    //installWindow.ClickContinueButton();
 
-            //Thread.Sleep(2000);
-            //bool isRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+        //    //Thread.Sleep(2000);
+        //    //bool isRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
 
-            //Assert.IsTrue(isRepositoryCloned);
-        }
+        //    //Assert.IsTrue(isRepositoryCloned);
+        //}
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public")]
         public void SearchInStartingRepositoryStepTest(
