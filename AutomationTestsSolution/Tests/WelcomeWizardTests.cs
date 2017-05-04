@@ -22,11 +22,11 @@ namespace AutomationTestsSolution.Tests
     /// </summary>
     class WelcomeWizardTests : BasicTest
     {
-
         [SetUp]
         public override void SetUp()
         {
             BackupConfigs();
+            UseTestUserConfig();
             RunSourceTree();
             AttachToWelcomeWizardSourceTree();
         }
