@@ -4,6 +4,8 @@ os: Unstable
 version: 1.0.{build}
 init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+install:
+- ps: Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/19v_03.May.7z 'C:\Users\appveyor\AppData\Local\ST_Local.7z'
 before_build:
 - cmd: >-
 
@@ -16,8 +18,6 @@ before_build:
     git config --global user.name QAAutomation
     
     nuget restore
-    
-    curl -o %localappdata%\ST_Local.7z https://transfer.sh/zdF7y/19v_03.May.7z
     
     7z e C:\Users\appveyor\AppData\Local\ST_Local.7z -y -oC:\Users\appveyor\AppData\Local -spf
     
