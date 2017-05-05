@@ -17,7 +17,7 @@ namespace AutomationTestsSolution.Tests
         protected string sourceTreeUserConfigPath;
         protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
         protected Process sourceTreeProcess;
-        private string testDataFolder;
+        private string testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
         private string emptyAutomationFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyAutomationFolder);
 
         private Tuple<string, string> exeAndVersion = FindSourceTree();
@@ -28,24 +28,47 @@ namespace AutomationTestsSolution.Tests
         public virtual void SetUp()
         {
             BackupConfigs();
-            UseTestConfigs(sourceTreeDataPath);
+            UseTestConfigAndAccountJson(sourceTreeDataPath);
             RunAndAttachToSourceTree();
         }
 
-        protected void UseTestConfigs(string dataFolder)
+        protected void UseTestConfigAndAccountJson(string dataFolder)
         {
-            testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
-
             var testAccountsJson = Path.Combine(testDataFolder, ConstantsList.accountsJson);
             var sourceTreeAccountsJsonPath = Path.Combine(dataFolder, ConstantsList.accountsJson);            
 
             SetFile(testAccountsJson, sourceTreeAccountsJsonPath);
 
+            UseTestUserConfig();
+
+            Utils.ThreadWait(1000);
+        }
+
+        protected void UseTestUserConfig()
+        {
             var testUserConfig = Path.Combine(testDataFolder, ConstantsList.userConfig);
 
             SetFile(testUserConfig, sourceTreeUserConfigPath);
 
-            Utils.ThreadWait(2000);
+            UserProfileExpandVariables();
+
+            Utils.ThreadWait(1000);
+        }
+
+        public static void ReplaceTextInFile(string pathToFile, string oldText, string newText)
+        {
+            var fileContent = File.ReadAllText(pathToFile);
+            fileContent = fileContent.Replace(oldText, newText);
+            File.WriteAllText(pathToFile, fileContent);
+        }
+
+        public void UserProfileExpandVariables()
+        {
+            var localappdataNewValue = Environment.ExpandEnvironmentVariables(ConstantsList.pathToLocalappdata);
+            ReplaceTextInFile(sourceTreeUserConfigPath, ConstantsList.pathToLocalappdata, localappdataNewValue);
+
+            var userprofileNewValue = Environment.ExpandEnvironmentVariables(ConstantsList.pathToUserprofile);
+            ReplaceTextInFile(sourceTreeUserConfigPath, ConstantsList.pathToUserprofile, userprofileNewValue);
         }
 
         protected void BackupConfigs()
@@ -57,7 +80,7 @@ namespace AutomationTestsSolution.Tests
 
             BackupData(sourceTreeDataPath);
 
-            Utils.ThreadWait(2000);
+            Utils.ThreadWait(1000);
         }
 
         protected void RunAndAttachToSourceTree()
@@ -96,7 +119,7 @@ namespace AutomationTestsSolution.Tests
         {
 
             Utils.RemoveFile(fileName + BackupSuffix);
-            Utils.ThreadWait(2000);
+            Utils.ThreadWait(1000);
             if (File.Exists(fileName))
             {
                 File.Move(fileName, fileName + BackupSuffix);

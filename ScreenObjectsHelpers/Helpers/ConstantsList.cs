@@ -17,6 +17,8 @@ namespace ScreenObjectsHelpers.Helpers
         public const string emptyAutomationFolder = @"%localappdata%\EmptyFolderForAutomation";
         public const string pathToDataFolder = @"%localappdata%\Atlassian\SourceTree\";
         public const string pathToAtlassianFolder = @"%localappdata%\Atlassian";
+        public const string pathToLocalappdata = @"%localappdata%\";
+        public const string pathToUserprofile = @"%userprofile%\";
         public const string userConfig = "user.config";
         public const string bookmarksXml = "bookmarks.xml";
         public const string opentabsXml = "opentabs.xml";

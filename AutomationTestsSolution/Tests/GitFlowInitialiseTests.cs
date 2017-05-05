@@ -26,7 +26,7 @@ namespace AutomationTestsSolution.Tests
             CreateTestFolder();
             Repository.Init(pathToClonedGitRepo);
             base.BackupConfigs();
-            base.UseTestConfigs(sourceTreeDataPath);
+            base.UseTestConfigAndAccountJson(sourceTreeDataPath);
             resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
             File.WriteAllText(openTabsPath, resourceName);
             base.RunAndAttachToSourceTree();

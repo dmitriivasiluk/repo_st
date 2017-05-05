@@ -30,6 +30,10 @@ before_build:
     %windir%\system32\reg.exe import %localappdata%\configs\Disable_Explorer_Auto_Complete_popup.reg
 
     %localappdata%\configs\SeleniumAuth.exe
+    
+    curl -o %userprofile%\Documents\ignore.7z https://transfer.sh/8LfXY/global_ignore_04.May.7z
+    
+    7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
 build:
   verbosity: minimal
 after_test:
