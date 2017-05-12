@@ -473,8 +473,7 @@ namespace AutomationTestsSolution.Tests
         public void CloneBitBucketRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
-            string nameOfRepo
-            )
+            string nameOfRepo)
         {
             string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneOAuthBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
