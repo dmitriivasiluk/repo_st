@@ -4,7 +4,7 @@ namespace ScreenObjectsHelpers.Helpers
     public class ConstantsList
     {
         //Constants for Help Menu (about window) tests
-        public const string appVersion = "Version 2.0.19.1";
+        public const string appVersion = "Version 2.0.20.1";
         public const string copyrightCaption = "Copyright Atlassian 2012-2017. All Rights Reserved.";
         public const string aboutWindowHeader = "About SourceTree";
 
@@ -17,6 +17,7 @@ namespace ScreenObjectsHelpers.Helpers
         public const string emptyAutomationFolder = @"%localappdata%\EmptyFolderForAutomation";
         public const string pathToDataFolder = @"%localappdata%\Atlassian\SourceTree\";
         public const string pathToAtlassianFolder = @"%localappdata%\Atlassian";
+        public const string pathToDocumentsFolder = @"%userprofile%\Documents\";
         public const string pathToLocalappdata = @"%localappdata%\";
         public const string pathToUserprofile = @"%userprofile%\";
         public const string userConfig = "user.config";

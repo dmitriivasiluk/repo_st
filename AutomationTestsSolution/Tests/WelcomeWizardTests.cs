@@ -22,6 +22,16 @@ namespace AutomationTestsSolution.Tests
     /// </summary>
     class WelcomeWizardTests : BasicTest
     {
+        #region Test Variables
+        private string pathToDocumentsFolder = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDocumentsFolder);
+        private string openSourceTreeTestFolder = "OpenSourceTree";
+        private string cloneOAuthGitHubTestFolder = "CloneOAuthGitHub";
+        private string cloneOAuthBitBucketTestFolder = "CloneOAuthBitBucket";
+        private string cloneBasicBitBucketTestFolder = "CloneBasicBitBucket";
+        private string cloneBasicGitHubTestFolder = "CloneBasicGitHub";
+        private string cloneBasicBitBucketServerTestFolder = "CloneBasicBitBucketServer";
+        #endregion
+
         [SetUp]
         public override void SetUp()
         {
@@ -31,6 +41,14 @@ namespace AutomationTestsSolution.Tests
             AttachToWelcomeWizardSourceTree();
         }
 
+        [TearDown]
+        public override void TearDown()
+        {
+            base.TearDown();
+
+            RemoveTestFolders();
+        }
+
         private void AttachToWelcomeWizardSourceTree()
         {
             MainWindow = null;
@@ -38,7 +56,18 @@ namespace AutomationTestsSolution.Tests
             MainWindow = Utils.FindNewWindow("Welcome");
         }
 
+        private void RemoveTestFolders()
+        {
+            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, openSourceTreeTestFolder));
+            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneOAuthGitHubTestFolder));
+            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneOAuthBitBucketTestFolder));
+            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketTestFolder));
+            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneBasicGitHubTestFolder));
+            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketServerTestFolder));
+        }
+
         [TestCase]
+        [Category("WelcomeWizard")]
         public void ContinueButtonIsNotActiveTest()
         {
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -49,6 +78,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
+        [Category("WelcomeWizard")]
         public void ValidRegistrationTest(string loginEmailToAtlassian, string passwordToAtlassian)
         {
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -67,6 +97,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake")]
+        [Category("WelcomeWizard")]
         public void ConnectGitHubAccountTest(
             string atlassianLoginEmail, 
             string atlassianPassword, 
@@ -89,6 +120,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake")]
+        [Category("WelcomeWizard")]
         public void ConnectBitbucketAccountTest (
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -113,32 +145,36 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
-        //[TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
-        //public void ConnectBitbucketServerAccountTest(
-        //    string atlassianLoginEmail,
-        //    string atlassianPassword,
-        //    string hostUrl,
-        //    string bitBucketLogin,
-        //    string bitbucketPassword)
-        //{
-        //    InstallationWindow installWindow = new InstallationWindow(MainWindow);
-        //    installWindow.CheckLicenceAgreementCheckbox();
-        //    installWindow.ClickContinueButton();
-        //    AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
+        [Ignore("BitBucket server link needed")]
+        [Category("WelcomeWizard")]
+        [Category("bbs")]
+        public void ConnectBitbucketServerAccountTest(
+            string atlassianLoginEmail,
+            string atlassianPassword,
+            string hostUrl,
+            string bitBucketLogin,
+            string bitbucketPassword)
+        {
+            InstallationWindow installWindow = new InstallationWindow(MainWindow);
+            installWindow.CheckLicenceAgreementCheckbox();
+            installWindow.ClickContinueButton();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-        //    installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
-        //    installWindow.ClickContinueButton();
+            installWindow.ClickContinueButton();
 
-        //    // Don't have any HostURL to BitbucketServer for check this functionality.
-        //    installWindow.FillAuthenticationBitBucketServer(hostUrl, bitBucketLogin, bitbucketPassword);
+            // Don't have any HostURL to BitbucketServer for check this functionality.
+            installWindow.FillAuthenticationBitBucketServer(hostUrl, bitBucketLogin, bitbucketPassword);
 
-        //    //string actualTitleOfNextStep = installWindow.DownloadingVersionText();
-        //    // This is ensure that authentication was successful, because we are located on next step "Install tools"
-        //    //Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
-        //}
+            //string actualTitleOfNextStep = installWindow.DownloadingVersionText();
+            // This is ensure that authentication was successful, because we are located on next step "Install tools"
+            //Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
+        }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "incorrectPassword")]
+        [Category("WelcomeWizard")]
         public void ConnectGitHubIncorrectCredentialsNegativeTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -166,6 +202,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "incorrectLogin", "IncorrectPassword")]
+        [Category("WelcomeWizard")]
         public void ConnectBitbucketIncorrectCredentialsNegativeTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -193,6 +230,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://IncorrectHost.com", "test", "test")]
+        [Category("WelcomeWizard")]
         public void ConnectBitbucketServerIncorrectCredentialsNegativeTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -225,6 +263,7 @@ namespace AutomationTestsSolution.Tests
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to GitHub account.
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
+        [Category("WelcomeWizard")]
         public void ConnectGitHubViaOAuthTest (
             string atlassianLoginEmail,
             string atlassianPassword)
@@ -253,6 +292,7 @@ namespace AutomationTestsSolution.Tests
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to BitBucket account.
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
+        [Category("WelcomeWizard")]
         public void ConnectBitbucketViaOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword)
@@ -278,6 +318,7 @@ namespace AutomationTestsSolution.Tests
         }
 
      [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "SourceTree")]
+     [Category("WelcomeWizard")]
         public void SkipSetupButtonClosesConfigurationTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -299,17 +340,16 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitle, expectedTitle);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public", @"Documents\CloneBasicGitHub")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public")]
+        [Category("WelcomeWizard")]
         public void CloneGitHubRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string gitHubLogin,
             string gitHubPassword,
-            string nameOfRepo,
-            string subFolderInUserProfile)
+            string nameOfRepo)
         {
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
+            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneBasicGitHubTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -341,17 +381,16 @@ namespace AutomationTestsSolution.Tests
             Assert.IsTrue(actualIsRepositoryCloned);
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public", @"Documents\CloneBasicBitBucket")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public")]
+        [Category("WelcomeWizard")]
         public void CloneBitBucketRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string bitbucketLogin,
             string bitbucketPassword,
-            string nameOfRepo,
-            string subFolderInUserProfile)
+            string nameOfRepo)
         {
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
+            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -387,15 +426,14 @@ namespace AutomationTestsSolution.Tests
         /// <summary>
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to GitHub account.
         /// </summary>
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "github-public", @"Documents\CloneOAuthGitHub")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "github-public")]
+        [Category("WelcomeWizard")]
         public void CloneGitHubRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
-            string nameOfRepo,
-            string subFolderInUserProfile)
+            string nameOfRepo)
         {
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
+            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneOAuthGitHubTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -430,16 +468,14 @@ namespace AutomationTestsSolution.Tests
         /// <summary>
         /// Verify that you have permission to access SourceTreeForWindows by atlassian to BitBucket account.
         /// </summary>
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public", @"Documents\CloneOAuthBitBucket")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public")]
+        [Category("WelcomeWizard")]
         public void CloneBitBucketRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
-            string nameOfRepo,
-            string subFolderInUserProfile
-            )
+            string nameOfRepo)
         {
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
+            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneOAuthBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -471,52 +507,54 @@ namespace AutomationTestsSolution.Tests
             Assert.IsTrue(isRepositoryCloned);
         }
 
-        //[TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public", @"Documents\CloneBasicBitBucketServer")]
-        //public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
-        //    string atlassianLoginEmail,
-        //    string atlassianPassword,
-        //    string urlServer,
-        //    string bitBucketLogin,
-        //    string bitBucketPassword,
-        //    string nameOfRepo,
-        //    string subFolderInUserProfile)
-        //{
-        //    string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-        //    string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
-        //    Utils.RemoveDirectory(pathToNewFolder);
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public")]
+        [Ignore("BitBucket server link needed")]
+        [Category("WelcomeWizard")]
+        [Category("bbs")]
+        public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
+            string atlassianLoginEmail,
+            string atlassianPassword,
+            string urlServer,
+            string bitBucketLogin,
+            string bitBucketPassword,
+            string nameOfRepo)
+        {
+            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketServerTestFolder);
+            Utils.RemoveDirectory(pathToNewFolder);
 
-        //    InstallationWindow installWindow = new InstallationWindow(MainWindow);
-        //    installWindow.CheckLicenceAgreementCheckbox();
-        //    installWindow.ClickContinueButton();
-        //    AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
+            InstallationWindow installWindow = new InstallationWindow(MainWindow);
+            installWindow.CheckLicenceAgreementCheckbox();
+            installWindow.ClickContinueButton();
+            AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
 
-        //    installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
+            installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
 
-        //    installWindow.ClickContinueButton();
+            installWindow.ClickContinueButton();
 
-        //    installWindow.FillAuthenticationBitBucketServer(urlServer, bitBucketLogin, bitBucketPassword);
+            installWindow.FillAuthenticationBitBucketServer(urlServer, bitBucketLogin, bitBucketPassword);
 
-        //    // WE need any BitBucket server to pass this test!
+            // WE need any BitBucket server to pass this test!
 
-        //    //installWindow.ClickContinueButton(); // step remotes
+            //installWindow.ClickContinueButton(); // step remotes
 
-        //    //installWindow.WaitCompleteInstallToolsProgressBar();
+            //installWindow.WaitCompleteInstallToolsProgressBar();
 
-        //    //installWindow.ClickContinueButton(); // step install tools
+            //installWindow.ClickContinueButton(); // step install tools
 
-        //    //installWindow.SelectRepositoryByName(nameOfRepo);
-        //    //Directory.CreateDirectory(pathToNewFolder);
-        //    //installWindow.BrowseDestinationPath(pathToNewFolder);
+            //installWindow.SelectRepositoryByName(nameOfRepo);
+            //Directory.CreateDirectory(pathToNewFolder);
+            //installWindow.BrowseDestinationPath(pathToNewFolder);
 
-        //    //installWindow.ClickContinueButton();
+            //installWindow.ClickContinueButton();
 
-        //    //Thread.Sleep(2000);
-        //    //bool isRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
+            //Thread.Sleep(2000);
+            //bool isRepositoryCloned = WindowsFilesHelper.IsGitRepositoryByPath(pathToNewFolder);
 
-        //    //Assert.IsTrue(isRepositoryCloned);
-        //}
+            //Assert.IsTrue(isRepositoryCloned);
+        }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake", "github-public")]
+        [Category("WelcomeWizard")]
         public void SearchInStartingRepositoryStepTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -551,18 +589,17 @@ namespace AutomationTestsSolution.Tests
 
         }
 
-        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public", @"Documents\OpenSourceTree")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public")]
+        [Category("WelcomeWizard")]
         public void SourceTreeOpensAfterFinishConfiguration(
             string atlassianLoginEmail,
             string atlassianPassword,
             string bitbucketbLogin,
             string bitbucketPassword,
-            string nameOfRepo,
-            string subFolderInUserProfile)
+            string nameOfRepo)
         {
             // Pre-condition
-            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-            string pathToNewFolder = Path.Combine(userProfile, subFolderInUserProfile);
+            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, openSourceTreeTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
