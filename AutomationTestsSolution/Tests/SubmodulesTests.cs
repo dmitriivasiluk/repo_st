@@ -5,6 +5,7 @@ using ScreenObjectsHelpers.Windows.Repository;
 using ScreenObjectsHelpers.Windows.MenuFolder;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -49,13 +50,37 @@ namespace AutomationTestsSolution.Tests
             Utils.RemoveDirectory(pathToClonedGitRepo);
         }
         [Test]
-        public void SourcePathFieldValidateCorrectGitFolderTest()
+        public void IsOkButtonDisabledWithEmptySourcePath()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-            addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
-            
+            Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
         }
+        [Test]
+        public void IsOkButtonEnabledWithEnteredSourcePath()
+        {
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
+
+            addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
+            addSubmoduleWindow.LocalRelativePathTextboxFocus();
+            Thread.Sleep(4000);
+
+            Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
+        }
+
+        //[Test]
+        //public void SourcePathFieldValidateCorrectGitFolderTest()
+        //{
+        //    RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+        //    addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
+
+        //    addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
+        //    addSubmoduleWindow.LocalRelativePathTextboxFocus();
+        //    var a = addSubmoduleWindow.WrongPathValidationMessage.Text;
+
+        //    addSubmoduleWindow.AdvancedOptions.Click();
+        //}
     }
 }
