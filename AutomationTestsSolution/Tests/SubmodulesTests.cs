@@ -69,18 +69,35 @@ namespace AutomationTestsSolution.Tests
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
+        [Test]
+        public void SourcePathFieldValidateWrongInputTest()
+        {
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-        //[Test]
-        //public void SourcePathFieldValidateCorrectGitFolderTest()
-        //{
-        //    RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-        //    addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
+            addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
+            addSubmoduleWindow.LocalRelativePathTextboxFocus();
 
-        //    addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
-        //    addSubmoduleWindow.LocalRelativePathTextboxFocus();
-        //    var a = addSubmoduleWindow.WrongPathValidationMessage.Text;
+            Assert.AreEqual(ConstantsList.wrongSourcePathEntered, addSubmoduleWindow.wrongSourcePathValidationMessage.Text);
+        }
+        [Test]
+        public void SourcePathFieldValidateCorrectMercurialHttpLink()
+        {
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-        //    addSubmoduleWindow.AdvancedOptions.Click();
-        //}
+            addSubmoduleWindow.SourcePathTextbox.SetValue(ConstantsList.mercurialRepoToClone);
+            addSubmoduleWindow.LocalRelativePathTextboxFocus();
+            Thread.Sleep(3000);
+            var notAGitRepoWindow = addSubmoduleWindow.SwitchToNotAGitRepositoryWindow();
+            
+            var errorMessage = notAGitRepoWindow.ErrorMessage.Text;
+            Thread.Sleep(3000);
+            //addSubmoduleWindow = notAGitRepoWindow.ClickCancelButton();
+
+            //Assert.AreEqual(ConstantsList.errorMessageForMercurialRepo, errorMessage);
+        }
+
+
     }
 }

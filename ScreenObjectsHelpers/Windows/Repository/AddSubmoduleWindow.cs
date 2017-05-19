@@ -25,8 +25,9 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("SourceTextBox"));
         public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Label WrongPathValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("No path / URL supplied"));
+        public Label noSourcePathEnteredValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("No path / URL supplied"));
         public Label CorrectSourcePathValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("This is a Git repository"));
+        public Label wrongSourcePathValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("This is not a valid source path / URL"));
         public Button AdvancedOptions => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
         public TextBox SourceBranch => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(3));
         public TextBox LocalRelativePath => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
@@ -54,13 +55,19 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
             SourcePathTextbox.Text = value;
         }
+        public NotAGitRepository SwitchToNotAGitRepositoryWindow()
+        {
+            SearchCriteria searchCriteria = SearchCriteria.ByText("Not a Git repository");
+            var notAGitRepoWindow = this.WaitMdiChildAppears(searchCriteria, 10);
+            return new NotAGitRepository(MainWindow, this, notAGitRepoWindow);
+        }
         #endregion
     }
     public class NotAGitRepository
     {
-        private UIItemContainer addSubmoduleWindow;
+        private AddSubmoduleWindow addSubmoduleWindow;
         private UIItemContainer notAGitRepositoryWindow;
-        public NotAGitRepository(Window mainWindow, UIItemContainer addSubmoduleWindow, UIItemContainer notAGitRepositoryWindow)
+        public NotAGitRepository(Window mainWindow, AddSubmoduleWindow addSubmoduleWindow, UIItemContainer notAGitRepositoryWindow)
         {
             this.addSubmoduleWindow = addSubmoduleWindow;
             this.notAGitRepositoryWindow = notAGitRepositoryWindow;
@@ -68,11 +75,19 @@ namespace ScreenObjectsHelpers.Windows.Repository
 
         #region UIItems
         public Button CancelButton => notAGitRepositoryWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public TextBox ErrorMessage => notAGitRepositoryWindow.Get<TextBox>(SearchCriteria.ByText("Submodules can only be git repositories."));
+        //public Label ErrorMessage => notAGitRepositoryWindow.Get<Label>(SearchCriteria.ByText("Submodules can only be git repositories."));
+        public Label ErrorMessage  
+        {
+            get
+            {
+                var controlElement = notAGitRepositoryWindow.GetElement(SearchCriteria.ByText("Submodules can only be git repositories.").AndControlType(ControlType.Text));
+                return controlElement != null ? new Label(controlElement, notAGitRepositoryWindow.ActionListener) : null;
+            }
+        }
         #endregion
 
         #region Methods
-        public UIItemContainer ClickCancelButton()
+        public AddSubmoduleWindow ClickCancelButton()
         {
             CancelButton.Click();
             return addSubmoduleWindow;
