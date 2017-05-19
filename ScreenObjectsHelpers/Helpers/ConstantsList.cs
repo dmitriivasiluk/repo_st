@@ -62,5 +62,11 @@ namespace ScreenObjectsHelpers.Helpers
         public const string defaultFeatureBranch = "feature/";
         public const string defaultReleaseBranch = "release/";
         public const string defaultHotfixBranch = "hotfix/";
+
+        //Validation messages for Submodules and Subtrees
+        public const string noSourcePathEntered = "No path / URL supplied";
+        public const string wrongSourcePathEntered = "This is not a valid source path / URL";
+        public const string correctSourcePathEntered = "This is a Git repository";
+        public const string errorMessageForMercurialRepo = "Submodules can only be git repositories.";
     }
 }
