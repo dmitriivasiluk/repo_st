@@ -128,6 +128,8 @@
     <Compile Include="Windows\Repository\RepositoryTab.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\CreateTab.cs" />
+    <Compile Include="Windows\ToolbarTabs\EditHostingAccountWindow\AuthenticateWindow.cs" />
+    <Compile Include="Windows\ToolbarTabs\EditHostingAccountWindow\EditHostingAccountWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\LocalTab.cs" />
     <Compile Include="Windows\ToolbarTabs\CloneTab.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTab.cs" />
