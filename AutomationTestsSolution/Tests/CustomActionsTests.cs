@@ -39,25 +39,6 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        public void EditCustomAction()
-        {
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
-            CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
-
-            var isEditCustomActionButtonEnabled = customActionsTab.IsEditCustomActionButtonEnabled();
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName);
-            var editCustomActionWindow = customActionsTab.ClickEditCustomActionButton();
-
-            editCustomActionWindow.SetMenuCaption(ConstantsList.editedCustomActionName);
-            editCustomActionWindow.ClickOKButton();
-
-            Assert.IsFalse(isEditCustomActionButtonEnabled);
-            Assert.IsFalse(isMenuCaptionExistsBeforeTest);
-            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName));
-        }
-
-        [Test]
         public void DeleteCustomAction()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

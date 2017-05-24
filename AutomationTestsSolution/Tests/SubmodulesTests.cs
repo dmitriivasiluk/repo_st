@@ -14,7 +14,8 @@ namespace AutomationTestsSolution.Tests
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
         private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
+        //private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolderGA, ConstantsList.opentabsXml));
+        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolderBeta, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
@@ -54,7 +55,7 @@ namespace AutomationTestsSolution.Tests
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
-
+            
             Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
         }
         [Test]
@@ -65,7 +66,7 @@ namespace AutomationTestsSolution.Tests
 
             addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextboxFocus();
-            Thread.Sleep(4000);
+            Thread.Sleep(3000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
@@ -80,24 +81,5 @@ namespace AutomationTestsSolution.Tests
 
             Assert.AreEqual(ConstantsList.wrongSourcePathEntered, addSubmoduleWindow.wrongSourcePathValidationMessage.Text);
         }
-        [Test]
-        public void SourcePathFieldValidateCorrectMercurialHttpLink()
-        {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
-
-            addSubmoduleWindow.SourcePathTextbox.SetValue(ConstantsList.mercurialRepoToClone);
-            addSubmoduleWindow.LocalRelativePathTextboxFocus();
-            Thread.Sleep(3000);
-            var notAGitRepoWindow = addSubmoduleWindow.SwitchToNotAGitRepositoryWindow();
-            
-            var errorMessage = notAGitRepoWindow.ErrorMessage.Text;
-            Thread.Sleep(3000);
-            //addSubmoduleWindow = notAGitRepoWindow.ClickCancelButton();
-
-            //Assert.AreEqual(ConstantsList.errorMessageForMercurialRepo, errorMessage);
-        }
-
-
     }
 }

@@ -10,7 +10,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
         }
 
-        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("View")); } }
+        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuView")); } }
 
         #region Methods        
         public void ClickOperations(OperationsView operation)
