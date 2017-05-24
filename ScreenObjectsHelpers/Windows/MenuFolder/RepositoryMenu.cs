@@ -13,7 +13,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
         }
 
-        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Repository")); } }
+        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuRepository")); } }
 
         #region Methods        
         public void ClickOperations(OperationsHelp operation)

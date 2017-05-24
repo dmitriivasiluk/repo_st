@@ -12,7 +12,8 @@ namespace AutomationTestsSolution.Tests
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
         private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
+        //private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolderGA, ConstantsList.opentabsXml));
+        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolderBeta, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
