@@ -32,7 +32,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             RemoveTestFolders(new string[] { pathToAllRepos + gitRepoName, pathToAllRepos + mercurialRepoName });
         }
 
-        [Test, Category("CreateRepoUI"), Order(1)]
+        [Test, Category("CreateRepoUI")]
         public void ValidateLocalRepoNameTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -41,7 +41,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(createTab.NameRepoTextBox.Text, gitRepoName);
         }
 
-        [Test, Category("CreateRepoUI"), Order(2)]
+        [Test, Category("CreateRepoUI")]
         public void CheckCreateRepoButtonUnavailableOnDestinationEmpty()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -51,7 +51,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(createTab.CreateButton.Enabled);
         }
 
-        [Test, Category("CreateRepoUI"), Order(3)]
+        [Test, Category("CreateRepoUI")]
         public void CheckCreateRepoButtonUnavailableOnNoRepoAccount()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -63,7 +63,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         }
 
         //TODO Add dialow window verification
-        [Test, Category("CreateRepoUI"), Order(4)]
+        [Test, Category("CreateRepoUI")]
         public void CheckBrowserButtonWorks()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -72,7 +72,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.DoesNotThrow(() => createTab.ClickButton(createTab.BrowseButton));
         }
 
-        [Test, Category("CreateRepoLocal"), Order(5)]
+        [Test, Category("CreateRepoLocal")]
         public void CheckLocalGitRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -87,7 +87,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(createTab.TabTextGit.Name, gitRepoName);
         }
 
-        [Test, Category("CreateRepoLocal"), Order(6)]
+        [Test, Category("CreateRepoLocal")]
         public void CheckLocalHgRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -102,8 +102,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(createTab.TabTextHg.Name, mercurialRepoName);
         }
 
-        [Test, Category("CreateRepoLocal"), Order(7)]
-        //[Ignore("Issue SRCTREE-1622")]
+        [Test, Category("CreateRepoLocal")]
+        [Ignore("Issue SRCTREE-1622")]
         public void CheckLocalNoneRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
