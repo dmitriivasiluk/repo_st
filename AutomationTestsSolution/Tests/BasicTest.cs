@@ -15,15 +15,18 @@ namespace AutomationTestsSolution.Tests
         protected string sourceTreeExePath;
         protected string sourceTreeVersion;
         protected string sourceTreeUserConfigPath;
-        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
+        
         protected Process sourceTreeProcess;
         private string testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
         private string emptyAutomationFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyAutomationFolder);
 
         private Tuple<string, string> exeAndVersion = FindSourceTree();
 
+        //private static readonly string sourceTreeTypeEnvVar = Environment.ExpandEnvironmentVariables("%ST_UI_TEST_TYPE%"); // "Beta", "Alpha" ....
         private static readonly string sourceTreeTypeEnvVar = Environment.GetEnvironmentVariable("ST_UI_TEST_TYPE"); // "Beta", "Alpha" ....
 
+        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolderGA);
+        
         [SetUp]
         public virtual void SetUp()
         {
@@ -144,7 +147,8 @@ namespace AutomationTestsSolution.Tests
         private string FindSourceTreeUserConfig(string version)
         {
             var sourceTreeInstallParentDir =
-                Environment.ExpandEnvironmentVariables(ConstantsList.pathToAtlassianFolder);
+                Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\");
+
             var userConfigDirectories = Directory.GetDirectories(sourceTreeInstallParentDir, version,
                     SearchOption.AllDirectories);
             if (userConfigDirectories.Count(d => !d.Contains("vshost")) != 1)
@@ -185,25 +189,27 @@ namespace AutomationTestsSolution.Tests
 
             sourceTreeProcess.Start();
         }
+        public static string SetSourceTreeFolder(string sourceTreeType)
+        {
+            return sourceTreeType == "Beta"
+                ? Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta")
+                : Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree");
+        }
 
         protected static Tuple<string, string> FindSourceTree()
         {
             // Allowing Environment Variables to override defaults  lets us test against GA, Beta, Alpha with runtime changes etc.
             var sourceTreeType = string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
 
-            var sourceTreeInstallParentDir =
-                //Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
-                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
-            // TODO find SourceTree
-            // assumption that it is a squirrel install.
+            //string sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
+            string sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
+
             string[] sourceTreeAppDirs = Directory.GetDirectories(sourceTreeInstallParentDir, "app-*",
                 SearchOption.TopDirectoryOnly);
             Array.Sort(sourceTreeAppDirs);
             string sourceTreeAppDir = sourceTreeAppDirs.Last();
             string version = new DirectoryInfo(sourceTreeAppDir).Name.Substring("app-".Length);
 
-            // TODO reset config to known state
-            // TODO run SourceTree
             return new Tuple<string, string>(Path.Combine(sourceTreeAppDir, "SourceTree.exe"), version);
         }
 
