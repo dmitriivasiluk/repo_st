@@ -4,42 +4,6 @@ os: Unstable
 version: 1.0.{build}
 init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-install:
-- ps: Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/2.0.20.1.7z 'C:\Users\appveyor\AppData\Local\ST_Local.7z'
-before_build:
+build_script:
 - cmd: >-
-
-    set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
-
-    git config --global core.excludesfile "%USERPROFILE%\.gitignore_global"
-
-    git config --global user.email test@atlassian.com
-    
-    git config --global user.name QAAutomation
-    
-    nuget restore
-    
-    7z e C:\Users\appveyor\AppData\Local\ST_Local.7z -y -oC:\Users\appveyor\AppData\Local -spf
-    
-    curl -o %localappdata%\configs.7z https://transfer.sh/iduWK/configs_24.May.7z
-    
-    7z e C:\Users\appveyor\AppData\Local\configs.7z -y -oC:\Users\appveyor\AppData\Local -spf
-
-    cscript %localappdata%\configs\chrome_default.vbs
-    
-    %windir%\system32\reg.exe import %localappdata%\configs\Disable_Explorer_Auto_Complete_popup.reg
-
-    %localappdata%\configs\SeleniumAuth.exe
-    
-    curl -o %userprofile%\Documents\ignore.7z https://transfer.sh/AIAMN/global_ignore_24.May.7z
-    
-    7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
-build:
-  verbosity: minimal
-after_test:
-- cmd: >-
-
-    7z a %APPVEYOR_BUILD_FOLDER%\screenshot.7z C:\Users\appveyor\Documents\*.jpg    
-artifacts:
- - path: screenshot.7z
-   name: screenshot
+    .\build.ps1 -Target Run-Unit-Tests-Core
