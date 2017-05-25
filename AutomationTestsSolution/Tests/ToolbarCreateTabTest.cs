@@ -5,7 +5,7 @@ using NUnit.Framework;
 using TestStack.White.UIItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
-using ScreenObjectsHelpers.Windows;
+using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests.CreateLocal
 {
@@ -80,11 +80,11 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
             mainWindow.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
-            createTab.ClickButton(createTab.CreateButton);
+            RepositoryTab repoTab = createTab.ClickCreateButton();
             Utils.ThreadWait(2000);
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName)));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName, ConstantsList.dotGitFolder)));
-            Assert.AreEqual(createTab.TabTextGit.Name, gitRepoName);
+            Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
         [Test, Category("CreateRepoLocal")]
@@ -95,11 +95,11 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, mercurialRepoName));
             mainWindow.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
-            createTab.ClickButton(createTab.CreateButton);
+            RepositoryTab repoTab = createTab.ClickCreateButton();
             Utils.ThreadWait(2000);
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, mercurialRepoName)));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, mercurialRepoName, ConstantsList.dotHgFolder)));
-            Assert.AreEqual(createTab.TabTextHg.Name, mercurialRepoName);
+            Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
         }
 
         [Test, Category("CreateRepoLocal")]

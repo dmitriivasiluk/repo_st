@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
+
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -35,9 +32,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public CheckBox IsPrivateCheckBox => MainWindow.Get<CheckBox>(SearchCriteria.ByClassName("CheckBox").AndByText("Is Private"));
         //=================================Opens when CreateRemoteCheckBox is checked - End
         public Button CreateButton => MainWindow.Get<Button>(SearchCriteria.ByClassName("Button").AndByText("CreateRepoButton"));
-        //New window is opened after successfull repo creation
-        public UIItem TabTextGit => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testGitRepoBookmarkName));
-        public UIItem TabTextHg => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testHgRepoBookmarkName));
+
         public struct CVS
         {
             public static string GitHub = "Git";
@@ -68,8 +63,14 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
                 DescriptionTextBox.Enabled && DescriptionTextBox.Visible &&
                 IsPrivateCheckBox.Enabled && IsPrivateCheckBox.Visible;
         }
-        
+
+        public RepositoryTab ClickCreateButton()
+        {
+            ClickButton(CreateButton);
+            return new RepositoryTab(MainWindow);
+        }
+
         #endregion
-        
+
     }
 }
