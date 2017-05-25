@@ -9,6 +9,7 @@ namespace AutomationTestsSolution.Tests
     class HelpMenuTests : BasicTest
     {
         [Test]
+        [Category("HelpMenu")]
         public void AboutWindowTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

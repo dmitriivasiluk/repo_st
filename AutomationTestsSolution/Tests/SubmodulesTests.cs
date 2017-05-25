@@ -14,8 +14,10 @@ namespace AutomationTestsSolution.Tests
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
         private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
+        // opentabs configuration
         private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
+
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
         private AddSubmoduleWindow addSubmoduleWindow;
@@ -49,15 +51,19 @@ namespace AutomationTestsSolution.Tests
         {
             Utils.RemoveDirectory(pathToClonedGitRepo);
         }
+
         [Test]
+        [Category("Submodules")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
-            
+
             Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
         }
+
         [Test]
+        [Category("Submodules")]
         public void IsOkButtonEnabledWithEnteredSourcePath()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
@@ -65,11 +71,13 @@ namespace AutomationTestsSolution.Tests
 
             addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextboxFocus();
-            Thread.Sleep(3000);
+            Thread.Sleep(4000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
+
         [Test]
+        [Category("Submodules")]
         public void SourcePathFieldValidateWrongInputTest()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);

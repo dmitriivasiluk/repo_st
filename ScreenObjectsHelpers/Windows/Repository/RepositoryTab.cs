@@ -26,7 +26,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public Button MergeButton => MainWindow.Get<Button>(SearchCriteria.ByText("Merge"));
         public Button StashButton => MainWindow.Get<Button>(SearchCriteria.ByText("Stash"));
         public Button DiscardButton => MainWindow.Get<Button>(SearchCriteria.ByText("Discard"));
-        
         public Button TagButton => MainWindow.Get<Button>(SearchCriteria.ByText("Tag"));
         public Button GitFlowButton => MainWindow.Get<Button>(SearchCriteria.ByText("Git Flow"));
         public Button TerminalButton => MainWindow.Get<Button>(SearchCriteria.ByText("Terminal"));
