@@ -21,6 +21,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("CustomActions")]
         public void AddCustomAction()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -39,6 +40,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("CustomActions")]
         public void DeleteCustomAction()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
