@@ -20,7 +20,7 @@ namespace AutomationTestsSolution.Tests
     /// 6. Putty agent is running on computer (when it is running, there is no prompt about adding ssh key)
     /// 7. There are global ignore files (Git/Mercurial) on computers
     /// </summary>
-    class WelcomeWizardTests : BasicTest
+    class WelcomeWizardTests : AbstractWelcomeWizardTest
     {
         #region Test Variables
         private string pathToDocumentsFolder = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDocumentsFolder);
@@ -32,28 +32,12 @@ namespace AutomationTestsSolution.Tests
         private string cloneBasicBitBucketServerTestFolder = "CloneBasicBitBucketServer";
         #endregion
 
-        [SetUp]
-        public override void SetUp()
-        {
-            BackupConfigs();
-            UseTestUserConfig();
-            RunSourceTree();
-            AttachToWelcomeWizardSourceTree();
-        }
-
         [TearDown]
         public override void TearDown()
         {
             base.TearDown();
 
             RemoveTestFolders();
-        }
-
-        private void AttachToWelcomeWizardSourceTree()
-        {
-            MainWindow = null;
-            Utils.ThreadWait(8000); // time for unzip some packages before configuration
-            MainWindow = Utils.FindNewWindow("Welcome");
         }
 
         private void RemoveTestFolders()
@@ -427,6 +411,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "github-public")]
         [Category("WelcomeWizard")]
+        [Ignore("Odd behaviour when there are existing sessions")]
         public void CloneGitHubRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -469,6 +454,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public")]
         [Category("WelcomeWizard")]
+        [Ignore("Odd behaviour when there are existing sessions")]
         public void CloneBitBucketRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -627,6 +613,11 @@ namespace AutomationTestsSolution.Tests
             string actualTitle = mainWindow.GetTitle();
 
             Assert.AreEqual(actualTitle, "SourceTree");
+
+        }
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            
 
         }
     }

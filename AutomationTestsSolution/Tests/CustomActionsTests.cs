@@ -8,18 +8,8 @@ using System;
 
 namespace AutomationTestsSolution.Tests
 {
-    class CustomActionsTests : BasicTest
+    class CustomActionsTests : AbstractUITest
     {
-        [SetUp]
-        public override void SetUp()
-        {
-            var resourceName = Resources.customactions;
-            var customActionsFilePath = Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTree\customactions.xml");
-            RestoreFile(customActionsFilePath);
-            File.WriteAllText(customActionsFilePath, resourceName);
-            base.SetUp();
-        }
-
         [Test]
         [Category("CustomActions")]
         public void AddCustomAction()
@@ -61,6 +51,13 @@ namespace AutomationTestsSolution.Tests
             Assert.IsFalse(isDeleteCustomActionButtonEnabled);
             Assert.IsTrue(isMenuCaptionExistsBeforeTest);
             Assert.IsFalse(isMenuCaptionExistsAfterTest);
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            var resourceName = Resources.customactions;
+            var customActionsFilePath = Path.Combine(SourceTreeUserDataPath, "customactions.xml");
+            File.WriteAllText(customActionsFilePath, resourceName);
         }
     }
 }

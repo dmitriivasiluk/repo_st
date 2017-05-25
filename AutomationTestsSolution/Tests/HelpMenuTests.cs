@@ -6,7 +6,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tests
 {
-    class HelpMenuTests : BasicTest
+    class HelpMenuTests : AbstractUITest
     {
         [Test]
         [Category("HelpMenu")]
@@ -20,7 +20,12 @@ namespace AutomationTestsSolution.Tests
             string appVersion = aboutWindow.GetAppVersion();
             Assert.AreEqual(aboutWindowHeader, ConstantsList.aboutWindowHeader);
             Assert.AreEqual(copyrightCaption, ConstantsList.copyrightCaption);
-            Assert.That(appVersion, Does.Contain(GetSourceTreeVersion()));
+            Assert.That(appVersion, Is.EqualTo("Version " + SourceTreeVersion));
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            // nothing todo
         }
     }
 }

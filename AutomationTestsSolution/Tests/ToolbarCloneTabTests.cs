@@ -6,7 +6,7 @@ using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
-    class ToolbarCloneTabTests : BasicTest
+    class ToolbarCloneTabTests : AbstractUITest
     {
         #region Test Variables
         string gitRepoToClone = ConstantsList.gitRepoToClone;
@@ -199,6 +199,10 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab repoTab = cloneTab.ClickCloneButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
+        }
+        
+        protected override void PerTestPreConfigureSourceTree()
+        {
         }
     }
 }

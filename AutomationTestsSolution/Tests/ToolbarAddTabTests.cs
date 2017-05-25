@@ -8,27 +8,13 @@ using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
-    class ToolbarAddTabTests : BasicTest
+    class ToolbarAddTabTests : AbstractUITest
     {
         #region Test Variables
         private string pathToTestGitFolder = Environment.ExpandEnvironmentVariables(ConstantsList.gitInitFolderForAddTest);
         private string pathToTestHgFolder = Environment.ExpandEnvironmentVariables(ConstantsList.hgInitFolderForAddTest);
         private string pathToEmptyFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyFolderForAddTest);
         #endregion
-
-
-        [SetUp]
-        public override void SetUp()
-        {
-            RemoveTestFolders();
-
-            CreateTestFolders();
-
-            Repository.Init(pathToTestGitFolder);
-            MercurialWrapper.HgRun(MercurialWrapper.HgInit, pathToTestHgFolder);
-
-            base.SetUp();           
-        }
 
         [TearDown]
         public override void TearDown()
@@ -150,6 +136,16 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab repoTab = addTab.ClickAddButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
+        }
+        
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            RemoveTestFolders();
+
+            CreateTestFolders();
+
+            Repository.Init(pathToTestGitFolder);
+            MercurialWrapper.HgRun(MercurialWrapper.HgInit, pathToTestHgFolder);
         }
     }
 }
