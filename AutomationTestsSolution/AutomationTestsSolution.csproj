@@ -94,6 +94,7 @@
     <Compile Include="Tests\ToolbarAddTabTests.cs" />
     <Compile Include="Tests\ToolbarRemoteTabTests.cs" />
     <Compile Include="Tests\ToolbarCloneTabTests.cs" />
+    <Compile Include="Tests\ToolbarCreateTabTest.cs" />
     <Compile Include="Tests\WelcomeWizardTests.cs" />
   </ItemGroup>
   <ItemGroup>
