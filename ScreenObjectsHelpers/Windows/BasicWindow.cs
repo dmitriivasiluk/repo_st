@@ -1,5 +1,6 @@
 ﻿using ScreenObjectsHelpers.Helpers;
 using System;
+using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -128,6 +129,27 @@ namespace ScreenObjectsHelpers.Windows
             {
                 checkbox.Toggle();
             }
+        }
+
+        public static T GetWithWait<T>(Window window, SearchCriteria searchCriteria, int rounds = 5) where T : UIItem
+        {
+            T result = null;
+            for (int i = 0; i < rounds; i++)
+            {
+                try
+                {
+                    result = (T) window.Get(searchCriteria);
+                    if (result != null && result.Visible)
+                    {
+                        return result;
+                    }
+                }
+                catch (AutomationException)
+                {
+                    // empty
+                }
+            }
+            return result;
         }
     }
 }

@@ -15,15 +15,10 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIElements
-        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Clone"));        
+        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Clone"));
         public Label RemoteAccountLabel => MainWindow.Get<Label>(SearchCriteria.ByAutomationId("remote account"));
         public TextBox SourcePathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("SourceTextBox"));
         private Button DetailsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Details..."));
-        private UIItem NoPathUrlSuppliedText => MainWindow.Get<UIItem>(SearchCriteria.ByText("No path / URL supplied"));
-        private UIItem NotValidSourcePathText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is not a valid source path / URL"));
-        private UIItem CheckingSourceText => MainWindow.Get<UIItem>(SearchCriteria.ByText("Checking source..."));
-        private UIItem GitRepoValidText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is a Git repository"));
-        private UIItem MercurialRepoValidText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is a Mercurial repository"));
         public ComboBox LocalFolderComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("CloneBookmarksFolderList"));
         public Button CloneButton => MainWindow.Get<Button>(SearchCriteria.ByText("Clone"));
         public Button AdvancedOptionsButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
@@ -79,60 +74,22 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             {
                 AdvancedOptionsButton.Click();
             }
-        }       
+        }
 
-        public void ValidateRepoLinkEnableCloneButton()
+        public void TriggerValidation()
         {
             //AutomationID_required - temporary workaround
-            var DestinationPathTextBox = MainWindow.GetMultiple(SearchCriteria.ByClassName("TextBox"))[1];
-            var NameTextBox = MainWindow.GetMultiple(SearchCriteria.ByClassName("TextBox"))[2];
-
-            DestinationPathTextBox.Focus();
-            Utils.ThreadWait(6000);
-            NameTextBox.Focus();
+            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(1)).Focus();
+            Utils.ThreadWait(2000);
+            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(2)).Focus();
         }
 
-        public string GetGitValidationMessage()
+
+        public bool IsCloneButtonEnabled()
         {
-            ValidateRepoLinkEnableCloneButton();
-
-            if (GitRepoValidText.Enabled && GitRepoValidText.Visible)
-            {
-                return ConstantsList.gitRepoType;
-            }
-            return null;
-        }
-
-        public string GetMercurialValidationMessage()
-        {
-            ValidateRepoLinkEnableCloneButton();
-
-            if (MercurialRepoValidText.Enabled && MercurialRepoValidText.Visible)
-            {
-                return ConstantsList.mercurialRepoType;
-            }
-            return null;
-        }
-
-        public string GetInvalidRepoMessage()
-        {
-            ValidateRepoLinkEnableCloneButton();
-
-            if (NotValidSourcePathText.Enabled && NotValidSourcePathText.Visible)
-            {
-                return ConstantsList.invalidFolder;
-            }
-            return null;
-        }
-
-        public Boolean IsCloneButtonEnabled()
-        {
-            ValidateRepoLinkEnableCloneButton();
-
             return CloneButton.Enabled;
         }
-
-        //TODO return repository tab
+        
         public RepositoryTab ClickCloneButton()
         {
             if (IsCloneButtonEnabled())
@@ -141,6 +98,29 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
                 Utils.ThreadWait(3000);
             }
             return new RepositoryTab(MainWindow);
+        }
+
+        public bool GetValidationMessage(string text)
+        {
+            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(1)).Focus();
+
+            if (GetWithWait<WPFLabel>(MainWindow, SearchCriteria.ByText(text)) == null)
+            {
+                return false;
+            }
+
+            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(2)).Focus();
+
+            return true;
+        }
+
+        public struct LinkValidationMessage
+        {
+            public static string noPathSupplied = "No path / URL supplied";
+            public static string notValidPath = "This is not a valid source path / URL";
+            public static string gitRepoType = "This is a Git repository";
+            public static string mercurialRepoType = "This is a Mercurial repository";
+            public static string checkingSource = "Checking source...";
         }
         #endregion
     }
