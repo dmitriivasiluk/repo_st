@@ -21,7 +21,7 @@ before_build:
     
     7z e C:\Users\appveyor\AppData\Local\ST_Local.7z -y -oC:\Users\appveyor\AppData\Local -spf
     
-    curl -o %localappdata%\configs.7z https://transfer.sh/FaaGw/configs_04.May.7z
+    curl -o %localappdata%\configs.7z https://transfer.sh/iduWK/configs_24.May.7z
     
     7z e C:\Users\appveyor\AppData\Local\configs.7z -y -oC:\Users\appveyor\AppData\Local -spf
 
@@ -31,7 +31,7 @@ before_build:
 
     %localappdata%\configs\SeleniumAuth.exe
     
-    curl -o %userprofile%\Documents\ignore.7z https://transfer.sh/8LfXY/global_ignore_04.May.7z
+    curl -o %userprofile%\Documents\ignore.7z https://transfer.sh/AIAMN/global_ignore_24.May.7z
     
     7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
 build:
