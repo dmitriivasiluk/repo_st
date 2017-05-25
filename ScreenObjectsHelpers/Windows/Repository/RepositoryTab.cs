@@ -17,6 +17,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
             // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
             Console.WriteLine("WAIT FOR OPENING TAB");
         }
+        
         #region UIItems
         public Button CommitButton => MainWindow.Get<Button>(SearchCriteria.ByText("Commit"));
         public Button PushButton => MainWindow.Get<Button>(SearchCriteria.ByText("Push"));
