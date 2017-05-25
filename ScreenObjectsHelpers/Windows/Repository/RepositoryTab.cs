@@ -31,6 +31,8 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public Button TerminalButton => MainWindow.Get<Button>(SearchCriteria.ByText("Terminal"));
         public Button ExplorerButton => MainWindow.Get<Button>(SearchCriteria.ByText("Explorer"));
         public Button SettingsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Settings"));
+        public UIItem TabTextGit => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testGitRepoBookmarkName));
+        public UIItem TabTextHg => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testHgRepoBookmarkName));
         //TO DO: running tests against SourceTree beta
         //public Button CommitButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarCommit"));
         //public Button PushButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarPush"));
