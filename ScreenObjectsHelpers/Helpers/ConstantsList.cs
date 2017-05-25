@@ -15,8 +15,7 @@ namespace ScreenObjectsHelpers.Helpers
 
         //Constants for BasicTest
         public const string emptyAutomationFolder = @"%localappdata%\EmptyFolderForAutomation";
-        public const string pathToDataFolderGA = @"%localappdata%\Atlassian\SourceTree\";
-        public const string pathToDataFolderBeta = @"%localappdata%\SourceTree-Settings\beta";
+        public const string pathToDataFolder = @"%localappdata%\Atlassian\SourceTree\";
         public const string pathToAtlassianFolder = @"%localappdata%\Atlassian";
         public const string pathToDocumentsFolder = @"%userprofile%\Documents\";
         public const string pathToLocalappdata = @"%localappdata%\";

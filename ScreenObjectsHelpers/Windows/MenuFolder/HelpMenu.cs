@@ -12,8 +12,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         public HelpMenu(Window mainWindow) : base(mainWindow)
         {
         }
-
-        public override Menu UIElementMenu { get {  return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuHelp")); } }
+        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Help")); } }
+        //TO DO: running tests against SourceTree beta
+        //public override Menu UIElementMenu { get {  return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuHelp")); } }
 
         #region Methods        
         public void ClickOperations(OperationsHelp operation)

@@ -25,7 +25,7 @@ namespace AutomationTestsSolution.Tests
         //private static readonly string sourceTreeTypeEnvVar = Environment.ExpandEnvironmentVariables("%ST_UI_TEST_TYPE%"); // "Beta", "Alpha" ....
         private static readonly string sourceTreeTypeEnvVar = Environment.GetEnvironmentVariable("ST_UI_TEST_TYPE"); // "Beta", "Alpha" ....
 
-        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolderGA);
+        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
         
         [SetUp]
         public virtual void SetUp()
@@ -188,12 +188,6 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.StartInfo = psi;
 
             sourceTreeProcess.Start();
-        }
-        public static string SetSourceTreeFolder(string sourceTreeType)
-        {
-            return sourceTreeType == "Beta"
-                ? Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta")
-                : Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree");
         }
 
         protected static Tuple<string, string> FindSourceTree()

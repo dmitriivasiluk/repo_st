@@ -20,7 +20,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         {
             get
             {
-                return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuFile"));
+                return MainWindow.Get<Menu>(SearchCriteria.ByText("File"));
+                //TO DO: running tests against SourceTree beta
+                //return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuFile"));
             }
         }
 

@@ -12,8 +12,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         public RepositoryMenu(Window mainWindow) : base(mainWindow)
         {
         }
-
-        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuRepository")); } }
+        public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Repository")); } }
+        //TO DO: running tests against SourceTree beta
+        //public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuRepository")); } }
 
         #region Methods        
         public void ClickOperations(OperationsHelp operation)
