@@ -195,8 +195,8 @@ namespace AutomationTestsSolution.Tests
             // Allowing Environment Variables to override defaults  lets us test against GA, Beta, Alpha with runtime changes etc.
             var sourceTreeType = string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
 
-            //string sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
-            string sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
+            string sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
+            //string sourceTreeInstallParentDir = Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
 
             string[] sourceTreeAppDirs = Directory.GetDirectories(sourceTreeInstallParentDir, "app-*",
                 SearchOption.TopDirectoryOnly);
