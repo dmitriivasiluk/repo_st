@@ -56,6 +56,9 @@ namespace ScreenObjectsHelpers.Helpers
         public const string hgInitFolderForAddTest = @"%userprofile%\Documents\TEST_HgInit_AddTab";
         public const string pathToEmbeddedHg = @"%localappdata%\Atlassian\SourceTree\hg_local\hg.exe";
 
+        //Constants for Create Tab tests
+        public const string pathToCreateLocalRepos = @"%userprofile%\Documents\";
+
         //Constants for GitFlow Initialise window
         public const string defaultProductionBranch = "master";
         public const string defaultDevelopmentBranch = "develop";

@@ -207,6 +207,14 @@ namespace AutomationTestsSolution.Tests
             return new Tuple<string, string>(Path.Combine(sourceTreeAppDir, "SourceTree.exe"), version);
         }
 
+        protected void RemoveTestFolders(string[] testFolderArray)
+        {
+            foreach (var testFolder in testFolderArray)
+            {
+                Utils.RemoveDirectory(testFolder);
+            }
+        }
+
         [TearDown]
         public virtual void TearDown()
         {
