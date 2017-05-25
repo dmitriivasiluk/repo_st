@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using NUnit.Framework;
+using TestStack.White.UIItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows;
@@ -31,7 +32,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             RemoveTestFolders(new string[] { pathToAllRepos + gitRepoName, pathToAllRepos + mercurialRepoName });
         }
 
-        [Test, Order(1)]
+        [Test, Category("CreateRepoUI"), Order(1)]
         public void ValidateLocalRepoNameTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -40,29 +41,29 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(createTab.NameRepoTextBox.Text, gitRepoName);
         }
 
-        [Test, Order(2)]
-        public void CheckCreateButtonUnavailableOnDestinationEmpty()
+        [Test, Category("CreateRepoUI"), Order(2)]
+        public void CheckCreateRepoButtonUnavailableOnDestinationEmpty()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
             //for sure
             createTab.DestinationPathTextBox.SetValue("");
-            Assert.IsFalse(createTab.CreateButton.Visible && createTab.CreateButton.Enabled);
+            Assert.IsFalse(createTab.CreateButton.Enabled);
         }
 
-        [Test, Order(3)]
-        public void CheckCreateButtonUnavailableOnNoRepoAccount()
+        [Test, Category("CreateRepoUI"), Order(3)]
+        public void CheckCreateRepoButtonUnavailableOnNoRepoAccount()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            createTab.DestinationPathTextBox.SetValue(pathToAllRepos + gitRepoName);
+            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
             createTab.CheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.DescriptionTextBox.Focus();
-            Assert.IsFalse(createTab.CreateButton.Visible && createTab.CreateButton.Enabled);
+            Assert.IsFalse(createTab.CreateButton.Enabled);
         }
 
         //TODO Add dialow window verification
-        [Test, Order(4)]
+        [Test, Category("CreateRepoUI"), Order(4)]
         public void CheckBrowserButtonWorks()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -71,43 +72,44 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.DoesNotThrow(() => createTab.ClickButton(createTab.BrowseButton));
         }
 
-        [Test]
+        [Test, Category("CreateRepoLocal"), Order(5)]
         public void CheckLocalGitRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            createTab.DestinationPathTextBox.SetValue(pathToAllRepos + gitRepoName);
+            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
             mainWindow.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             createTab.ClickButton(createTab.CreateButton);
             Utils.ThreadWait(2000);
-            Assert.IsTrue(Directory.Exists(pathToAllRepos + gitRepoName));
-            Assert.IsTrue(Directory.Exists(pathToAllRepos + gitRepoName + "\\" + ConstantsList.dotGitFolder));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName)));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName, ConstantsList.dotGitFolder)));
             Assert.AreEqual(createTab.TabTextGit.Name, gitRepoName);
         }
 
-        [Test]
+        [Test, Category("CreateRepoLocal"), Order(6)]
         public void CheckLocalHgRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            createTab.DestinationPathTextBox.SetValue(pathToAllRepos + mercurialRepoName);
+            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, mercurialRepoName));
             mainWindow.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
             createTab.ClickButton(createTab.CreateButton);
             Utils.ThreadWait(2000);
-            Assert.IsTrue(Directory.Exists(pathToAllRepos + mercurialRepoName));
-            Assert.IsTrue(Directory.Exists(pathToAllRepos + mercurialRepoName + "\\" + ConstantsList.dotHgFolder));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, mercurialRepoName)));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, mercurialRepoName, ConstantsList.dotHgFolder)));
             Assert.AreEqual(createTab.TabTextHg.Name, mercurialRepoName);
         }
 
-        [Test]
+        [Test, Category("CreateRepoLocal"), Order(7)]
         //[Ignore("Issue SRCTREE-1622")]
         public void CheckLocalNoneRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            Assert.Throws(typeof(TestStack.White.UIItems.UIActionException), () => createTab.RepoTypeComboBox.Select(CreateTab.CVS.None));
+            Assert.Throws(typeof(UIActionException), 
+                () => createTab.RepoTypeComboBox.Select(CreateTab.CVS.None));
         }
     }
 }

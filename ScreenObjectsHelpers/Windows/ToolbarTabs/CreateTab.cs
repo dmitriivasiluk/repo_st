@@ -25,19 +25,26 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public TextBox DestinationPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoDestinationPath"));
         public TextBox NameRepoTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoName"));
         public ComboBox RepoTypeComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("CreateRepoTypeDropdown"));
-        //AutomationID is needed
+        //AutomationID_required
         public CheckBox CreateRemoteCheckBox =>
             MainWindow.Get<CheckBox>(SearchCriteria.ByClassName("CheckBox").AndByText("Create Repository On Account:"));
         //=================================Opens when CreateRemoteCheckBox is checked - Start
         public ComboBox RemoteAccountsComboBox => MainWindow.Get<ComboBox>(SearchCriteria.ByAutomationId("LocalRemoteTypeDropdown"));
         //AutomationID is needed
-        public TextBox DescriptionTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndAutomationId(""));
+        public TextBox DescriptionTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
         public CheckBox IsPrivateCheckBox => MainWindow.Get<CheckBox>(SearchCriteria.ByClassName("CheckBox").AndByText("Is Private"));
         //=================================Opens when CreateRemoteCheckBox is checked - End
         public Button CreateButton => MainWindow.Get<Button>(SearchCriteria.ByClassName("Button").AndByText("CreateRepoButton"));
         //New window is opened after successfull repo creation
         public UIItem TabTextGit => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testGitRepoBookmarkName));
         public UIItem TabTextHg => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testHgRepoBookmarkName));
+        public struct CVS
+        {
+            public static string GitHub = "Git";
+            public static string Mercurial = "Mercurial";
+            //somesing strange
+            public static string None = "None";
+        }
 
         #endregion
 
@@ -63,15 +70,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
         
         #endregion
-
-        //TODO: Put this struct to  ScreenObjectsHelpers / Windows / ToolbarTabs / 
-        //EditHostingAccountWindow / EditHostingAccountWindow.cs
-        public struct CVS
-        {
-            public static string GitHub = "Git";
-            public static string Mercurial = "Mercurial";
-            //somesing strange
-            public static string None = "None";
-        }
+        
     }
 }
