@@ -12,8 +12,11 @@ namespace AutomationTestsSolution.Tests
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
         private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
+        
+        // opentabs configuration
         private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
+
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
         private GitFlowInitialiseWindow gitFlowInitWindow;
@@ -47,7 +50,9 @@ namespace AutomationTestsSolution.Tests
         {
             Utils.RemoveDirectory(pathToClonedGitRepo);
         }
+
         [Test]
+        [Category ("GitFlow")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
@@ -65,6 +70,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("GitFlow")]
         public void CheckWhetherDefaultBranchNamesCorrect()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);

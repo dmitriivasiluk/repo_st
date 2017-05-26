@@ -9,8 +9,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         public ViewMenu(Window mainWindow) : base(mainWindow)
         {
         }
-
         public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("View")); } }
+        //TODO: running tests against SourceTree beta
+        //public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuView")); } }
 
         #region Methods        
         public void ClickOperations(OperationsView operation)
