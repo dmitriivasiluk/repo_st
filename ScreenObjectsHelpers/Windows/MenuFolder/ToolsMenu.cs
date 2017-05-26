@@ -18,7 +18,7 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
 
         #region UIElements        
         public override Menu UIElementMenu => MainWindow.Get<Menu>(SearchCriteria.ByText("Tools"));
-        //TO DO: running tests against SourceTree beta
+        //TODO: running tests against SourceTree beta
         //public override Menu UIElementMenu => MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuTools"));
         #endregion
 
