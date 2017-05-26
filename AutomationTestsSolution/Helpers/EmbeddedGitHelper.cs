@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Threading;
 
 namespace AutomationTestsSolution.Helpers
 {
@@ -19,7 +21,7 @@ namespace AutomationTestsSolution.Helpers
             _version = version;
         }
 
-        public bool DownloadGit(bool forceCleanRun)
+        public bool Download(bool forceCleanRun)
         {
             InstallerPath = Path.Combine(_downloadFolder, "PortableGit.7z.exe");
 
@@ -36,7 +38,26 @@ namespace AutomationTestsSolution.Helpers
             using (var client = new System.Net.WebClient())
             {
                 var url = $"https://downloads.atlassian.com/software/sourcetree/windows/PortableGit-{_version}-32-bit.7z.exe";
-                client.DownloadFile(url, InstallerPath);
+                var count = 0;
+                using (var stream = client.OpenRead(url))
+                {
+                    if (stream != null)
+                    {
+                        stream.ReadTimeout = Timeout.Infinite;
+                        using (var reader = new StreamReader(stream, Encoding.UTF8, false))
+                        {
+                            string line;
+                            while ((line = reader.ReadLine()) != null)
+                            {
+                                if (line != String.Empty)
+                                {
+                                    Console.WriteLine("Count {0}", count++);
+                                }
+                                Console.WriteLine(line);
+                            }
+                        }
+                    }
+                }
             }
 
             if (!File.Exists(InstallerPath))

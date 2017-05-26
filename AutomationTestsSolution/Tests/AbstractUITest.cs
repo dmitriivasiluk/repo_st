@@ -105,7 +105,7 @@ namespace AutomationTestsSolution.Tests
         private void InstallHgEmbedded()
         {
             var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, new Version("3.7.3"));
-            hgHelper.DownloadGit(ForceCleanRun);
+            hgHelper.Download(ForceCleanRun);
             if (!hgHelper.InstallHg(ForceCleanRun))
             {
                 Assert.Fail("Unable to install hg");
@@ -121,7 +121,7 @@ namespace AutomationTestsSolution.Tests
         private void InstallHgSystem()
         {
             var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, new Version("3.7.3"));
-            hgHelper.DownloadGit(ForceCleanRun);
+            hgHelper.Download(ForceCleanRun);
             if (!hgHelper.InstallHg(ForceCleanRun))
             {
                 Assert.Fail("Unable to install git");
@@ -140,7 +140,7 @@ namespace AutomationTestsSolution.Tests
         private void InstallGitEmbedded()
         {
             var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, new Version("2.12.2.2"));
-            gitHelper.DownloadGit(ForceCleanRun);
+            gitHelper.Download(ForceCleanRun);
             if (!gitHelper.InstallGit(ForceCleanRun))
             {
                 Assert.Fail("Unable to install git");
@@ -156,7 +156,7 @@ namespace AutomationTestsSolution.Tests
         private void InstallGitSystem()
         {
             var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, new Version("2.12.2.2"));
-            gitHelper.DownloadGit(ForceCleanRun);
+            gitHelper.Download(ForceCleanRun);
             if (!gitHelper.InstallGit(ForceCleanRun))
             {
                 Assert.Fail("Unable to install git");
