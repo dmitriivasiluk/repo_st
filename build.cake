@@ -82,7 +82,7 @@ Task("Run-Unit-Tests-Core")
     NUnit3("./**/bin/" + configuration + "/AutomationTest*.dll", 
         new NUnit3Settings {
             NoResults = true,
-            Test = "AutomationTestsSolution.Tests.HelpMenuTests"
+            Test = "AutomationTestsSolution.Tests.HelpMenuTests,AutomationTestsSolution.Tests.CustomActionsTests"
         });
 });
 
