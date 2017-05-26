@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Threading;
 
@@ -38,23 +39,30 @@ namespace AutomationTestsSolution.Helpers
             using (var client = new System.Net.WebClient())
             {
                 var url = $"https://downloads.atlassian.com/software/sourcetree/windows/PortableGit-{_version}-32-bit.7z.exe";
-                var count = 0;
+                var lineCount = 0;
                 using (var stream = client.OpenRead(url))
                 {
                     if (stream != null)
                     {
                         stream.ReadTimeout = Timeout.Infinite;
-                        using (var reader = new StreamReader(stream, Encoding.UTF8, false))
+
+                        WebHeaderCollection whc = client.ResponseHeaders;
+                        string contentLength = whc["Content-Length"];
+                        
+                        int totalLength = (Int32.Parse(contentLength));
+                        int fivePercent = ((totalLength) / 10) / 2;
+
+                        //buffer of 5% of stream
+                        byte[] fivePercentBuffer = new byte[fivePercent];
+
+                        using (FileStream fs = new FileStream(InstallerPath, FileMode.Create, FileAccess.ReadWrite))
                         {
-                            string line;
-                            while ((line = reader.ReadLine()) != null)
+                            int count;
+                            do
                             {
-                                if (line != String.Empty)
-                                {
-                                    Console.WriteLine("Count {0}", count++);
-                                }
-                                Console.WriteLine(line);
-                            }
+                                count = stream.Read(fivePercentBuffer, 0, fivePercent);
+                                fs.Write(fivePercentBuffer, 0, count);
+                            } while (count > 0);
                         }
                     }
                 }
