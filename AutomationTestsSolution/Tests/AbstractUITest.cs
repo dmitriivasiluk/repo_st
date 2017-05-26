@@ -483,6 +483,11 @@ namespace AutomationTestsSolution.Tests
         public IEnumerable<string> FindUserConfigs()
         {
             var userConfigHome = Path.Combine(Environment.ExpandEnvironmentVariables("%LocalAppData%"), "Atlassian");
+            if (!Directory.Exists(userConfigHome))
+            {
+                return new List<string>();
+            }
+
             return Directory.GetDirectories(userConfigHome, SourceTreeVersion.ToString(), SearchOption.AllDirectories);
         }
         [TearDown]
