@@ -4,5 +4,19 @@ os: Unstable
 version: 1.0.{build}
 init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+before_build:
+- cmd: >-
+    git config --global user.email test@atlassian.com
+    
+    git config --global user.name QAAutomation
+
+    dir C:\projects\sourcetreeqaautomation\.appveyor
+    
+    cscript C:\projects\sourcetreeqaautomation\.appveyor\chrome_default.vbs
+    
+    %windir%\system32\reg.exe import C:\projects\sourcetreeqaautomation\.appveyor\Disable_Explorer_Auto_Complete_popup.reg
+
+    echo C:\projects\sourcetreeqaautomation\.appveyor\SeleniumAuth.exe
+    
 build_script:
 - ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Run-Unit-Tests-Core
