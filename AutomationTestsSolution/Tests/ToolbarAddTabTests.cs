@@ -58,7 +58,7 @@ namespace AutomationTestsSolution.Tests
             AddTab addTab = mainWindow.OpenTab<AddTab>();
             addTab.WorkingCopyPathTextBox.SetValue(pathToTestGitFolder);
 
-            Assert.AreEqual(addTab.GetGitValidationMessage(), ConstantsList.gitRepoType);
+            Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.gitRepoType));
         }
 
         [Test]
@@ -68,7 +68,7 @@ namespace AutomationTestsSolution.Tests
             AddTab addTab = mainWindow.OpenTab<AddTab>();
             addTab.WorkingCopyPathTextBox.SetValue(pathToTestHgFolder);
 
-            Assert.AreEqual(addTab.GetMercurialValidationMessage(), ConstantsList.mercurialRepoType);
+            Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.mercurialRepoType));
         }
 
         [Test]
@@ -80,7 +80,7 @@ namespace AutomationTestsSolution.Tests
             addTab.WorkingCopyPathTextBox.SetValue(pathToEmptyFolder);
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
-            Assert.AreEqual(addTab.GetInvalidRepoMessage(), ConstantsList.invalidFolder);
+            Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.notValidPath));
             Assert.IsFalse(isAddButtonEnabled);
         }
 
@@ -90,10 +90,10 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.ValidateFolder();
-
+            addTab.WorkingCopyPathTextBox.SetValue("");            
+            
+            Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.noWorkingPathSupplied));
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
-            Assert.AreEqual(addTab.GetEmptyPathMessage(), ConstantsList.emptyPath);
             Assert.IsFalse(isAddButtonEnabled);
         }
 
@@ -104,7 +104,7 @@ namespace AutomationTestsSolution.Tests
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
             addTab.WorkingCopyPathTextBox.SetValue(pathToTestGitFolder);
-            addTab.ValidateFolder();
+            addTab.TriggerValidation();
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
             Assert.IsTrue(isAddButtonEnabled);
@@ -117,7 +117,7 @@ namespace AutomationTestsSolution.Tests
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
             addTab.WorkingCopyPathTextBox.SetValue(pathToTestHgFolder);
-            addTab.ValidateFolder();
+            addTab.TriggerValidation();
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
             Assert.IsTrue(isAddButtonEnabled);
