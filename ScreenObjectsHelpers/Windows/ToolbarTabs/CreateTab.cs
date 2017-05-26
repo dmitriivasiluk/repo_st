@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.Finders;
@@ -11,7 +12,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
     public class CreateTab : NewTabWindow
     {
-        public CreateTab(TestStack.White.UIItems.WindowItems.Window mainWindow) : base(mainWindow)
+        public CreateTab(Window mainWindow) : base(mainWindow)
         {
         }
 
@@ -70,7 +71,109 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             return new RepositoryTab(MainWindow);
         }
 
+        public WarningExistingEmptyFolder ClickCreateButtonCallsWarning()
+        {
+            ClickButton(CreateButton);
+            Utils.ThreadWait(2000);
+            return new WarningExistingEmptyFolder(MainWindow);
+        }
+
         #endregion
 
+    }
+    
+    //TODO add separate folder for dialogs
+    public class DialogSelectDestination : GeneralWindow
+    {
+        public DialogSelectDestination(Window mainWindow) : base(mainWindow)
+        {
+            dialogWindow = mainWindow.ModalWindow("Select Destination Path");
+        }
+
+        public Window dialogWindow { get; }
+
+        public override void ValidateWindow()
+        {
+            Console.WriteLine("WAIT FOR DIALOG WINDOW");
+        }
+
+        #region UIElements
+
+        public TitleBar titleBar => dialogWindow.TitleBar;
+        //ToDo Add proper ToolBar identification
+        //public TextBox destinationPath => dialogWindow.Get<TextBox>(SearchCriteria.ByClassName("ToolbarWindow32"));
+        public TextBox destinationFolder => dialogWindow.Get<TextBox>(SearchCriteria.ByAutomationId("1152"));
+        public Button selectFolderButton => dialogWindow.Get<Button>(SearchCriteria.ByAutomationId("1"));
+        public Button cancelButton => dialogWindow.Get<Button>(SearchCriteria.ByAutomationId("2"));
+
+        #endregion
+
+        #region Methods
+
+        public void ClickSelectButton()
+        {
+            ClickButton(selectFolderButton);
+        }
+        public void ClickCancelButton()
+        {
+            ClickButton(cancelButton);
+        }
+
+        #endregion
+    }
+
+    //TODO separate folder for warnings
+    public class WarningExistingEmptyFolder : GeneralWindow
+    {
+        /*public WarningExistingEmptyFolder(Window mainWindow, UIItemContainer warningWindow) : base(mainWindow)
+        {
+            WarningWindowContainer = warningWindow;
+        }*/
+        public WarningExistingEmptyFolder(Window mainWindow) : base(mainWindow)
+        {
+            WarningWindowContainer = mainWindow.ModalWindow(SearchCriteria.ByAutomationId("window"));
+        }
+        //public UIItemContainer WarningWindowContainer { get; }
+        public Window WarningWindowContainer { get; }
+        public override void ValidateWindow()
+        {
+            Console.WriteLine("WAIT FOR WarningExistingEmptyFolder");
+        }
+
+        #region UIItems
+        //public TextBox titleBar => WarningWindowContainer.Get<TextBox>(SearchCriteria.ByText("Problem with destination directory"));
+        public TextBox titleBar
+        {
+            get
+            {
+                var controlElement = WarningWindowContainer.GetElement(SearchCriteria.ByText("Problem with destination directory").AndControlType(ControlType.Text));
+                return controlElement != null ? new TextBox(controlElement, WarningWindowContainer.ActionListener) : null;
+            }
+        }
+
+        public Button closeButton => WarningWindowContainer.Get<Button>(SearchCriteria.ByAutomationId("close"));
+        public Button yesButton => WarningWindowContainer.Get<Button>(SearchCriteria.ByText("Yes"));
+        public Button noButton => WarningWindowContainer.Get<Button>(SearchCriteria.ByText("No"));
+        #endregion
+
+        #region Methods
+
+        public void ClickCloseButton()
+        {
+            ClickButton(closeButton);
+        }
+
+        public RepositoryTab ClickYesButton()
+        {
+            ClickButton(yesButton);
+            return new RepositoryTab(MainWindow);
+        }
+
+        public void ClickNoButton()
+        {
+            ClickButton(noButton);
+        }
+
+        #endregion
     }
 }
