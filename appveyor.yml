@@ -5,5 +5,4 @@ version: 1.0.{build}
 init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
 build_script:
-- cmd: >-
-    .\build.ps1 -Target Run-Unit-Tests-Core
+- ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Run-Unit-Tests-Core
