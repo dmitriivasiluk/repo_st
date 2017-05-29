@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.ListBoxItems;
@@ -113,6 +113,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
             ClickButton(selectFolderButton);
         }
+        
         public void ClickCancelButton()
         {
             ClickButton(cancelButton);
