@@ -24,42 +24,44 @@ namespace ScreenObjectsHelpers.Windows.Repository
         //Automation IDs required
         public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(0));
         public Button AdvancedOptionsButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
-        public TextBox BranchCommit => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));
-        public TextBox LocalRelativePath => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
-        public Button SquashCommitsCheckbox => MainWindow.Get<Button>(SearchCriteria.ByText("Squash commits?"));
+        public TextBox BranchCommitTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));
+        public TextBox LocalRelativePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
+        public CheckBox SquashCommitsCheckbox => MainWindow.Get<CheckBox>(SearchCriteria.ByText("Squash commits?"));
         public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         #endregion
 
         #region Methods
-        public void ClickOkButton()
+        public RepositoryTab ClickOkButton()
         {
-            OKButton.Click();
-        }
-        public RepositoryTab ClickCancelButton()
-        {
-            CancelButton.Click();
+            ClickButton(OKButton);
             return new RepositoryTab(MainWindow);
         }
-        public void LocalRelativePathTextboxFocus()
+
+        public RepositoryTab ClickCancelButton()
         {
-            LocalRelativePath.Focus();
+            ClickButton(CancelButton);
+            return new RepositoryTab(MainWindow);
         }
+
         public bool IsOkButtonEnabled()
         {
             return OKButton.Enabled;
         }
+
         public void SetSourcePath(string value)
         {
             SourcePathTextbox.Text = value;
         }
+
         public void SetLocalRelativePath(string value)
         {
-            LocalRelativePath.Text = value;
+            LocalRelativePathTextbox.Text = value;
         }
+
         public bool GetValidationMessage(string text)
         {
-            LocalRelativePath.Focus();
+            LocalRelativePathTextbox.Focus();
 
             if (GetWithWait<Label>(MainWindow, SearchCriteria.ByText(text)) == null)
             {
