@@ -101,7 +101,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         public TitleBar titleBar => dialogWindow.TitleBar;
         //ToDo Add proper ToolBar identification
-        //public TextBox destinationPath => dialogWindow.Get<TextBox>(SearchCriteria.ByClassName("ToolbarWindow32"));
         public TextBox destinationFolder => dialogWindow.Get<TextBox>(SearchCriteria.ByAutomationId("1152"));
         public Button selectFolderButton => dialogWindow.Get<Button>(SearchCriteria.ByAutomationId("1"));
         public Button cancelButton => dialogWindow.Get<Button>(SearchCriteria.ByAutomationId("2"));
@@ -125,15 +124,10 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
     //TODO separate folder for warnings
     public class WarningExistingEmptyFolder : GeneralWindow
     {
-        /*public WarningExistingEmptyFolder(Window mainWindow, UIItemContainer warningWindow) : base(mainWindow)
-        {
-            WarningWindowContainer = warningWindow;
-        }*/
         public WarningExistingEmptyFolder(Window mainWindow) : base(mainWindow)
         {
             WarningWindowContainer = mainWindow.ModalWindow(SearchCriteria.ByAutomationId("window"));
         }
-        //public UIItemContainer WarningWindowContainer { get; }
         public Window WarningWindowContainer { get; }
         public override void ValidateWindow()
         {
@@ -141,7 +135,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIItems
-        //public TextBox titleBar => WarningWindowContainer.Get<TextBox>(SearchCriteria.ByText("Problem with destination directory"));
         public TextBox titleBar
         {
             get
