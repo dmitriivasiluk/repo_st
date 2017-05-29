@@ -69,11 +69,12 @@ namespace ScreenObjectsHelpers.Windows
             while (true)
             {
                 var isItemVisible = item.Visible;
+                var isItemEnabled = item.Enabled;
                 if (secondPassed > maximumTimeToWait)
                 {
-                    throw new TimeoutException($"Element {item.ToString()} is not Visible after {secondPassed} second");
+                    throw new TimeoutException($"Element {item.ToString()} is not Visible or Disabled after {secondPassed} second");
                 }
-                if (isItemVisible) return item;
+                if (isItemVisible && isItemEnabled) return item;
                 secondPassed += secondToWaitEachLoop;
                 Utils.ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
             }

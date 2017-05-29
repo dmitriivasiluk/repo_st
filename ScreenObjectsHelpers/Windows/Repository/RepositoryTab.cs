@@ -53,6 +53,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
         #region Methods
         public GitFlowInitialiseWindow ClickGitFlowButton()
         {
+            WaitWhileElementAvaliable(GitFlowButton);
             ClickButton(GitFlowButton);
             return new GitFlowInitialiseWindow(MainWindow);
         }
