@@ -25,9 +25,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("SourceTextBox"));
         public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Label noSourcePathEnteredValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("No path / URL supplied"));
-        public Label CorrectSourcePathValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("This is a Git repository"));
-        public Label wrongSourcePathValidationMessage => MainWindow.Get<Label>(SearchCriteria.ByControlType(ControlType.Text).AndByText("This is not a valid source path / URL"));
         public Button AdvancedOptions => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
         public TextBox SourceBranch => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(3));
         public TextBox LocalRelativePath => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
@@ -55,6 +52,24 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
             SourcePathTextbox.Text = value;
         }
+        public bool GetValidationMessage(string text)
+        {
+            LocalRelativePath.Focus();
+
+            if (GetWithWait<Label>(MainWindow, SearchCriteria.ByText(text)) == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public struct LinkValidationMessage
+        {
+            public static string noPathSupplied = "No path / URL supplied";
+            public static string notValidPath = "This is not a valid source path / URL";
+            public static string gitRepoType = "This is a Git repository";
+            public static string checkingSource = "Checking source...";
+        }
         public NotAGitRepository SwitchToNotAGitRepositoryWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByText("Not a Git repository");
@@ -75,7 +90,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
 
         #region UIItems
         public Button CancelButton => notAGitRepositoryWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        //public Label ErrorMessage => notAGitRepositoryWindow.Get<Label>(SearchCriteria.ByText("Submodules can only be git repositories."));
         public Label ErrorMessage  
         {
             get
