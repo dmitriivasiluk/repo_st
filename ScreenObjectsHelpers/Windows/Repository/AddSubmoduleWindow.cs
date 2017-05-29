@@ -31,27 +31,33 @@ namespace ScreenObjectsHelpers.Windows.Repository
         #endregion
 
         #region Methods
-        public void ClickOkButton()
+        public RepositoryTab ClickOkButton()
         {
-            OKButton.Click();
-        }
-        public RepositoryTab ClickCancelButton()
-        {
-            CancelButton.Click();
+            ClickButton(OKButton);
             return new RepositoryTab(MainWindow);
         }
+
+        public RepositoryTab ClickCancelButton()
+        {
+            ClickButton(CancelButton);
+            return new RepositoryTab(MainWindow);
+        }
+
         public void LocalRelativePathTextboxFocus()
         {
             LocalRelativePath.Focus();
         }
+
         public bool IsOkButtonEnabled()
         {
             return OKButton.Enabled;
         }
+
         public void SetSourcePath(string value)
         {
             SourcePathTextbox.Text = value;
         }
+
         public bool GetValidationMessage(string text)
         {
             LocalRelativePath.Focus();
@@ -70,6 +76,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
             public static string gitRepoType = "This is a Git repository";
             public static string checkingSource = "Checking source...";
         }
+
         public NotAGitRepository SwitchToNotAGitRepositoryWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByText("Not a Git repository");
@@ -82,6 +89,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
     {
         private AddSubmoduleWindow addSubmoduleWindow;
         private UIItemContainer notAGitRepositoryWindow;
+
         public NotAGitRepository(Window mainWindow, AddSubmoduleWindow addSubmoduleWindow, UIItemContainer notAGitRepositoryWindow)
         {
             this.addSubmoduleWindow = addSubmoduleWindow;
@@ -89,8 +97,10 @@ namespace ScreenObjectsHelpers.Windows.Repository
         }
 
         #region UIItems
+
         public Button CancelButton => notAGitRepositoryWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Label ErrorMessage  
+
+        public Label ErrorMessage
         {
             get
             {
