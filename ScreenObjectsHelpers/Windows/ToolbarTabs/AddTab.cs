@@ -1,4 +1,5 @@
 ﻿using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 
@@ -55,6 +56,13 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             }            
 
             return true;
+        }
+
+        public RepositoryTab ClickAddButton()
+        {
+            ClickButton(AddButton);
+
+            return new RepositoryTab(MainWindow);
         }
 
         public struct RepoValidationMessage

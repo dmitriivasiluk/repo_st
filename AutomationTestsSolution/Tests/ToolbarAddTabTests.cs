@@ -4,6 +4,7 @@ using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.IO;
 using LibGit2Sharp;
+using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -121,6 +122,34 @@ namespace AutomationTestsSolution.Tests
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
             Assert.IsTrue(isAddButtonEnabled);
+        }
+
+        [Test]
+        public void CheckOpenedRepoTitleAfterAddGitFolderTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            AddTab addTab = mainWindow.OpenTab<AddTab>();
+
+            addTab.WorkingCopyPathTextBox.SetValue(pathToTestGitFolder);
+            addTab.TriggerValidation();
+            var repoName = addTab.NameTextBox.Text;
+            RepositoryTab repoTab = addTab.ClickAddButton();           
+
+            Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
+        }
+
+        [Test]
+        public void CheckOpenedRepoTitleAfterAddHgFolderTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            AddTab addTab = mainWindow.OpenTab<AddTab>();
+
+            addTab.WorkingCopyPathTextBox.SetValue(pathToTestHgFolder);
+            addTab.TriggerValidation();
+            var repoName = addTab.NameTextBox.Text;
+            RepositoryTab repoTab = addTab.ClickAddButton();
+
+            Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }
     }
 }

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -166,6 +167,38 @@ namespace AutomationTestsSolution.Tests
             var localtab = mainWindow.OpenTab<LocalTab>();
             var bookmarkAdded = localtab.IsTestHgRepoBookmarkAdded();
             Assert.IsTrue(bookmarkAdded);
+        }
+
+        [Test]
+        [Category("CloneTab")]
+        public void CheckGitRepoOpenedAfterCloneTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+
+            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
+            cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);            
+            var repoName = cloneTab.NameTextBox.Text;
+
+            RepositoryTab repoTab = cloneTab.ClickCloneButton();
+
+            Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
+        }
+
+        [Test]
+        [Category("CloneTab")]
+        public void CheckHgRepoOpenedAfterCloneTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
+
+            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
+            cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
+            var repoName = cloneTab.NameTextBox.Text;
+
+            RepositoryTab repoTab = cloneTab.ClickCloneButton();
+
+            Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }
     }
 }

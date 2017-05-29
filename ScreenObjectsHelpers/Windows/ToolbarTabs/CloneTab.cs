@@ -26,11 +26,12 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public CheckBox NoHardlinksCheckBox => MainWindow.Get<CheckBox>(SearchCriteria.ByText("No hardlinks"));
 
         //AutomationID_required
+        
+        public TextBox DestinationPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
+
+        public TextBox NameTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
+
         /*
-        public TextBox DestinationPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId(""));
-
-        public TextBox NameTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId(""));
-
         public Button SourcePathButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
 
         public Button DestinationPathButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId(""));
@@ -79,11 +80,10 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public void TriggerValidation()
         {
             //AutomationID_required - temporary workaround
-            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(1)).Focus();
+            DestinationPathTextBox.Focus();
             Utils.ThreadWait(2000);
-            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(2)).Focus();
+            NameTextBox.Focus();
         }
-
 
         public bool IsCloneButtonEnabled()
         {
@@ -102,14 +102,14 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         public bool GetValidationMessage(string text)
         {
-            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(1)).Focus();
+            DestinationPathTextBox.Focus();
 
             if (GetWithWait<WPFLabel>(MainWindow, SearchCriteria.ByText(text)) == null)
             {
                 return false;
             }
 
-            MainWindow.Get(SearchCriteria.ByClassName("TextBox").AndIndex(2)).Focus();
+            NameTextBox.Focus();
 
             return true;
         }
