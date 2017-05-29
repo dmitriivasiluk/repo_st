@@ -56,6 +56,16 @@ namespace ScreenObjectsHelpers.Windows.Repository
             ClickButton(GitFlowButton);
             return new GitFlowInitialiseWindow(MainWindow);
         }
+
+        public bool IsRepoTabTitledWithText(string text)
+        {
+            if (GetWithWait<WPFLabel>(MainWindow, SearchCriteria.ByText(text)) == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
         #endregion
     }
 }
