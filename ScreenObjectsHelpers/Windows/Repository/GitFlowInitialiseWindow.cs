@@ -14,6 +14,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public GitFlowInitialiseWindow(Window mainWindow) : base(mainWindow)
         {
         }
+
         public override void ValidateWindow()
         {
             // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
@@ -33,32 +34,39 @@ namespace ScreenObjectsHelpers.Windows.Repository
         #endregion
 
         #region Methods
-        public void ClickOkButton()
+        public RepositoryTab ClickOkButton()
         {
-            OKButton.Click();
-        }
-        public RepositoryTab ClickCancelButton()
-        {
-            CancelButton.Click();
+            ClickButton(OKButton);
             return new RepositoryTab(MainWindow);
         }
+
+        public RepositoryTab ClickCancelButton()
+        {
+            ClickButton(CancelButton);
+            return new RepositoryTab(MainWindow);
+        }
+
         public void ClickUseDefaultsButton()
         {
-            UseDefaultsButton.Click();
+            ClickButton(UseDefaultsButton);
         }
+
         public bool TextboxDefaultContent(TextBox textbox, string expectedContent)
         {
             return textbox.Text.Equals(expectedContent);
         }
+
         public bool IsVersionTagEmpty()
         {
             return VersionTagTextbox.Text.Equals("");
         }
+
         public void SetTextboxContent(TextBox textbox, string content)
         {
             textbox.Focus();
             Keyboard.Instance.Enter(content);
         }
+
         public bool IsDefaultBranchNameCorrect(TextBox textbox, string condition)
         {
             if (textbox.Text == condition)
@@ -66,6 +74,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
             else
                 return false;
         }
+
         public void SetAllTextboxes(string testString)
         {
             SetTextboxContent(ProductionBranchTextbox, testString);

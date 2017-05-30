@@ -69,9 +69,9 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-            addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
-            addSubmoduleWindow.LocalRelativePathTextboxFocus();
-            Thread.Sleep(4000);
+            addSubmoduleWindow.SourcePathTextbox.SetValue(pathToClonedGitRepo);
+            addSubmoduleWindow.LocalRelativePathTextbox.Focus();
+            addSubmoduleWindow.WaitWhileElementAvaliable(addSubmoduleWindow.OKButton);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
@@ -84,9 +84,9 @@ namespace AutomationTestsSolution.Tests
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
             addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
-            addSubmoduleWindow.LocalRelativePathTextboxFocus();
+            var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
 
-            Assert.AreEqual(ConstantsList.wrongSourcePathEntered, addSubmoduleWindow.wrongSourcePathValidationMessage.Text);
+            Assert.IsTrue(isValidationMessageCorrect);
         }
     }
 }
