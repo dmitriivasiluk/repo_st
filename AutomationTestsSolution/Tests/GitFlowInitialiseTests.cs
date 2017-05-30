@@ -53,6 +53,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category ("GitFlow")]
+        [Ignore("Investigate stability issue")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
@@ -71,6 +72,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("GitFlow")]
+        [Ignore("Investigate stability issue")]
         public void CheckWhetherDefaultBranchNamesCorrect()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);

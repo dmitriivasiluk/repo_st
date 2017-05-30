@@ -34,7 +34,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             RemoveTestFolders(new string[] { pathToAllRepos + gitRepoName, pathToAllRepos + mercurialRepoName });
         }
 
-        [Test, Category("CreateRepoUI")]
+        [Test]
+        [Category("CreateRepoUI")]
         public void ValidateLocalRepoNameTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -43,7 +44,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(createTab.NameRepoTextBox.Text, gitRepoName);
         }
 
-        [Test, Category("CreateRepoUI")]
+        [Test]
+        [Category("CreateRepoUI")]
         public void CheckCreateRepoButtonUnavailableOnDestinationEmpty()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -53,7 +55,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(createTab.CreateButton.Enabled);
         }
 
-        [Test, Category("CreateRepoUI")]
+        [Test]
+        [Category("CreateRepoUI")]
         public void CheckCreateRepoButtonUnavailableOnNoRepoAccount()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -65,7 +68,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         }
 
         //TODO Add dialow window verification
-        [Test, Category("CreateRepoUI")]
+        [Test]
+        [Category("CreateRepoUI")]
         public void CheckBrowserButtonWorks()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -78,7 +82,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(ConstantsList.dialogSelectDestinationTitle, titleBar);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalGitRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -94,7 +99,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalHgRepoCreatedTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -109,7 +115,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         [Ignore("Issue SRCTREE-1622")]
         public void CheckLocalNoneRepoCreatedTest()
         {
@@ -119,7 +126,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
                 () => createTab.RepoTypeComboBox.Select(CreateTab.CVS.None));
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInEmptyFolderPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -136,7 +144,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInEmptyFolderNegativeTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -152,7 +161,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(LibGit2Sharp.Repository.IsValid(pathToRepo));
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInEmptyFolderPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -168,7 +178,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInEmptyFolderNegativeTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -183,7 +194,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToAllRepos, mercurialRepoName, ConstantsList.dotHgFolder)));
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInNotEmptyFolderPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -201,7 +213,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInNotEmptyFolderNegativeTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -218,7 +231,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(LibGit2Sharp.Repository.IsValid(pathToRepo));
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInNotEmptyFolderPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -236,7 +250,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInNotEmptyFolderNegativeTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -253,7 +268,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInExistRepoPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -274,7 +290,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
-        [Test, Category("CreateRepoLocal")]
+        [Test]
+        [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInExistRepoPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

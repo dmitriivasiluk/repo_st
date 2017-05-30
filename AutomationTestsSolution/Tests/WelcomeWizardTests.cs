@@ -147,8 +147,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
         [Ignore("BitBucket server link needed")]
-        [Category("WelcomeWizard")]
-        [Category("bbs")]
+        [Category("WelcomeWizard")]        
         public void ConnectBitbucketServerAccountTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -509,8 +508,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public")]
         [Ignore("BitBucket server link needed")]
-        [Category("WelcomeWizard")]
-        [Category("bbs")]
+        [Category("WelcomeWizard")]        
         public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -586,7 +584,6 @@ namespace AutomationTestsSolution.Tests
 
             Assert.AreEqual(actualAmountOfRepos, 1);
             Assert.IsTrue(nameOfRepository.Contains(searchCondition));
-
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public")]
@@ -632,7 +629,6 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitle, "SourceTree");
 
         }
-
     }
 }
 
