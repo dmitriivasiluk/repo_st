@@ -15,20 +15,6 @@ namespace AutomationTestsSolution.Tests
         string pathToClonedMercurialRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedMercurialRepo);
         #endregion
 
-        /// <summary>        
-        /// Pre-conditions: 
-        /// Test repo folders are removed
-        /// Mercurial is installed
-        /// 2.0 Welcome - Disabled
-        /// </summary>
-        [SetUp]
-        public override void SetUp()
-        {
-            RemoveTestFolders();
-
-            base.SetUp();           
-        }
-
         [TearDown]
         public override void TearDown()
         {
@@ -203,6 +189,7 @@ namespace AutomationTestsSolution.Tests
         
         protected override void PerTestPreConfigureSourceTree()
         {
+            RemoveTestFolders();
         }
     }
 }

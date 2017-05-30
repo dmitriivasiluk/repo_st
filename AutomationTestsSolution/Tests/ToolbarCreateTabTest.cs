@@ -11,7 +11,7 @@ using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests.CreateLocal
 {
-    class ToolbarCreateTabTestLocal : BasicTest
+    class ToolbarCreateTabTestLocal : AbstractUITest
     {
          #region Test Variables
         string gitRepoName = ConstantsList.testGitRepoBookmarkName;
@@ -19,19 +19,12 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         string pathToAllRepos = Environment.ExpandEnvironmentVariables(ConstantsList.pathToCreateLocalRepos);
         #endregion
 
-        [SetUp]
-        public override void SetUp()
-        {
-            //if folders exist for some reason
-            RemoveTestFolders(new string[] { pathToAllRepos + gitRepoName, pathToAllRepos + mercurialRepoName });
-            base.SetUp();
-        }
-
         [TearDown]
         public override void TearDown()
         {
             base.TearDown();
-            RemoveTestFolders(new string[] { pathToAllRepos + gitRepoName, pathToAllRepos + mercurialRepoName });
+            Utils.RemoveDirectory(pathToAllRepos + gitRepoName);
+            Utils.RemoveDirectory(pathToAllRepos + mercurialRepoName);
         }
 
         [Test]
@@ -340,10 +333,11 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             return true;
         }
         #endregion
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            Utils.RemoveDirectory(pathToAllRepos + gitRepoName);
+            Utils.RemoveDirectory(pathToAllRepos + mercurialRepoName);
+        }
     }
-}
-
-namespace AutomationTestsSolution.Tests.CreateRemote
-{
-
 }

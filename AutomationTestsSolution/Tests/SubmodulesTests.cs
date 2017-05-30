@@ -9,13 +9,12 @@ using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
-    class SubmodulesTests : BasicTest
+    class SubmodulesTests : AbstractUITest
     {
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
         private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
         // opentabs configuration
-        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
 
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
@@ -23,18 +22,6 @@ namespace AutomationTestsSolution.Tests
         private AddSubmoduleWindow addSubmoduleWindow;
         #endregion
 
-        [SetUp]
-        public override void SetUp()
-        {
-            RemoveTestFolder();
-            CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
-            base.BackupConfigs();
-            base.UseTestConfigAndAccountJson(sourceTreeDataPath);
-            resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
-            File.WriteAllText(openTabsPath, resourceName);
-            base.RunAndAttachToSourceTree();
-        }
 
         [TearDown]
         public override void TearDown()
@@ -87,6 +74,16 @@ namespace AutomationTestsSolution.Tests
             var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
 
             Assert.IsTrue(isValidationMessageCorrect);
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            RemoveTestFolder();
+            CreateTestFolder();
+            Repository.Init(pathToClonedGitRepo);
+
+            var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
+            File.WriteAllText(openTabsPath, resourceName);
         }
     }
 }
