@@ -50,16 +50,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
             return OKButton.Enabled;
         }
 
-        public void SetSourcePath(string value)
-        {
-            SourcePathTextbox.SetValue(value);
-        }
-
-        public void SetLocalRelativePath(string value)
-        {
-            LocalRelativePathTextbox.SetValue(value);
-        }
-
         public bool GetValidationMessage(string text)
         {
             LocalRelativePathTextbox.Focus();

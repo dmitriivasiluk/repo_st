@@ -27,8 +27,8 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         public Button AdvancedOptions => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
-        public TextBox SourceBranch => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(3));
-        public TextBox LocalRelativePath => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
+        public TextBox SourceBranchTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(3));
+        public TextBox LocalRelativePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
         #endregion
 
         #region Methods
@@ -44,20 +44,12 @@ namespace ScreenObjectsHelpers.Windows.Repository
             return new RepositoryTab(MainWindow);
         }
 
-        public void LocalRelativePathTextboxFocus()
-        {
-            LocalRelativePath.Focus();
-        }
-
         public bool IsOkButtonEnabled()
         {
             return OKButton.Enabled;
         }
 
-        public void SetSourcePath(string value)
-        {
-            SourcePathTextbox.SetValue(value);
-        }
+        
 
         public bool GetValidationMessage(string text)
         {

@@ -69,8 +69,8 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-            addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
-            addSubmoduleWindow.LocalRelativePathTextboxFocus();
+            addSubmoduleWindow.SourcePathTextbox.SetValue(pathToClonedGitRepo);
+            addSubmoduleWindow.LocalRelativePathTextbox.Focus();
             addSubmoduleWindow.WaitWhileElementAvaliable(addSubmoduleWindow.OKButton);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
