@@ -1,5 +1,5 @@
 ﻿using System;
-using TestStack.White;
+using TestStack.White.UIItems.TabItems;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -32,6 +32,8 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public Button TerminalButton => MainWindow.Get<Button>(SearchCriteria.ByText("Terminal"));
         public Button ExplorerButton => MainWindow.Get<Button>(SearchCriteria.ByText("Explorer"));
         public Button SettingsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Settings"));
+        public Thumb TabThumb => MainWindow.Get<Thumb>(SearchCriteria.ByAutomationId("PART_Thumb"));
+        //Any element contains specified text pattern
         public UIItem TabTextGit => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testGitRepoBookmarkName));
         public UIItem TabTextHg => MainWindow.Get<UIItem>(SearchCriteria.ByText(ConstantsList.testHgRepoBookmarkName));
         //TODO: running tests against SourceTree beta
