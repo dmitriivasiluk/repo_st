@@ -14,6 +14,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public AddSubmoduleWindow(Window mainWindow) : base(mainWindow)
         {
         }
+
         public override void ValidateWindow()
         {
             // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
@@ -55,7 +56,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
 
         public void SetSourcePath(string value)
         {
-            SourcePathTextbox.Text = value;
+            SourcePathTextbox.SetValue(value);
         }
 
         public bool GetValidationMessage(string text)

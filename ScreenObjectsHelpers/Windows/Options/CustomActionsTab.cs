@@ -9,6 +9,7 @@ namespace ScreenObjectsHelpers.Windows.Options
     public class CustomActionsTab : OptionsWindow
     {
         private readonly UIItemContainer customActionsTab;
+
         public CustomActionsTab(Window mainWindow, UIItemContainer optionsWindow) : base(mainWindow, optionsWindow)
         {
             customActionsTab = optionsWindow;
@@ -105,6 +106,7 @@ namespace ScreenObjectsHelpers.Windows.Options
             CancelButton.Click();
             return customActionsTab;
         }
+
         public UIItemContainer ClickOkButton()
         {
             OkButton.Click();
