@@ -2,7 +2,7 @@
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 using System.Windows.Automation;
-using TestStack.White.InputDevices;
+using ScreenObjectsHelpers.Helpers;
 
 namespace ScreenObjectsHelpers.Windows.Repository
 {
@@ -11,7 +11,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public GitFlowInitialiseWindow(Window mainWindow) : base(mainWindow)
         {
         }
-
 
         #region UIItems
         public TextBox ProductionBranchTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));
@@ -43,11 +42,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
             ClickButton(UseDefaultsButton);
         }
 
-        public bool TextboxDefaultContent(TextBox textbox, string expectedContent)
-        {
-            return textbox.Text.Equals(expectedContent);
-        }
-
         public bool IsVersionTagEmpty()
         {
             return VersionTagTextbox.Text.Equals("");
@@ -56,15 +50,8 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public void SetTextboxContent(TextBox textbox, string content)
         {
             textbox.Focus();
-            Keyboard.Instance.Enter(content);
-        }
-
-        public bool IsDefaultBranchNameCorrect(TextBox textbox, string condition)
-        {
-            if (textbox.Text == condition)
-                return true;
-            else
-                return false;
+            Utils.ThreadWait(50);
+            textbox.SetValue(content);            
         }
 
         public void SetAllTextboxes(string testString)
@@ -77,6 +64,5 @@ namespace ScreenObjectsHelpers.Windows.Repository
             SetTextboxContent(VersionTagTextbox, testString);
         }
         #endregion
-
     }
 }
