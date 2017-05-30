@@ -49,11 +49,9 @@ namespace ScreenObjectsHelpers.Windows.Repository
             return OKButton.Enabled;
         }
 
-        
-
         public bool GetValidationMessage(string text)
         {
-            LocalRelativePath.Focus();
+            LocalRelativePathTextbox.Focus();
 
             if (GetWithWait<Label>(MainWindow, SearchCriteria.ByText(text)) == null)
             {
