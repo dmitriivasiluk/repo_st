@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.ListBoxItems;
@@ -101,7 +101,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         public TitleBar titleBar => dialogWindow.TitleBar;
         //ToDo Add proper ToolBar identification
-        //public TextBox destinationPath => dialogWindow.Get<TextBox>(SearchCriteria.ByClassName("ToolbarWindow32"));
         public TextBox destinationFolder => dialogWindow.Get<TextBox>(SearchCriteria.ByAutomationId("1152"));
         public Button selectFolderButton => dialogWindow.Get<Button>(SearchCriteria.ByAutomationId("1"));
         public Button cancelButton => dialogWindow.Get<Button>(SearchCriteria.ByAutomationId("2"));
@@ -114,6 +113,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
             ClickButton(selectFolderButton);
         }
+        
         public void ClickCancelButton()
         {
             ClickButton(cancelButton);
@@ -137,7 +137,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIItems
-        //public TextBox titleBar => WarningWindowContainer.Get<TextBox>(SearchCriteria.ByText("Problem with destination directory"));
         public TextBox titleBar
         {
             get
