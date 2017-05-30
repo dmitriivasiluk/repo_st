@@ -125,15 +125,11 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
     //TODO separate folder for warnings
     public class WarningExistingEmptyFolder : GeneralWindow
     {
-        /*public WarningExistingEmptyFolder(Window mainWindow, UIItemContainer warningWindow) : base(mainWindow)
-        {
-            WarningWindowContainer = warningWindow;
-        }*/
         public WarningExistingEmptyFolder(Window mainWindow) : base(mainWindow)
         {
             WarningWindowContainer = mainWindow.ModalWindow(SearchCriteria.ByAutomationId("window"));
         }
-        //public UIItemContainer WarningWindowContainer { get; }
+
         public Window WarningWindowContainer { get; }
         public override void ValidateWindow()
         {
@@ -174,6 +170,40 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             ClickButton(noButton);
         }
 
+        #endregion
+    }
+
+    public class WarningExistingRepoMercurial : GeneralWindow
+    {
+        public WarningExistingRepoMercurial(Window mainWindow) : base(mainWindow)
+        {
+            WarningWindowContainer = mainWindow.ModalWindow(SearchCriteria.ByAutomationId("window"));
+        }
+        public Window WarningWindowContainer { get; }
+        public override void ValidateWindow()
+        {
+            Console.WriteLine("WAIT FOR WarningExistingHgRepository");
+        }
+
+        #region UIItems
+        public TextBox titleBar
+        {
+            get
+            {
+                var controlElement = WarningWindowContainer
+                    .GetElement(SearchCriteria.ByText("Failed to create local repository")
+                    .AndControlType(ControlType.Text));
+                return controlElement != null ? new TextBox(controlElement, WarningWindowContainer.ActionListener) : null;
+            }
+        }
+        public Button closeButton => WarningWindowContainer.Get<Button>(SearchCriteria.ByText("Cancel"));
+        #endregion
+
+        #region Methods
+        public void ClickCloseButton()
+        {
+            ClickButton(closeButton);
+        }
         #endregion
     }
 }

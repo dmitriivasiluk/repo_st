@@ -83,13 +83,14 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
+            var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             RepositoryTab repoTab = createTab.ClickCreateButton();
             Utils.ThreadWait(2000);
-            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName)));
-            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName, ConstantsList.dotGitFolder)));
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
@@ -123,14 +124,15 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            CreateRepoDirecory(Path.Combine(pathToAllRepos, gitRepoName));
-            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
+            var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
+            CreateRepoDirecory(pathToRepo);
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
-            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName)));
-            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName, ConstantsList.dotGitFolder)));
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
@@ -139,14 +141,15 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            CreateRepoDirecory(Path.Combine(pathToAllRepos, gitRepoName));
-            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
+            var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
+            CreateRepoDirecory(pathToRepo);
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
-            Assert.IsTrue(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName)));
-            Assert.IsFalse(Directory.Exists(Path.Combine(pathToAllRepos, gitRepoName, ConstantsList.dotGitFolder)));
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsFalse(LibGit2Sharp.Repository.IsValid(pathToRepo));
         }
 
         [Test, Category("CreateRepoLocal")]
@@ -180,11 +183,143 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToAllRepos, mercurialRepoName, ConstantsList.dotHgFolder)));
         }
 
+        [Test, Category("CreateRepoLocal")]
+        public void CheckLocalRepoCreateGitInNotEmptyFolderPositiveTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
+            CreateRepoDirecory(pathToRepo);
+            CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
+            createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
+            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
+            RepositoryTab repoTab = warning.ClickYesButton();
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
+        }
+
+        [Test, Category("CreateRepoLocal")]
+        public void CheckLocalRepoCreateGitInNotEmptyFolderNegativeTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
+            CreateRepoDirecory(pathToRepo);
+            CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
+            createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
+            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
+            warning.ClickNoButton();
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsFalse(LibGit2Sharp.Repository.IsValid(pathToRepo));
+        }
+
+        [Test, Category("CreateRepoLocal")]
+        public void CheckLocalRepoCreateHgInNotEmptyFolderPositiveTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
+            CreateRepoDirecory(pathToRepo);
+            CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
+            createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
+            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
+            RepositoryTab repoTab = warning.ClickYesButton();
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
+            Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
+        }
+
+        [Test, Category("CreateRepoLocal")]
+        public void CheckLocalRepoCreateHgInNotEmptyFolderNegativeTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
+            CreateRepoDirecory(pathToRepo);
+            CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
+            createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
+            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
+            warning.ClickNoButton();
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
+        }
+
+        [Test, Category("CreateRepoLocal")]
+        public void CheckLocalRepoCreateGitInExistRepoPositiveTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
+            CreateRepoDirecory(pathToRepo);
+            LibGit2Sharp.Repository.Init(pathToRepo);
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
+            createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
+            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
+            RepositoryTab repoTab = warning.ClickYesButton();
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            //New thumb is opened and is accessible
+            Assert.DoesNotThrow(() => repoTab.TabThumb.Click());
+            //Supposed to be TabName
+            Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
+        }
+
+        [Test, Category("CreateRepoLocal")]
+        public void CheckLocalRepoCreateHgInExistRepoPositiveTest()
+        {
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
+            CreateRepoDirecory(pathToRepo);
+            var repo = new Mercurial.Repository(pathToRepo);
+            repo.Init();
+            createTab.DestinationPathTextBox.SetValue(pathToRepo);
+            createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
+            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
+            warning.ClickYesButton();
+            WarningExistingRepoMercurial warningHg = new WarningExistingRepoMercurial(MainWindow);
+            var warnTitle = warningHg.titleBar.Name;
+            warningHg.ClickCloseButton();
+            Assert.IsTrue(Directory.Exists(pathToRepo));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
+            Assert.AreEqual(ConstantsList.mercurialExistRepoWarnTitle, warnTitle);
+            // Retirned to create repo tab - all elements are accessible
+            Assert.DoesNotThrow(() => createTab.DestinationPathTextBox.Focus());
+        }
+
         #region ServiceMethods
         private bool CreateRepoDirecory(string path)
         {
             if (Directory.Exists(path)) return false;
             Directory.CreateDirectory(path);
+            return true;
+        }
+
+        private bool CreateFile(string path)
+        {
+            try
+            {
+                if (File.Exists(path)) File.Delete(path);
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine("string");
+                }
+            }catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
             return true;
         }
         #endregion
