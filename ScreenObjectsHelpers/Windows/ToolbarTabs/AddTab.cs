@@ -1,4 +1,5 @@
 ﻿using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 
@@ -17,19 +18,10 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         public Button AddButton => MainWindow.Get<Button>(SearchCriteria.ByText("Add"));
 
-        private UIItem GitRepoValidText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is a Git repository"));
-
-        private UIItem MercurialRepoValidText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is a Mercurial repository"));
-
-        private UIItem NotValidSourcePathText => MainWindow.Get<UIItem>(SearchCriteria.ByText("This is not a valid working copy path."));
-
-        private UIItem NoWorkingCopyPathSuppliedText => MainWindow.Get<UIItem>(SearchCriteria.ByText("No working copy path supplied"));
-
-
         //AutomationID_required Temporary workaround
-        public IUIItem WorkingCopyPathTextBox => MainWindow.GetMultiple(SearchCriteria.ByClassName("TextBox"))[0];
+        public TextBox WorkingCopyPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(0));
 
-        public IUIItem NameTextBox => MainWindow.GetMultiple(SearchCriteria.ByClassName("TextBox"))[1];
+        public TextBox NameTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
 
         //AutomationID_required
         /*
@@ -42,60 +34,43 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         #endregion
 
         #region Methods
-        public void ValidateFolder()
+        public void TriggerValidation()
         {
             NameTextBox.Focus();
             Utils.ThreadWait(2000);
-        }
-
-        public string GetGitValidationMessage()
-        {
-            ValidateFolder();
-
-            if (GitRepoValidText.Enabled && GitRepoValidText.Visible)
-            {
-                return ConstantsList.gitRepoType;
-            }
-            return null;
-        }
-
-        public string GetMercurialValidationMessage()
-        {
-            ValidateFolder();
-
-            if (MercurialRepoValidText.Enabled && MercurialRepoValidText.Visible)
-            {
-                return ConstantsList.mercurialRepoType;
-            }
-            return null;
-        }
-
-        public string GetInvalidRepoMessage()
-        {
-            ValidateFolder();
-
-            if (NotValidSourcePathText.Enabled && NotValidSourcePathText.Visible)
-            {
-                return ConstantsList.invalidFolder;
-            }
-            return null;
-        }
-
-        public string GetEmptyPathMessage()
-        {
-            ValidateFolder();
-
-            if (NoWorkingCopyPathSuppliedText.Enabled && NoWorkingCopyPathSuppliedText.Visible)
-            {
-                return ConstantsList.emptyPath;
-            }
-            return null;
         }
 
         //TODO return OpenWorkingCopyWindow class
         public void ClickBrowseButton()
         {
             ClickButton(BrowseButton);
+        }
+
+        public bool GetValidationMessage(string text)
+        {
+            TriggerValidation();
+
+            if (GetWithWait<WPFLabel>(MainWindow, SearchCriteria.ByText(text)) == null)
+            {
+                return false;
+            }            
+
+            return true;
+        }
+
+        public RepositoryTab ClickAddButton()
+        {
+            ClickButton(AddButton);
+
+            return new RepositoryTab(MainWindow);
+        }
+
+        public struct RepoValidationMessage
+        {
+            public static string noWorkingPathSupplied = "No working copy path supplied";
+            public static string notValidPath = "This is not a valid working copy path.";
+            public static string gitRepoType = "This is a Git repository";
+            public static string mercurialRepoType = "This is a Mercurial repository";
         }
 
         #endregion

@@ -106,6 +106,7 @@
     <Compile Include="Windows\InstallationWindow.cs" />
     <Compile Include="Windows\MenuFolder\ActionMenu\ActionsMenu.cs" />
     <Compile Include="Windows\MenuFolder\ActionMenu\ResolveConflict.cs" />
+    <Compile Include="Windows\MenuFolder\RepositoryMenu.cs" />
     <Compile Include="Windows\MenuFolder\ViewMenu.cs" />
     <Compile Include="Windows\MenuFolder\EditMenu.cs" />
     <Compile Include="Windows\MenuFolder\HelpMenu.cs" />
@@ -124,6 +125,8 @@
     <Compile Include="Windows\GeneralWindow.cs" />
     <Compile Include="Windows\Options\UpdatesTab.cs" />
     <Compile Include="Windows\ProxyAuthenticationWindow.cs" />
+    <Compile Include="Windows\Repository\AddLinkSubtreeWindow.cs" />
+    <Compile Include="Windows\Repository\AddSubmoduleWindow.cs" />
     <Compile Include="Windows\Repository\GitFlowInitialiseWindow.cs" />
     <Compile Include="Windows\Repository\RepositoryTab.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />

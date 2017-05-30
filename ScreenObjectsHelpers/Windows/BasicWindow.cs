@@ -1,5 +1,6 @@
 ﻿using ScreenObjectsHelpers.Helpers;
 using System;
+using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -68,11 +69,12 @@ namespace ScreenObjectsHelpers.Windows
             while (true)
             {
                 var isItemVisible = item.Visible;
+                var isItemEnabled = item.Enabled;
                 if (secondPassed > maximumTimeToWait)
                 {
-                    throw new TimeoutException($"Element {item.ToString()} is not Visible after {secondPassed} second");
+                    throw new TimeoutException($"Element {item.ToString()} is not Visible or Disabled after {secondPassed} second");
                 }
-                if (isItemVisible) return item;
+                if (isItemVisible && isItemEnabled) return item;
                 secondPassed += secondToWaitEachLoop;
                 Utils.ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
             }
@@ -128,6 +130,27 @@ namespace ScreenObjectsHelpers.Windows
             {
                 checkbox.Toggle();
             }
+        }
+
+        public static T GetWithWait<T>(Window window, SearchCriteria searchCriteria, int rounds = 5) where T : UIItem
+        {
+            T result = null;
+            for (int i = 0; i < rounds; i++)
+            {
+                try
+                {
+                    result = (T) window.Get(searchCriteria);
+                    if (result != null && result.Visible)
+                    {
+                        return result;
+                    }
+                }
+                catch (AutomationException)
+                {
+                    // empty
+                }
+            }
+            return result;
         }
     }
 }

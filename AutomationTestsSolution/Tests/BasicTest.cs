@@ -35,7 +35,7 @@ namespace AutomationTestsSolution.Tests
         protected void UseTestConfigAndAccountJson(string dataFolder)
         {
             var testAccountsJson = Path.Combine(testDataFolder, ConstantsList.accountsJson);
-            var sourceTreeAccountsJsonPath = Path.Combine(dataFolder, ConstantsList.accountsJson);            
+            var sourceTreeAccountsJsonPath = Path.Combine(dataFolder, ConstantsList.accountsJson);
 
             SetFile(testAccountsJson, sourceTreeAccountsJsonPath);
 
@@ -94,13 +94,13 @@ namespace AutomationTestsSolution.Tests
             sourceTreeExePath = exeAndVersion.Item1;
             RunSourceTree(sourceTreeExePath);
         }
-       
+
 
         private void BackupData(string dataFolder)
         {
             BackupFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
             BackupFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
-            BackupFile(Path.Combine(dataFolder, ConstantsList.accountsJson));            
+            BackupFile(Path.Combine(dataFolder, ConstantsList.accountsJson));
         }
 
         private void SetFile(string sourceFile, string targetFile)

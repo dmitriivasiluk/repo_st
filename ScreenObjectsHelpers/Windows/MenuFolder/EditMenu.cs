@@ -11,6 +11,9 @@ namespace ScreenObjectsHelpers.Windows.MenuFolder
         }
 
         public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByText("Edit")); } }
+        //TODO: running tests against SourceTree beta
+        //public override Menu UIElementMenu { get { return MainWindow.Get<Menu>(SearchCriteria.ByAutomationId("MenuEdit")); } }
+
 
         #region Methods        
         public void ClickOperations(OperationsEdit operation)
