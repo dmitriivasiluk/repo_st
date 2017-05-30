@@ -12,11 +12,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public RepositoryTab(Window mainWindow) : base(mainWindow)
         {
         }
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING TAB");
-        }
         
         #region UIItems
         public Button CommitButton => MainWindow.Get<Button>(SearchCriteria.ByText("Commit"));

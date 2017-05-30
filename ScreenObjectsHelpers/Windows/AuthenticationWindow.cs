@@ -1,14 +1,7 @@
 ﻿using ScreenObjectsHelpers.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Automation;
 using TestStack.White.InputDevices;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 using static TestStack.White.WindowsAPI.KeyboardInput;
 
@@ -21,12 +14,6 @@ namespace ScreenObjectsHelpers.Windows
         public AuthenticationWindow(Window mainWindow, Window authorizationWindow) : base(mainWindow)
         {
             this.authorizationWindow = authorizationWindow;
-            ValidateWindow();
-        }
-
-        public void ValidateWindow()
-        {
-            var logInByGoogleButton = LogInByGoogle; // Check that this element exist in current window.
         }
 
         #region UIElements
@@ -41,10 +28,10 @@ namespace ScreenObjectsHelpers.Windows
         {
             // It is workaround method, because I can't catch TextEdit fields from authorization window. Need time to resolve this issue
             // Need to reimplement in future. 
-            Utils.ThreadWait(1000);
+            Utils.ThreadWait(2000);
             Keyboard.Instance.Enter(loginEmail);
             ClickButton(NextButton);
-            Utils.ThreadWait(1000);
+            Utils.ThreadWait(2000);
             Keyboard.Instance.Enter(password);
             ClickButton(NextButton);
             Utils.ThreadWait(1000);

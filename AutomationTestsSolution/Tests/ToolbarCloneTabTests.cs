@@ -141,36 +141,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
-        public void CheckBookmarkAppearedAfterGitRepoClonedTest()
-        {
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
-
-            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
-            cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);
-            cloneTab.ClickCloneButton();
-            var localtab = mainWindow.OpenTab<LocalTab>();
-            var bookmarkAdded = localtab.IsTestGitRepoBookmarkAdded();
-            Assert.IsTrue(bookmarkAdded);
-        }
-
-        [Test]
-        [Category("CloneTab")]
-        public void CheckBookmarkAppearedAfterHgRepoClonedTest()  // Mercurial should be installed
-        {
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
-
-            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
-            cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
-            cloneTab.ClickCloneButton();
-            var localtab = mainWindow.OpenTab<LocalTab>();
-            var bookmarkAdded = localtab.IsTestHgRepoBookmarkAdded();
-            Assert.IsTrue(bookmarkAdded);
-        }
-
-        [Test]
-        [Category("CloneTab")]
+        [Ignore("Investigate stability issue")]
         public void CheckGitRepoOpenedAfterCloneTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -187,6 +158,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Ignore("Investigate stability issue")]
         public void CheckHgRepoOpenedAfterCloneTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

@@ -15,12 +15,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("AddLinkSubtreeWindow opened");
-        }
-
         #region UIItems
         //Automation IDs required
         public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(0));

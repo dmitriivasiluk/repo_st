@@ -19,12 +19,6 @@ namespace ScreenObjectsHelpers.Windows
             this.customActionsTab = customActionsTab;
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING _Edit_Custom_action_Window");
-        }
-
         #region UIItems
         public TextBox MenuCaption => customActionsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CaptionBox"));
         public CheckBox OpenInASeparateWindow => customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Open in a separate window"));
