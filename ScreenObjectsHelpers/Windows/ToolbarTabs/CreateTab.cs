@@ -18,7 +18,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         #region UIElements
 
-        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Create"));
+        public override WPFLabel ToolbarTabButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Create"));
         public Button BrowseButton => MainWindow.Get<Button>(SearchCriteria.ByText("Browse"));
         public TextBox DestinationPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoDestinationPath"));
         public TextBox NameRepoTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoName"));
@@ -92,11 +92,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         public Window dialogWindow { get; }
 
-        public override void ValidateWindow()
-        {
-            Console.WriteLine("WAIT FOR DIALOG WINDOW");
-        }
-
         #region UIElements
 
         public TitleBar titleBar => dialogWindow.TitleBar;
@@ -131,10 +126,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         public Window WarningWindowContainer { get; }
-        public override void ValidateWindow()
-        {
-            Console.WriteLine("WAIT FOR WarningExistingEmptyFolder");
-        }
 
         #region UIItems
         public TextBox titleBar
@@ -179,10 +170,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             WarningWindowContainer = mainWindow.ModalWindow(SearchCriteria.ByAutomationId("window"));
         }
         public Window WarningWindowContainer { get; }
-        public override void ValidateWindow()
-        {
-            Console.WriteLine("WAIT FOR WarningExistingHgRepository");
-        }
 
         #region UIItems
         public TextBox titleBar

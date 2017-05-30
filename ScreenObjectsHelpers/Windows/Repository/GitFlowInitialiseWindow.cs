@@ -1,9 +1,6 @@
-﻿using System;
-using TestStack.White;
-using TestStack.White.UIItems;
+﻿using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
-using ScreenObjectsHelpers.Helpers;
 using System.Windows.Automation;
 using TestStack.White.InputDevices;
 
@@ -15,11 +12,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING TAB");
-        }
 
         #region UIItems
         public TextBox ProductionBranchTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));

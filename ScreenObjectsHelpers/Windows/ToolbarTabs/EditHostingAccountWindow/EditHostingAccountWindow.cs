@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using TestStack.White.UIItems;
@@ -18,12 +17,6 @@ namespace ScreenObjectsHelpers.Windows
         {
             this.editHostingAccountWindow = editHostingAccountWindow;
             
-        }
-
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING Edit_Hosting_Account_Window");
         }
 
         #region UIItems

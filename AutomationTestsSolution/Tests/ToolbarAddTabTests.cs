@@ -16,7 +16,6 @@ namespace AutomationTestsSolution.Tests
         private string pathToEmptyFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyFolderForAddTest);
         #endregion
 
-
         [SetUp]
         public override void SetUp()
         {

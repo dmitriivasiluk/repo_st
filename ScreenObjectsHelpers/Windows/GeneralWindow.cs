@@ -11,19 +11,16 @@ namespace ScreenObjectsHelpers.Windows
     /// </summary>
     public abstract class GeneralWindow : BasicWindow
     {
-
         public GeneralWindow(Window mainWindow) : base(mainWindow)
         {
-            ValidateWindow();
-        }
 
-        public abstract void ValidateWindow();
+        }
 
         public T OpenMenu<T>() where T : MenuBar
         {
             return (T)Activator.CreateInstance(typeof(T), MainWindow);
         }
-        public Button NewTabButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("DefaultAddButton"));
 
+        public Button NewTabButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("DefaultAddButton").AndByClassName("Button"));
     }
 }

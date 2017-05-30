@@ -14,13 +14,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             customActionsTab = optionsWindow;
         }
-
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING TAB");
-        }
-
+        
         #region UIItems
         public override UIItem UIElementTab
         {

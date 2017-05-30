@@ -12,7 +12,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIElements
-        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Add"));
+        public override WPFLabel ToolbarTabButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Add"));
 
         public Button BrowseButton => MainWindow.Get<Button>(SearchCriteria.ByText("Browse"));
 

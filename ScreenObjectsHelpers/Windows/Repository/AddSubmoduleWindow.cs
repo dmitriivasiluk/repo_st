@@ -1,11 +1,7 @@
-﻿using System;
-using TestStack.White;
-using TestStack.White.UIItems;
+﻿using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
-using ScreenObjectsHelpers.Helpers;
 using System.Windows.Automation;
-using TestStack.White.InputDevices;
 
 namespace ScreenObjectsHelpers.Windows.Repository
 {
@@ -13,12 +9,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
     {
         public AddSubmoduleWindow(Window mainWindow) : base(mainWindow)
         {
-        }
-
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("AddSubmoduleWindow opened");
         }
 
         #region UIItems
