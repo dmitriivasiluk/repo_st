@@ -20,6 +20,13 @@ namespace ScreenObjectsHelpers.Windows
             this.MainWindow = mainWindow;
         }
 
+        #region UIItems
+        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
+        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+       
+        #endregion
+
+        #region Methods
         public Window MainWindow { get; private set; }
 
         public void ClickButton(Button button)
@@ -152,5 +159,16 @@ namespace ScreenObjectsHelpers.Windows
             }
             return result;
         }
+        public virtual bool IsOkButtonEnabled()
+        {
+            return OKButton.Enabled;
+        }
+
+        public T ClickButtonToGetRepository<T>(Button button) where T : BasicWindow
+        {
+            ClickButton(button);
+            return (T)Activator.CreateInstance(typeof(T), MainWindow);
+        }
+        #endregion
     }
 }

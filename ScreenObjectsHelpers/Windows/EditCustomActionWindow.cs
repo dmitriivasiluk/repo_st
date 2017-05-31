@@ -26,8 +26,6 @@ namespace ScreenObjectsHelpers.Windows
         public TextBox ScriptToRun => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
         public TextBox Parameters => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
         
-        public Button OkButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         #endregion
 
         #region Methods
@@ -46,7 +44,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public CustomActionsTab ClickOKButton()
         {
-            OkButton.Click();
+            OKButton.Click();
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
         public CustomActionsTab ClickCancelButton()
@@ -54,6 +52,7 @@ namespace ScreenObjectsHelpers.Windows
             CancelButton.Click();
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
+
         #endregion
     }
 }

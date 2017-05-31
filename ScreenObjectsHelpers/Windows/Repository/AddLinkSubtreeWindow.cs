@@ -22,28 +22,10 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public TextBox BranchCommitTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));
         public TextBox LocalRelativePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
         public CheckBox SquashCommitsCheckbox => MainWindow.Get<CheckBox>(SearchCriteria.ByText("Squash commits?"));
-        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+        
         #endregion
 
         #region Methods
-        public RepositoryTab ClickOkButton()
-        {
-            ClickButton(OKButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public RepositoryTab ClickCancelButton()
-        {
-            ClickButton(CancelButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public bool IsOkButtonEnabled()
-        {
-            return OKButton.Enabled;
-        }
-
         public bool GetValidationMessage(string text)
         {
             LocalRelativePathTextbox.Focus();

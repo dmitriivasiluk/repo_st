@@ -123,7 +123,7 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
             var addAccount = remoteTab.ClickAddAccountButton();
 
-            Assert.IsFalse(addAccount.OkButton.Enabled);
+            Assert.IsFalse(addAccount.OKButton.Enabled);
         }
 
         [TestCase("RandomUsername")]
