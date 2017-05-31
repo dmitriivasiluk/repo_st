@@ -127,6 +127,7 @@
     <Compile Include="Windows\ProxyAuthenticationWindow.cs" />
     <Compile Include="Windows\Repository\AddLinkSubtreeWindow.cs" />
     <Compile Include="Windows\Repository\AddSubmoduleWindow.cs" />
+    <Compile Include="Windows\Repository\FetchWindow.cs" />
     <Compile Include="Windows\Repository\GitFlowInitialiseWindow.cs" />
     <Compile Include="Windows\Repository\RepositoryTab.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />

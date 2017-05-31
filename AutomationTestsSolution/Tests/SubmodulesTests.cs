@@ -39,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            addSubmoduleWindow.ClickCancelButton();
+            addSubmoduleWindow.ClickButtonToGetRepository<AddSubmoduleWindow>(addSubmoduleWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -71,7 +71,7 @@ namespace AutomationTestsSolution.Tests
 
             addSubmoduleWindow.SourcePathTextbox.SetValue(pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            addSubmoduleWindow.WaitWhileElementAvaliable(addSubmoduleWindow.OKButton);
+            Utils.ThreadWait(2000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }

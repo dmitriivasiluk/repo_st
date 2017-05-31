@@ -38,7 +38,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            gitFlowInitWindow.ClickCancelButton();
+            gitFlowInitWindow.ClickButtonToGetRepository<GitFlowInitialiseWindow>(gitFlowInitWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -53,7 +53,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category ("GitFlow")]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
@@ -71,8 +71,8 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        [Category("GitFlow")]
-        [Ignore("Investigate stability issue")]
+        [Category ("GitFlow")]
+        //[Ignore("Investigate stability issue")]
         public void CheckWhetherDefaultBranchNamesCorrect()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
