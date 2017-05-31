@@ -83,7 +83,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public RemoteTab ClickOkButton()
         {
-            ClickButton(CancelButton);
+            ClickButton(OKButton);
             return new RemoteTab(MainWindow);
         }
 

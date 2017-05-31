@@ -39,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            addSubmoduleWindow.ClickButtonToGetRepository<AddSubmoduleWindow>(addSubmoduleWindow.CancelButton);
+            addSubmoduleWindow.ClickButtonToGetRepository(addSubmoduleWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }

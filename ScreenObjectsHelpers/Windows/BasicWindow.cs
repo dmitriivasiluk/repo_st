@@ -1,4 +1,5 @@
 ﻿using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
 using System;
 using TestStack.White;
 using TestStack.White.UIItems;
@@ -164,10 +165,10 @@ namespace ScreenObjectsHelpers.Windows
             return OKButton.Enabled;
         }
 
-        public T ClickButtonToGetRepository<T>(Button button) where T : BasicWindow
+        public RepositoryTab ClickButtonToGetRepository(Button button)
         {
             ClickButton(button);
-            return (T)Activator.CreateInstance(typeof(T), MainWindow);
+            return new RepositoryTab(MainWindow);
         }
         #endregion
     }

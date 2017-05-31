@@ -38,7 +38,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            gitFlowInitWindow.ClickButtonToGetRepository<GitFlowInitialiseWindow>(gitFlowInitWindow.CancelButton);
+            gitFlowInitWindow.ClickButtonToGetRepository(gitFlowInitWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
