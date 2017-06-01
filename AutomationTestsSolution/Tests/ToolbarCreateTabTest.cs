@@ -8,6 +8,8 @@ using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows.Repository;
+using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace AutomationTestsSolution.Tests.CreateLocal
 {
@@ -95,7 +97,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             RepositoryTab repoTab = createTab.ClickCreateButton();
             Utils.ThreadWait(2000);
             Assert.IsTrue(Directory.Exists(pathToRepo));
-            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
@@ -140,7 +142,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             Assert.IsTrue(Directory.Exists(pathToRepo));
-            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
@@ -158,7 +160,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
             Assert.IsTrue(Directory.Exists(pathToRepo));
-            Assert.IsFalse(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
         }
 
         [Test]
@@ -209,7 +211,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             Assert.IsTrue(Directory.Exists(pathToRepo));
-            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
         }
 
@@ -228,7 +230,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
             Assert.IsTrue(Directory.Exists(pathToRepo));
-            Assert.IsFalse(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
         }
 
         [Test]
@@ -270,20 +272,21 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Ignore("Not stable yet")]
         public void CheckLocalRepoCreateGitInExistRepoPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
             CreateRepoDirecory(pathToRepo);
-            LibGit2Sharp.Repository.Init(pathToRepo);
+            GitInit(pathToRepo);
             createTab.DestinationPathTextBox.SetValue(pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             Assert.IsTrue(Directory.Exists(pathToRepo));
-            Assert.IsTrue(LibGit2Sharp.Repository.IsValid(pathToRepo));
+            Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             //New thumb is opened and is accessible
             Assert.DoesNotThrow(() => repoTab.TabThumb.Click());
             //Supposed to be TabName
@@ -338,6 +341,80 @@ namespace AutomationTestsSolution.Tests.CreateLocal
                 return false;
             }
             return true;
+        }
+
+        private bool IsValidGitRepo(string path)
+        {
+            return GitInteraction.IsValidRepo(path);
+        }
+
+        private void GitInit(string path)
+        {
+            if (!GitInteraction.IsInitSucessully(path)) throw new Exception("Cannot init git in " + path);
+        }
+
+        //TODO place this class in some another method as Git2Sharp substitute
+        private class GitInteraction
+        {
+            private readonly Process _gitProcess;
+
+            public static bool IsValidRepo(string path)
+            {
+                var repo = new GitInteraction(path, gitPath);
+                return repo.IsGitRepository;
+            }
+
+            public static bool IsInitSucessully(string path)
+            {
+                var repo = new GitInteraction(path, gitPath);
+                return repo.IsInitGit;
+            }
+
+            private bool IsGitRepository => !String.IsNullOrWhiteSpace(RunCommand("log -1"));
+            private bool IsInitGit => !String.IsNullOrWhiteSpace(RunCommand("init"));
+            private static string gitPath => GetGitPath();
+
+            private GitInteraction(string path, string gitPath)
+            {
+                var processInfo = new ProcessStartInfo
+                {
+                    UseShellExecute = true,
+                    RedirectStandardOutput = true,
+                    FileName = Directory.Exists(gitPath) ? gitPath : "git.exe",
+                    CreateNoWindow = true,
+                    WorkingDirectory = (path != null && Directory.Exists(path)) ? path : Environment.CurrentDirectory
+                };
+                _gitProcess = new Process();
+                _gitProcess.StartInfo = processInfo;
+            }
+
+            private string RunCommand(string args)
+            {
+                _gitProcess.StartInfo.Arguments = args;
+                _gitProcess.Start();
+                string output = _gitProcess.StandardOutput.ReadToEnd().Trim();
+                _gitProcess.WaitForExit();
+                return output;
+            }
+
+            private static string GetGitPath()
+            {
+                var programName = "Git ";
+                foreach (var item in Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall")
+                    .GetSubKeyNames())
+                {
+                    string program = Registry.LocalMachine.OpenSubKey(
+                        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\"
+                        + item).GetValue("DisplayName") as string;
+                    if (program != null && program.StartsWith(programName))
+                    {
+                        return Registry.LocalMachine.OpenSubKey(
+                        "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\"
+                        + item).GetValue("InstallLocation") as string;
+                    }
+                }
+                throw new Exception("Git doesn't installed!");
+            }
         }
         #endregion
     }
