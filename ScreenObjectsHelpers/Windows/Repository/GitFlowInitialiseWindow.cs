@@ -34,13 +34,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
             return VersionTagTextbox.Text.Equals("");
         }
 
-        public void SetTextboxContent(TextBox textbox, string content)
-        {
-            textbox.Focus();
-            Utils.ThreadWait(50);
-            textbox.SetValue(content);            
-        }
-
         public void SetAllTextboxes(string testString)
         {
             SetTextboxContent(ProductionBranchTextbox, testString);

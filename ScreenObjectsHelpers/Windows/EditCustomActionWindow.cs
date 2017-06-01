@@ -31,25 +31,25 @@ namespace ScreenObjectsHelpers.Windows
         #region Methods
         public void SetMenuCaption(string menuCaption)
         {
-            MenuCaption.Text = menuCaption;
+            SetTextboxContent(MenuCaption, menuCaption);
         }
         public void SetScriptToRun(string scriptToRun)
         {
-            ScriptToRun.Text = scriptToRun;
+            SetTextboxContent(ScriptToRun, scriptToRun);
         }
         public void SetParameters(string parameters)
         {
-            Parameters.Text = parameters;
+            SetTextboxContent(Parameters, parameters);
         }
 
         public CustomActionsTab ClickOKButton()
         {
-            OKButton.Click();
+            ClickButton(OKButton);
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
         public CustomActionsTab ClickCancelButton()
         {
-            CancelButton.Click();
+            ClickButton(CancelButton);
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
 

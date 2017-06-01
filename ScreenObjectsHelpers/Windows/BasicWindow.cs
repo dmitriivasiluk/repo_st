@@ -97,6 +97,12 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
+        public void SetTextboxContent(TextBox textbox, string content)
+        {
+            textbox.Focus();
+            Utils.ThreadWait(50);
+            textbox.SetValue(content);
+        }
         public void ScrollHorizontalRigh(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
