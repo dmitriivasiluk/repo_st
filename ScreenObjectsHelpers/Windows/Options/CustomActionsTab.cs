@@ -91,7 +91,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
         #region UIItems
         public Button CancelButton => confirmDeletionWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Button OkButton => confirmDeletionWindow.Get<Button>(SearchCriteria.ByText("OK"));
+        public Button OKButton => confirmDeletionWindow.Get<Button>(SearchCriteria.ByText("OK"));
         #endregion
 
         #region Methods
@@ -103,7 +103,7 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public UIItemContainer ClickOkButton()
         {
-            OkButton.Click();
+            OKButton.Click();
             return customActionsTab;
         }
         #endregion

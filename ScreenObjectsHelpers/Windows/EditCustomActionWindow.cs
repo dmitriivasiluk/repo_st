@@ -26,34 +26,33 @@ namespace ScreenObjectsHelpers.Windows
         public TextBox ScriptToRun => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
         public TextBox Parameters => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
         
-        public Button OkButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         #endregion
 
         #region Methods
         public void SetMenuCaption(string menuCaption)
         {
-            MenuCaption.Text = menuCaption;
+            SetTextboxContent(MenuCaption, menuCaption);
         }
         public void SetScriptToRun(string scriptToRun)
         {
-            ScriptToRun.Text = scriptToRun;
+            SetTextboxContent(ScriptToRun, scriptToRun);
         }
         public void SetParameters(string parameters)
         {
-            Parameters.Text = parameters;
+            SetTextboxContent(Parameters, parameters);
         }
 
         public CustomActionsTab ClickOKButton()
         {
-            OkButton.Click();
+            ClickButton(OKButton);
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
         public CustomActionsTab ClickCancelButton()
         {
-            CancelButton.Click();
+            ClickButton(CancelButton);
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
+
         #endregion
     }
 }
