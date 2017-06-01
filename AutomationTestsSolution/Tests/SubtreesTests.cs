@@ -3,13 +3,13 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 using ScreenObjectsHelpers.Windows.MenuFolder;
-using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using System;
 using System.IO;
+using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 
 namespace AutomationTestsSolution.Tests
 {
-    class SubmodulesTests : BasicTest
+    class SubtreesTests : BasicTest
     {
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
@@ -20,7 +20,7 @@ namespace AutomationTestsSolution.Tests
 
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
-        private AddSubmoduleWindow addSubmoduleWindow;
+        private AddLinkSubtreeWindow addLinkSubtree;
         #endregion
 
         [SetUp]
@@ -39,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            addSubmoduleWindow.ClickButtonToGetRepository(addSubmoduleWindow.CancelButton);
+            addLinkSubtree.ClickButtonToGetRepository(addLinkSubtree.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -53,40 +53,16 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        [Category("Submodules")]
+        [Category("Subtrees")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
-
-            Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
+            
+            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
+            
+            Assert.IsFalse(addLinkSubtree.IsOkButtonEnabled());
         }
 
-        [Test]
-        [Category("Submodules")]
-        public void IsOkButtonEnabledWithEnteredSourcePath()
-        {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
-
-            addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
-            addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            Utils.ThreadWait(2000);
-
-            Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
-        }
-
-        [Test]
-        [Category("Submodules")]
-        public void SourcePathFieldValidateWrongInputTest()
-        {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
-
-            addSubmoduleWindow.SetSourcePath(testString);
-            var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
-
-            Assert.IsTrue(isValidationMessageCorrect);
-        }
+        
     }
 }
