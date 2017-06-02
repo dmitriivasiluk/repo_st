@@ -63,6 +63,20 @@ namespace AutomationTestsSolution.Tests
             Assert.IsFalse(addLinkSubtree.IsOkButtonEnabled());
         }
 
-        
+        [Test]
+        [Category("Subtrees")]
+        public void IsOkButtonEnabledAfterCorrectDataSet()
+        {
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+
+            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
+
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, pathToClonedGitRepo);
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);
+
+            Assert.IsTrue(addLinkSubtree.IsOkButtonEnabled());
+        }
+
+
     }
 }

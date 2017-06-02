@@ -69,7 +69,7 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
-            addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
+            addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
             Utils.ThreadWait(2000);
 
@@ -83,7 +83,7 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
-            addSubmoduleWindow.SetSourcePath(testString);
+            addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, testString);
             var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
 
             Assert.IsTrue(isValidationMessageCorrect);
