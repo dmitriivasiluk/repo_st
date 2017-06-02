@@ -6,6 +6,7 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 using System;
 using System.IO;
 using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
+using ScreenObjectsHelpers.Windows;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -75,7 +76,8 @@ namespace AutomationTestsSolution.Tests
             addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);
             Utils.ThreadWait(3000);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.BranchCommitTextbox, testString);
-            Utils.ThreadWait(2000);
+            addLinkSubtree.SourcePathTextbox.Focus();
+            Utils.ThreadWait(3000);
 
             Assert.IsTrue(addLinkSubtree.IsOkButtonEnabled());
         }
