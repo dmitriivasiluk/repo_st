@@ -57,7 +57,6 @@ namespace ScreenObjectsHelpers.Helpers
         public const string pathToEmbeddedHg = @"%localappdata%\Atlassian\SourceTree\hg_local\hg.exe";
 
         //Constants for Create Tab tests
-        public const string pathToCreateLocalRepos = @"%userprofile%\Documents\";
         public const string fileForNotEmptyFolder = "SomeFile.txt";
         public const string mercurialExistRepoWarnTitle = "Failed to create local repository";
 
