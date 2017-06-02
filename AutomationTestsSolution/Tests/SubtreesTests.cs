@@ -73,6 +73,9 @@ namespace AutomationTestsSolution.Tests
 
             addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, pathToClonedGitRepo);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);
+            Utils.ThreadWait(3000);
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.BranchCommitTextbox, testString);
+            Utils.ThreadWait(2000);
 
             Assert.IsTrue(addLinkSubtree.IsOkButtonEnabled());
         }
