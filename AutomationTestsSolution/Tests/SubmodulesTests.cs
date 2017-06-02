@@ -39,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            addSubmoduleWindow.ClickCancelButton();
+            addSubmoduleWindow.ClickButtonToGetRepository(addSubmoduleWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -69,9 +69,9 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-            addSubmoduleWindow.SourcePathTextbox.SetValue(pathToClonedGitRepo);
+            addSubmoduleWindow.SetSourcePath(pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            addSubmoduleWindow.WaitWhileElementAvaliable(addSubmoduleWindow.OKButton);
+            Utils.ThreadWait(2000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
@@ -83,7 +83,7 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-            addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
+            addSubmoduleWindow.SetSourcePath(testString);
             var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
 
             Assert.IsTrue(isValidationMessageCorrect);

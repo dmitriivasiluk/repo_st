@@ -19,24 +19,11 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public TextBox ReleaseBranchTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(4));
         public TextBox HotfixBranchTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(5));
         public TextBox VersionTagTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(6));
-        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         public Button UseDefaultsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Use Defaults"));
+       
         #endregion
 
         #region Methods
-        public RepositoryTab ClickOkButton()
-        {
-            ClickButton(OKButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public RepositoryTab ClickCancelButton()
-        {
-            ClickButton(CancelButton);
-            return new RepositoryTab(MainWindow);
-        }
-
         public void ClickUseDefaultsButton()
         {
             ClickButton(UseDefaultsButton);
@@ -45,13 +32,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public bool IsVersionTagEmpty()
         {
             return VersionTagTextbox.Text.Equals("");
-        }
-
-        public void SetTextboxContent(TextBox textbox, string content)
-        {
-            textbox.Focus();
-            Utils.ThreadWait(50);
-            textbox.SetValue(content);            
         }
 
         public void SetAllTextboxes(string testString)

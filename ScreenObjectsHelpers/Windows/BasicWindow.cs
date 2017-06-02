@@ -1,4 +1,5 @@
 ﻿using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
 using System;
 using TestStack.White;
 using TestStack.White.UIItems;
@@ -20,6 +21,13 @@ namespace ScreenObjectsHelpers.Windows
             this.MainWindow = mainWindow;
         }
 
+        #region UIItems
+        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
+        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+       
+        #endregion
+
+        #region Methods
         public Window MainWindow { get; private set; }
 
         public void ClickButton(Button button)
@@ -89,6 +97,12 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
+        public void SetTextboxContent(TextBox textbox, string content)
+        {
+            textbox.Focus();
+            Utils.ThreadWait(50);
+            textbox.SetValue(content);
+        }
         public void ScrollHorizontalRigh(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
@@ -152,5 +166,17 @@ namespace ScreenObjectsHelpers.Windows
             }
             return result;
         }
+        public virtual bool IsOkButtonEnabled()
+        {
+            return OKButton.Enabled;
+        }
+
+
+        public RepositoryTab ClickButtonToGetRepository(Button button)
+        {
+            ClickButton(button);
+            return new RepositoryTab(MainWindow);
+        }
+        #endregion
     }
 }

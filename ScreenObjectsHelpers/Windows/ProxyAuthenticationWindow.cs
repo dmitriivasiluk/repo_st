@@ -27,7 +27,6 @@ namespace ScreenObjectsHelpers.Windows
 
         public Button LoginButton => proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("LoginButton"));
 
-        public Button CancelButton => proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("CancelButton"));
         #endregion
 
         #region Methods

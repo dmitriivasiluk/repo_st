@@ -20,8 +20,6 @@ namespace ScreenObjectsHelpers.Windows
         }
 
         #region UIItems
-        public Button CancelButton => editHostingAccountWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Button OkButton => editHostingAccountWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public ComboBox HostingSeviceComboBox => editHostingAccountWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox).AndIndex(0));
         public ComboBox PreferredProtocolComboBox => editHostingAccountWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox).AndIndex(1));
         public ComboBox AuthenticationComboBox => editHostingAccountWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox).AndIndex(2));
@@ -85,7 +83,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public RemoteTab ClickOkButton()
         {
-            ClickButton(CancelButton);
+            ClickButton(OKButton);
             return new RemoteTab(MainWindow);
         }
 
