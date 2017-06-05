@@ -67,7 +67,6 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("githubst", "incorrectPassword")]
         [Category("Authentication")]
-        [Ignore("Investigate stability issue")]
         public void AuthGithubHttpsBasicNegativeTest(string login, string password)
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -120,7 +119,6 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
-        [Ignore("Investigate stability issue")]
         public void AuthOkButtonDisabledTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

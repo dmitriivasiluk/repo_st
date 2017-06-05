@@ -45,6 +45,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
             public static string mercurialRepoType = "This is a Mercurial repository";
             public static string checkingSource = "Checking source...";
         }
+
         #endregion
     }
 }
