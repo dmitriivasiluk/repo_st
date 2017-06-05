@@ -262,6 +262,8 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         [Category("WelcomeWizard")]
+        [Ignore("Investigate stability issue")]
+
         public void ConnectGitHubViaOAuthTest (
             string atlassianLoginEmail,
             string atlassianPassword)
