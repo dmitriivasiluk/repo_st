@@ -43,6 +43,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
             createTab.DestinationPathTextBox.SetValue(pathToAllRepos + gitRepoName);
+            
             Assert.AreEqual(createTab.NameRepoTextBox.Text, gitRepoName);
         }
 
@@ -52,8 +53,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
-            //for sure
             createTab.DestinationPathTextBox.SetValue("");
+            
             Assert.IsFalse(createTab.CreateButton.Enabled);
         }
 
@@ -66,10 +67,10 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
             createTab.CheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.DescriptionTextBox.Focus();
+            
             Assert.IsFalse(createTab.CreateButton.Enabled);
         }
 
-        //TODO Add dialow window verification
         [Test]
         [Category("CreateRepoUI")]
         public void CheckBrowserButtonWorks()
@@ -81,6 +82,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             DialogSelectDestination dialog = new DialogSelectDestination(MainWindow);
             var titleBar = dialog.titleBar.Name;
             dialog.ClickCancelButton();
+            
             Assert.AreEqual(ConstantsList.dialogSelectDestinationTitle, titleBar);
         }
 
@@ -96,6 +98,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             RepositoryTab repoTab = createTab.ClickCreateButton();
             Utils.ThreadWait(2000);
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
@@ -113,6 +116,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
             RepositoryTab repoTab = createTab.ClickCreateButton();
             Utils.ThreadWait(2000);
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
             Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
@@ -125,6 +129,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
+            
             Assert.Throws(typeof(UIActionException), 
                 () => createTab.RepoTypeComboBox.Select(CreateTab.CVS.None));
         }
@@ -142,6 +147,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
@@ -160,6 +166,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
         }
@@ -177,6 +184,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
             Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
@@ -195,6 +203,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
         }
@@ -213,6 +222,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             Assert.AreEqual(repoTab.TabTextGit.Name, gitRepoName);
@@ -232,6 +242,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
         }
@@ -250,6 +261,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
             Assert.AreEqual(repoTab.TabTextHg.Name, mercurialRepoName);
@@ -269,6 +281,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsFalse(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
         }
@@ -288,6 +301,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
             //New thumb is opened and is accessible
@@ -314,10 +328,11 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             WarningExistingRepoMercurial warningHg = new WarningExistingRepoMercurial(MainWindow);
             var warnTitle = warningHg.titleBar.Name;
             warningHg.ClickCloseButton();
+            
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
             Assert.AreEqual(ConstantsList.mercurialExistRepoWarnTitle, warnTitle);
-            // Retirned to create repo tab - all elements are accessible
+            // Returned to create repo tab - all elements are accessible
             Assert.DoesNotThrow(() => createTab.DestinationPathTextBox.Focus());
         }
 
