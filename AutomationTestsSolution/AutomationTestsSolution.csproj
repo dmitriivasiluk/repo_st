@@ -95,6 +95,7 @@
     <Compile Include="Tests\HelpMenuTests.cs" />
     <Compile Include="Tests\CustomActionsTests.cs" />
     <Compile Include="Tests\SubmodulesTests.cs" />
+    <Compile Include="Tests\SubtreesTests.cs" />
     <Compile Include="Tests\ToolbarAddTabTests.cs" />
     <Compile Include="Tests\ToolbarRemoteTabTests.cs" />
     <Compile Include="Tests\ToolbarCloneTabTests.cs" />

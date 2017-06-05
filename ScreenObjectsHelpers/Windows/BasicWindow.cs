@@ -103,6 +103,7 @@ namespace ScreenObjectsHelpers.Windows
             Utils.ThreadWait(50);
             textbox.SetValue(content);
         }
+
         public void ScrollHorizontalRigh(Window window)
         {
             var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
@@ -166,6 +167,7 @@ namespace ScreenObjectsHelpers.Windows
             }
             return result;
         }
+
         public virtual bool IsOkButtonEnabled()
         {
             return OKButton.Enabled;

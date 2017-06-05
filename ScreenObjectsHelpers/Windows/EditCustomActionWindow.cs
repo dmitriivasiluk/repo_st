@@ -29,19 +29,6 @@ namespace ScreenObjectsHelpers.Windows
         #endregion
 
         #region Methods
-        public void SetMenuCaption(string menuCaption)
-        {
-            SetTextboxContent(MenuCaption, menuCaption);
-        }
-        public void SetScriptToRun(string scriptToRun)
-        {
-            SetTextboxContent(ScriptToRun, scriptToRun);
-        }
-        public void SetParameters(string parameters)
-        {
-            SetTextboxContent(Parameters, parameters);
-        }
-
         public CustomActionsTab ClickOKButton()
         {
             ClickButton(OKButton);

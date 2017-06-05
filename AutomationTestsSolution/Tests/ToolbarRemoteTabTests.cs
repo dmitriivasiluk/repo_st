@@ -87,6 +87,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
+        [Ignore ("Investigate stability issue")]
         public void AuthBitbucketHttpsOauthPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -101,6 +102,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
+        [Ignore("Investigate stability issue")]
         public void AuthGithubHttpsOauthPositiveTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

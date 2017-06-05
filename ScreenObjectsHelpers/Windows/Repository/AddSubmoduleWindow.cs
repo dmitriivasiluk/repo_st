@@ -40,11 +40,6 @@ namespace ScreenObjectsHelpers.Windows.Repository
             public static string checkingSource = "Checking source...";
         }
 
-        public void SetSourcePath(string sourcePath)
-        {
-            SetTextboxContent(SourcePathTextbox, sourcePath);
-        }
-
         public NotAGitRepository SwitchToNotAGitRepositoryWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByText("Not a Git repository");

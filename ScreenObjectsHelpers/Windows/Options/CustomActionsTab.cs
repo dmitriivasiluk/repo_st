@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScreenObjectsHelpers.Helpers;
+using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -52,6 +53,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
         public bool IsMenuCaptionExists(string condition)
         {
+            Utils.ThreadWait(2000);
             for (int i = 0; i < AllCustomActions.Items.Count; i++)
             {
                 if (AllCustomActions.Items[i].Contains(condition))

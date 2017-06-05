@@ -3,13 +3,14 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 using ScreenObjectsHelpers.Windows.MenuFolder;
-using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using System;
 using System.IO;
+using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
+using ScreenObjectsHelpers.Windows;
 
 namespace AutomationTestsSolution.Tests
 {
-    class SubmodulesTests : BasicTest
+    class SubtreesTests : BasicTest
     {
         #region Test Variables
         private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
@@ -20,7 +21,7 @@ namespace AutomationTestsSolution.Tests
 
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
-        private AddSubmoduleWindow addSubmoduleWindow;
+        private AddLinkSubtreeWindow addLinkSubtree;
         #endregion
 
         [SetUp]
@@ -39,7 +40,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            addSubmoduleWindow.ClickButtonToGetRepository(addSubmoduleWindow.CancelButton);
+            addLinkSubtree.ClickButtonToGetRepository(addLinkSubtree.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -53,40 +54,34 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        [Category("Submodules")]
+        [Category("Subtrees")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
-
-            Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
+            
+            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
+            
+            Assert.IsFalse(addLinkSubtree.IsOkButtonEnabled());
         }
 
         [Test]
-        [Category("Submodules")]
-        public void IsOkButtonEnabledWithEnteredSourcePath()
+        [Category("Subtrees")]
+        public void IsOkButtonEnabledAfterCorrectDataSet()
         {
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
-            addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, pathToClonedGitRepo);
-            addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            Utils.ThreadWait(2000);
+            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
 
-            Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, pathToClonedGitRepo);
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);
+            Utils.ThreadWait(3000);
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.BranchCommitTextbox, testString);
+            addLinkSubtree.SourcePathTextbox.Focus();
+            Utils.ThreadWait(3000);
+
+            Assert.IsTrue(addLinkSubtree.IsOkButtonEnabled());
         }
 
-        [Test]
-        [Category("Submodules")]
-        public void SourcePathFieldValidateWrongInputTest()
-        {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
-            addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, testString);
-            var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
-
-            Assert.IsTrue(isValidationMessageCorrect);
-        }
     }
 }
