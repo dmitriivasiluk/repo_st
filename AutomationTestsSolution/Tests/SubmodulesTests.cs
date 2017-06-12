@@ -71,7 +71,7 @@ namespace AutomationTestsSolution.Tests
 
             addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            Utils.ThreadWait(2000);
+            Utils.ThreadWait(4000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
