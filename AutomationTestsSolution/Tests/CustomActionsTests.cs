@@ -28,36 +28,37 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName);
+            Utils.ThreadWait(3000);
+
             var editCustomActionWindow = customActionsTab.ClickAddCustomActionButton();
 
             editCustomActionWindow.SetTextboxContent(editCustomActionWindow.MenuCaption, ConstantsList.addCustomActionName);
             editCustomActionWindow.SetTextboxContent(editCustomActionWindow.ScriptToRun, ConstantsList.addCustomActionName);
             editCustomActionWindow.ClickOKButton();
 
-            Assert.IsFalse(isMenuCaptionExistsBeforeTest);
-            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName));
+            bool isCustomActionAdded = customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName);
+
+            Assert.IsTrue(isCustomActionAdded);
         }
 
         [Test]
         [Category("CustomActions")]
-        [Ignore("Investigate stability issue")]
         public void EditCustomAction()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            var isEditCustomActionButtonEnabled = customActionsTab.IsEditCustomActionButtonEnabled();
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName);
+            Utils.ThreadWait(3000);
+
             var editCustomActionWindow = customActionsTab.ClickEditCustomActionButton();
 
             editCustomActionWindow.SetTextboxContent(editCustomActionWindow.MenuCaption, ConstantsList.editedCustomActionName);
             editCustomActionWindow.ClickOKButton();
 
-            Assert.IsFalse(isEditCustomActionButtonEnabled);
-            Assert.IsFalse(isMenuCaptionExistsBeforeTest);
-            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName));
+            bool isCustomActionEdited = customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName);
+
+            Assert.IsTrue(isCustomActionEdited);
         }
 
 
@@ -69,8 +70,7 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            var isDeleteCustomActionButtonEnabled = customActionsTab.IsDeleteCustomActionButtonEnabled();
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
+            Utils.ThreadWait(3000);
 
             customActionsTab.ClickDeleteCustomActionButton();
 
@@ -78,11 +78,9 @@ namespace AutomationTestsSolution.Tests
 
             confirmDeletionWindow.ClickOkButton();
 
-            var isMenuCaptionExistsAfterTest = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
+            bool isCustomActionDeleted = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
 
-            Assert.IsFalse(isDeleteCustomActionButtonEnabled);
-            Assert.IsTrue(isMenuCaptionExistsBeforeTest);
-            Assert.IsFalse(isMenuCaptionExistsAfterTest);
+            Assert.IsFalse(isCustomActionDeleted);
         }
     }
 }
