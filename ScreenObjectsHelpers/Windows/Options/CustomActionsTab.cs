@@ -106,6 +106,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         public UIItemContainer ClickOkButton()
         {
             OKButton.Click();
+            Utils.ThreadWait(3000);
             return customActionsTab;
         }
         #endregion
