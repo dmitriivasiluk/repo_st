@@ -5,6 +5,7 @@ using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
+using System.Threading;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -52,7 +53,7 @@ namespace ScreenObjectsHelpers.Windows
         #region Methods
         public AuthenticateWindow ClickRefreshPasswordButton()
         {
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
 
             if (RefreshPasswordButton.Enabled)
             {
@@ -65,12 +66,12 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickRefreshTokenButton()
         {
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
 
             if (RefreshTokenButton.Enabled)
             {
                 ClickButton(RefreshTokenButton);
-                Utils.ThreadWait(4000);
+                Thread.Sleep(4000);
             }
         }
 

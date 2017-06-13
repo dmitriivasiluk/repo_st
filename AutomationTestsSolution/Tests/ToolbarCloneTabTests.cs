@@ -3,6 +3,7 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows.Repository;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -34,7 +35,7 @@ namespace AutomationTestsSolution.Tests
         {
             base.TearDown();
 
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
 
             RemoveTestFolders();
         }
