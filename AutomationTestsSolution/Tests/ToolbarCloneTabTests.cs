@@ -52,7 +52,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
             
-            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.gitRepoLink);
 
             Assert.IsTrue(cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType));
         }
@@ -64,7 +64,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(ConstantsList.mercurialRepoLink);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.mercurialRepoLink);
 
             Assert.IsTrue(cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType));
         }
@@ -76,7 +76,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(ConstantsList.notValidRepoLink);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.notValidRepoLink);
 
             Assert.IsTrue(cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.notValidPath));
         }
@@ -88,7 +88,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue("");
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, "");
 
             Assert.IsTrue(cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.noPathSupplied));
         }
@@ -100,7 +100,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(ConstantsList.gitRepoLink);            
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.gitRepoLink);            
             cloneTab.TriggerValidation();
 
             Assert.IsTrue(cloneTab.IsCloneButtonEnabled());
@@ -113,7 +113,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, gitRepoToClone);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);
             cloneTab.ClickCloneButton();
 
@@ -129,7 +129,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);
 
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
             cloneTab.ClickCloneButton();
@@ -147,7 +147,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, gitRepoToClone);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);            
             var repoName = cloneTab.NameTextBox.Text;
 
@@ -164,7 +164,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
-            cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
+            cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
             var repoName = cloneTab.NameTextBox.Text;
 
