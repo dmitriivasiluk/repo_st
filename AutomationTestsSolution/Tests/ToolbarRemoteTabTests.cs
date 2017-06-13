@@ -21,7 +21,6 @@ namespace AutomationTestsSolution.Tests
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
             Thread.Sleep(1000); // wait is needed because of the issue 1090, reported earlier
-
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
@@ -60,7 +59,6 @@ namespace AutomationTestsSolution.Tests
             addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
             Thread.Sleep(1000); // wait is needed for combobox selecting 
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
-
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
             Thread.Sleep(1000);
             var auth = addAccount.ClickRefreshPasswordButton();

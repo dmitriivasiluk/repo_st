@@ -33,7 +33,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickButton(Button button)
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(500);
             if (button.Enabled && button.Visible)
             {
                 button.Click();
