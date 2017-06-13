@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using ScreenObjectsHelpers.Windows;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -74,10 +75,10 @@ namespace AutomationTestsSolution.Tests
 
             addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, pathToClonedGitRepo);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.BranchCommitTextbox, testString);
             addLinkSubtree.SourcePathTextbox.Focus();
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
 
             Assert.IsTrue(addLinkSubtree.IsOkButtonEnabled());
         }

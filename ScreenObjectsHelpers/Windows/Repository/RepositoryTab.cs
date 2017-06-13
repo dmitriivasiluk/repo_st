@@ -4,6 +4,7 @@ using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
+using System.Threading;
 
 namespace ScreenObjectsHelpers.Windows.Repository
 {
@@ -36,21 +37,21 @@ namespace ScreenObjectsHelpers.Windows.Repository
         #region Methods
         public GitFlowInitialiseWindow ClickGitFlowButton()
         {
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
             ClickButton(GitFlowButton);
             return new GitFlowInitialiseWindow(MainWindow);
         }
 
         public StashShelveWindow ClickStashButton()
         {
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
             ClickButton(StashButton);
             return new StashShelveWindow(MainWindow);
         }
 
         public FetchWindow ClickFetchButton()
         {
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
             ClickButton(FetchButton);
             return new FetchWindow(MainWindow);
         }

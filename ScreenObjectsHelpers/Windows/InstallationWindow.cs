@@ -124,7 +124,7 @@ namespace ScreenObjectsHelpers.Windows
             var secondPass = 0;
             while (currentProcent < InstallTollsProgressBar.Maximum)
             {
-                Utils.ThreadWait(1000);
+                Thread.Sleep(1000);
                 secondPass++;
                 currentProcent = InstallTollsProgressBar.Value;
                 if (secondPass > 180) // pass 3 minutes
@@ -250,7 +250,7 @@ namespace ScreenObjectsHelpers.Windows
             int secondToWait = 20;
             while (repositories.Count == 0 && countLoop < secondToWait)
             {
-                Utils.ThreadWait(1000);
+                Thread.Sleep(1000);
                 countLoop++;
                 repositories = RepoListView.Items;
             }

@@ -5,6 +5,7 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.IO;
 using System;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -28,7 +29,7 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
 
             var editCustomActionWindow = customActionsTab.ClickAddCustomActionButton();
 
@@ -49,7 +50,7 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
 
             var editCustomActionWindow = customActionsTab.ClickEditCustomActionButton();
 
@@ -61,7 +62,6 @@ namespace AutomationTestsSolution.Tests
             Assert.IsTrue(isCustomActionEdited);
         }
 
-
         [Test]
         [Category("CustomActions")]
         public void DeleteCustomAction()
@@ -70,7 +70,7 @@ namespace AutomationTestsSolution.Tests
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
 
             customActionsTab.ClickDeleteCustomActionButton();
 

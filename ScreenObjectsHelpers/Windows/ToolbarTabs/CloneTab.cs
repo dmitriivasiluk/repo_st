@@ -5,6 +5,7 @@ using TestStack.White.UIItems.Finders;
 using System.Windows.Automation;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
+using System.Threading;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -81,7 +82,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
             //AutomationID_required - temporary workaround
             DestinationPathTextBox.Focus();
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
             NameTextBox.Focus();
         }
 
@@ -95,7 +96,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             if (IsCloneButtonEnabled())
             {
                 CloneButton.Click();
-                Utils.ThreadWait(3000);
+                Thread.Sleep(3000);
             }
             return new RepositoryTab(MainWindow);
         }

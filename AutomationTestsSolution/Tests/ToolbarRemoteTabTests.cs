@@ -3,6 +3,7 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -15,14 +16,16 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Utils.ThreadWait(1000); // wait is needed because of the issue 1090, reported earlier
+            Thread.Sleep(1000); // wait is needed because of the issue 1090, reported earlier
+
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
-            Utils.ThreadWait(2000); // wait is needed for authentication
+            Thread.Sleep(2000); // wait is needed for authentication
             
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
         }
@@ -33,14 +36,15 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
 
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authFailed));
         }
@@ -51,16 +55,18 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
-            Utils.ThreadWait(1000); // wait is needed for combobox selecting 
+            Thread.Sleep(1000); // wait is needed for combobox selecting 
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
+
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
 
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
         }
@@ -71,16 +77,17 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
 
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.loginFailed));
         }
@@ -92,10 +99,11 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.OAuth);
             addAccount.ClickRefreshTokenButton();
-            Utils.ThreadWait(3000); // wait needed for OAuth in browser
+            Thread.Sleep(3000); // wait needed for OAuth in browser
 
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
         }
@@ -107,12 +115,13 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.OAuth);
             addAccount.ClickRefreshTokenButton();
-            Utils.ThreadWait(3000);
+            Thread.Sleep(3000);
 
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
         }
@@ -134,10 +143,11 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
 
             Assert.IsTrue(addAccount.RefreshPasswordButton.Enabled);
         }
@@ -148,6 +158,7 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
+
             var addAccount = remoteTab.ClickAddAccountButton();
             addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
 

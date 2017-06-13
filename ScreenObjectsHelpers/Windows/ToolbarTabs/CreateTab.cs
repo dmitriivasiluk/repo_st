@@ -6,7 +6,7 @@ using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
-
+using System.Threading;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -38,8 +38,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
             public static string GitHub = "Git";
             public static string Mercurial = "Mercurial";
-            //somesing strange
-            public static string None = "None";
         }
 
         #endregion
@@ -59,7 +57,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public Boolean IsRepoSettingsAvailable()
         {
             CheckCheckbox(CreateRemoteCheckBox);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             return RemoteAccountsComboBox.Enabled && RemoteAccountsComboBox.Visible &&
                 DescriptionTextBox.Enabled && DescriptionTextBox.Visible &&
                 IsPrivateCheckBox.Enabled && IsPrivateCheckBox.Visible;
@@ -74,7 +72,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public WarningExistingEmptyFolder ClickCreateButtonCallsWarning()
         {
             ClickButton(CreateButton);
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
             return new WarningExistingEmptyFolder(MainWindow);
         }
 
