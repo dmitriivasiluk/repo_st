@@ -16,7 +16,6 @@ namespace ScreenObjectsHelpers.Windows
             : base(mainWindow)
         {
             this.editHostingAccountWindow = editHostingAccountWindow;
-            
         }
 
         #region UIItems
@@ -29,7 +28,7 @@ namespace ScreenObjectsHelpers.Windows
         public Button RefreshPasswordButton => editHostingAccountWindow.Get<Button>(SearchCriteria.ByText("Refresh Password"));
         #endregion
 
-        #region ComboBox Varibles
+        #region ComboBox Variables
         public struct HostingService
         {
             public static string GitHub = "GitHub";

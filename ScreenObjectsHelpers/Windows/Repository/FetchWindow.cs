@@ -6,7 +6,7 @@ using TestStack.White.UIItems.ListBoxItems;
 
 namespace ScreenObjectsHelpers.Windows.Repository
 {
-    class FetchWindow : GeneralWindow
+    public class FetchWindow : GeneralWindow
     {
         public FetchWindow(Window mainWindow) : base(mainWindow)
         {

@@ -129,7 +129,9 @@
     <Compile Include="Windows\Repository\AddSubmoduleWindow.cs" />
     <Compile Include="Windows\Repository\FetchWindow.cs" />
     <Compile Include="Windows\Repository\GitFlowInitialiseWindow.cs" />
+    <Compile Include="Windows\Repository\PullGitRepoWindow.cs" />
     <Compile Include="Windows\Repository\RepositoryTab.cs" />
+    <Compile Include="Windows\Repository\StashShelveWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\CreateTab.cs" />
     <Compile Include="Windows\ToolbarTabs\EditHostingAccountWindow\AuthenticateWindow.cs" />

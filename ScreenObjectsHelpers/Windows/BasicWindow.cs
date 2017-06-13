@@ -4,6 +4,7 @@ using System;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows
@@ -95,6 +96,11 @@ namespace ScreenObjectsHelpers.Windows
             {
                 window.ScrollBars.Horizontal.ScrollLeftLarge();
             }
+        }
+
+        public void SetComboboxValue(ComboBox combobox, string comboboxValue)
+        {
+            combobox.Select(comboboxValue);
         }
 
         public void SetTextboxContent(TextBox textbox, string content)
