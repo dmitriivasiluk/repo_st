@@ -1,5 +1,6 @@
 ﻿using System;
 using TestStack.White.UIItems;
+using TestStack.White.UIItems.TabItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows
@@ -16,7 +17,7 @@ namespace ScreenObjectsHelpers.Windows
             OpenToolbarTab();
         }
 
-        public abstract WPFLabel ToolbarTabButton
+        public abstract TabPage ToolbarTab
         {
             get;
         }
@@ -28,14 +29,14 @@ namespace ScreenObjectsHelpers.Windows
 
         public virtual void OpenToolbarTab()
         {
-            if (ToolbarTabButton == null)
+            if (ToolbarTab == null)
             {
                 ClickButton(NewTabButton);
             }
 
-            if (ToolbarTabButton.Name != "Local")
+            if (ToolbarTab.Name != "LocalRepoListTab")
             {
-                ToolbarTabButton.Click();
+                ToolbarTab.Click();
             }                
         }
 
