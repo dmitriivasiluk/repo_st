@@ -1,5 +1,6 @@
 ﻿using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
+using System.Threading;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 
@@ -37,7 +38,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public void TriggerValidation()
         {
             NameTextBox.Focus();
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
         }
 
         //TODO return OpenWorkingCopyWindow class

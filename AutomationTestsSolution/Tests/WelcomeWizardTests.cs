@@ -50,7 +50,7 @@ namespace AutomationTestsSolution.Tests
         private void AttachToWelcomeWizardSourceTree()
         {
             MainWindow = null;
-            Utils.ThreadWait(8000); // time for unzip some packages before configuration
+            Thread.Sleep(8000); // time for unzip some packages before configuration
             MainWindow = Utils.FindNewWindow("Welcome");
         }
 
@@ -375,7 +375,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            Utils.ThreadWait(10000); // Time for cloning 
+            Thread.Sleep(10000); // Time for cloning 
             bool actualIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(actualIsRepositoryCloned);

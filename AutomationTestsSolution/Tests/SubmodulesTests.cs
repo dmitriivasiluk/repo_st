@@ -6,6 +6,7 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using System;
 using System.IO;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -71,7 +72,7 @@ namespace AutomationTestsSolution.Tests
 
             addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, pathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            Utils.ThreadWait(4000);
+            Thread.Sleep(4000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }

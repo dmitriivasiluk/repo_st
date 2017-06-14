@@ -5,6 +5,7 @@ using System.Linq;
 using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -41,7 +42,7 @@ namespace AutomationTestsSolution.Tests
 
             UseTestUserConfig();
 
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
         }
 
         protected void UseTestUserConfig()
@@ -52,7 +53,7 @@ namespace AutomationTestsSolution.Tests
 
             UserProfileExpandVariables();
 
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
         }
 
         public static void ReplaceTextInFile(string pathToFile, string oldText, string newText)
@@ -80,7 +81,7 @@ namespace AutomationTestsSolution.Tests
 
             BackupData(sourceTreeDataPath);
 
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
         }
 
         protected void RunAndAttachToSourceTree()
@@ -94,7 +95,6 @@ namespace AutomationTestsSolution.Tests
             sourceTreeExePath = exeAndVersion.Item1;
             RunSourceTree(sourceTreeExePath);
         }
-
 
         private void BackupData(string dataFolder)
         {
@@ -119,7 +119,7 @@ namespace AutomationTestsSolution.Tests
         {
 
             Utils.RemoveFile(fileName + BackupSuffix);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             if (File.Exists(fileName))
             {
                 File.Move(fileName, fileName + BackupSuffix);
@@ -234,7 +234,7 @@ namespace AutomationTestsSolution.Tests
                 sourceTreeProcess.Close();
             }
 
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
 
             RestoreFile(sourceTreeUserConfigPath);
             RestoreData(sourceTreeDataPath);

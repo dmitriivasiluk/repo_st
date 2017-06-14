@@ -37,18 +37,6 @@ namespace ScreenObjectsHelpers.Helpers
             return window;
         }
 
-        public static void ThreadWait(int timeInMilliseconds)
-        {
-            try
-            {
-                Thread.Sleep(timeInMilliseconds);
-            }
-            catch (ThreadInterruptedException)
-            {
-                Thread.CurrentThread.Interrupt();
-            }
-        }
-
         public static void RemoveFile(string path)
         {
             if (File.Exists(path))

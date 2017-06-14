@@ -1,6 +1,6 @@
-﻿using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
+﻿using ScreenObjectsHelpers.Windows.Repository;
 using System;
+using System.Threading;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -33,7 +33,8 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickButton(Button button)
         {
-            WaitWhileElementAvaliable(button);
+
+            Thread.Sleep(500);
             if (button.Enabled && button.Visible)
             {
                 button.Click();
@@ -44,18 +45,13 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
-        public void ClickButtonAfterElementVisible(Button Button)
-        {
-            WaitWhileElementAvaliable(Button).Click();
-        }
-
         public UIItemContainer WaitMdiChildAppears(SearchCriteria searchCriteria, int secondsForWait)
         {
             int secondsPass = 0;
             UIItemContainer container = MainWindow.MdiChild(searchCriteria);
             while (container == null)
             {
-                Utils.ThreadWait(1000);
+                Thread.Sleep(1000);
                 secondsPass++;
                 container = MainWindow.MdiChild(searchCriteria);
                 if (secondsPass > secondsForWait)
@@ -66,38 +62,6 @@ namespace ScreenObjectsHelpers.Windows
             return container;
         }
 
-        public bool IsElementAvaliable(UIItem item)
-        {
-            return item.Visible;
-        }
-
-        public UIItem WaitWhileElementAvaliable(UIItem item, int maximumTimeToWait = 60)
-        {
-            int secondPassed = 0;
-            const int secondToWaitEachLoop = 5;
-            while (true)
-            {
-                var isItemVisible = item.Visible;
-                var isItemEnabled = item.Enabled;
-                if (secondPassed > maximumTimeToWait)
-                {
-                    throw new TimeoutException($"Element {item.ToString()} is not Visible or Disabled after {secondPassed} second");
-                }
-                if (isItemVisible && isItemEnabled) return item;
-                secondPassed += secondToWaitEachLoop;
-                Utils.ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
-            }
-        }
-
-        public void ScrollHorizontalLeft(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Horizontal.ScrollLeftLarge();
-            }
-        }
-
         public void SetComboboxValue(ComboBox combobox, string comboboxValue)
         {
             combobox.Select(comboboxValue);
@@ -106,35 +70,8 @@ namespace ScreenObjectsHelpers.Windows
         public void SetTextboxContent(TextBox textbox, string content)
         {
             textbox.Focus();
-            Utils.ThreadWait(50);
+            Thread.Sleep(50);
             textbox.SetValue(content);
-        }
-
-        public void ScrollHorizontalRigh(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Horizontal.ScrollRightLarge();
-            }
-        }
-
-        public void ScrollVerticalDown(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Vertical.ScrollDown();
-            }
-        }
-
-        public void ScrollVerticalUp(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Vertical.ScrollUp();
-            }
         }
 
         public void CheckCheckbox(CheckBox checkbox)
@@ -178,7 +115,6 @@ namespace ScreenObjectsHelpers.Windows
         {
             return OKButton.Enabled;
         }
-
 
         public RepositoryTab ClickButtonToGetRepository(Button button)
         {
