@@ -1,5 +1,6 @@
 ﻿using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.TabItems;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -10,7 +11,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
         }
 
-        public override WPFLabel ToolbarTabButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Remote"));
+        public override TabPage ToolbarTab => MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("RemoteRepoListTab"));
         public WPFLabel AddAccountButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Add an account..."));
         public Button EditAccountsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Edit Accounts..."));
 

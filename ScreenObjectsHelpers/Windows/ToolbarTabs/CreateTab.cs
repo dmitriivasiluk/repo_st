@@ -7,6 +7,7 @@ using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 using System.Threading;
+using TestStack.White.UIItems.TabItems;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -18,7 +19,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         #region UIElements
 
-        public override WPFLabel ToolbarTabButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Create"));
+        public override TabPage ToolbarTab => MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("CreateRepoTab"));
         public Button BrowseButton => MainWindow.Get<Button>(SearchCriteria.ByText("Browse"));
         public TextBox DestinationPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoDestinationPath"));
         public TextBox NameRepoTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoName"));

@@ -3,6 +3,7 @@ using ScreenObjectsHelpers.Windows.Repository;
 using System.Threading;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.TabItems;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -13,7 +14,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIElements
-        public override WPFLabel ToolbarTabButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Add"));
+        public override TabPage ToolbarTab => MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("AddRepoTab"));
 
         public Button BrowseButton => MainWindow.Get<Button>(SearchCriteria.ByText("Browse"));
 

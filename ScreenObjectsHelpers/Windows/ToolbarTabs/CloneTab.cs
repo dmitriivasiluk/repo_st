@@ -6,6 +6,7 @@ using System.Windows.Automation;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 using System.Threading;
+using TestStack.White.UIItems.TabItems;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -16,7 +17,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIElements
-        public override WPFLabel ToolbarTabButton => MainWindow.Get<WPFLabel>(SearchCriteria.ByText("Clone"));
+        public override TabPage ToolbarTab => MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("CloneRepoTab"));
         public Label RemoteAccountLabel => MainWindow.Get<Label>(SearchCriteria.ByAutomationId("remote account"));
         public TextBox SourcePathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("SourceTextBox"));
         private Button DetailsButton => MainWindow.Get<Button>(SearchCriteria.ByText("Details..."));
