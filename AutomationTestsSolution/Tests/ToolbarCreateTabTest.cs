@@ -61,7 +61,6 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, Path.Combine(pathToAllRepos, gitRepoName));
-            createTab.DestinationPathTextBox.SetValue(Path.Combine(pathToAllRepos, gitRepoName));
             createTab.CheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.DescriptionTextBox.Focus();
             
