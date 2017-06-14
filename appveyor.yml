@@ -39,10 +39,6 @@ before_build:
     7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
 build:
   verbosity: minimal
-after_test:
-- cmd: >-
-
-    7z a %APPVEYOR_BUILD_FOLDER%\screenshot.7z C:\Users\appveyor\Documents\*.jpg    
-artifacts:
- - path: screenshot.7z
-   name: screenshot
+on_finish:
+- 7z a %APPVEYOR_BUILD_FOLDER%\screenshots.7z C:\Users\appveyor\Documents\*.jpg    
+- appveyor PushArtifact screenshots.7z
