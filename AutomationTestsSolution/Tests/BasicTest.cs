@@ -186,6 +186,8 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.Start();
 
             Thread.Sleep(1500);
+
+            ScreenshotsTaker.TakeScreenShot(nameof(RunSourceTree));
         }
 
         protected static Tuple<string, string> FindSourceTree()
@@ -237,6 +239,8 @@ namespace AutomationTestsSolution.Tests
             }
 
             Thread.Sleep(2000);
+
+            ScreenshotsTaker.TakeScreenShot(nameof(TearDown));
 
             RestoreFile(sourceTreeUserConfigPath);
             RestoreData(sourceTreeDataPath);

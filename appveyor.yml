@@ -39,6 +39,6 @@ before_build:
     7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
 build:
   verbosity: minimal
-on_finish:
+on_failure:
 - 7z a %APPVEYOR_BUILD_FOLDER%\screenshots.7z C:\Users\appveyor\Documents\*.jpg    
 - appveyor PushArtifact screenshots.7z
