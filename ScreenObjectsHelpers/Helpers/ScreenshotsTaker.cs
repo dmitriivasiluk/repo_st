@@ -15,6 +15,7 @@ namespace ScreenObjectsHelpers.Helpers
         // ScreenshotsTaker.TakeScreenShot(new StackTrace().GetFrame(0).GetMethod().Name);
         public static void TakeScreenShot(string nameOfTest)
         {
+            Thread.Sleep(500);
             var prefix = "Test_";
             var timestamp = DateTime.Now.ToString("_MM.dd_HHmmss");
             var random = new Random().Next().ToString();

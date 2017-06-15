@@ -14,7 +14,9 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthBitbucketHttpsBasicPositiveTest(string login, string password)
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsBasicPositiveTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsBasicPositiveTest));
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -94,6 +96,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
+        [Category("OAuth")]
         //[Ignore ("Investigate stability issue")]
         public void AuthBitbucketHttpsOauthPositiveTest()
         {
@@ -112,6 +115,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
+        [Category("OAuth")]
         //[Ignore("Investigate stability issue")]
         public void AuthGithubHttpsOauthPositiveTest()
         {

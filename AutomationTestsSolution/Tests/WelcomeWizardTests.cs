@@ -272,6 +272,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         [Category("WelcomeWizard")]
+        [Category("OAuth")]
         //[Ignore("Investigate stability issue")]
 
         public void ConnectGitHubViaOAuthTest (
@@ -305,6 +306,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         [Category("WelcomeWizard")]
+        [Category("OAuth")]
         public void ConnectBitbucketViaOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword)
@@ -448,6 +450,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "github-public")]
         [Category("WelcomeWizard")]
+        [Category("OAuth")]
         public void CloneGitHubRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -492,6 +495,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucket-public")]
         [Category("WelcomeWizard")]
+        [Category("OAuth")]
         public void CloneBitBucketRepositoryUsingOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,

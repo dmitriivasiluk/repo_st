@@ -185,7 +185,7 @@ namespace AutomationTestsSolution.Tests
 
             sourceTreeProcess.Start();
 
-            Thread.Sleep(1500);
+            Thread.Sleep(2500);
 
             ScreenshotsTaker.TakeScreenShot(nameof(RunSourceTree));
         }
