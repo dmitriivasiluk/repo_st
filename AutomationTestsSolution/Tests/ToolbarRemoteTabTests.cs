@@ -52,7 +52,9 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthGithubHttpsBasicPositiveTest(string login, string password)
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsBasicPositiveTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsBasicPositiveTest));
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -95,7 +97,9 @@ namespace AutomationTestsSolution.Tests
         //[Ignore ("Investigate stability issue")]
         public void AuthBitbucketHttpsOauthPositiveTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsOauthPositiveTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsOauthPositiveTest));
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -111,7 +115,9 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void AuthGithubHttpsOauthPositiveTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsOauthPositiveTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsOauthPositiveTest));
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();

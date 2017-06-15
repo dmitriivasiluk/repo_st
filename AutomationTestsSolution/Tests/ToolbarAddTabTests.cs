@@ -88,7 +88,9 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void AddEmptyPathValidationMessageTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AddEmptyPathValidationMessageTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AddEmptyPathValidationMessageTest));
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
             addTab.SetTextboxContent(addTab.WorkingCopyPathTextBox, "");            
