@@ -184,6 +184,8 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.StartInfo = psi;
 
             sourceTreeProcess.Start();
+
+            Thread.Sleep(1500);
         }
 
         protected static Tuple<string, string> FindSourceTree()
