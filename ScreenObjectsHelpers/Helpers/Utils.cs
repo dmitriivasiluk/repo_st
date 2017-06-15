@@ -13,7 +13,7 @@ namespace ScreenObjectsHelpers.Helpers
     public class Utils
     {
 
-        public static Window FindNewWindow(string nameOfWindow, int testCount = 30)
+        public static Window FindNewWindow(string nameOfWindow, int testCount = 15)
         {
             Window window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
             int count = 0;
@@ -25,11 +25,12 @@ namespace ScreenObjectsHelpers.Helpers
                 }
                 catch (ElementNotAvailableException e)
                 {
+                    Console.WriteLine("FindNewWindow: ElementNotAvailableException", e.Message);
                     window = null;
                 }
                 catch (NullReferenceException e)
                 {
-                    window = null;
+                    throw new NullReferenceException("FindNewWindow: NullReferenceException" + e.Message);                    
                 }
                 Thread.Sleep(1000);
                 count++;
