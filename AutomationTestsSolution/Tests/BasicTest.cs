@@ -236,6 +236,8 @@ namespace AutomationTestsSolution.Tests
 
             Thread.Sleep(2000);
 
+            ScreenshotsTaker.TakeScreenShot(nameof(TearDown));
+
             RestoreFile(sourceTreeUserConfigPath);
             RestoreData(sourceTreeDataPath);
         }

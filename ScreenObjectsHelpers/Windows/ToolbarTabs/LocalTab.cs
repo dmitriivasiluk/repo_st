@@ -1,4 +1,5 @@
-﻿using TestStack.White;
+﻿using System;
+using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.TabItems;
@@ -20,9 +21,15 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
                 {
                     return MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("LocalRepoListTab"));
                 }
-                catch (AutomationException)
-                {
+                catch (AutomationException e)
+                {                    
                     return null;
+                }
+                catch (NullReferenceException e)
+                {
+                    Console.WriteLine("**************************************");
+                    Console.WriteLine(e.Message);
+                    throw new NullReferenceException("ToolbarTab:" + e.Message);                    
                 }
             }
         }       

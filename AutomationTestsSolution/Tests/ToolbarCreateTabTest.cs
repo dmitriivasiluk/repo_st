@@ -35,7 +35,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoUI")]
         public void ValidateLocalRepoNameTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(ValidateLocalRepoNameTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToAllRepos + gitRepoName);
             
@@ -46,7 +47,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoUI")]
         public void CheckCreateRepoButtonUnavailableOnDestinationEmpty()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckCreateRepoButtonUnavailableOnDestinationEmpty));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, "");
             
@@ -57,7 +59,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoUI")]
         public void CheckCreateRepoButtonUnavailableOnNoRepoAccount()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckCreateRepoButtonUnavailableOnNoRepoAccount));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, Path.Combine(pathToAllRepos, gitRepoName));
@@ -71,7 +74,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoUI")]
         public void CheckBrowserButtonWorks()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckBrowserButtonWorks));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             Assert.IsTrue(createTab.BrowseButton.Enabled && createTab.BrowseButton.Visible);
@@ -88,7 +92,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalGitRepoCreatedTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalGitRepoCreatedTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
@@ -107,7 +112,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalHgRepoCreatedTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalHgRepoCreatedTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
@@ -126,7 +132,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInEmptyFolderPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInEmptyFolderPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
@@ -146,7 +153,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInEmptyFolderNegativeTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInEmptyFolderNegativeTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
@@ -165,7 +173,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInEmptyFolderPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInEmptyFolderPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
@@ -185,7 +194,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInEmptyFolderNegativeTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInEmptyFolderNegativeTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
@@ -204,7 +214,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInNotEmptyFolderPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInNotEmptyFolderPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
@@ -225,7 +236,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateGitInNotEmptyFolderNegativeTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInNotEmptyFolderNegativeTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
@@ -245,7 +257,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInNotEmptyFolderPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInNotEmptyFolderPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
@@ -266,7 +279,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInNotEmptyFolderNegativeTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInNotEmptyFolderNegativeTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
@@ -287,7 +301,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         //[Ignore("Not stable")]
         public void CheckLocalRepoCreateGitInExistRepoPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInExistRepoPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
@@ -311,7 +326,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
         [Category("CreateRepoLocal")]
         public void CheckLocalRepoCreateHgInExistRepoPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInExistRepoPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CreateTab createTab = mainWindow.OpenTab<CreateTab>();
 
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);

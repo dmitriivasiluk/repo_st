@@ -14,7 +14,8 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthBitbucketHttpsBasicPositiveTest(string login, string password)
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsBasicPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -33,6 +34,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthBitbucketHttpsBasicNegativeTest(string login, string password)
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsBasicNegativeTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
@@ -52,7 +54,8 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthGithubHttpsBasicPositiveTest(string login, string password)
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsBasicPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -73,6 +76,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthGithubHttpsBasicNegativeTest(string login, string password)
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsBasicNegativeTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
@@ -92,10 +96,12 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
-        [Ignore ("Investigate stability issue")]
+        [Category("OAuth")]
+        //[Ignore ("Investigate stability issue")]
         public void AuthBitbucketHttpsOauthPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsOauthPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -108,10 +114,12 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
-        [Ignore("Investigate stability issue")]
+        [Category("OAuth")]
+        //[Ignore("Investigate stability issue")]
         public void AuthGithubHttpsOauthPositiveTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsOauthPositiveTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -128,6 +136,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthOkButtonDisabledTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthOkButtonDisabledTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
             var addAccount = remoteTab.ClickAddAccountButton();
@@ -139,6 +148,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthRefreshPasswordButtonEnabledTest(string login)
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthRefreshPasswordButtonEnabledTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
@@ -154,6 +164,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Authentication")]
         public void AuthRefreshPasswordButtonDisabledTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AuthRefreshPasswordButtonDisabledTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 

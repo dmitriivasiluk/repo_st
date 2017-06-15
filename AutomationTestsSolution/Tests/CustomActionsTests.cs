@@ -25,6 +25,7 @@ namespace AutomationTestsSolution.Tests
         [Category("CustomActions")]
         public void AddCustomAction()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AddCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -46,6 +47,7 @@ namespace AutomationTestsSolution.Tests
         [Category("CustomActions")]
         public void EditCustomAction()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(EditCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -66,6 +68,7 @@ namespace AutomationTestsSolution.Tests
         [Category("CustomActions")]
         public void DeleteCustomAction()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(DeleteCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();

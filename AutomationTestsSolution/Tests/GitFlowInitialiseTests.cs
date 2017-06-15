@@ -55,7 +55,8 @@ namespace AutomationTestsSolution.Tests
         [Category ("GitFlow")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckUseDefaultsButtonResetTextboxesTest));
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             gitFlowInitWindow.SetAllTextboxes(testString);
@@ -73,6 +74,7 @@ namespace AutomationTestsSolution.Tests
         [Category("GitFlow")]
         public void CheckDefaultBranchNamesTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckDefaultBranchNamesTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
