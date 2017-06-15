@@ -28,6 +28,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
                 catch (NullReferenceException e)
                 {
                     Console.WriteLine("**************************************");
+                    Console.WriteLine(e.Message);
                     throw new NullReferenceException("ToolbarTab:" + e.Message);                    
                 }
             }
