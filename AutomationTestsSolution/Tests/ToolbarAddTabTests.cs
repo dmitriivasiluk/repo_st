@@ -85,7 +85,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
         public void AddEmptyPathValidationMessageTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

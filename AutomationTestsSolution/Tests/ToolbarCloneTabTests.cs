@@ -142,7 +142,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
         public void CheckGitRepoOpenedAfterCloneTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -159,7 +159,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
         public void CheckHgRepoOpenedAfterCloneTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);

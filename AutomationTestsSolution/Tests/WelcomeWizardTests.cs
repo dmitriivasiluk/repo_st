@@ -77,7 +77,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         [Category("WelcomeWizard")]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
         public void ValidRegistrationTest(string loginEmailToAtlassian, string passwordToAtlassian)
         {
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -262,7 +262,7 @@ namespace AutomationTestsSolution.Tests
         /// </summary>
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree")]
         [Category("WelcomeWizard")]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
 
         public void ConnectGitHubViaOAuthTest (
             string atlassianLoginEmail,
@@ -589,7 +589,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public")]
         [Category("WelcomeWizard")]
-        [Ignore("Investigate stability issue")]
+        //[Ignore("Investigate stability issue")]
         public void SourceTreeOpensAfterFinishConfiguration(
             string atlassianLoginEmail,
             string atlassianPassword,
