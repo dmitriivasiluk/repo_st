@@ -7,7 +7,7 @@ init:
 install:
 - ps:  >-
 
-    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/2.1.2.4.7z 'C:\Users\appveyor\AppData\Local\sourcetree.7z'
+    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/2.1.2.5.7z 'C:\Users\appveyor\AppData\Local\sourcetree.7z'
     
     Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/configs.7z 'C:\Users\appveyor\AppData\Local\configs.7z'
     
