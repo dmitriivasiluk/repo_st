@@ -12,6 +12,7 @@ namespace AutomationTestsSolution.Tests
         [Category("HelpMenu")]
         public void AboutWindowTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AboutWindowTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AboutWindow aboutWindow = mainWindow.OpenMenu<HelpMenu>().OpenAbout();
 

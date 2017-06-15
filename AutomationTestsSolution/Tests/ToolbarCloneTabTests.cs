@@ -51,8 +51,7 @@ namespace AutomationTestsSolution.Tests
         public void ValidateGitRepoLinkTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateGitRepoLinkTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateGitRepoLinkTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
             
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.gitRepoLink);
@@ -65,8 +64,7 @@ namespace AutomationTestsSolution.Tests
         public void ValidateMercurialRepoLinkTest() // Mercurial should be installed
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateMercurialRepoLinkTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateMercurialRepoLinkTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.mercurialRepoLink);
@@ -79,8 +77,7 @@ namespace AutomationTestsSolution.Tests
         public void ValidateInvalidRepoLinkTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateInvalidRepoLinkTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateInvalidRepoLinkTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.notValidRepoLink);
@@ -93,8 +90,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckNoPathSuppliedMessageDisplayed()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckNoPathSuppliedMessageDisplayed));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckNoPathSuppliedMessageDisplayed));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, "");
@@ -107,8 +103,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckCloneButtonEnabledTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneButtonEnabledTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneButtonEnabledTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, ConstantsList.gitRepoLink);            
@@ -122,8 +117,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckCloneGitRepoTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneGitRepoTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneGitRepoTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, gitRepoToClone);
@@ -140,8 +134,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckCloneMercurialRepoTest()  // Mercurial should be installed
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);
@@ -160,8 +153,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckGitRepoOpenedAfterCloneTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckGitRepoOpenedAfterCloneTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckGitRepoOpenedAfterCloneTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, gitRepoToClone);
@@ -179,8 +171,7 @@ namespace AutomationTestsSolution.Tests
         public void CheckHgRepoOpenedAfterCloneTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckHgRepoOpenedAfterCloneTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckHgRepoOpenedAfterCloneTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);

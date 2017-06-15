@@ -57,6 +57,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Submodules")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
@@ -67,6 +68,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Submodules")]
         public void IsOkButtonEnabledWithEnteredSourcePath()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonEnabledWithEnteredSourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
@@ -81,6 +83,7 @@ namespace AutomationTestsSolution.Tests
         [Category("Submodules")]
         public void SourcePathFieldValidateWrongInputTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(SourcePathFieldValidateWrongInputTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
