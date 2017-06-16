@@ -220,6 +220,16 @@ namespace AutomationTestsSolution.Tests
 
             sourceTreeProcess.Start();
             sourceTreeProcess.WaitForInputIdle();
+
+            var attempt = 0;
+
+            do
+            {                
+                sourceTreeProcess.Refresh();
+                Thread.Sleep(1000);
+                attempt++;
+            }
+            while (string.IsNullOrEmpty(sourceTreeProcess.MainWindowTitle) && attempt < 15);
         }
 
         public bool IsSourceTreeProcessRunning(string processName)
