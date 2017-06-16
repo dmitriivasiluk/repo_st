@@ -116,6 +116,11 @@ namespace ScreenObjectsHelpers.Windows
             return OKButton.Enabled;
         }
 
+        public string GetTitle()
+        {
+            return MainWindow.Title;
+        }
+
         public RepositoryTab ClickButtonToGetRepository(Button button)
         {
             ClickButton(button);

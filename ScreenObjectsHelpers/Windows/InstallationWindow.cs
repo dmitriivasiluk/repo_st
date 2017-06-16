@@ -10,6 +10,7 @@ using System.Windows.Automation;
 using TestStack.White.UIItems.ListBoxItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using ScreenObjectsHelpers.Windows.Repository;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -208,7 +209,7 @@ namespace ScreenObjectsHelpers.Windows
             return new LocalTab(mainWindow);
         }
 
-        public LocalTab ClickContinueAtTheLatestStepButton()
+        public RepositoryTab ClickContinueAtTheLatestStepButton()
         {
             try
             {
@@ -219,7 +220,7 @@ namespace ScreenObjectsHelpers.Windows
                 // Empty, expect that Configuration window is closed (the latest step in configuration, clone) and SourceTree is opened 
             }
             Window mainWindow = Utils.FindNewWindow("SourceTree");
-            return new LocalTab(mainWindow);
+            return new RepositoryTab(mainWindow);
         }
 
         public IgnoreFileDialogWindow GetInstallGlobalIgnoreFileDialogWindow()

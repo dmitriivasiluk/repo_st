@@ -39,10 +39,5 @@ namespace ScreenObjectsHelpers.Windows
                 ToolbarTab.Click();
             }                
         }
-
-        public string GetTitle()
-        {
-            return MainWindow.Title;
-        }
     }
 }
