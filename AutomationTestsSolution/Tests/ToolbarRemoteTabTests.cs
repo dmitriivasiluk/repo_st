@@ -12,6 +12,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("staccount", "123456test")]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthBitbucketHttpsBasicPositiveTest(string login, string password)
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsBasicPositiveTest));
@@ -32,6 +33,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("staccount", "incorrectPassword")]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthBitbucketHttpsBasicNegativeTest(string login, string password)
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthBitbucketHttpsBasicNegativeTest));
@@ -52,6 +54,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("githubst", "123456test")]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthGithubHttpsBasicPositiveTest(string login, string password)
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsBasicPositiveTest));
@@ -74,6 +77,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("githubst", "incorrectPassword")]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthGithubHttpsBasicNegativeTest(string login, string password)
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthGithubHttpsBasicNegativeTest));
@@ -134,6 +138,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthOkButtonDisabledTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthOkButtonDisabledTest));
@@ -146,6 +151,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("RandomUsername")]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthRefreshPasswordButtonEnabledTest(string login)
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthRefreshPasswordButtonEnabledTest));
@@ -162,6 +168,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Authentication")]
+        [Category("General")]
         public void AuthRefreshPasswordButtonDisabledTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AuthRefreshPasswordButtonDisabledTest));

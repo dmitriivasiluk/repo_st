@@ -52,7 +52,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        [Category ("GitFlow")]
+        [Category("GitFlow")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckUseDefaultsButtonResetTextboxesTest));
@@ -72,6 +74,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("GitFlow")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void CheckDefaultBranchNamesTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckDefaultBranchNamesTest));

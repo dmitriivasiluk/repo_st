@@ -56,6 +56,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Subtrees")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonDisabledWithEmptySourcePath));
@@ -68,6 +70,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Subtrees")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledAfterCorrectDataSet()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonEnabledAfterCorrectDataSet));

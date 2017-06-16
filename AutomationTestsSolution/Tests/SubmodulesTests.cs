@@ -55,6 +55,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Submodules")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonDisabledWithEmptySourcePath));
@@ -66,6 +68,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Submodules")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledWithEnteredSourcePath()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonEnabledWithEnteredSourcePath));
@@ -81,6 +85,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Submodules")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void SourcePathFieldValidateWrongInputTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(SourcePathFieldValidateWrongInputTest));

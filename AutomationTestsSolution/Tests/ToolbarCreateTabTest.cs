@@ -33,6 +33,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoUI")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void ValidateLocalRepoNameTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateLocalRepoNameTest));
@@ -45,6 +47,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoUI")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckCreateRepoButtonUnavailableOnDestinationEmpty()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCreateRepoButtonUnavailableOnDestinationEmpty));
@@ -57,6 +61,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoUI")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckCreateRepoButtonUnavailableOnNoRepoAccount()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCreateRepoButtonUnavailableOnNoRepoAccount));
@@ -72,6 +78,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoUI")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckBrowserButtonWorks()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckBrowserButtonWorks));
@@ -90,6 +98,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalGitRepoCreatedTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalGitRepoCreatedTest));
@@ -110,6 +120,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalHgRepoCreatedTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalHgRepoCreatedTest));
@@ -130,6 +142,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateGitInEmptyFolderPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInEmptyFolderPositiveTest));
@@ -151,6 +165,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateGitInEmptyFolderNegativeTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInEmptyFolderNegativeTest));
@@ -171,6 +187,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateHgInEmptyFolderPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInEmptyFolderPositiveTest));
@@ -192,6 +210,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateHgInEmptyFolderNegativeTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInEmptyFolderNegativeTest));
@@ -212,6 +232,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateGitInNotEmptyFolderPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInNotEmptyFolderPositiveTest));
@@ -234,6 +256,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateGitInNotEmptyFolderNegativeTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateGitInNotEmptyFolderNegativeTest));
@@ -255,6 +279,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateHgInNotEmptyFolderPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInNotEmptyFolderPositiveTest));
@@ -277,6 +303,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateHgInNotEmptyFolderNegativeTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInNotEmptyFolderNegativeTest));
@@ -298,6 +326,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         //[Ignore("Not stable")]
         public void CheckLocalRepoCreateGitInExistRepoPositiveTest()
         {
@@ -324,6 +354,8 @@ namespace AutomationTestsSolution.Tests.CreateLocal
 
         [Test]
         [Category("CreateRepoLocal")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckLocalRepoCreateHgInExistRepoPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckLocalRepoCreateHgInExistRepoPositiveTest));

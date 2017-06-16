@@ -52,6 +52,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddGitFolderValidationMessageTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -62,6 +65,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddHgFolderValidationMessageTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AddHgFolderValidationMessageTest));
@@ -73,6 +79,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddNotRepoFolderValidationMessageTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AddNotRepoFolderValidationMessageTest));
@@ -87,6 +96,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         //[Ignore("Investigate stability issue")]
         public void AddEmptyPathValidationMessageTest()
         {
@@ -102,6 +114,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckAddButtonEnablesWithValidGitFolderTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckAddButtonEnablesWithValidGitFolderTest));
@@ -116,6 +131,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckAddButtonEnablesWithValidHgFolderTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckAddButtonEnablesWithValidGitFolderTest));
@@ -130,6 +148,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckOpenedRepoTitleAfterAddGitFolderTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckOpenedRepoTitleAfterAddGitFolderTest));
@@ -145,6 +166,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckOpenedRepoTitleAfterAddHgFolderTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckOpenedRepoTitleAfterAddHgFolderTest));

@@ -23,6 +23,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CustomActions")]
+        [Category("General")]
         public void AddCustomAction()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AddCustomAction));
@@ -45,6 +46,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CustomActions")]
+        [Category("General")]
         public void EditCustomAction()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(EditCustomAction));
@@ -66,6 +68,7 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CustomActions")]
+        [Category("General")]
         public void DeleteCustomAction()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(DeleteCustomAction));

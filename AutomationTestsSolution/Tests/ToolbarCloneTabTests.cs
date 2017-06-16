@@ -48,6 +48,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void ValidateGitRepoLinkTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateGitRepoLinkTest));
@@ -61,6 +63,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void ValidateMercurialRepoLinkTest() // Mercurial should be installed
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateMercurialRepoLinkTest));
@@ -74,6 +78,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void ValidateInvalidRepoLinkTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(ValidateInvalidRepoLinkTest));
@@ -87,6 +93,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckNoPathSuppliedMessageDisplayed()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckNoPathSuppliedMessageDisplayed));
@@ -100,6 +108,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckCloneButtonEnabledTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneButtonEnabledTest));
@@ -114,6 +124,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckCloneGitRepoTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneGitRepoTest));
@@ -131,6 +143,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckCloneMercurialRepoTest()  // Mercurial should be installed
         {
             ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
@@ -149,6 +163,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         //[Ignore("Investigate stability issue")]
         public void CheckGitRepoOpenedAfterCloneTest()
         {
@@ -167,6 +183,8 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("CloneTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         //[Ignore("Investigate stability issue")]
         public void CheckHgRepoOpenedAfterCloneTest()
         {
