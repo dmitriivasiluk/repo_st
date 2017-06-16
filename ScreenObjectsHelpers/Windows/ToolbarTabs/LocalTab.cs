@@ -1,6 +1,4 @@
 ﻿using System;
-using TestStack.White;
-using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.TabItems;
 using TestStack.White.UIItems.WindowItems;
@@ -26,6 +24,12 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
                     Console.WriteLine("**************************************");
                     Console.WriteLine(e.Message);
                     throw new NullReferenceException("ToolbarTab:" + e.Message);                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("**************************************");
+                    Console.WriteLine(e.Message);
+                    throw new Exception(e.Message);
                 }
             }
         }       

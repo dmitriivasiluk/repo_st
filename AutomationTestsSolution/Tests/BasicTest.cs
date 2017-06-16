@@ -96,7 +96,7 @@ namespace AutomationTestsSolution.Tests
             sourceTreeExePath = exeAndVersion.Item1;
 
             var attempt = 0;
-                        
+
             do
             {
                 KillProcess();
@@ -104,7 +104,7 @@ namespace AutomationTestsSolution.Tests
                 attempt++;
                 //Thread.Sleep(5000);                
             }
-            while (!IsSourceTreeProcessRunning("SourceTree") && attempt < 5);            
+            while (!IsSourceTreeProcessRunning("SourceTree") && attempt < 5);
         }
 
         private void KillProcess()
@@ -113,14 +113,21 @@ namespace AutomationTestsSolution.Tests
             {
                 try
                 {
+                    process.CloseMainWindow();
                     process.Kill();
+                    process.WaitForExit();
                 }
                 catch (Win32Exception e)
                 {
                     Console.WriteLine(e.Message);
                     throw new Win32Exception(e.Message);
                 }
-            }            
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+            }
         }
 
         private void BackupData(string dataFolder)
@@ -272,7 +279,8 @@ namespace AutomationTestsSolution.Tests
             if (!sourceTreeProcess.HasExited)
             {
                 sourceTreeProcess.CloseMainWindow();
-                sourceTreeProcess.Close();
+                sourceTreeProcess.Kill();
+                sourceTreeProcess.WaitForExit();
             }
 
             Thread.Sleep(2000);

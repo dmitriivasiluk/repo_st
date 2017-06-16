@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Automation;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
-using TestStack.White.UIItems;
 using System.Linq;
 
 namespace ScreenObjectsHelpers.Helpers
