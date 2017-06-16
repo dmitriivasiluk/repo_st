@@ -94,6 +94,9 @@ namespace AutomationTestsSolution.Tests
         {
             sourceTreeExePath = exeAndVersion.Item1;
             RunSourceTree(sourceTreeExePath);
+            
+            if (!IsSourceTreeProcessRunning("SourceTree"))
+                RunSourceTree(sourceTreeExePath);
         }
 
         private void BackupData(string dataFolder)
@@ -184,6 +187,19 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.StartInfo = psi;
 
             sourceTreeProcess.Start();
+            Thread.Sleep(5000);
+        }
+
+        public bool IsSourceTreeProcessRunning(string processName)
+        {
+            foreach (Process process in Process.GetProcesses())
+            {
+                if (process.ProcessName.Contains(processName))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected static Tuple<string, string> FindSourceTree()
