@@ -5,6 +5,7 @@ using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using System.Threading;
+using System.Windows.Automation;
 
 namespace ScreenObjectsHelpers.Windows.Repository
 {
@@ -28,7 +29,28 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public Button StashButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarStash"));
         public Button DiscardButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarDiscard"));
         public Button TagButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarTag"));
-        public Button GitFlowButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarFlow"));
+        public Button GitFlowButton
+        {
+            get
+            {
+                try
+                {
+                    return MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarFlow"));
+                }
+                catch (NullReferenceException e)
+                {
+                    Console.WriteLine("**************************************");
+                    Console.WriteLine(e.Message);
+                    throw new NullReferenceException("GitFlowButton:" + e.Message);
+                }
+                catch (ElementNotAvailableException e)
+                {
+                    Console.WriteLine("**************************************");
+                    Console.WriteLine(e.Message);
+                    throw new ElementNotAvailableException("GitFlowButton:" + e.Message);
+                }
+            }
+        }
         public Button TerminalButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarTerminal"));
         public Button ExplorerButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarExplorer"));
         public Button SettingsButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("ToolbarSettings"));
@@ -38,8 +60,13 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public GitFlowInitialiseWindow ClickGitFlowButton()
         {
             Thread.Sleep(3000);
-            ClickButton(GitFlowButton);
-            return new GitFlowInitialiseWindow(MainWindow);
+            if (GitFlowButton != null)
+            {
+                ClickButton(GitFlowButton);
+                return new GitFlowInitialiseWindow(MainWindow);
+            }
+
+            throw new NullReferenceException("No GitFlow button exist");
         }
 
         public StashShelveWindow ClickStashButton()
