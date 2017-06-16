@@ -93,13 +93,25 @@ namespace AutomationTestsSolution.Tests
         protected void RunSourceTree()
         {
             sourceTreeExePath = exeAndVersion.Item1;
+
+            var attempt = 0;
+                        
             do
             {
+                KillProcess();
                 RunSourceTree(sourceTreeExePath);
+                attempt++;
+                Thread.Sleep(5000);                
             }
-            while (!IsSourceTreeProcessRunning("SourceTree"));
+            while (!IsSourceTreeProcessRunning("SourceTree") && attempt < 5);            
+        }
 
-            
+        private void KillProcess()
+        {
+            foreach (var process in Process.GetProcessesByName("SourceTree"))
+            {
+                process.Kill();
+            }
         }
 
         private void BackupData(string dataFolder)
@@ -123,9 +135,10 @@ namespace AutomationTestsSolution.Tests
 
         private void BackupFile(string fileName)
         {
-
             Utils.RemoveFile(fileName + BackupSuffix);
+
             Thread.Sleep(1000);
+
             if (File.Exists(fileName))
             {
                 File.Move(fileName, fileName + BackupSuffix);
@@ -197,7 +210,6 @@ namespace AutomationTestsSolution.Tests
         {
             foreach (Process process in Process.GetProcesses())
             {
-
                 if (process.ProcessName.Contains(processName) && (process.MainWindowTitle.Equals("SourceTree") || process.MainWindowTitle.Equals("Welcome")))
                 {
                     return true;
