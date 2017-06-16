@@ -661,20 +661,27 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.FillBasicAuthenticationBitbucket(bitbucketbLogin, bitbucketPassword);
 
+            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             installWindow.ClickContinueButton();
 
             installWindow.WaitCompleteInstallToolsProgressBar();
 
+            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             installWindow.ClickContinueButton();
 
+            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             installWindow.SelectRepositoryByName(nameOfRepo);
+
+            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             Directory.CreateDirectory(pathToNewFolder);
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();
 
+            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             LocalTab mainWindow = installWindow.ClickContinueAtTheLatestStepButton();
-            
+
+            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             string actualTitle = mainWindow.GetTitle();
 
             Assert.AreEqual(actualTitle, "SourceTree");
