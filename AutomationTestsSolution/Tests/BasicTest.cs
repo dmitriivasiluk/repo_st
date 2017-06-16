@@ -6,6 +6,7 @@ using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using System.Threading;
+using System.ComponentModel;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -101,7 +102,7 @@ namespace AutomationTestsSolution.Tests
                 KillProcess();
                 RunSourceTree(sourceTreeExePath);
                 attempt++;
-                Thread.Sleep(5000);                
+                //Thread.Sleep(5000);                
             }
             while (!IsSourceTreeProcessRunning("SourceTree") && attempt < 5);            
         }
@@ -110,8 +111,16 @@ namespace AutomationTestsSolution.Tests
         {
             foreach (var process in Process.GetProcessesByName("SourceTree"))
             {
-                process.Kill();
-            }
+                try
+                {
+                    process.Kill();
+                }
+                catch (Win32Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+            }            
         }
 
         private void BackupData(string dataFolder)
