@@ -6,13 +6,14 @@ using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using System.Threading;
+using System.Windows;
 
 namespace AutomationTestsSolution.Tests
 {
     class BasicTest
     {
         private string BackupSuffix = "st_ui_test_bak";
-        protected Window MainWindow;
+        protected TestStack.White.UIItems.WindowItems.Window MainWindow;
         protected string sourceTreeExePath;
         protected string sourceTreeVersion;
         protected string sourceTreeUserConfigPath;
@@ -93,10 +94,15 @@ namespace AutomationTestsSolution.Tests
         protected void RunSourceTree()
         {
             sourceTreeExePath = exeAndVersion.Item1;
-            RunSourceTree(sourceTreeExePath);
-            
-            if (!IsSourceTreeProcessRunning("SourceTree"))
+            do
+            {
+                //foreach (var process in Process.GetProcessesByName("SourceTree"))
+                //    {
+                //        process.Kill();
+                //    }
                 RunSourceTree(sourceTreeExePath);
+            }
+            while (!IsSourceTreeProcessRunning("SourceTree"));
         }
 
         private void BackupData(string dataFolder)
@@ -187,14 +193,14 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.StartInfo = psi;
 
             sourceTreeProcess.Start();
-            Thread.Sleep(5000);
+            sourceTreeProcess.WaitForInputIdle();
         }
 
         public bool IsSourceTreeProcessRunning(string processName)
         {
             foreach (Process process in Process.GetProcesses())
             {
-                if (process.ProcessName.Contains(processName))
+                if (process.ProcessName.Contains(processName) && (process.MainWindowTitle.Equals("SourceTree") || process.MainWindowTitle.Equals("Welcome")))
                 {
                     return true;
                 }
