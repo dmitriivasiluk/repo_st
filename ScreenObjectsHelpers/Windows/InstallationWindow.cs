@@ -198,7 +198,7 @@ namespace ScreenObjectsHelpers.Windows
         public LocalTab SkipSetup()
         {
             ClickButton(SkipSetupButton);
-            Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found", 10);
+            Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found");
             if (mercurialWindow != null)
             {
                 Button IDontWantUseMercurial = mercurialWindow.Get<Button>(SearchCriteria.ByAutomationId("CommandLink_2003"));
