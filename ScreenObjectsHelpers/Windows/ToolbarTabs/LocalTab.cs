@@ -21,10 +21,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
                 {
                     return MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("LocalRepoListTab"));
                 }
-                catch (AutomationException e)
-                {                    
-                    return null;
-                }
                 catch (NullReferenceException e)
                 {
                     Console.WriteLine("**************************************");
