@@ -20,9 +20,9 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Thread.Sleep(1000); // wait is needed because of the issue 1090, reported earlier
+            
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
@@ -41,9 +41,9 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Thread.Sleep(1000);
+            
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
@@ -62,11 +62,10 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
-            Thread.Sleep(1000); // wait is needed for combobox selecting 
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
+            addAccount.SetComboboxValue(addAccount.HostingSeviceComboBox, EditHostingAccountWindow.HostingService.GitHub);            
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Thread.Sleep(1000);
+            
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
@@ -85,11 +84,10 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
-            Thread.Sleep(1000);
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
+            addAccount.SetComboboxValue(addAccount.HostingSeviceComboBox, EditHostingAccountWindow.HostingService.GitHub);            
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
             addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Thread.Sleep(1000);
+            
             var auth = addAccount.ClickRefreshPasswordButton();
             auth.PasswordField.SetValue(password);
             addAccount = auth.ClickLoginButton();
@@ -109,9 +107,8 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.OAuth);
-            addAccount.ClickRefreshTokenButton();
-            Thread.Sleep(3000); // wait needed for OAuth in browser
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.OAuth);
+            addAccount.ClickRefreshTokenButton();            
 
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
         }
@@ -127,12 +124,10 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.HostingSeviceComboBox.Select(EditHostingAccountWindow.HostingService.GitHub);
-            Thread.Sleep(1000);
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.OAuth);
+            addAccount.SetComboboxValue(addAccount.HostingSeviceComboBox, EditHostingAccountWindow.HostingService.GitHub);            
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.OAuth);
             addAccount.ClickRefreshTokenButton();
-            Thread.Sleep(3000);
-
+            
             Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
         }
 
@@ -159,9 +154,8 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
-            addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);
-            Thread.Sleep(1000);
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
+            addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);            
 
             Assert.IsTrue(addAccount.RefreshPasswordButton.Enabled);
         }
@@ -176,7 +170,7 @@ namespace AutomationTestsSolution.Tests
             RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
 
             var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.AuthenticationComboBox.Select(EditHostingAccountWindow.Authentication.Basic);
+            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
 
             Assert.IsFalse(addAccount.RefreshPasswordButton.Enabled);
         }

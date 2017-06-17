@@ -152,12 +152,14 @@ namespace AutomationTestsSolution.Tests
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
 
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
             cloneTab.ClickCloneButton();
 
             bool isDotHgExistByPath = Utils.IsFolderMercurial(pathToClonedMercurialRepo);
-
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
             Assert.IsTrue(isDotHgExistByPath);
         }
 

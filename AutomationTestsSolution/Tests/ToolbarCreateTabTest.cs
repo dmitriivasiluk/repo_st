@@ -109,7 +109,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             var pathToRepo = Path.Combine(pathToAllRepos, gitRepoName);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             RepositoryTab repoTab = createTab.ClickCreateButton();
             Thread.Sleep(2000);
             
@@ -131,7 +131,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             var pathToRepo = Path.Combine(pathToAllRepos, mercurialRepoName);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             RepositoryTab repoTab = createTab.ClickCreateButton();
             Thread.Sleep(2000);
             
@@ -154,7 +154,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateRepoDirecory(pathToRepo);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             
@@ -177,7 +177,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateRepoDirecory(pathToRepo);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
             
@@ -199,7 +199,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateRepoDirecory(pathToRepo);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             
@@ -222,7 +222,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateRepoDirecory(pathToRepo);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
             
@@ -245,7 +245,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             
@@ -269,7 +269,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
             
@@ -292,7 +292,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             
@@ -316,7 +316,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             CreateFile(Path.Combine(pathToRepo, ConstantsList.fileForNotEmptyFolder));
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickNoButton();
             
@@ -340,7 +340,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             LibGit2Sharp.Repository.Init(pathToRepo);
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.GitHub);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             RepositoryTab repoTab = warning.ClickYesButton();
             
@@ -368,7 +368,7 @@ namespace AutomationTestsSolution.Tests.CreateLocal
             repo.Init();
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
-            createTab.RepoTypeComboBox.Select(CreateTab.CVS.Mercurial);
+            createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
             warning.ClickYesButton();
             WarningExistingRepoMercurial warningHg = new WarningExistingRepoMercurial(MainWindow);
