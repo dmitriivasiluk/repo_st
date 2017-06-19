@@ -71,7 +71,7 @@ namespace ScreenObjectsHelpers.Windows
             if (RefreshTokenButton.Enabled)
             {
                 ClickButton(RefreshTokenButton);
-                Thread.Sleep(4000);
+                Thread.Sleep(5000);
             }
         }
 

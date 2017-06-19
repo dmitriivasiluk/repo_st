@@ -5,8 +5,7 @@ using TestStack.White.UIItems.TabItems;
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
     public class RemoteTab : NewTabWindow
-    {
-        private readonly UIItemContainer remoteTab;
+    {        
         public RemoteTab(TestStack.White.UIItems.WindowItems.Window mainWindow) : base(mainWindow)
         {
         }

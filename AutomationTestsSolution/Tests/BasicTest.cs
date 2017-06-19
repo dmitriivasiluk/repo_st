@@ -6,11 +6,13 @@ using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using System.Threading;
+using System.ComponentModel;
 
 namespace AutomationTestsSolution.Tests
 {
     class BasicTest
-    {
+    {        
+        Process STprocess;
         private string BackupSuffix = "st_ui_test_bak";
         protected Window MainWindow;
         protected string sourceTreeExePath;
@@ -93,7 +95,39 @@ namespace AutomationTestsSolution.Tests
         protected void RunSourceTree()
         {
             sourceTreeExePath = exeAndVersion.Item1;
-            RunSourceTree(sourceTreeExePath);
+
+            var attempt = 0;
+
+            do
+            {
+                KillProcess();
+                RunSourceTree(sourceTreeExePath);
+                attempt++;
+            }
+            while (!IsSourceTreeWindowOpeded() && attempt < 5);
+        }
+
+        private void KillProcess()
+        {
+            foreach (var process in Process.GetProcessesByName("SourceTree"))
+            {
+                try
+                {
+                    process.CloseMainWindow();
+                    process.Kill();
+                    process.WaitForExit();
+                }
+                catch (Win32Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+            }
         }
 
         private void BackupData(string dataFolder)
@@ -117,9 +151,10 @@ namespace AutomationTestsSolution.Tests
 
         private void BackupFile(string fileName)
         {
-
             Utils.RemoveFile(fileName + BackupSuffix);
+
             Thread.Sleep(1000);
+
             if (File.Exists(fileName))
             {
                 File.Move(fileName, fileName + BackupSuffix);
@@ -184,6 +219,31 @@ namespace AutomationTestsSolution.Tests
             sourceTreeProcess.StartInfo = psi;
 
             sourceTreeProcess.Start();
+            sourceTreeProcess.WaitForInputIdle();
+                        
+            STprocess = Process.GetProcessById(sourceTreeProcess.Id);
+
+            var attempt = 0;
+
+            do
+            {
+                sourceTreeProcess.Refresh();
+                Thread.Sleep(1000);
+                attempt++;
+            }
+            while (string.IsNullOrEmpty(sourceTreeProcess.MainWindowTitle) && attempt < 15);
+
+            Assert.AreEqual(STprocess.ProcessName, "SourceTree");
+        }
+
+        public bool IsSourceTreeWindowOpeded()
+        {               
+            if (STprocess.MainWindowTitle.Equals("SourceTree") || STprocess.MainWindowTitle.Equals("Welcome"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
         protected static Tuple<string, string> FindSourceTree()
@@ -231,7 +291,8 @@ namespace AutomationTestsSolution.Tests
             if (!sourceTreeProcess.HasExited)
             {
                 sourceTreeProcess.CloseMainWindow();
-                sourceTreeProcess.Close();
+                sourceTreeProcess.Kill();
+                sourceTreeProcess.WaitForExit();
             }
 
             Thread.Sleep(2000);

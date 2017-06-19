@@ -4,6 +4,8 @@ os: Unstable
 version: 1.0.{build}
 init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+cache:
+  - packages
 install:
 - ps:  >-
 

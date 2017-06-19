@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Automation;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
-using TestStack.White.UIItems;
 using System.Linq;
 
 namespace ScreenObjectsHelpers.Helpers
@@ -13,28 +10,27 @@ namespace ScreenObjectsHelpers.Helpers
     public class Utils
     {
 
-        public static Window FindNewWindow(string nameOfWindow, int testCount = 15)
+        public static Window FindNewWindow(string nameOfWindow)
         {
-            Window window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-            int count = 0;
-            while (window == null && count < testCount)
+            Window window = null;
+
+            var attempt = 0;
+
+            do
             {
-                try
-                {
-                    window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-                }
-                catch (ElementNotAvailableException e)
-                {
-                    Console.WriteLine("FindNewWindow: ElementNotAvailableException", e.Message);
-                    window = null;
-                }
-                catch (NullReferenceException e)
-                {
-                    throw new NullReferenceException("FindNewWindow: NullReferenceException" + e.Message);                    
-                }
-                Thread.Sleep(1000);
-                count++;
-            }
+                window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
+
+                Thread.Sleep(2000);
+                attempt++;
+            } while (window == null && attempt < 15);
+
+            if (window == null)
+            {
+                Console.WriteLine("*** *** *** *** *** *** ***");
+                Console.WriteLine("Could not find the window");
+                throw new NullReferenceException("Could not find the window");
+            }                
+
             return window;
         }
 

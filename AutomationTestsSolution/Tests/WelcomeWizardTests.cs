@@ -5,6 +5,7 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -679,7 +680,7 @@ namespace AutomationTestsSolution.Tests
             installWindow.ClickContinueButton();
 
             ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
-            LocalTab mainWindow = installWindow.ClickContinueAtTheLatestStepButton();
+            RepositoryTab mainWindow = installWindow.ClickContinueAtTheLatestStepButton();
 
             ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
             string actualTitle = mainWindow.GetTitle();

@@ -65,12 +65,13 @@ namespace ScreenObjectsHelpers.Windows
         public void SetComboboxValue(ComboBox combobox, string comboboxValue)
         {
             combobox.Select(comboboxValue);
+            Thread.Sleep(1000);
         }
 
         public void SetTextboxContent(TextBox textbox, string content)
         {
             textbox.Focus();
-            Thread.Sleep(50);
+            Thread.Sleep(1000); 
             textbox.SetValue(content);
         }
 
@@ -114,6 +115,11 @@ namespace ScreenObjectsHelpers.Windows
         public virtual bool IsOkButtonEnabled()
         {
             return OKButton.Enabled;
+        }
+
+        public string GetTitle()
+        {
+            return MainWindow.Title;
         }
 
         public RepositoryTab ClickButtonToGetRepository(Button button)

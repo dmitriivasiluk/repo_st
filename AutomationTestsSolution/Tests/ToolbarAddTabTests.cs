@@ -99,7 +99,6 @@ namespace AutomationTestsSolution.Tests
         [Category("AddTab")]
         [Category("General")]
         [Category("StartWithNewTabOpened")]
-        //[Ignore("Investigate stability issue")]
         public void AddEmptyPathValidationMessageTest()
         {
             ScreenshotsTaker.TakeScreenShot(nameof(AddEmptyPathValidationMessageTest));
