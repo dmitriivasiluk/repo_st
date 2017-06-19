@@ -102,7 +102,6 @@ namespace AutomationTestsSolution.Tests
                 KillProcess();
                 RunSourceTree(sourceTreeExePath);
                 attempt++;
-                //Thread.Sleep(5000);                
             }
             while (!IsSourceTreeProcessRunning("SourceTree") && attempt < 5);
         }

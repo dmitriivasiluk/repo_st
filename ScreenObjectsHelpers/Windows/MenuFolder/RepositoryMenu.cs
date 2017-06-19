@@ -1,10 +1,8 @@
-﻿using ScreenObjectsHelpers.Windows.Repository;
-using System;
+﻿using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.MenuItems;
 using TestStack.White.UIItems.WindowItems;
-using System.ComponentModel;
 
 namespace ScreenObjectsHelpers.Windows.MenuFolder
 {

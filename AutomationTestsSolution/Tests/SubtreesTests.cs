@@ -6,7 +6,6 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 using System;
 using System.IO;
 using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
-using ScreenObjectsHelpers.Windows;
 using System.Threading;
 
 namespace AutomationTestsSolution.Tests
