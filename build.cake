@@ -57,8 +57,11 @@ Task("Build")
     if(IsRunningOnWindows())
     {
       // Use MSBuild
-      MSBuild("./SourceTreeAutomation.sln", settings =>
-        settings.SetConfiguration(configuration));
+      MSBuild("./SourceTreeAutomation.sln", new MSBuildSettings {
+        Verbosity = Verbosity.Minimal,
+        ToolVersion = MSBuildToolVersion.NET452,
+        Configuration = configuration,
+        });
     }
     else
     {

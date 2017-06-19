@@ -6,6 +6,7 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 using System;
 using System.IO;
 using System.Threading;
+using AutomationTestsSolution.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -82,8 +83,10 @@ namespace AutomationTestsSolution.Tests
             CreateTestFolder();
             Repository.Init(pathToClonedGitRepo);
 
+            
             var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
-            File.WriteAllText(openTabsPath, resourceName);
+            var openTabsXml = new OpenTabsXml(openTabsPath);
+            openTabsXml.SetOpenTab(pathToClonedGitRepo);
         }
     }
 }
