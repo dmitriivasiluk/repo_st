@@ -102,7 +102,7 @@ namespace AutomationTestsSolution.Tests
             {
                 KillProcess();
                 RunSourceTree(sourceTreeExePath);
-                attempt++;
+                ++attempt;
             }
             while (!IsSourceTreeWindowOpeded() && attempt < 5);
         }

@@ -87,6 +87,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\ConstantsList.cs" />
+    <Compile Include="Helpers\AttemptsCounterLogger.cs" />
     <Compile Include="Helpers\MercurialWrapper.cs" />
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Helpers\Utils.cs" />
