@@ -11,7 +11,8 @@ using System.ComponentModel;
 namespace AutomationTestsSolution.Tests
 {
     class BasicTest
-    {
+    {        
+        Process STprocess;
         private string BackupSuffix = "st_ui_test_bak";
         protected Window MainWindow;
         protected string sourceTreeExePath;
@@ -103,7 +104,7 @@ namespace AutomationTestsSolution.Tests
                 RunSourceTree(sourceTreeExePath);
                 attempt++;
             }
-            while (!IsSourceTreeProcessRunning("SourceTree") && attempt < 5);
+            while (!IsSourceTreeWindowOpeded() && attempt < 5);
         }
 
         private void KillProcess()
@@ -219,27 +220,29 @@ namespace AutomationTestsSolution.Tests
 
             sourceTreeProcess.Start();
             sourceTreeProcess.WaitForInputIdle();
+                        
+            STprocess = Process.GetProcessById(sourceTreeProcess.Id);
 
             var attempt = 0;
 
             do
-            {                
+            {
                 sourceTreeProcess.Refresh();
                 Thread.Sleep(1000);
                 attempt++;
             }
             while (string.IsNullOrEmpty(sourceTreeProcess.MainWindowTitle) && attempt < 15);
+
+            Assert.AreEqual(STprocess.ProcessName, "SourceTree");
         }
 
-        public bool IsSourceTreeProcessRunning(string processName)
-        {
-            foreach (Process process in Process.GetProcesses())
+        public bool IsSourceTreeWindowOpeded()
+        {               
+            if (STprocess.MainWindowTitle.Equals("SourceTree") || STprocess.MainWindowTitle.Equals("Welcome"))
             {
-                if (process.ProcessName.Contains(processName) && (process.MainWindowTitle.Equals("SourceTree") || process.MainWindowTitle.Equals("Welcome")))
-                {
-                    return true;
-                }
+                return true;
             }
+
             return false;
         }
 

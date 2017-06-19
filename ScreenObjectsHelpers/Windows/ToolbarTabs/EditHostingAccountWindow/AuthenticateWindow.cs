@@ -16,8 +16,7 @@ namespace ScreenObjectsHelpers.Windows
         }
 
         #region UIItems
-        public UIItem PasswordField => authenticationWindow.Get<UIItem>(SearchCriteria.ByAutomationId("Password"));
-        public Button CancelButton => authenticationWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+        public UIItem PasswordField => authenticationWindow.Get<UIItem>(SearchCriteria.ByAutomationId("Password"));        
         public Button LoginButton => authenticationWindow.Get<Button>(SearchCriteria.ByText("Login"));
         public CheckBox RememberPasswordCheckBox => authenticationWindow.Get<CheckBox>(SearchCriteria.ByText("Remember password"));
         #endregion

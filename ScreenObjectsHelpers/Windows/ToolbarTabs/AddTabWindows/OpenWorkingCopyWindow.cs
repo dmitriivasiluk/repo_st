@@ -14,9 +14,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs.AddTabWindows
 
         public UIItem FolderTextBox => MainWindow.Get<UIItem>(SearchCriteria.ByText("Folder:"));
 
-        public Button SelectFolderButton => MainWindow.Get<Button>(SearchCriteria.ByText("Select Folder"));
-
-        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+        public Button SelectFolderButton => MainWindow.Get<Button>(SearchCriteria.ByText("Select Folder"));       
 
         #endregion
 
