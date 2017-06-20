@@ -1,4 +1,5 @@
-﻿using ScreenObjectsHelpers.Helpers;
+﻿using System;
+using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
@@ -51,9 +52,10 @@ namespace ScreenObjectsHelpers.Windows
         {
             return HeaderOfAboutWindow.Name;
         }
-        public string GetAppVersion()
+        public bool HasAppVersion(Version version)
         {
-            return AppVersion.Name;
+            var controlElement = AboutWindowContainer.GetElement(SearchCriteria.ByText($"Version {version}").AndControlType(ControlType.Text));
+            return controlElement != null;
         }
         public string GetCopyrightCaption()
         {

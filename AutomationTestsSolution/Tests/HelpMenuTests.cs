@@ -20,10 +20,9 @@ namespace AutomationTestsSolution.Tests
 
             string aboutWindowHeader = aboutWindow.GetHeader();
             string copyrightCaption = aboutWindow.GetCopyrightCaption();
-            string appVersion = aboutWindow.GetAppVersion();
             Assert.AreEqual(aboutWindowHeader, ConstantsList.aboutWindowHeader);
             Assert.AreEqual(copyrightCaption, ConstantsList.copyrightCaption);
-            Assert.That(appVersion, Is.EqualTo("Version " + SourceTreeVersion));
+            Assert.That(aboutWindow.HasAppVersion(SourceTreeVersion), Is.True);
         }
 
         protected override void PerTestPreConfigureSourceTree()
