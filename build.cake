@@ -86,6 +86,15 @@ Task("Run-Unit-Tests-Core")
         new NUnit3Settings {
             NoResults = true,
             Test = "AutomationTestsSolution.Tests.HelpMenuTests"
+            + ",AutomationTestsSolution.Tests.CustomActionsTests"
+            + ",AutomationTestsSolution.Tests.SubmodulesTests"
+            + ",AutomationTestsSolution.Tests.GitFlowInitialiseTests"
+            + ",AutomationTestsSolution.Tests.SubtreesTests"
+            + ",AutomationTestsSolution.Tests.ToolbarAddTabTests"
+            + ",ToolbarCloneTabTests"
+            + ",ToolbarCreateTabTestLocal"
+            + ",ToolbarRemoteTabTests"
+            + ",WelcomeWizardTests"
         });
 });
 
