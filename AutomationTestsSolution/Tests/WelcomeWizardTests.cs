@@ -52,7 +52,7 @@ namespace AutomationTestsSolution.Tests
         [Category("WelcomeWizard")]
         public void ContinueButtonIsNotActiveTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ContinueButtonIsNotActiveTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ContinueButtonIsNotActiveTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.UncheckLicenceAgreementCheckbox();
 
@@ -65,15 +65,15 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void ValidRegistrationTest(string loginEmailToAtlassian, string passwordToAtlassian)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidRegistrationTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ValidRegistrationTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidRegistrationTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ValidRegistrationTest));
 
             installWindow = authentication.SignIn(loginEmailToAtlassian, passwordToAtlassian);
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidRegistrationTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ValidRegistrationTest));
 
             bool isContinueButtonActive = installWindow.IsContinueButtonActive();
             string ActualtextRegistrationComplete = installWindow.CompleteText();
@@ -91,15 +91,15 @@ namespace AutomationTestsSolution.Tests
             string gitHubLogin, 
             string gitHubPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubAccountTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubAccountTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubAccountTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubAccountTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubAccountTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubAccountTest));
             installWindow.ClickContinueButton();
             installWindow.FillBasicAuthenticationGithub(gitHubLogin, gitHubPassword);
             installWindow.ClickContinueButton();
@@ -117,15 +117,15 @@ namespace AutomationTestsSolution.Tests
             string bitBucketLogin,
             string bitbucketPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketAccountTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketAccountTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketAccountTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketAccountTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketAccountTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketAccountTest));
 
             installWindow.ClickContinueButton();
 
@@ -173,15 +173,15 @@ namespace AutomationTestsSolution.Tests
             string gitHubLogin,
             string gitHubPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubIncorrectCredentialsNegativeTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubIncorrectCredentialsNegativeTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubIncorrectCredentialsNegativeTest));
 
             installWindow.ClickContinueButton();
 
@@ -204,15 +204,15 @@ namespace AutomationTestsSolution.Tests
             string bitBucketLogin,
             string bitBucketPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketIncorrectCredentialsNegativeTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketIncorrectCredentialsNegativeTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketIncorrectCredentialsNegativeTest));
 
             installWindow.ClickContinueButton();
 
@@ -236,7 +236,7 @@ namespace AutomationTestsSolution.Tests
             string bitBucketLogin,
             string bitBucketPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketServerIncorrectCredentialsNegativeTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketServerIncorrectCredentialsNegativeTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
@@ -270,15 +270,15 @@ namespace AutomationTestsSolution.Tests
             string atlassianLoginEmail,
             string atlassianPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubViaOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubViaOAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubViaOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubViaOAuthTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectGitHubViaOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectGitHubViaOAuthTest));
 
             installWindow.ClickContinueButton();
 
@@ -303,15 +303,15 @@ namespace AutomationTestsSolution.Tests
             string atlassianLoginEmail,
             string atlassianPassword)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketViaOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketViaOAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketViaOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketViaOAuthTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(ConnectBitbucketViaOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ConnectBitbucketViaOAuthTest));
 
             installWindow.ClickContinueButton();
 
@@ -333,15 +333,15 @@ namespace AutomationTestsSolution.Tests
             string atlassianPassword,
             string expectedTitle)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(SkipSetupButtonClosesConfigurationTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SkipSetupButtonClosesConfigurationTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(SkipSetupButtonClosesConfigurationTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SkipSetupButtonClosesConfigurationTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(SkipSetupButtonClosesConfigurationTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SkipSetupButtonClosesConfigurationTest));
 
             installWindow.ClickContinueButton();
 
@@ -364,15 +364,15 @@ namespace AutomationTestsSolution.Tests
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicGitHubTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneGitHubRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneGitHubRepositoryUsingBasicAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneGitHubRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneGitHubRepositoryUsingBasicAuthTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneGitHubRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneGitHubRepositoryUsingBasicAuthTest));
 
             installWindow.ClickContinueButton();
 
@@ -408,15 +408,15 @@ namespace AutomationTestsSolution.Tests
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
 
             installWindow.ClickContinueButton();
 
@@ -456,15 +456,15 @@ namespace AutomationTestsSolution.Tests
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneOAuthGitHubTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneGitHubRepositoryUsingOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneGitHubRepositoryUsingOAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneGitHubRepositoryUsingOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneGitHubRepositoryUsingOAuthTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneGitHubRepositoryUsingOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneGitHubRepositoryUsingOAuthTest));
 
             installWindow.ClickContinueButton();
 
@@ -503,15 +503,15 @@ namespace AutomationTestsSolution.Tests
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneOAuthBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketRepositoryUsingOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketRepositoryUsingOAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketRepositoryUsingOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketRepositoryUsingOAuthTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketRepositoryUsingOAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketRepositoryUsingOAuthTest));
 
             installWindow.ClickContinueButton();
 
@@ -549,7 +549,7 @@ namespace AutomationTestsSolution.Tests
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketServerTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(CloneBitBucketServerRepositoryUsingBasicAuthTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CloneBitBucketServerRepositoryUsingBasicAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
@@ -590,15 +590,15 @@ namespace AutomationTestsSolution.Tests
             string gitHubPassword,
             string searchCondition)
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(SearchInStartingRepositoryStepTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SearchInStartingRepositoryStepTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(SearchInStartingRepositoryStepTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SearchInStartingRepositoryStepTest));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(SearchInStartingRepositoryStepTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SearchInStartingRepositoryStepTest));
 
             installWindow.ClickContinueButton();
 
@@ -633,41 +633,41 @@ namespace AutomationTestsSolution.Tests
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, openSourceTreeTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
             installWindow.CheckLicenceAgreementCheckbox();
             installWindow.ClickContinueButton();
             AuthenticationWindow authentication = installWindow.ClickUseExistingAccount();
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
 
             installWindow = authentication.SignIn(atlassianLoginEmail, atlassianPassword);
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
 
             installWindow.ClickContinueButton();
 
             installWindow.FillBasicAuthenticationBitbucket(bitbucketbLogin, bitbucketPassword);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             installWindow.ClickContinueButton();
 
             installWindow.WaitCompleteInstallToolsProgressBar();
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             installWindow.ClickContinueButton();
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             installWindow.SelectRepositoryByName(nameOfRepo);
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             Directory.CreateDirectory(pathToNewFolder);
             installWindow.BrowseDestinationPath(pathToNewFolder);
 
             installWindow.ClickContinueButton();
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             RepositoryTab mainWindow = installWindow.ClickContinueAtTheLatestStepButton();
 
-            ScreenshotsTaker.TakeScreenShot(nameof(SourceTreeOpensAfterFinishConfiguration));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             string actualTitle = mainWindow.GetTitle();
 
             Assert.AreEqual(actualTitle, "SourceTree");

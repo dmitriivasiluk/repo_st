@@ -16,7 +16,7 @@ namespace AutomationTestsSolution.Tests
         [Category("General")]
         public void AddCustomAction()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AddCustomAction));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(AddCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -39,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         [Category("General")]
         public void EditCustomAction()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(EditCustomAction));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(EditCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -61,7 +61,7 @@ namespace AutomationTestsSolution.Tests
         [Category("General")]
         public void DeleteCustomAction()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(DeleteCustomAction));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(DeleteCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();

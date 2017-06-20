@@ -14,7 +14,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void AboutWindowTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AboutWindowTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(AboutWindowTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AboutWindow aboutWindow = mainWindow.OpenMenu<HelpMenu>().OpenAbout();
 

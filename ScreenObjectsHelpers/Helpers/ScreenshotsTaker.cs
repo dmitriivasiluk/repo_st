@@ -12,8 +12,8 @@ namespace ScreenObjectsHelpers.Helpers
         // to include it to the name of screenshot file
         // e.g. TakeScreenShot(nameof(<name of test>))
         // or a frame name from StackTrace
-        // ScreenshotsTaker.TakeScreenShot(new StackTrace().GetFrame(0).GetMethod().Name);
-        public static void TakeScreenShot(string nameOfTest)
+        // ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, new StackTrace().GetFrame(0).GetMethod().Name);
+        public static void TakeScreenShot(string path, string nameOfTest)
         {
             Thread.Sleep(500);
             var prefix = "Test_";
@@ -22,8 +22,6 @@ namespace ScreenObjectsHelpers.Helpers
             var extension = ".jpg";
 
             var filename = prefix + nameOfTest + timestamp + random + extension;
-
-            string path = Environment.ExpandEnvironmentVariables(@"");
 
             ScreenCapture sc = new ScreenCapture();
             // capture entire screen, and save it to a file

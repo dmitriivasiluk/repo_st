@@ -20,3 +20,7 @@ before_build:
     
 build_script:
 - ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Run-Unit-Tests-Core
+
+artifacts:
+  - path: '**\screenshots\*.jpg'
+

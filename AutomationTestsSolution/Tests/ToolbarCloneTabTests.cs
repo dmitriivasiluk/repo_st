@@ -40,7 +40,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void ValidateGitRepoLinkTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateGitRepoLinkTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ValidateGitRepoLinkTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
             
@@ -55,7 +55,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void ValidateMercurialRepoLinkTest() // Mercurial should be installed
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateMercurialRepoLinkTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ValidateMercurialRepoLinkTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -70,7 +70,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void ValidateInvalidRepoLinkTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateInvalidRepoLinkTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(ValidateInvalidRepoLinkTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -85,7 +85,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckNoPathSuppliedMessageDisplayed()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckNoPathSuppliedMessageDisplayed));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckNoPathSuppliedMessageDisplayed));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -100,7 +100,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckCloneButtonEnabledTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneButtonEnabledTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckCloneButtonEnabledTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -116,7 +116,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckCloneGitRepoTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneGitRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckCloneGitRepoTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -136,18 +136,18 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckCloneMercurialRepoTest()  // Mercurial should be installed
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckCloneMercurialRepoTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);
             cloneTab.DestinationPathTextBox.SetValue(PathToClonedHgRepo);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckCloneMercurialRepoTest));
             cloneTab.ClickCloneButton();
 
             bool isDotHgExistByPath = Utils.IsFolderMercurial(PathToClonedHgRepo);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckCloneMercurialRepoTest));
             Assert.IsTrue(isDotHgExistByPath);
         }
 
@@ -158,7 +158,7 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void CheckGitRepoOpenedAfterCloneTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckGitRepoOpenedAfterCloneTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckGitRepoOpenedAfterCloneTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -178,7 +178,7 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void CheckHgRepoOpenedAfterCloneTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckHgRepoOpenedAfterCloneTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckHgRepoOpenedAfterCloneTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 

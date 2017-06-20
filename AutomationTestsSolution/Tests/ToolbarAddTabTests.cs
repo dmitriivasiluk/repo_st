@@ -58,7 +58,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void AddHgFolderValidationMessageTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AddHgFolderValidationMessageTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(AddHgFolderValidationMessageTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
             addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
@@ -72,7 +72,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void AddNotRepoFolderValidationMessageTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AddNotRepoFolderValidationMessageTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(AddNotRepoFolderValidationMessageTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -89,7 +89,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void AddEmptyPathValidationMessageTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AddEmptyPathValidationMessageTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(AddEmptyPathValidationMessageTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -106,7 +106,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckAddButtonEnablesWithValidGitFolderTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckAddButtonEnablesWithValidGitFolderTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckAddButtonEnablesWithValidGitFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -123,7 +123,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckAddButtonEnablesWithValidHgFolderTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckAddButtonEnablesWithValidGitFolderTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckAddButtonEnablesWithValidGitFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -140,7 +140,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckOpenedRepoTitleAfterAddGitFolderTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckOpenedRepoTitleAfterAddGitFolderTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckOpenedRepoTitleAfterAddGitFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -158,7 +158,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckOpenedRepoTitleAfterAddHgFolderTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckOpenedRepoTitleAfterAddHgFolderTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(CheckOpenedRepoTitleAfterAddHgFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
