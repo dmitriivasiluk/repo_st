@@ -59,7 +59,7 @@ Task("Build")
       // Use MSBuild
       MSBuild("./SourceTreeAutomation.sln", new MSBuildSettings {
         Verbosity = Verbosity.Minimal,
-        ToolVersion = MSBuildToolVersion.NET452,
+        ToolVersion = MSBuildToolVersion.VS2015 ,
         Configuration = configuration,
         });
     }
