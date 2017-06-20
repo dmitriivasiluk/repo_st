@@ -6,7 +6,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tests
 {
-    class HelpMenuTests : AbstractUITest
+    class HelpMenuTests : BasicTest
     {
         [Test]
         [Category("HelpMenu")]

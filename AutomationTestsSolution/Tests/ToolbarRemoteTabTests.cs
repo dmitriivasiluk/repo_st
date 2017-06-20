@@ -6,7 +6,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tests
 {
-    class ToolbarRemoteTabTests : AbstractUITest
+    class ToolbarRemoteTabTests : BasicTest
     {
 
         [TestCase("staccount", "123456test")]

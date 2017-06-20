@@ -23,7 +23,6 @@ namespace AutomationTestsSolution.Tests
     class WelcomeWizardTests : AbstractWelcomeWizardTest
     {
         #region Test Variables
-        private string pathToDocumentsFolder = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDocumentsFolder);
         private string openSourceTreeTestFolder = "OpenSourceTree";
         private string cloneOAuthGitHubTestFolder = "CloneOAuthGitHub";
         private string cloneOAuthBitBucketTestFolder = "CloneOAuthBitBucket";
@@ -42,12 +41,12 @@ namespace AutomationTestsSolution.Tests
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, openSourceTreeTestFolder));
-            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneOAuthGitHubTestFolder));
-            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneOAuthBitBucketTestFolder));
-            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketTestFolder));
-            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneBasicGitHubTestFolder));
-            Utils.RemoveDirectory(Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketServerTestFolder));
+            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, openSourceTreeTestFolder));
+            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneOAuthGitHubTestFolder));
+            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneOAuthBitBucketTestFolder));
+            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketTestFolder));
+            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicGitHubTestFolder));
+            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketServerTestFolder));
         }
 
         [TestCase]
@@ -332,7 +331,7 @@ namespace AutomationTestsSolution.Tests
             string gitHubPassword,
             string nameOfRepo)
         {
-            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneBasicGitHubTestFolder);
+            string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicGitHubTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -373,7 +372,7 @@ namespace AutomationTestsSolution.Tests
             string bitbucketPassword,
             string nameOfRepo)
         {
-            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketTestFolder);
+            string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -417,7 +416,7 @@ namespace AutomationTestsSolution.Tests
             string atlassianPassword,
             string nameOfRepo)
         {
-            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneOAuthGitHubTestFolder);
+            string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneOAuthGitHubTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -460,7 +459,7 @@ namespace AutomationTestsSolution.Tests
             string atlassianPassword,
             string nameOfRepo)
         {
-            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneOAuthBitBucketTestFolder);
+            string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneOAuthBitBucketTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -503,7 +502,7 @@ namespace AutomationTestsSolution.Tests
             string bitBucketPassword,
             string nameOfRepo)
         {
-            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, cloneBasicBitBucketServerTestFolder);
+            string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketServerTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -582,7 +581,7 @@ namespace AutomationTestsSolution.Tests
             string nameOfRepo)
         {
             // Pre-condition
-            string pathToNewFolder = Path.Combine(pathToDocumentsFolder, openSourceTreeTestFolder);
+            string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, openSourceTreeTestFolder);
             Utils.RemoveDirectory(pathToNewFolder);
 
             InstallationWindow installWindow = new InstallationWindow(MainWindow);

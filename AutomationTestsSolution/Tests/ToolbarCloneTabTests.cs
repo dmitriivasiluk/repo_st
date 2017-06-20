@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
@@ -6,13 +7,14 @@ using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
-    class ToolbarCloneTabTests : AbstractUITest
+    class ToolbarCloneTabTests : BasicTest
     {
         #region Test Variables
         string gitRepoToClone = ConstantsList.gitRepoToClone;
-        string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
+        public string PathToClonedHgRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testHgRepoBookmarkName); } }
+
         string mercurialRepoToClone = ConstantsList.mercurialRepoToClone;
-        string pathToClonedMercurialRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedMercurialRepo);
         #endregion
 
         [TearDown]
@@ -27,8 +29,8 @@ namespace AutomationTestsSolution.Tests
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
-            Utils.RemoveDirectory(pathToClonedMercurialRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedHgRepo);
         }
 
         [Test]
@@ -100,10 +102,11 @@ namespace AutomationTestsSolution.Tests
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SourcePathTextBox.SetValue(gitRepoToClone);
+            cloneTab.DestinationPathTextBox.SetValue(PathToClonedGitRepo);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);
             cloneTab.ClickCloneButton();
 
-            var isFolderInitialized = GitWrapper.GetRepositoryByPath(pathToClonedGitRepo);            
+            var isFolderInitialized = GitWrapper.GetRepositoryByPath(PathToClonedGitRepo);            
 
             Assert.IsNotNull(isFolderInitialized);
         }
@@ -116,11 +119,11 @@ namespace AutomationTestsSolution.Tests
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SourcePathTextBox.SetValue(mercurialRepoToClone);
-
+            cloneTab.DestinationPathTextBox.SetValue(PathToClonedHgRepo);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
             cloneTab.ClickCloneButton();
 
-            bool isDotHgExistByPath = Utils.IsFolderMercurial(pathToClonedMercurialRepo);
+            bool isDotHgExistByPath = Utils.IsFolderMercurial(PathToClonedHgRepo);
 
             Assert.IsTrue(isDotHgExistByPath);
         }

@@ -94,6 +94,7 @@
     <Compile Include="Helpers\ExeConfig.cs" />
     <Compile Include="Helpers\OpenTabsXml.cs" />
     <Compile Include="Helpers\ProcessHelper.cs" />
+    <Compile Include="Helpers\SevenZipHelper.cs" />
     <Compile Include="Helpers\Uninstall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.Designer.cs">
@@ -101,7 +102,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Tests\AbstractUITest.cs" />
+    <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="Tests\AbstractWelcomeWizardTest.cs" />
     <Compile Include="Tests\GitFlowInitialiseTests.cs" />
     <Compile Include="Tests\HelpMenuTests.cs" />

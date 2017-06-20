@@ -3,16 +3,17 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using System.IO;
 using System;
+using AutomationTestsSolution.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
-    class GitFlowInitialiseTests : AbstractUITest
+    class GitFlowInitialiseTests : BasicTest
     {
         #region Test Variables
-        private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
-        private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        
+
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
+
         // opentabs configuration
         private string resourceName = Resources.opentabs_for_clear_repo;
 
@@ -30,11 +31,11 @@ namespace AutomationTestsSolution.Tests
         }
         private void CreateTestFolder()
         {
-            Directory.CreateDirectory(pathToClonedGitRepo);
+            Directory.CreateDirectory(PathToClonedGitRepo);
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]
@@ -77,12 +78,14 @@ namespace AutomationTestsSolution.Tests
             // init repo
             RemoveTestFolder();
             CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
+            Repository.Init(PathToClonedGitRepo);
 
             // open tab
-            resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
             var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
-            File.WriteAllText(openTabsPath, resourceName);
+            var openTabsXml = new OpenTabsXml(openTabsPath);
+            openTabsXml.SetOpenTab(PathToClonedGitRepo);
+            openTabsXml.Save();
+
         }
     }
 }

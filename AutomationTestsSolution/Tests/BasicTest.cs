@@ -1,59 +1,365 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
+using System.Xml.XPath;
+using AutomationTestsSolution.Helpers;
+using Castle.Core.Internal;
 using NUnit.Framework;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
-    class BasicTest
+    public abstract class BasicTest
     {
-        private string BackupSuffix = "st_ui_test_bak";
-        protected Window MainWindow;
-        protected string sourceTreeExePath;
-        protected string sourceTreeVersion;
-        protected string sourceTreeUserConfigPath;
-        protected string sourceTreeDataPath = Environment.ExpandEnvironmentVariables(ConstantsList.pathToDataFolder);
-        protected Process sourceTreeProcess;
-        private string testDataFolder = Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData");
-        private string emptyAutomationFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyAutomationFolder);
+        public static readonly string DefaultSourceTreeInstallPath = Path.Combine(TestContext.CurrentContext.TestDirectory, DateTime.Now.Ticks.ToString());
+        public static readonly string DefaultSourceTreeDownloadPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "downloads");
 
-        private Tuple<string, string> exeAndVersion = FindSourceTree();
+        public static readonly Version DefaultSourceTreeVersion = new Version("2.0.20.1");
 
-        private static readonly string sourceTreeTypeEnvVar = Environment.GetEnvironmentVariable("ST_UI_TEST_TYPE"); // "Beta", "Alpha" ....
+        private bool ForceCleanRun = false;
+
 
         [SetUp]
         public virtual void SetUp()
         {
-            BackupConfigs();
-            UseTestConfigAndAccountJson(sourceTreeDataPath);
-            RunAndAttachToSourceTree();
+            CheckRuntimeEnvironment();
+            
+            // check we have a sourcetree install
+            GetSourceTreeHandle();
+
+            // configure sourcetree
+            PreConfigureSourceTree();
+
+            PerTestPreConfigureSourceTree();
+
+            RecordUserConfigPaths();
+
+            // run sourcetree
+            RunAndAttach();
         }
 
-        protected void UseTestConfigAndAccountJson(string dataFolder)
+        private void RecordUserConfigPaths()
         {
-            var testAccountsJson = Path.Combine(testDataFolder, ConstantsList.accountsJson);
-            var sourceTreeAccountsJsonPath = Path.Combine(dataFolder, ConstantsList.accountsJson);
-
-            SetFile(testAccountsJson, sourceTreeAccountsJsonPath);
-
-            UseTestUserConfig();
-
-            Utils.ThreadWait(1000);
+            UserConfigPaths = FindUserConfigs();
         }
 
-        protected void UseTestUserConfig()
+        private void CleanUserConfigPaths()
         {
-            var testUserConfig = Path.Combine(testDataFolder, ConstantsList.userConfig);
+            var currentUserConfigPaths = FindUserConfigs();
 
-            SetFile(testUserConfig, sourceTreeUserConfigPath);
+            var newUserConfigPaths = currentUserConfigPaths.Except(UserConfigPaths);
 
-            UserProfileExpandVariables();
-
-            Utils.ThreadWait(1000);
+            newUserConfigPaths.ForEach(p => CleanDirectory(p));
         }
+
+        protected IEnumerable<string> UserConfigPaths { get; private set; }
+        protected virtual void PreConfigureSourceTree()
+        {
+            PreConfigureSourceTreeCore();
+
+            PreConfigureSourceTreeRegistered();
+            PreConfigureSourceTreeCheckedForOlderInstalls();
+            PreConfigureSourceTreeRegistration();
+
+            InstallGitSystem();
+            InstallGitExtras();
+            InstallHgSystem();
+            InstallHgExtras();
+        }
+
+        private void GetSourceTreeHandle()
+        {
+            if (!FindSourceTree())
+            {
+                // TODO install if necessary
+                if (DownloadSourceTree())
+                {
+                    if (ExtractSourceTree())
+                    {
+                        if (!FindSourceTree())
+                        {
+                            Assert.Fail($"Unable to find SourceTree installation");
+                        }
+                    }
+                }
+            }
+        }
+
+        private void InstallHgEmbedded()
+        {
+            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, new Version("3.7.3"));
+            hgHelper.Download(ForceCleanRun);
+            if (!hgHelper.InstallHg(ForceCleanRun))
+            {
+                Assert.Fail("Unable to install hg");
+            }
+
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetUserSetting("HgSystemPath", hgHelper.InstalledPath);
+            exeConfig.SetUserSetting("HgWhichOne", "0");
+            exeConfig.SetUserSetting("EnableHgSupport", "True");
+            exeConfig.Save();
+        }
+
+        private void InstallHgSystem()
+        {
+            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, new Version("3.7.3"));
+            hgHelper.Download(ForceCleanRun);
+            if (!hgHelper.InstallHg(ForceCleanRun))
+            {
+                Assert.Fail("Unable to install git");
+            }
+
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetUserSetting("HgSystemPath", hgHelper.InstalledPath);
+            exeConfig.SetUserSetting("HgWhichOne", "1");
+            exeConfig.SetUserSetting("EnableHgSupport", "True");
+            exeConfig.Save();
+
+            var currPath = Environment.GetEnvironmentVariable("PATH");
+            Environment.SetEnvironmentVariable("PATH", hgHelper.InstalledPath + ";" + currPath);
+        }
+
+        private void InstallHgExtras()
+        {
+            var szHelper = new SevenZipHelper(SourceTreeAppPath);
+
+            // TODO search for a GCM installer to avoid hardcoding the  version
+            var gcmPassThroughInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGcmPassthroughAskpass-1.2.0.0.7z");
+            if (!szHelper.Unzip(gcmPassThroughInstaller, SourceTreeUserDataHgExtrasPath, ForceCleanRun))
+            {
+                Assert.Fail("Unable to install hg gcm passthrough");
+            }
+        }
+
+        private void InstallGitEmbedded()
+        {
+            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, new Version("2.12.2.2"));
+            gitHelper.Download(ForceCleanRun);
+            if (!gitHelper.InstallGit(ForceCleanRun))
+            {
+                Assert.Fail("Unable to install git");
+            }
+
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetUserSetting("GitSystemPath", gitHelper.InstalledPath);
+            exeConfig.SetUserSetting("GitWhichOne", "0");
+            exeConfig.SetUserSetting("EnableGitSupport", "True");
+            exeConfig.Save();
+        }
+
+        private void InstallGitSystem()
+        {
+            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, new Version("2.12.2.2"));
+            gitHelper.Download(ForceCleanRun);
+            if (!gitHelper.InstallGit(ForceCleanRun))
+            {
+                Assert.Fail("Unable to install git");
+            }
+
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetUserSetting("GitSystemPath", gitHelper.InstalledPath);
+            exeConfig.SetUserSetting("GitWhichOne", "1");
+            exeConfig.SetUserSetting("EnableGitSupport", "True");
+            exeConfig.Save();
+
+            var currPath = Environment.GetEnvironmentVariable("PATH");
+            Environment.SetEnvironmentVariable("PATH", gitHelper.InstalledPath + ";" + currPath);
+        }
+
+        private void InstallGitExtras()
+        {
+            var szHelper = new SevenZipHelper(SourceTreeAppPath);
+
+            // TODO search for a GCM installer to avoid hardcoding the  version
+            var gcmInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGcmSt-1.8.1.6.7z");
+            if (!szHelper.Unzip(gcmInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
+            {
+                Assert.Fail("Unable to install gcm");
+            }
+
+            // TODO search for a GCM installer to avoid hardcoding the  version
+            var gitlfsInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGitLfs-1.5.6.7z");
+            if (!szHelper.Unzip(gitlfsInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
+            {
+                Assert.Fail("Unable to install git-lfs");
+            }
+
+            // TODO search for a GCM installer to avoid hardcoding the  version
+            var gitlfsmediaInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGitLfsBitbucketMediaApi-1.0.5.7z");
+            if (!szHelper.Unzip(gitlfsmediaInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
+            {
+                Assert.Fail("Unable to install git-lfs media adapter");
+            }
+        }
+
+        protected virtual void PerTestPreConfigureSourceTree()
+        {
+            // do nothing by default
+            // override in TestFixtures for Ficture specific setup
+        }
+
+        private void PreConfigureSourceTreeRegistration()
+        {
+            using (var client = new System.Net.WebClient())
+            {
+                if (!Directory.Exists(SourceTreeUserDataPath))
+                {
+                    Directory.CreateDirectory(SourceTreeUserDataPath);
+                }
+
+                var accountsJson = Path.Combine(SourceTreeUserDataPath, "accounts.json");
+                client.DownloadFile("https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/sourcetree-test_preregistered_accounts.json", accountsJson);
+            }
+        }
+
+        protected void PreConfigureSourceTreeCore()
+        {
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetApplicationSetting("IsPortable", "True");
+            exeConfig.SetApplicationSetting("PortableDataFolder", @"AppData\local\Atlassian\SourceTree");
+            exeConfig.SetApplicationSetting("AutoUpdater", "Disabled");
+
+            exeConfig.SetUserSetting("AutoStartSSHAgent", "False");
+            exeConfig.SetUserSetting("SSHClientType", "PuTTY");
+
+            exeConfig.SetUserSetting("ShowWelcome", "False");
+
+            exeConfig.Save();
+        }
+
+        private void PreConfigureSourceTreeRegistered()
+        {
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetUserSetting("AgreedToEULA", "True");
+            exeConfig.SetUserSetting("FirstLaunchSinceHgAdded", "False");
+            exeConfig.SetUserSetting("FirstLaunch", "False");
+            exeConfig.SetUserSetting("AgreedToEULAVersion", "20160201");
+            exeConfig.Save();
+        }
+
+        protected void PreConfigureSourceTreeCheckedForOlderInstalls()
+        {
+            ExeConfig exeConfig = new ExeConfig(SourceTreeExeConfigPath);
+            exeConfig.SetUserSetting("HasCheckedForOlderInstall", "True");
+            exeConfig.Save();
+        }
+
+        private bool ExtractSourceTree()
+        {
+            if (Directory.Exists(SourceTreeInstallTempPath))
+            {
+                CleanDirectory(SourceTreeInstallTempPath);
+            }
+
+            System.IO.Compression.ZipFile.ExtractToDirectory(SourceTreeNuPkgPath, SourceTreeInstallTempPath);
+
+            if (Directory.Exists(SourceTreeAppPath))
+            {
+                CleanDirectory(SourceTreeAppPath);
+            }
+
+            Directory.Move(Path.Combine(SourceTreeInstallTempPath, @"lib\net45"), SourceTreeAppPath);
+            return true;;
+        }
+
+        private void CheckRuntimeEnvironment()
+        {
+            var stInstallPathEnvVar = Environment.GetEnvironmentVariable("ST_INSTALLPATH");
+            SourceTreeInstallPath = stInstallPathEnvVar == null ? DefaultSourceTreeInstallPath : stInstallPathEnvVar;
+
+            Version ver;
+            if(Version.TryParse(Environment.GetEnvironmentVariable("ST_TARGETVERSION"), out ver))
+            {
+                SourceTreeTargetVersion = ver;
+            }
+            else
+            {
+                SourceTreeTargetVersion = DefaultSourceTreeVersion;
+            }
+
+            var stDownloadPathEnvVar = Environment.GetEnvironmentVariable("ST_DOWNLOADPATH");
+            SourceTreeDownloadPath = stDownloadPathEnvVar == null ? DefaultSourceTreeDownloadPath : stDownloadPathEnvVar;
+        }
+
+        private bool DownloadSourceTree()
+        {
+            if (SourceTreeTargetVersion == null)
+            {
+                Assert.Fail("A Target version is required to install SourceTree");
+                return false;
+            }
+
+            if (!Directory.Exists(DefaultSourceTreeDownloadPath))
+            {
+                Directory.CreateDirectory(DefaultSourceTreeDownloadPath);
+            }
+
+            SourceTreeNuPkgPath = Path.Combine(DefaultSourceTreeDownloadPath, "sourcetree.nupkg");
+
+            if (File.Exists(SourceTreeNuPkgPath) && !ForceCleanRun)
+            {
+                // local cache of the download
+                return true;
+            }
+
+            using (var client = new System.Net.WebClient())
+            {
+                client.DownloadFile($"https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/SourceTree-{SourceTreeTargetVersion}-full.nupkg", SourceTreeNuPkgPath);
+            }
+
+            if (!File.Exists(SourceTreeNuPkgPath))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool FindSourceTree()
+        {
+            if (!File.Exists(SourceTreeExePath))
+            {
+                return false;
+            }
+
+            SourceTreeVersion = GetSourceTreeVersion(SourceTreeExePath);
+
+            if (SourceTreeVersion != SourceTreeTargetVersion)
+            {
+                Assert.Warn($"{SourceTreeVersion} != {SourceTreeTargetVersion}");
+                return false;
+            }
+
+            return true;
+        }
+
+        protected Window MainWindow { get; set; }
+        protected Process SourceTreeProcess { get; private set; }
+
+        public string SourceTreeInstallPath { get; private set; }
+        public string SourceTreeInstallTempPath { get { return Path.Combine(SourceTreeInstallPath, "temp"); } }
+        public string SourceTreeAppPath { get { return Path.Combine(SourceTreeInstallPath, "app"); } }
+        public string SourceTreeExtrasPath { get { return Path.Combine(SourceTreeAppPath, "extras"); } }
+        public string SourceTreeNuPkgPath { get; private set; }
+        public Version SourceTreeVersion { get; private set; }
+        public Version SourceTreeTargetVersion { get; private set; }
+        public string SourceTreeExePath { get { return Path.Combine(SourceTreeAppPath, "SourceTree.exe"); } }
+        public string SourceTreeExeConfigPath { get { return Path.Combine(SourceTreeAppPath, "SourceTree.exe.config"); } }
+        public string SourceTreeUserDataPath {  get {  return Path.Combine(SourceTreeAppPath, @"AppData\local\Atlassian\SourceTree"); } }
+
+        public string SourceTreeUserDataGitExtrasPath { get { return Path.Combine(SourceTreeUserDataPath, @"git_extras"); } }
+
+        public string SourceTreeUserDataHgExtrasPath { get { return Path.Combine(SourceTreeUserDataPath, @"hg_extras"); } }
+        public IEnumerable<string> SourceTreeUserConfigs { get; set; }
+        public string TestDataPath { get { return Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData"); } }
+        public string SourceTreeTestDataPath { get { return Path.Combine(SourceTreeInstallPath, "data"); } }
+        public string SourceTreeDownloadPath { get; private set; }
 
         public static void ReplaceTextInFile(string pathToFile, string oldText, string newText)
         {
@@ -62,107 +368,52 @@ namespace AutomationTestsSolution.Tests
             File.WriteAllText(pathToFile, fileContent);
         }
 
-        public void UserProfileExpandVariables()
+        protected virtual void RunAndAttach()
         {
-            var localappdataNewValue = Environment.ExpandEnvironmentVariables(ConstantsList.pathToLocalappdata);
-            ReplaceTextInFile(sourceTreeUserConfigPath, ConstantsList.pathToLocalappdata, localappdataNewValue);
-
-            var userprofileNewValue = Environment.ExpandEnvironmentVariables(ConstantsList.pathToUserprofile);
-            ReplaceTextInFile(sourceTreeUserConfigPath, ConstantsList.pathToUserprofile, userprofileNewValue);
-        }
-
-        protected void BackupConfigs()
-        {
-            sourceTreeVersion = exeAndVersion.Item2;
-            sourceTreeUserConfigPath = FindSourceTreeUserConfig(sourceTreeVersion);
-
-            BackupFile(sourceTreeUserConfigPath);
-
-            BackupData(sourceTreeDataPath);
-
-            Utils.ThreadWait(1000);
+            RunAndAttachToSourceTree();
         }
 
         protected void RunAndAttachToSourceTree()
-        {
-            RunSourceTree();
+        { 
+            var attempt = 0;
+
+            do
+            {
+                KillSourceTree();
+                RunSourceTree(SourceTreeExePath);
+                attempt++;
+            }
+            while (!IsSourceTreeWindowOpeded() && attempt < 5);
+            RunSourceTree(SourceTreeExePath);
             AttachToSourceTree();
         }
 
-        protected void RunSourceTree()
+        public bool IsSourceTreeWindowOpeded()
         {
-            sourceTreeExePath = exeAndVersion.Item1;
-            RunSourceTree(sourceTreeExePath);
+            if (SourceTreeProcess.MainWindowTitle.Equals("SourceTree") || SourceTreeProcess.MainWindowTitle.Equals("Welcome"))
+            {
+                return true;
+            }
+
+            return false;
         }
 
-
-        private void BackupData(string dataFolder)
+        protected void SetFile(string sourceFile, string targetFile)
         {
-            BackupFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
-            BackupFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
-            BackupFile(Path.Combine(dataFolder, ConstantsList.accountsJson));
-        }
+            if (File.Exists(targetFile))
+            {
+                File.Delete(targetFile);
+            }
 
-        private void SetFile(string sourceFile, string targetFile)
-        {
             File.Copy(sourceFile, targetFile);
         }
 
-        private void RestoreData(string dataFolder)
+        public static Version GetSourceTreeVersion(string sourceTreeExePath)
         {
-            RestoreFile(Path.Combine(dataFolder, ConstantsList.bookmarksXml));
-            RestoreFile(Path.Combine(dataFolder, ConstantsList.opentabsXml));
-            RestoreAccount(Path.Combine(sourceTreeDataPath, ConstantsList.accountsJson));
-        }
+            // Get the file version for the file.
+            FileVersionInfo stVersionInfo = FileVersionInfo.GetVersionInfo(sourceTreeExePath);
 
-        private void BackupFile(string fileName)
-        {
-
-            Utils.RemoveFile(fileName + BackupSuffix);
-            Utils.ThreadWait(1000);
-            if (File.Exists(fileName))
-            {
-                File.Move(fileName, fileName + BackupSuffix);
-            }
-        }
-
-        protected void RestoreFile(string fileName)
-        {
-            Utils.RemoveFile(fileName);
-
-            if (File.Exists(fileName + BackupSuffix))
-            {
-                File.Move(fileName + BackupSuffix, fileName);
-            }
-        }
-
-        private void RestoreAccount(string account)
-        {
-            RestoreFile(account);
-        }
-
-        private string FindSourceTreeUserConfig(string version)
-        {
-            var sourceTreeInstallParentDir =
-                Environment.ExpandEnvironmentVariables(ConstantsList.pathToAtlassianFolder);
-            var userConfigDirectories = Directory.GetDirectories(sourceTreeInstallParentDir, version,
-                    SearchOption.AllDirectories);
-            if (userConfigDirectories.Count(d => !d.Contains("vshost")) != 1)
-            {
-                throw new Exception("Unexpected number of user.config folders");
-            }
-
-            Array.Sort(userConfigDirectories);
-            var folder = userConfigDirectories.Last(d => !d.Contains("vshost"));
-            return Path.Combine(folder, ConstantsList.userConfig);
-        }
-
-        public string GetSourceTreeVersion()
-        {
-            var pathToConfig = FindSourceTreeUserConfig(sourceTreeVersion);
-            var version = Path.GetDirectoryName(pathToConfig).Split('\\').LastOrDefault();
-
-            return version;
+            return new Version(stVersionInfo.FileVersion);
         }
 
         protected void AttachToSourceTree()
@@ -173,46 +424,56 @@ namespace AutomationTestsSolution.Tests
 
         protected void RunSourceTree(string sourceTreeExe)
         {
+            if (string.IsNullOrWhiteSpace(sourceTreeExe) || !File.Exists(sourceTreeExe))
+            {
+                Assert.Fail($"Unable to start [{sourceTreeExe}]");
+            }
+
+            Console.WriteLine($"Starting [{sourceTreeExe}]");
             // run SourceTree
             ProcessStartInfo psi = new ProcessStartInfo(sourceTreeExe);
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
-            Directory.CreateDirectory(emptyAutomationFolder);
-            psi.WorkingDirectory = emptyAutomationFolder;
-            sourceTreeProcess = new Process();
-            sourceTreeProcess.StartInfo = psi;
+            psi.WorkingDirectory = Environment.ExpandEnvironmentVariables("%TEMP%");
+            SourceTreeProcess = new Process();
+            SourceTreeProcess.StartInfo = psi;
 
-            sourceTreeProcess.Start();
+            SourceTreeProcess.Start();
         }
 
-        protected static Tuple<string, string> FindSourceTree()
+        private void KillSourceTree()
         {
-            // Allowing Environment Variables to override defaults  lets us test against GA, Beta, Alpha with runtime changes etc.
-            var sourceTreeType = string.IsNullOrWhiteSpace(sourceTreeTypeEnvVar) ? string.Empty : sourceTreeTypeEnvVar;
-
-            var sourceTreeInstallParentDir =
-                //Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTreeBeta" + sourceTreeType);
-                Environment.ExpandEnvironmentVariables(@"%localappdata%\SourceTree" + sourceTreeType);
-            // TODO find SourceTree
-            // assumption that it is a squirrel install.
-            string[] sourceTreeAppDirs = Directory.GetDirectories(sourceTreeInstallParentDir, "app-*",
-                SearchOption.TopDirectoryOnly);
-            Array.Sort(sourceTreeAppDirs);
-            string sourceTreeAppDir = sourceTreeAppDirs.Last();
-            string version = new DirectoryInfo(sourceTreeAppDir).Name.Substring("app-".Length);
-
-            // TODO reset config to known state
-            // TODO run SourceTree
-            return new Tuple<string, string>(Path.Combine(sourceTreeAppDir, "SourceTree.exe"), version);
-        }
-
-        protected void RemoveTestFolders(string[] testFolderArray)
-        {
-            foreach (var testFolder in testFolderArray)
+            foreach (var process in Process.GetProcessesByName("SourceTree"))
             {
-                Utils.RemoveDirectory(testFolder);
+                try
+                {
+                    process.CloseMainWindow();
+                    process.Kill();
+                    process.WaitForExit();
+                }
+                catch (Win32Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
             }
+        }
+
+        public IEnumerable<string> FindUserConfigs()
+        {
+            var userConfigHome = Path.Combine(Environment.ExpandEnvironmentVariables("%LocalAppData%"), "Atlassian");
+            if (!Directory.Exists(userConfigHome))
+            {
+                return new List<string>();
+            }
+
+            return Directory.GetDirectories(userConfigHome, SourceTreeVersion.ToString(), SearchOption.AllDirectories);
         }
 
         [TearDown]
@@ -228,16 +489,51 @@ namespace AutomationTestsSolution.Tests
                 MainWindow.Close();
             }
 
-            if (!sourceTreeProcess.HasExited)
+            if (!SourceTreeProcess.HasExited)
             {
-                sourceTreeProcess.CloseMainWindow();
-                sourceTreeProcess.Close();
+                SourceTreeProcess.CloseMainWindow();
+                SourceTreeProcess.Close();
             }
 
-            Utils.ThreadWait(2000);
+            CleanTransitoryDirectories();
 
-            RestoreFile(sourceTreeUserConfigPath);
-            RestoreData(sourceTreeDataPath);
+            CleanUserConfigPaths();
+        }
+
+        private void CleanTransitoryDirectories()
+        {
+            var inError = false;
+            do
+            {
+                try
+                {
+                    CleanDirectory(SourceTreeInstallPath);
+                    inError = false;
+                }
+                catch (Exception)
+                {
+                    inError = true;
+                }
+            } while (inError);
+        }
+
+        public static void CleanDirectory(string target_dir)
+        {
+            string[] files = Directory.GetFiles(target_dir);
+            string[] dirs = Directory.GetDirectories(target_dir);
+
+            foreach (string file in files)
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+
+            foreach (string dir in dirs)
+            {
+                CleanDirectory(dir);
+            }
+
+            Directory.Delete(target_dir, false);
         }
     }
 }

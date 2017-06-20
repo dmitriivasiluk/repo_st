@@ -10,13 +10,10 @@ using AutomationTestsSolution.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
-    class SubmodulesTests : AbstractUITest
+    class SubmodulesTests : BasicTest
     {
         #region Test Variables
-        private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
-        private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        // opentabs configuration
-        private string resourceName = Resources.opentabs_for_clear_repo;
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
 
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
@@ -33,11 +30,11 @@ namespace AutomationTestsSolution.Tests
         }
         private void CreateTestFolder()
         {
-            Directory.CreateDirectory(pathToClonedGitRepo);
+            Directory.CreateDirectory(PathToClonedGitRepo);
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]
@@ -57,7 +54,7 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
 
-            addSubmoduleWindow.SourcePathTextbox.SetValue(pathToClonedGitRepo);
+            addSubmoduleWindow.SourcePathTextbox.SetValue(PathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
             addSubmoduleWindow.WaitWhileElementAvaliable(addSubmoduleWindow.OKButton);
 
@@ -81,12 +78,12 @@ namespace AutomationTestsSolution.Tests
         {
             RemoveTestFolder();
             CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
-
+            Repository.Init(PathToClonedGitRepo);
             
             var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
             var openTabsXml = new OpenTabsXml(openTabsPath);
-            openTabsXml.SetOpenTab(pathToClonedGitRepo);
+            openTabsXml.SetOpenTab(PathToClonedGitRepo);
+            openTabsXml.Save();
         }
     }
 }

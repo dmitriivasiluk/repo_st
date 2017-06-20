@@ -8,7 +8,7 @@ using System;
 
 namespace AutomationTestsSolution.Tests
 {
-    class CustomActionsTests : AbstractUITest
+    class CustomActionsTests : BasicTest
     {
         [Test]
         [Category("CustomActions")]

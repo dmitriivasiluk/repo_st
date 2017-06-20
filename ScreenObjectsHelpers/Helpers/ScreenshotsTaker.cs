@@ -18,7 +18,7 @@ namespace ScreenObjectsHelpers.Helpers
 
             var filename = prefix + nameOfTest + timestamp + extension;
 
-            string path = Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\");
+            string path = Environment.ExpandEnvironmentVariables(@"");
 
             ScreenCapture sc = new ScreenCapture();
             // capture entire screen, and save it to a file

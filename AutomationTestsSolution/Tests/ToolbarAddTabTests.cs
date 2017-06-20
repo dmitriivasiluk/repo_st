@@ -8,12 +8,13 @@ using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
 {
-    class ToolbarAddTabTests : AbstractUITest
+    class ToolbarAddTabTests : BasicTest
     {
         #region Test Variables
-        private string pathToTestGitFolder = Environment.ExpandEnvironmentVariables(ConstantsList.gitInitFolderForAddTest);
-        private string pathToTestHgFolder = Environment.ExpandEnvironmentVariables(ConstantsList.hgInitFolderForAddTest);
-        private string pathToEmptyFolder = Environment.ExpandEnvironmentVariables(ConstantsList.emptyFolderForAddTest);
+
+        private string PathToTestGitFolder { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.gitInitFolderForAddTest); } }
+        private string PathToTestHgFolder { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.hgInitFolderForAddTest); } }
+        private string PathToEmptyFolder { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.emptyFolderForAddTest); } }
         #endregion
 
         [TearDown]
@@ -26,16 +27,16 @@ namespace AutomationTestsSolution.Tests
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(pathToTestGitFolder);
-            Utils.RemoveDirectory(pathToTestHgFolder);
-            Utils.RemoveDirectory(pathToEmptyFolder);
+            Utils.RemoveDirectory(PathToTestGitFolder);
+            Utils.RemoveDirectory(PathToTestHgFolder);
+            Utils.RemoveDirectory(PathToEmptyFolder);
         }
 
         private void CreateTestFolders()
         {
-            Directory.CreateDirectory(pathToTestGitFolder);
-            Directory.CreateDirectory(pathToTestHgFolder);
-            Directory.CreateDirectory(pathToEmptyFolder);
+            Directory.CreateDirectory(PathToTestGitFolder);
+            Directory.CreateDirectory(PathToTestHgFolder);
+            Directory.CreateDirectory(PathToEmptyFolder);
         }
 
         [Test]
@@ -43,7 +44,7 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
-            addTab.WorkingCopyPathTextBox.SetValue(pathToTestGitFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToTestGitFolder);
 
             Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.gitRepoType));
         }
@@ -53,7 +54,7 @@ namespace AutomationTestsSolution.Tests
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
-            addTab.WorkingCopyPathTextBox.SetValue(pathToTestHgFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
 
             Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.mercurialRepoType));
         }
@@ -64,7 +65,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.WorkingCopyPathTextBox.SetValue(pathToEmptyFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToEmptyFolder);
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
             Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.notValidPath));
@@ -90,7 +91,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.WorkingCopyPathTextBox.SetValue(pathToTestGitFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToTestGitFolder);
             addTab.TriggerValidation();
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
@@ -103,7 +104,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.WorkingCopyPathTextBox.SetValue(pathToTestHgFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
             addTab.TriggerValidation();
 
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
@@ -116,7 +117,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.WorkingCopyPathTextBox.SetValue(pathToTestGitFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToTestGitFolder);
             addTab.TriggerValidation();
             var repoName = addTab.NameTextBox.Text;
             RepositoryTab repoTab = addTab.ClickAddButton();           
@@ -130,7 +131,7 @@ namespace AutomationTestsSolution.Tests
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.WorkingCopyPathTextBox.SetValue(pathToTestHgFolder);
+            addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
             addTab.TriggerValidation();
             var repoName = addTab.NameTextBox.Text;
             RepositoryTab repoTab = addTab.ClickAddButton();
@@ -144,8 +145,9 @@ namespace AutomationTestsSolution.Tests
 
             CreateTestFolders();
 
-            Repository.Init(pathToTestGitFolder);
-            MercurialWrapper.HgRun(MercurialWrapper.HgInit, pathToTestHgFolder);
+            Repository.Init(PathToTestGitFolder);
+            var mercurial = new MercurialWrapper(Path.Combine(SourceTreeDownloadPath, "hg_local", "hg.exe"));
+            mercurial.Init(PathToTestHgFolder);
         }
     }
 }

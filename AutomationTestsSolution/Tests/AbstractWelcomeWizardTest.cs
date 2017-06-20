@@ -10,12 +10,11 @@ using ScreenObjectsHelpers.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
-    public abstract class AbstractWelcomeWizardTest : AbstractUITest
+    public abstract class AbstractWelcomeWizardTest : BasicTest
     {
         private bool _glogalIgnoreSet = false;
-        
 
-        private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
 
 
         [TearDown]
@@ -33,18 +32,18 @@ namespace AutomationTestsSolution.Tests
 
             RemoveTestFolder();
             CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
+            Repository.Init(PathToClonedGitRepo);
 
             SetGlobalIgnore();
         }
 
         private void CreateTestFolder()
         {
-            Directory.CreateDirectory(pathToClonedGitRepo);
+            Directory.CreateDirectory(PathToClonedGitRepo);
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         protected override void RunAndAttach()
@@ -92,7 +91,7 @@ namespace AutomationTestsSolution.Tests
         {
             if (_glogalIgnoreSet)
             {
-                using (var repo = new Repository(pathToClonedGitRepo))
+                using (var repo = new Repository(PathToClonedGitRepo))
                 {
                     repo.Config.Unset("core.excludesfile");
                 }

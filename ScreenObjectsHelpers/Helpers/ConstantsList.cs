@@ -14,10 +14,6 @@ namespace ScreenObjectsHelpers.Helpers
         public const string customActionToBeDeleted = "customActionToBeEdited";
 
         //Constants for BasicTest
-        public const string emptyAutomationFolder = @"%localappdata%\EmptyFolderForAutomation";
-        
-        public const string pathToAtlassianFolder = @"%localappdata%\Atlassian";
-        public const string pathToDocumentsFolder = @"%userprofile%\Documents\";
         public const string pathToLocalappdata = @"%localappdata%\";
         public const string pathToUserprofile = @"%userprofile%\";
         public const string userConfig = "user.config";
@@ -37,11 +33,9 @@ namespace ScreenObjectsHelpers.Helpers
 
             //CloneTab: clone tests
         public const string gitRepoToClone = @"https://UserAccountNo2FA@bitbucket.org/UserAccountNo2FA/test_bbgitrepotoclone.git";
-        public const string pathToClonedGitRepo = @"%userprofile%\Documents\test_bbgitrepotoclone";
         public const string testGitRepoBookmarkName = "test_bbgitrepotoclone";
 
         public const string mercurialRepoToClone = @"https://UserAccountNo2FA@bitbucket.org/UserAccountNo2FA/test_bbmercurialrepotoclone";
-        public const string pathToClonedMercurialRepo = @"%userprofile%\Documents\test_bbmercurialrepotoclone";
         public const string testHgRepoBookmarkName = "test_bbmercurialrepotoclone";        
 
         //Constants for Clone tests (clone tab and welcome wizard)
@@ -51,13 +45,11 @@ namespace ScreenObjectsHelpers.Helpers
         public const string emptyPath = "emptyPath";
 
         //Constants for Add Tab tests
-        public const string emptyFolderForAddTest = @"%userprofile%\Documents\TEST_Empty_AddTab";
-        public const string gitInitFolderForAddTest = @"%userprofile%\Documents\TEST_GitInit_AddTab";
-        public const string hgInitFolderForAddTest = @"%userprofile%\Documents\TEST_HgInit_AddTab";
-        public const string pathToEmbeddedHg = @"%localappdata%\Atlassian\SourceTree\hg_local\hg.exe";
-
+        public const string emptyFolderForAddTest = @"TEST_Empty_AddTab";
+        public const string gitInitFolderForAddTest = @"TEST_GitInit_AddTab";
+        public const string hgInitFolderForAddTest = @"TEST_HgInit_AddTab";
+        
         //Constants for Create Tab tests
-        public const string pathToCreateLocalRepos = @"%userprofile%\Documents\";
         public const string fileForNotEmptyFolder = "SomeFile.txt";
         public const string mercurialExistRepoWarnTitle = "Failed to create local repository";
 
