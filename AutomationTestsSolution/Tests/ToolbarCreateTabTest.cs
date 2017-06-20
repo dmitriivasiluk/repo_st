@@ -6,7 +6,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows.Repository;
 using System.Threading;
 
-namespace AutomationTestsSolution.Tests.CreateLocal
+namespace AutomationTestsSolution.Tests
 {
     class ToolbarCreateTabTestLocal : BasicTest
     {

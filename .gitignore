@@ -115,3 +115,4 @@ $RECYCLE.BIN/
 # Fake Logs
 AutomationTestsSolution/.fake/
 tools/
+Test_AboutWindowTest_*.jpg

@@ -91,10 +91,10 @@ Task("Run-Unit-Tests-Core")
             + ",AutomationTestsSolution.Tests.GitFlowInitialiseTests"
             + ",AutomationTestsSolution.Tests.SubtreesTests"
             + ",AutomationTestsSolution.Tests.ToolbarAddTabTests"
-            + ",ToolbarCloneTabTests"
-            + ",ToolbarCreateTabTestLocal"
-            + ",ToolbarRemoteTabTests"
-            + ",WelcomeWizardTests"
+            + ",AutomationTestsSolution.Tests.ToolbarCloneTabTests"
+            + ",AutomationTestsSolution.Tests.ToolbarCreateTabTestLocal"
+            + ",AutomationTestsSolution.Tests.ToolbarRemoteTabTests"
+            + ",AutomationTestsSolution.Tests.WelcomeWizardTests"
         });
 });
 
