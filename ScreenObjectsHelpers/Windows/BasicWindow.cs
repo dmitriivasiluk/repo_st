@@ -53,9 +53,10 @@ namespace ScreenObjectsHelpers.Windows
 
             while (MdiChild == null && attempt < 15)
             {
-                MdiChild = MainWindow.MdiChild(searchCriteria);
-
                 Thread.Sleep(1000);
+
+                MdiChild = MainWindow.MdiChild(searchCriteria);
+                
                 attempt++;
             }
 

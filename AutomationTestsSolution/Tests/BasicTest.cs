@@ -107,7 +107,7 @@ namespace AutomationTestsSolution.Tests
                 attempt++;
             }
 
-            AttemptsCounterLogger.AttemptCounter("Restart SourceTree", TestContext.CurrentContext.Test.FullName, attempt);
+            AttemptsCounterLogger.AttemptCounter("Restart SourceTree ", TestContext.CurrentContext.Test.FullName, attempt);
 
             Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");            
             Console.WriteLine("Restart SourceTree: " + attempt);
@@ -245,10 +245,10 @@ namespace AutomationTestsSolution.Tests
                 attempt++;
             }
 
-            AttemptsCounterLogger.AttemptCounter(nameof(IsSourceTreeWindowOpeded), TestContext.CurrentContext.Test.FullName, attempt);
+            AttemptsCounterLogger.AttemptCounter("SourceTree process refresh ", TestContext.CurrentContext.Test.FullName, attempt);
 
             Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
-            Console.WriteLine("RunSourceTree Refresh: " + attempt);
+            Console.WriteLine("SourceTree process refresh: " + attempt);
             Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
 
             bool SourceTreeWindowOpeded = (sourceTreeProcess.MainWindowTitle.Equals("SourceTree") || sourceTreeProcess.MainWindowTitle.Equals("Welcome"));
