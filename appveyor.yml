@@ -44,9 +44,11 @@ build:
 test:
   categories:
     only:
-    - General
+    - GitFlow
 on_failure:
 - 7z a %APPVEYOR_BUILD_FOLDER%\screenshots.7z C:\Users\appveyor\Documents\*.jpg    
 - appveyor PushArtifact screenshots.7z
-- 7z a %APPVEYOR_BUILD_FOLDER%\attemptsCounter.7z C:\Users\appveyor\Documents\attemptsCounter.txt
-- appveyor PushArtifact attemptsCounter.7z
+on_finish:
+- cmd: >-
+    move "C:\Users\appveyor\Documents\attemptsCounter.txt" %APPVEYOR_BUILD_FOLDER%\    	
+    appveyor PushArtifact attemptsCounter.txt
