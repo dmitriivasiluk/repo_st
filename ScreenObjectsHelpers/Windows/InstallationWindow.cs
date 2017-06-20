@@ -20,12 +20,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public InstallationWindow(Window mainWindow) : base(mainWindow)
         {
-            ValidateWindow();
-        }
-
-        public void ValidateWindow()
-        {
-
+                        
         }
 
         #region UIElements
@@ -192,7 +187,7 @@ namespace ScreenObjectsHelpers.Windows
         public ErrorDialogWindow SwitchToErrorDialogWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByAutomationId("window");
-            var errorDialog = this.WaitMdiChildAppears(searchCriteria, 10);
+            var errorDialog = this.WaitMdiChildAppears(searchCriteria);
             return new ErrorDialogWindow(this, errorDialog);
         }
 
@@ -226,7 +221,7 @@ namespace ScreenObjectsHelpers.Windows
         public IgnoreFileDialogWindow GetInstallGlobalIgnoreFileDialogWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByAutomationId("window");
-            var dialogWindow = this.WaitMdiChildAppears(searchCriteria, 10);
+            var dialogWindow = this.WaitMdiChildAppears(searchCriteria);
             return new IgnoreFileDialogWindow(this, dialogWindow);
         }
 
@@ -261,7 +256,7 @@ namespace ScreenObjectsHelpers.Windows
         {
             ClickButton(BrowseDestinationPathButton);
             SearchCriteria searchCriteria = SearchCriteria.ByText("Select Destination Path");
-            var selectDestinationWindow = this.WaitMdiChildAppears(searchCriteria, 10);
+            var selectDestinationWindow = this.WaitMdiChildAppears(searchCriteria);
             var browseWindow = new BrowseDestinationPath(this, selectDestinationWindow);
             browseWindow.ChooseDestinationFolder(path);
             browseWindow.ClickSelectFolder();
@@ -312,8 +307,8 @@ namespace ScreenObjectsHelpers.Windows
 
         public BrowseDestinationPath(InstallationWindow installWindow, UIItemContainer browsePath)
         {
-            this._installWindow = installWindow;
-            this._browsePath = browsePath;
+            _installWindow = installWindow;
+            _browsePath = browsePath;
         }
 
         public TextBox FolderEditField => _browsePath.Get<TextBox>(SearchCriteria.ByAutomationId("1152"));
@@ -339,8 +334,8 @@ namespace ScreenObjectsHelpers.Windows
 
         public IgnoreFileDialogWindow(InstallationWindow installWindow, UIItemContainer dialogWindow)
         {
-            this._installWindow = installWindow;
-            this._dialogWindow = dialogWindow;
+            _installWindow = installWindow;
+            _dialogWindow = dialogWindow;
         }
 
         public Label TitleOfWindowLabel => _dialogWindow.Get<Label>(SearchCriteria.ByText("Login failed"));
@@ -372,8 +367,8 @@ namespace ScreenObjectsHelpers.Windows
 
         public ErrorDialogWindow(InstallationWindow installationWindow, UIItemContainer errorWindow)
         {
-            this._installationWindow = installationWindow;
-            this._errorWindow = errorWindow;
+            _installationWindow = installationWindow;
+            _errorWindow = errorWindow;
         }
 
         public Label TitleOfMessageError => _errorWindow.Get<Label>(SearchCriteria.ByText("Bad credentials"));

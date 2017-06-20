@@ -9,27 +9,32 @@ namespace ScreenObjectsHelpers.Helpers
 {
     public class Utils
     {
-
         public static Window FindNewWindow(string nameOfWindow)
         {
             Window window = null;
 
             var attempt = 0;
 
-            do
+            while (window == null && attempt < 15)
             {
                 window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
 
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
                 attempt++;
-            } while (window == null && attempt < 15);
+            }
+
+            AttemptsCounterLogger.AttemptCounter(nameof(FindNewWindow), "", attempt);
+
+            Console.WriteLine("* + * + * + * + * + * + * + ");
+            Console.WriteLine("FindNewWindow: " + attempt);
+            Console.WriteLine("* + * + * + * + * + * + * + ");            
 
             if (window == null)
             {
                 Console.WriteLine("*** *** *** *** *** *** ***");
-                Console.WriteLine("Could not find the window");
-                throw new NullReferenceException("Could not find the window");
-            }                
+                Console.WriteLine("FindNewWindow: Could not find the window");
+                throw new NullReferenceException("FindNewWindow: Could not find the window");
+            }
 
             return window;
         }
@@ -70,7 +75,6 @@ namespace ScreenObjectsHelpers.Helpers
             }
 
             Directory.Delete(path, false);
-
         }
 
         public static bool IsFolderGit(string path)

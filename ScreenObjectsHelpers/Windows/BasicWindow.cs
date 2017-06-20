@@ -1,4 +1,5 @@
-﻿using ScreenObjectsHelpers.Windows.Repository;
+﻿using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.Repository;
 using System;
 using System.Threading;
 using TestStack.White;
@@ -16,10 +17,9 @@ namespace ScreenObjectsHelpers.Windows
     /// </summary>
     public abstract class BasicWindow
     {
-
         public BasicWindow(Window mainWindow)
         {
-            this.MainWindow = mainWindow;
+            MainWindow = mainWindow;
         }
 
         #region UIItems
@@ -33,8 +33,8 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickButton(Button button)
         {
-
             Thread.Sleep(500);
+
             if (button.Enabled && button.Visible)
             {
                 button.Click();
@@ -45,21 +45,34 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
-        public UIItemContainer WaitMdiChildAppears(SearchCriteria searchCriteria, int secondsForWait)
+        public UIItemContainer WaitMdiChildAppears(SearchCriteria searchCriteria)
         {
-            int secondsPass = 0;
-            UIItemContainer container = MainWindow.MdiChild(searchCriteria);
-            while (container == null)
+            UIItemContainer MdiChild = null;
+
+            var attempt = 0;
+
+            while (MdiChild == null && attempt < 15)
             {
+                MdiChild = MainWindow.MdiChild(searchCriteria);
+
                 Thread.Sleep(1000);
-                secondsPass++;
-                container = MainWindow.MdiChild(searchCriteria);
-                if (secondsPass > secondsForWait)
-                {
-                    throw new TimeoutException();
-                }
+                attempt++;
             }
-            return container;
+
+            AttemptsCounterLogger.AttemptCounter(nameof(WaitMdiChildAppears), "", attempt);
+
+            if (MdiChild == null)
+            {
+                Console.WriteLine("*** *** *** *** *** *** ***");
+                Console.WriteLine("MdiChild: Could not find the MdiChild");
+                throw new NullReferenceException("MdiChild: Could not find the MdiChild");
+            }
+                        
+            Console.WriteLine("% + % + % + % + % + % + % + % + ");
+            Console.WriteLine("WaitMdiChildAppears: " + attempt);
+            Console.WriteLine("% + % + % + % + % + % + % + % + ");            
+
+            return MdiChild;
         }
 
         public void SetComboboxValue(ComboBox combobox, string comboboxValue)

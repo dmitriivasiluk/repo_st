@@ -11,8 +11,7 @@ using System.ComponentModel;
 namespace AutomationTestsSolution.Tests
 {
     class BasicTest
-    {        
-        Process STprocess;
+    {   
         private string BackupSuffix = "st_ui_test_bak";
         protected Window MainWindow;
         protected string sourceTreeExePath;
@@ -96,15 +95,23 @@ namespace AutomationTestsSolution.Tests
         {
             sourceTreeExePath = exeAndVersion.Item1;
 
+            KillProcess();
+            RunSourceTree(sourceTreeExePath);
+
             var attempt = 0;
 
-            do
+            while (!IsSourceTreeWindowOpeded() && attempt < 5)
             {
                 KillProcess();
                 RunSourceTree(sourceTreeExePath);
-                ++attempt;
+                attempt++;
             }
-            while (!IsSourceTreeWindowOpeded() && attempt < 5);
+
+            AttemptsCounterLogger.AttemptCounter("Restart SourceTree", TestContext.CurrentContext.Test.FullName, attempt);
+
+            Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");            
+            Console.WriteLine("Restart SourceTree: " + attempt);
+            Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");            
         }
 
         private void KillProcess()
@@ -220,32 +227,35 @@ namespace AutomationTestsSolution.Tests
 
             sourceTreeProcess.Start();
             sourceTreeProcess.WaitForInputIdle();
-                        
-            STprocess = Process.GetProcessById(sourceTreeProcess.Id);
 
-            var attempt = 0;
-
-            do
-            {
-                sourceTreeProcess.Refresh();
-                Thread.Sleep(1000);
-                ++attempt;
-            }
-            while (string.IsNullOrEmpty(sourceTreeProcess.MainWindowTitle) && attempt < 15);
-
-            AttemptsCounterLogger.AttemptCounter(nameof(RunSourceTree), TestContext.CurrentContext.Test.FullName, attempt);
-
-            Assert.AreEqual(STprocess.ProcessName, "SourceTree");
+            Assert.AreEqual(sourceTreeProcess.ProcessName, "SourceTree");
         }
 
         public bool IsSourceTreeWindowOpeded()
-        {               
-            if (STprocess.MainWindowTitle.Equals("SourceTree") || STprocess.MainWindowTitle.Equals("Welcome"))
+        {
+            Thread.Sleep(2000);
+            sourceTreeProcess.Refresh();
+
+            var attempt = 0;
+
+            while (string.Equals(sourceTreeProcess.MainWindowTitle, "") && attempt < 15)
             {
-                return true;
+                Thread.Sleep(1000);
+                sourceTreeProcess.Refresh();
+                attempt++;
             }
 
-            return false;
+            AttemptsCounterLogger.AttemptCounter(nameof(IsSourceTreeWindowOpeded), TestContext.CurrentContext.Test.FullName, attempt);
+
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
+            Console.WriteLine("RunSourceTree Refresh: " + attempt);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
+
+            bool SourceTreeWindowOpeded = (sourceTreeProcess.MainWindowTitle.Equals("SourceTree") || sourceTreeProcess.MainWindowTitle.Equals("Welcome"));
+
+            Assert.IsTrue(SourceTreeWindowOpeded);
+
+            return SourceTreeWindowOpeded;
         }
 
         protected static Tuple<string, string> FindSourceTree()
