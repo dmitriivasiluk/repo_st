@@ -117,7 +117,7 @@ namespace AutomationTestsSolution.Tests
         {
             var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, DefaultHgVersion);
             hgHelper.Download(ForceCleanRun);
-            if (!hgHelper.InstallHg(ForceCleanRun))ar
+            if (!hgHelper.InstallHg(ForceCleanRun))
             {
                 Assert.Fail("Unable to install git");
             }
