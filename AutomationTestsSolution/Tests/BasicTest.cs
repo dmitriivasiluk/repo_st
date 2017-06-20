@@ -11,7 +11,8 @@ using System.ComponentModel;
 namespace AutomationTestsSolution.Tests
 {
     class BasicTest
-    {   
+    {
+        bool sourceTreeWindowOpeded;
         private string BackupSuffix = "st_ui_test_bak";
         protected Window MainWindow;
         protected string sourceTreeExePath;
@@ -96,22 +97,24 @@ namespace AutomationTestsSolution.Tests
             sourceTreeExePath = exeAndVersion.Item1;
 
             KillProcess();
-            RunSourceTree(sourceTreeExePath);
+            RunSourceTree(sourceTreeExePath);                       
 
-            var attempt = 0;
+            var attempt = 0;            
 
             while (!IsSourceTreeWindowOpeded() && attempt < 5)
             {
                 KillProcess();
                 RunSourceTree(sourceTreeExePath);
                 attempt++;
-            }
+            }            
 
             AttemptsCounterLogger.AttemptCounter("Restart SourceTree ", TestContext.CurrentContext.Test.FullName, attempt);
 
             Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");            
             Console.WriteLine("Restart SourceTree: " + attempt);
-            Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");            
+            Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");
+
+            Assert.True(sourceTreeWindowOpeded, "SourceTree window was not opeded");
         }
 
         private void KillProcess()
@@ -236,7 +239,7 @@ namespace AutomationTestsSolution.Tests
             Thread.Sleep(2000);
             sourceTreeProcess.Refresh();
 
-            var attempt = 0;
+            var attempt = 0;            
 
             while (string.Equals(sourceTreeProcess.MainWindowTitle, "") && attempt < 15)
             {
@@ -251,11 +254,9 @@ namespace AutomationTestsSolution.Tests
             Console.WriteLine("SourceTree process refresh: " + attempt);
             Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
 
-            bool SourceTreeWindowOpeded = (sourceTreeProcess.MainWindowTitle.Equals("SourceTree") || sourceTreeProcess.MainWindowTitle.Equals("Welcome"));
+            sourceTreeWindowOpeded = (sourceTreeProcess.MainWindowTitle.Equals("SourceTree") || sourceTreeProcess.MainWindowTitle.Equals("Welcome"));
 
-            Assert.IsTrue(SourceTreeWindowOpeded);
-
-            return SourceTreeWindowOpeded;
+            return sourceTreeWindowOpeded;
         }
 
         protected static Tuple<string, string> FindSourceTree()
