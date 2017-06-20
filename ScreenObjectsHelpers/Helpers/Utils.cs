@@ -11,7 +11,7 @@ namespace ScreenObjectsHelpers.Helpers
     {
         public static Window FindNewWindow(string nameOfWindow)
         {
-            Window window = null;
+            Window window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow); 
 
             var attempt = 0;
 
