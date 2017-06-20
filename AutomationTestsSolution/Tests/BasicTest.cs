@@ -229,9 +229,11 @@ namespace AutomationTestsSolution.Tests
             {
                 sourceTreeProcess.Refresh();
                 Thread.Sleep(1000);
-                attempt++;
+                ++attempt;
             }
             while (string.IsNullOrEmpty(sourceTreeProcess.MainWindowTitle) && attempt < 15);
+
+            AttemptsCounterLogger.AttemptCounter(nameof(RunSourceTree), TestContext.CurrentContext.Test.FullName, attempt);
 
             Assert.AreEqual(STprocess.ProcessName, "SourceTree");
         }

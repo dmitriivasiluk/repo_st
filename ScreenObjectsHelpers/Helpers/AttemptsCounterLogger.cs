@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace ScreenObjectsHelpers.Helpers
 {
-    class AttemptsCounterLogger
+    public class AttemptsCounterLogger
     {
-        public static void AttemptCounter(string nameOfMethod, int counter)
+        public static void AttemptCounter(string nameOfMethod, string testName, int counter)
         {
-            var output = nameOfMethod + counter;
+            var output = Environment.NewLine + testName + " -> " + nameOfMethod + " -> " + counter;
             
-            string path = Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\atteptsCounter.txt");
+            string path = Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\attemptsCounter.txt");
 
             File.AppendAllText(path, output);
+            
         }
     }
 }
