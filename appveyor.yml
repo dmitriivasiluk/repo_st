@@ -44,7 +44,7 @@ build:
 test:
   categories:
     only:
-    - GitFlow
+    - General
 on_failure:
 - 7z a %APPVEYOR_BUILD_FOLDER%\screenshots.7z C:\Users\appveyor\Documents\*.jpg    
 - appveyor PushArtifact screenshots.7z
