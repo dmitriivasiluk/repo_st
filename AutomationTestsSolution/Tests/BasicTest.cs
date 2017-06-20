@@ -397,13 +397,13 @@ namespace AutomationTestsSolution.Tests
         { 
             var attempt = 0;
 
-            do
-            {
-                KillSourceTree();
-                RunSourceTree(SourceTreeExePath);
-                attempt++;
-            }
-            while (!IsSourceTreeWindowOpeded() && attempt < 5);
+            //do
+            //{
+            //    KillSourceTree();
+            //    RunSourceTree(SourceTreeExePath);
+            //    attempt++;
+            //}
+            //while (!IsSourceTreeWindowOpeded() && attempt < 5);
             RunSourceTree(SourceTreeExePath);
             AttachToSourceTree();
         }
