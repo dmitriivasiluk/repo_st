@@ -115,7 +115,7 @@ namespace AutomationTestsSolution.Tests
         [Test]
         [Category("Authentication")]
         [Category("OAuth")]
-        //[Ignore("Investigate stability issue")]
+        [Ignore("Investigate stability issue")]
         public void AuthGithubHttpsOauthPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AuthGithubHttpsOauthPositiveTest));
@@ -146,6 +146,7 @@ namespace AutomationTestsSolution.Tests
         [TestCase("RandomUsername")]
         [Category("Authentication")]
         [Category("General")]
+        [Ignore("Investigate stability issue")]
         public void AuthRefreshPasswordButtonEnabledTest(string login)
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AuthRefreshPasswordButtonEnabledTest));

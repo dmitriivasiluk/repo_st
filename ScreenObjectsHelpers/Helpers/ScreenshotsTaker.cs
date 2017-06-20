@@ -2,6 +2,7 @@
 using TestStack.White;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Threading;
 
 namespace ScreenObjectsHelpers.Helpers
@@ -15,18 +16,23 @@ namespace ScreenObjectsHelpers.Helpers
         // ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, new StackTrace().GetFrame(0).GetMethod().Name);
         public static void TakeScreenShot(string path, string nameOfTest)
         {
-            //Thread.Sleep(500);
-            //var prefix = "Test_";
-            //var timestamp = DateTime.Now.ToString("_MM.dd_HHmmss");
-            //var random = new Random().Next().ToString();
-            //var extension = ".jpg";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
 
-            //var filename = prefix + nameOfTest + timestamp + random + extension;
+            Thread.Sleep(500);
+            var prefix = "Test_";
+            var timestamp = DateTime.Now.ToString("_MM.dd_HHmmss");
+            var random = new Random().Next().ToString();
+            var extension = ".jpg";
 
-            //ScreenCapture sc = new ScreenCapture();
-            //// capture entire screen, and save it to a file
-            //Bitmap img = sc.CaptureScreenShot();
-            //img.Save(path + filename, ImageFormat.Jpeg);            
+            var filename = prefix + nameOfTest + timestamp + random + extension;
+
+            ScreenCapture sc = new ScreenCapture();
+            // capture entire screen, and save it to a file
+            Bitmap img = sc.CaptureScreenShot();
+            img.Save(path + filename, ImageFormat.Jpeg);            
         }
     }
 }
