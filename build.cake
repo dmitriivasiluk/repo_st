@@ -81,7 +81,7 @@ Task("Run-Unit-Tests-Core")
     //Environment.SetEnvironmentVariable("ST_TESTDATARUNTIMEFOLDER", testDataRuntimeFolder );
     //Environment.SetEnvironmentVariable("ST_USERCONFIG", userConfig );
 
-    Error("Using "+ testVersion + " @ " + exePath);
+    //Error("Using "+ testVersion + " @ " + exePath);
     NUnit3("./**/bin/" + configuration + "/AutomationTest*.dll", 
         new NUnit3Settings {
             NoResults = true,

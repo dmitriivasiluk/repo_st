@@ -15,18 +15,18 @@ namespace ScreenObjectsHelpers.Helpers
         // ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, new StackTrace().GetFrame(0).GetMethod().Name);
         public static void TakeScreenShot(string path, string nameOfTest)
         {
-            Thread.Sleep(500);
-            var prefix = "Test_";
-            var timestamp = DateTime.Now.ToString("_MM.dd_HHmmss");
-            var random = new Random().Next().ToString();
-            var extension = ".jpg";
+            //Thread.Sleep(500);
+            //var prefix = "Test_";
+            //var timestamp = DateTime.Now.ToString("_MM.dd_HHmmss");
+            //var random = new Random().Next().ToString();
+            //var extension = ".jpg";
 
-            var filename = prefix + nameOfTest + timestamp + random + extension;
+            //var filename = prefix + nameOfTest + timestamp + random + extension;
 
-            ScreenCapture sc = new ScreenCapture();
-            // capture entire screen, and save it to a file
-            Bitmap img = sc.CaptureScreenShot();
-            img.Save(path + filename, ImageFormat.Jpeg);            
+            //ScreenCapture sc = new ScreenCapture();
+            //// capture entire screen, and save it to a file
+            //Bitmap img = sc.CaptureScreenShot();
+            //img.Save(path + filename, ImageFormat.Jpeg);            
         }
     }
 }
