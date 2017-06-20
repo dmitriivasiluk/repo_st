@@ -50,5 +50,6 @@ on_failure:
 - appveyor PushArtifact screenshots.7z
 on_finish:
 - cmd: >-
-    move "C:\Users\appveyor\Documents\attemptsCounter.txt" %APPVEYOR_BUILD_FOLDER%\    	
+    move "C:\Users\appveyor\Documents\attemptsCounter.txt" %APPVEYOR_BUILD_FOLDER%
+
     appveyor PushArtifact attemptsCounter.txt
