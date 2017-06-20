@@ -18,8 +18,15 @@ namespace AutomationTestsSolution.Tests
     {
         public static readonly string DefaultSourceTreeInstallPath = Path.Combine(TestContext.CurrentContext.TestDirectory, DateTime.Now.Ticks.ToString());
         public static readonly string DefaultSourceTreeDownloadPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "downloads");
+        public static readonly string DefaultSourceTreeArtifactsPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "artifacts");
 
-        public static readonly Version DefaultSourceTreeVersion = new Version("2.0.20.1");
+        public static readonly Version DefaultSourceTreeVersion = new Version("2.1.2.5");
+        public static readonly Version DefaulGitVersion = new Version("2.12.2.2");
+        public static readonly Version DefaulGitLfsVersion = new Version("1.5.6");
+        public static readonly Version DefaulGitLfsMediaAdapaterVersion = new Version("1.0.5");
+        public static readonly Version DefaulGcmVersion = new Version("1.8.1.6");
+        public static readonly Version DefaultHgVersion = new Version("3.7.3");
+        public static readonly Version DefaulAskpassPassthroughVersion = new Version("1.2.0.0");
 
         private bool ForceCleanRun = false;
 
@@ -92,7 +99,7 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallHgEmbedded()
         {
-            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, new Version("3.7.3"));
+            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, DefaultHgVersion);
             hgHelper.Download(ForceCleanRun);
             if (!hgHelper.InstallHg(ForceCleanRun))
             {
@@ -108,9 +115,9 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallHgSystem()
         {
-            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, new Version("3.7.3"));
+            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, DefaultHgVersion);
             hgHelper.Download(ForceCleanRun);
-            if (!hgHelper.InstallHg(ForceCleanRun))
+            if (!hgHelper.InstallHg(ForceCleanRun))ar
             {
                 Assert.Fail("Unable to install git");
             }
@@ -130,7 +137,7 @@ namespace AutomationTestsSolution.Tests
             var szHelper = new SevenZipHelper(SourceTreeAppPath);
 
             // TODO search for a GCM installer to avoid hardcoding the  version
-            var gcmPassThroughInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGcmPassthroughAskpass-1.2.0.0.7z");
+            var gcmPassThroughInstaller = Path.Combine(SourceTreeExtrasPath, $"PortableGcmPassthroughAskpass-{DefaulAskpassPassthroughVersion}.7z");
             if (!szHelper.Unzip(gcmPassThroughInstaller, SourceTreeUserDataHgExtrasPath, ForceCleanRun))
             {
                 Assert.Fail("Unable to install hg gcm passthrough");
@@ -139,7 +146,7 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallGitEmbedded()
         {
-            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, new Version("2.12.2.2"));
+            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, DefaulGitVersion);
             gitHelper.Download(ForceCleanRun);
             if (!gitHelper.InstallGit(ForceCleanRun))
             {
@@ -155,7 +162,7 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallGitSystem()
         {
-            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, new Version("2.12.2.2"));
+            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, DefaulGitVersion);
             gitHelper.Download(ForceCleanRun);
             if (!gitHelper.InstallGit(ForceCleanRun))
             {
@@ -177,21 +184,21 @@ namespace AutomationTestsSolution.Tests
             var szHelper = new SevenZipHelper(SourceTreeAppPath);
 
             // TODO search for a GCM installer to avoid hardcoding the  version
-            var gcmInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGcmSt-1.8.1.6.7z");
+            var gcmInstaller = Path.Combine(SourceTreeExtrasPath, $"PortableGcmSt-{DefaulGcmVersion}.7z");
             if (!szHelper.Unzip(gcmInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
             {
                 Assert.Fail("Unable to install gcm");
             }
 
             // TODO search for a GCM installer to avoid hardcoding the  version
-            var gitlfsInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGitLfs-1.5.6.7z");
+            var gitlfsInstaller = Path.Combine(SourceTreeExtrasPath, $"PortableGitLfs-{DefaulGitLfsVersion}.7z");
             if (!szHelper.Unzip(gitlfsInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
             {
                 Assert.Fail("Unable to install git-lfs");
             }
 
             // TODO search for a GCM installer to avoid hardcoding the  version
-            var gitlfsmediaInstaller = Path.Combine(SourceTreeExtrasPath, "PortableGitLfsBitbucketMediaApi-1.0.5.7z");
+            var gitlfsmediaInstaller = Path.Combine(SourceTreeExtrasPath, $"PortableGitLfsBitbucketMediaApi-{DefaulGitLfsMediaAdapaterVersion}.7z");
             if (!szHelper.Unzip(gitlfsmediaInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
             {
                 Assert.Fail("Unable to install git-lfs media adapter");
@@ -300,7 +307,7 @@ namespace AutomationTestsSolution.Tests
                 Directory.CreateDirectory(DefaultSourceTreeDownloadPath);
             }
 
-            SourceTreeNuPkgPath = Path.Combine(DefaultSourceTreeDownloadPath, "sourcetree.nupkg");
+            SourceTreeNuPkgPath = Path.Combine(DefaultSourceTreeDownloadPath, $"sourcetree.{SourceTreeTargetVersion}.nupkg");
 
             if (File.Exists(SourceTreeNuPkgPath) && !ForceCleanRun)
             {
@@ -310,7 +317,19 @@ namespace AutomationTestsSolution.Tests
 
             using (var client = new System.Net.WebClient())
             {
-                client.DownloadFile($"https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/SourceTree-{SourceTreeTargetVersion}-full.nupkg", SourceTreeNuPkgPath);
+                var url = $"https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/SourceTree-{SourceTreeTargetVersion}-full.nupkg";
+                try
+                {
+                    client.DownloadFile(
+                        url,
+                        SourceTreeNuPkgPath);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Unable to download {url} {e.Message}");
+                    Console.WriteLine(e.StackTrace);
+                    Assert.Fail($"Unable to download {url}");
+                }
             }
 
             if (!File.Exists(SourceTreeNuPkgPath))
@@ -344,6 +363,7 @@ namespace AutomationTestsSolution.Tests
 
         public string SourceTreeInstallPath { get; private set; }
         public string SourceTreeInstallTempPath { get { return Path.Combine(SourceTreeInstallPath, "temp"); } }
+        public string SourceTreeScreenShotsPath { get { return Path.Combine(DefaultSourceTreeArtifactsPath, "screenshots"); } }
         public string SourceTreeAppPath { get { return Path.Combine(SourceTreeInstallPath, "app"); } }
         public string SourceTreeExtrasPath { get { return Path.Combine(SourceTreeAppPath, "extras"); } }
         public string SourceTreeNuPkgPath { get; private set; }
