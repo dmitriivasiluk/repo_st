@@ -44,7 +44,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
@@ -57,7 +57,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledWithEnteredSourcePath()
         {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(IsOkButtonEnabledWithEnteredSourcePath));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonEnabledWithEnteredSourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
@@ -74,7 +74,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void SourcePathFieldValidateWrongInputTest()
         {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(SourcePathFieldValidateWrongInputTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(SourcePathFieldValidateWrongInputTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 

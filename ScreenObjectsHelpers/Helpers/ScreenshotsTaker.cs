@@ -12,7 +12,7 @@ namespace ScreenObjectsHelpers.Helpers
         // to include it to the name of screenshot file
         // e.g. TakeScreenShot(nameof(<name of test>))
         // or a frame name from StackTrace
-        // ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, new StackTrace().GetFrame(0).GetMethod().Name);
+        // ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, new StackTrace().GetFrame(0).GetMethod().Name);
         public static void TakeScreenShot(string path, string nameOfTest)
         {
             Thread.Sleep(500);

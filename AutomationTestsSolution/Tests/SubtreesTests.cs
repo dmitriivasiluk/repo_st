@@ -54,7 +54,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             
             addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
@@ -68,7 +68,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledAfterCorrectDataSet()
         {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeInstallArtifactsPath, nameof(IsOkButtonEnabledAfterCorrectDataSet));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonEnabledAfterCorrectDataSet));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
 
             addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
