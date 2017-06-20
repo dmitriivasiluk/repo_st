@@ -47,11 +47,11 @@ namespace ScreenObjectsHelpers.Windows
 
         public UIItemContainer WaitMdiChildAppears(SearchCriteria searchCriteria)
         {
-            UIItemContainer MdiChild = null;
+            UIItemContainer MdiChild = MainWindow.MdiChild(searchCriteria); 
 
             var attempt = 0;
 
-            while (MdiChild == null && attempt < 15)
+            while (MdiChild == null && attempt < 20)
             {
                 Thread.Sleep(1000);
 
