@@ -6,7 +6,8 @@ using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
-
+using System.Threading;
+using TestStack.White.UIItems.TabItems;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -18,7 +19,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 
         #region UIElements
 
-        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Create"));
+        public override TabPage ToolbarTab => MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("CreateRepoTab"));
         public Button BrowseButton => MainWindow.Get<Button>(SearchCriteria.ByText("Browse"));
         public TextBox DestinationPathTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoDestinationPath"));
         public TextBox NameRepoTextBox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CreateRepoName"));
@@ -38,8 +39,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         {
             public static string GitHub = "Git";
             public static string Mercurial = "Mercurial";
-            //somesing strange
-            public static string None = "None";
         }
 
         #endregion
@@ -59,7 +58,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public Boolean IsRepoSettingsAvailable()
         {
             CheckCheckbox(CreateRemoteCheckBox);
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
             return RemoteAccountsComboBox.Enabled && RemoteAccountsComboBox.Visible &&
                 DescriptionTextBox.Enabled && DescriptionTextBox.Visible &&
                 IsPrivateCheckBox.Enabled && IsPrivateCheckBox.Visible;
@@ -74,7 +73,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public WarningExistingEmptyFolder ClickCreateButtonCallsWarning()
         {
             ClickButton(CreateButton);
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
             return new WarningExistingEmptyFolder(MainWindow);
         }
 
@@ -91,11 +90,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         public Window dialogWindow { get; }
-
-        public override void ValidateWindow()
-        {
-            Console.WriteLine("WAIT FOR DIALOG WINDOW");
-        }
 
         #region UIElements
 
@@ -131,10 +125,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         public Window WarningWindowContainer { get; }
-        public override void ValidateWindow()
-        {
-            Console.WriteLine("WAIT FOR WarningExistingEmptyFolder");
-        }
 
         #region UIItems
         public TextBox titleBar
@@ -179,10 +169,6 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
             WarningWindowContainer = mainWindow.ModalWindow(SearchCriteria.ByAutomationId("window"));
         }
         public Window WarningWindowContainer { get; }
-        public override void ValidateWindow()
-        {
-            Console.WriteLine("WAIT FOR WarningExistingHgRepository");
-        }
 
         #region UIItems
         public TextBox titleBar

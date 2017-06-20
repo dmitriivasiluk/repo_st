@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows.Automation;
+﻿using System.Windows.Automation;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
+using System.Threading;
 
 namespace ScreenObjectsHelpers.Windows
 {
@@ -17,18 +17,9 @@ namespace ScreenObjectsHelpers.Windows
             : base(mainWindow)
         {
             this.editHostingAccountWindow = editHostingAccountWindow;
-            
-        }
-
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING Edit_Hosting_Account_Window");
         }
 
         #region UIItems
-        public Button CancelButton => editHostingAccountWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Button OkButton => editHostingAccountWindow.Get<Button>(SearchCriteria.ByText("OK"));
         public ComboBox HostingSeviceComboBox => editHostingAccountWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox).AndIndex(0));
         public ComboBox PreferredProtocolComboBox => editHostingAccountWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox).AndIndex(1));
         public ComboBox AuthenticationComboBox => editHostingAccountWindow.Get<ComboBox>(SearchCriteria.ByControlType(ControlType.ComboBox).AndIndex(2));
@@ -38,7 +29,7 @@ namespace ScreenObjectsHelpers.Windows
         public Button RefreshPasswordButton => editHostingAccountWindow.Get<Button>(SearchCriteria.ByText("Refresh Password"));
         #endregion
 
-        #region ComboBox Varibles
+        #region ComboBox Variables
         public struct HostingService
         {
             public static string GitHub = "GitHub";
@@ -62,7 +53,7 @@ namespace ScreenObjectsHelpers.Windows
         #region Methods
         public AuthenticateWindow ClickRefreshPasswordButton()
         {
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
 
             if (RefreshPasswordButton.Enabled)
             {
@@ -75,12 +66,12 @@ namespace ScreenObjectsHelpers.Windows
 
         public void ClickRefreshTokenButton()
         {
-            Utils.ThreadWait(1000);
+            Thread.Sleep(1000);
 
             if (RefreshTokenButton.Enabled)
             {
                 ClickButton(RefreshTokenButton);
-                Utils.ThreadWait(4000);
+                Thread.Sleep(5000);
             }
         }
 
@@ -92,7 +83,7 @@ namespace ScreenObjectsHelpers.Windows
 
         public RemoteTab ClickOkButton()
         {
-            ClickButton(CancelButton);
+            ClickButton(OKButton);
             return new RemoteTab(MainWindow);
         }
 

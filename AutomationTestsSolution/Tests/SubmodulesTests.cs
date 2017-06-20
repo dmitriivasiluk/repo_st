@@ -3,6 +3,7 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 using ScreenObjectsHelpers.Windows.MenuFolder;
+using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using System;
 using System.IO;
 using System.Threading;
@@ -24,7 +25,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            addSubmoduleWindow.ClickCancelButton();
+            addSubmoduleWindow.ClickButtonToGetRepository(addSubmoduleWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -39,36 +40,45 @@ namespace AutomationTestsSolution.Tests
 
         [Test]
         [Category("Submodules")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
             Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
         }
 
         [Test]
         [Category("Submodules")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledWithEnteredSourcePath()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonEnabledWithEnteredSourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
             addSubmoduleWindow.SourcePathTextbox.SetValue(PathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
-            addSubmoduleWindow.WaitWhileElementAvaliable(addSubmoduleWindow.OKButton);
+            Thread.Sleep(4000);
 
             Assert.IsTrue(addSubmoduleWindow.IsOkButtonEnabled());
         }
 
         [Test]
         [Category("Submodules")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void SourcePathFieldValidateWrongInputTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(SourcePathFieldValidateWrongInputTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().OpenAddSubmoduleWindow();
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
-            addSubmoduleWindow.SourcePathTextbox.SetValue(testString);
+            addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, testString);
             var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
 
             Assert.IsTrue(isValidationMessageCorrect);

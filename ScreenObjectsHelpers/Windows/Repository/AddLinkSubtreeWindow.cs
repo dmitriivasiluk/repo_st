@@ -15,41 +15,17 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("AddLinkSubtreeWindow opened");
-        }
-
         #region UIItems
         //Automation IDs required
-        public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(0));
+        public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));
         public Button AdvancedOptionsButton => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
-        public TextBox BranchCommitTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(1));
-        public TextBox LocalRelativePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
+        public TextBox BranchCommitTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
+        public TextBox LocalRelativePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(3));
         public CheckBox SquashCommitsCheckbox => MainWindow.Get<CheckBox>(SearchCriteria.ByText("Squash commits?"));
-        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+        
         #endregion
 
         #region Methods
-        public RepositoryTab ClickOkButton()
-        {
-            ClickButton(OKButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public RepositoryTab ClickCancelButton()
-        {
-            ClickButton(CancelButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public bool IsOkButtonEnabled()
-        {
-            return OKButton.Enabled;
-        }
-
         public bool GetValidationMessage(string text)
         {
             LocalRelativePathTextbox.Focus();
@@ -69,6 +45,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
             public static string mercurialRepoType = "This is a Mercurial repository";
             public static string checkingSource = "Checking source...";
         }
+
         #endregion
     }
 }

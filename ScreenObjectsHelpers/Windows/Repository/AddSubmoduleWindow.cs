@@ -1,11 +1,8 @@
-﻿using System;
-using TestStack.White;
-using TestStack.White.UIItems;
+﻿using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
-using ScreenObjectsHelpers.Helpers;
 using System.Windows.Automation;
-using TestStack.White.InputDevices;
+using System;
 
 namespace ScreenObjectsHelpers.Windows.Repository
 {
@@ -15,40 +12,15 @@ namespace ScreenObjectsHelpers.Windows.Repository
         {
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("AddSubmoduleWindow opened");
-        }
-
         #region UIItems
-        //Automation IDs required
+        //AutomationID_required
         public TextBox SourcePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByAutomationId("SourceTextBox"));
-        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         public Button AdvancedOptions => MainWindow.Get<Button>(SearchCriteria.ByAutomationId("HeaderSite"));
         public TextBox SourceBranchTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(3));
         public TextBox LocalRelativePathTextbox => MainWindow.Get<TextBox>(SearchCriteria.ByControlType(ControlType.Edit).AndIndex(2));
         #endregion
 
         #region Methods
-        public RepositoryTab ClickOkButton()
-        {
-            ClickButton(OKButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public RepositoryTab ClickCancelButton()
-        {
-            ClickButton(CancelButton);
-            return new RepositoryTab(MainWindow);
-        }
-
-        public bool IsOkButtonEnabled()
-        {
-            return OKButton.Enabled;
-        }
-
         public bool GetValidationMessage(string text)
         {
             LocalRelativePathTextbox.Focus();

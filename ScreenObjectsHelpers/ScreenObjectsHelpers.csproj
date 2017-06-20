@@ -44,11 +44,6 @@
       <HintPath>..\packages\LibGit2Sharp.0.23.1\lib\net40\LibGit2Sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-    <Reference Include="nunit.framework, Version=3.6.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.6.0\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -92,11 +87,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Helpers\ConstantsList.cs" />
+    <Compile Include="Helpers\AttemptsCounterLogger.cs" />
     <Compile Include="Helpers\MercurialWrapper.cs" />
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Helpers\GitWrapper.cs" />
-    <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Windows\DownloadHgWindow.cs" />
     <Compile Include="Windows\AuthenticationWindow.cs" />
@@ -127,8 +122,11 @@
     <Compile Include="Windows\ProxyAuthenticationWindow.cs" />
     <Compile Include="Windows\Repository\AddLinkSubtreeWindow.cs" />
     <Compile Include="Windows\Repository\AddSubmoduleWindow.cs" />
+    <Compile Include="Windows\Repository\FetchWindow.cs" />
     <Compile Include="Windows\Repository\GitFlowInitialiseWindow.cs" />
+    <Compile Include="Windows\Repository\PullGitRepoWindow.cs" />
     <Compile Include="Windows\Repository\RepositoryTab.cs" />
+    <Compile Include="Windows\Repository\StashShelveWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />
     <Compile Include="Windows\ToolbarTabs\CreateTab.cs" />
     <Compile Include="Windows\ToolbarTabs\EditHostingAccountWindow\AuthenticateWindow.cs" />

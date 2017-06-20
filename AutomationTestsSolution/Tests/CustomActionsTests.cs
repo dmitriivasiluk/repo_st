@@ -5,6 +5,7 @@ using ScreenObjectsHelpers.Windows.MenuFolder;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.IO;
 using System;
+using System.Threading;
 
 namespace AutomationTestsSolution.Tests
 {
@@ -12,33 +13,60 @@ namespace AutomationTestsSolution.Tests
     {
         [Test]
         [Category("CustomActions")]
+        [Category("General")]
         public void AddCustomAction()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AddCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName);
+            Thread.Sleep(3000);
+
             var editCustomActionWindow = customActionsTab.ClickAddCustomActionButton();
 
-            editCustomActionWindow.SetMenuCaption(ConstantsList.addCustomActionName);
-            editCustomActionWindow.SetScriptToRun(ConstantsList.addCustomActionName);
+            editCustomActionWindow.SetTextboxContent(editCustomActionWindow.MenuCaption, ConstantsList.addCustomActionName);
+            editCustomActionWindow.SetTextboxContent(editCustomActionWindow.ScriptToRun, ConstantsList.addCustomActionName);
             editCustomActionWindow.ClickOKButton();
 
-            Assert.IsFalse(isMenuCaptionExistsBeforeTest);
-            Assert.IsTrue(customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName));
+            bool isCustomActionAdded = customActionsTab.IsMenuCaptionExists(ConstantsList.addCustomActionName);
+
+            Assert.IsTrue(isCustomActionAdded);
         }
 
         [Test]
         [Category("CustomActions")]
-        public void DeleteCustomAction()
+        [Category("General")]
+        public void EditCustomAction()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(EditCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
 
-            var isDeleteCustomActionButtonEnabled = customActionsTab.IsDeleteCustomActionButtonEnabled();
-            var isMenuCaptionExistsBeforeTest = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
+            Thread.Sleep(3000);
+
+            var editCustomActionWindow = customActionsTab.ClickEditCustomActionButton();
+
+            editCustomActionWindow.SetTextboxContent(editCustomActionWindow.MenuCaption, ConstantsList.editedCustomActionName);
+            editCustomActionWindow.ClickOKButton();
+
+            bool isCustomActionEdited = customActionsTab.IsMenuCaptionExists(ConstantsList.editedCustomActionName);
+
+            Assert.IsTrue(isCustomActionEdited);
+        }
+
+        [Test]
+        [Category("CustomActions")]
+        [Category("General")]
+        public void DeleteCustomAction()
+        {
+            ScreenshotsTaker.TakeScreenShot(nameof(DeleteCustomAction));
+            LocalTab mainWindow = new LocalTab(MainWindow);
+            OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
+            CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
+
+            Thread.Sleep(3000);
 
             customActionsTab.ClickDeleteCustomActionButton();
 
@@ -46,11 +74,9 @@ namespace AutomationTestsSolution.Tests
 
             confirmDeletionWindow.ClickOkButton();
 
-            var isMenuCaptionExistsAfterTest = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
+            bool isCustomActionDeleted = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
 
-            Assert.IsFalse(isDeleteCustomActionButtonEnabled);
-            Assert.IsTrue(isMenuCaptionExistsBeforeTest);
-            Assert.IsFalse(isMenuCaptionExistsAfterTest);
+            Assert.IsFalse(isCustomActionDeleted);
         }
 
         protected override void PerTestPreConfigureSourceTree()

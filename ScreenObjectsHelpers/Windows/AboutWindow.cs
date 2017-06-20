@@ -1,6 +1,5 @@
 ﻿using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
-using System;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -16,11 +15,7 @@ namespace ScreenObjectsHelpers.Windows
         }
 
         public UIItemContainer AboutWindowContainer { get; }
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING _ABOUT_ WINDOW");
-        }
+
         #region UIItems
 
         public TextBox HeaderOfAboutWindow

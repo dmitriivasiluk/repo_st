@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Automation;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
-using TestStack.White.UIItems;
 using System.Linq;
 
 namespace ScreenObjectsHelpers.Helpers
@@ -13,40 +10,28 @@ namespace ScreenObjectsHelpers.Helpers
     public class Utils
     {
 
-        public static Window FindNewWindow(string nameOfWindow, int testCount = 30)
+        public static Window FindNewWindow(string nameOfWindow)
         {
-            Window window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-            int count = 0;
-            while (window == null && count < testCount)
-            {
-                try
-                {
-                    window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
-                }
-                catch (ElementNotAvailableException e)
-                {
-                    window = null;
-                }
-                catch (NullReferenceException e)
-                {
-                    window = null;
-                }
-                Thread.Sleep(1000);
-                count++;
-            }
-            return window;
-        }
+            Window window = null;
 
-        public static void ThreadWait(int timeInMilliseconds)
-        {
-            try
+            var attempt = 0;
+
+            do
             {
-                Thread.Sleep(timeInMilliseconds);
-            }
-            catch (ThreadInterruptedException)
+                window = Desktop.Instance.Windows().FirstOrDefault(x => x.Name == nameOfWindow);
+
+                Thread.Sleep(2000);
+                attempt++;
+            } while (window == null && attempt < 15);
+
+            if (window == null)
             {
-                Thread.CurrentThread.Interrupt();
-            }
+                Console.WriteLine("*** *** *** *** *** *** ***");
+                Console.WriteLine("Could not find the window");
+                throw new NullReferenceException("Could not find the window");
+            }                
+
+            return window;
         }
 
         public static void RemoveFile(string path)

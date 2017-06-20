@@ -1,7 +1,9 @@
 ﻿using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
+using System.Threading;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.TabItems;
 
 namespace ScreenObjectsHelpers.Windows.ToolbarTabs
 {
@@ -12,7 +14,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         }
 
         #region UIElements
-        public override UIItem ToolbarTabButton => MainWindow.Get<UIItem>(SearchCriteria.ByText("Add"));
+        public override TabPage ToolbarTab => MainWindow.Get<TabPage>(SearchCriteria.ByAutomationId("AddRepoTab"));
 
         public Button BrowseButton => MainWindow.Get<Button>(SearchCriteria.ByText("Browse"));
 
@@ -37,7 +39,7 @@ namespace ScreenObjectsHelpers.Windows.ToolbarTabs
         public void TriggerValidation()
         {
             NameTextBox.Focus();
-            Utils.ThreadWait(2000);
+            Thread.Sleep(2000);
         }
 
         //TODO return OpenWorkingCopyWindow class

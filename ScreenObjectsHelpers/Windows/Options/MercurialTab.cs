@@ -11,11 +11,6 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING TAB");
-        }
 
         #region UIElements        
         public override UIItem UIElementTab => OptionsWindowContainer.Get<UIItem>(SearchCriteria.ByText("Mercurial"));

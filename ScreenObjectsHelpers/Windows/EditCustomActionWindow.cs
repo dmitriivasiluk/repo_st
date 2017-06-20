@@ -19,12 +19,6 @@ namespace ScreenObjectsHelpers.Windows
             this.customActionsTab = customActionsTab;
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING _Edit_Custom_action_Window");
-        }
-
         #region UIItems
         public TextBox MenuCaption => customActionsWindow.Get<TextBox>(SearchCriteria.ByAutomationId("CaptionBox"));
         public CheckBox OpenInASeparateWindow => customActionsWindow.Get<CheckBox>(SearchCriteria.ByText("Open in a separate window"));
@@ -32,34 +26,20 @@ namespace ScreenObjectsHelpers.Windows
         public TextBox ScriptToRun => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(1));
         public TextBox Parameters => customActionsWindow.Get<TextBox>(SearchCriteria.ByClassName("TextBox").AndIndex(2));
         
-        public Button OkButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("OK"));
-        public Button CancelButton => customActionsWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
         #endregion
 
         #region Methods
-        public void SetMenuCaption(string menuCaption)
-        {
-            MenuCaption.Text = menuCaption;
-        }
-        public void SetScriptToRun(string scriptToRun)
-        {
-            ScriptToRun.Text = scriptToRun;
-        }
-        public void SetParameters(string parameters)
-        {
-            Parameters.Text = parameters;
-        }
-
         public CustomActionsTab ClickOKButton()
         {
-            OkButton.Click();
+            ClickButton(OKButton);
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
         public CustomActionsTab ClickCancelButton()
         {
-            CancelButton.Click();
+            ClickButton(CancelButton);
             return new CustomActionsTab(MainWindow, customActionsTab);
         }
+
         #endregion
     }
 }

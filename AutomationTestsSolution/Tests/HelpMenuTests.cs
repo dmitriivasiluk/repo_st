@@ -10,8 +10,11 @@ namespace AutomationTestsSolution.Tests
     {
         [Test]
         [Category("HelpMenu")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AboutWindowTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AboutWindowTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AboutWindow aboutWindow = mainWindow.OpenMenu<HelpMenu>().OpenAbout();
 

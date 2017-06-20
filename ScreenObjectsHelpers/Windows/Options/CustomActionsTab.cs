@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ScreenObjectsHelpers.Helpers;
+using System;
+using System.Threading;
 using System.Windows.Automation;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
@@ -14,13 +16,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         {
             customActionsTab = optionsWindow;
         }
-
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING TAB");
-        }
-
+        
         #region UIItems
         public override UIItem UIElementTab
         {
@@ -58,6 +54,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
         public bool IsMenuCaptionExists(string condition)
         {
+            Thread.Sleep(2000);
             for (int i = 0; i < AllCustomActions.Items.Count; i++)
             {
                 if (AllCustomActions.Items[i].Contains(condition))
@@ -97,7 +94,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         }
         #region UIItems
         public Button CancelButton => confirmDeletionWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
-        public Button OkButton => confirmDeletionWindow.Get<Button>(SearchCriteria.ByText("OK"));
+        public Button OKButton => confirmDeletionWindow.Get<Button>(SearchCriteria.ByText("OK"));
         #endregion
 
         #region Methods
@@ -109,7 +106,8 @@ namespace ScreenObjectsHelpers.Windows.Options
 
         public UIItemContainer ClickOkButton()
         {
-            OkButton.Click();
+            OKButton.Click();
+            Thread.Sleep(3000);
             return customActionsTab;
         }
         #endregion

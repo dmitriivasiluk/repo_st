@@ -40,6 +40,9 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddGitFolderValidationMessageTest()
         {
             LocalTab mainWindow = new LocalTab(MainWindow);
@@ -50,8 +53,12 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddHgFolderValidationMessageTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AddHgFolderValidationMessageTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
             addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
@@ -60,8 +67,12 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddNotRepoFolderValidationMessageTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(AddNotRepoFolderValidationMessageTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -73,12 +84,16 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void AddEmptyPathValidationMessageTest()
         {
-            LocalTab mainWindow = new LocalTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(AddEmptyPathValidationMessageTest));
+            LocalTab mainWindow = new LocalTab(MainWindow);            
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
-            addTab.WorkingCopyPathTextBox.SetValue("");            
+            addTab.SetTextboxContent(addTab.WorkingCopyPathTextBox, "");            
             
             Assert.IsTrue(addTab.GetValidationMessage(AddTab.RepoValidationMessage.noWorkingPathSupplied));
             bool isAddButtonEnabled = addTab.AddButton.Enabled;
@@ -86,8 +101,12 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckAddButtonEnablesWithValidGitFolderTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckAddButtonEnablesWithValidGitFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -99,8 +118,12 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckAddButtonEnablesWithValidHgFolderTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckAddButtonEnablesWithValidGitFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -112,8 +135,12 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckOpenedRepoTitleAfterAddGitFolderTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckOpenedRepoTitleAfterAddGitFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 
@@ -126,8 +153,12 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
+        [Category("AddTab")]
+        [Category("General")]
+        [Category("StartWithNewTabOpened")]
         public void CheckOpenedRepoTitleAfterAddHgFolderTest()
         {
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckOpenedRepoTitleAfterAddHgFolderTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AddTab addTab = mainWindow.OpenTab<AddTab>();
 

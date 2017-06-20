@@ -1,8 +1,10 @@
-﻿using ScreenObjectsHelpers.Helpers;
+﻿using ScreenObjectsHelpers.Windows.Repository;
 using System;
+using System.Threading;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
+using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
 namespace ScreenObjectsHelpers.Windows
@@ -20,11 +22,19 @@ namespace ScreenObjectsHelpers.Windows
             this.MainWindow = mainWindow;
         }
 
+        #region UIItems
+        public Button OKButton => MainWindow.Get<Button>(SearchCriteria.ByText("OK"));
+        public Button CancelButton => MainWindow.Get<Button>(SearchCriteria.ByText("Cancel"));
+       
+        #endregion
+
+        #region Methods
         public Window MainWindow { get; private set; }
 
         public void ClickButton(Button button)
         {
-            WaitWhileElementAvaliable(button);
+
+            Thread.Sleep(500);
             if (button.Enabled && button.Visible)
             {
                 button.Click();
@@ -35,18 +45,13 @@ namespace ScreenObjectsHelpers.Windows
             }
         }
 
-        public void ClickButtonAfterElementVisible(Button Button)
-        {
-            WaitWhileElementAvaliable(Button).Click();
-        }
-
         public UIItemContainer WaitMdiChildAppears(SearchCriteria searchCriteria, int secondsForWait)
         {
             int secondsPass = 0;
             UIItemContainer container = MainWindow.MdiChild(searchCriteria);
             while (container == null)
             {
-                Utils.ThreadWait(1000);
+                Thread.Sleep(1000);
                 secondsPass++;
                 container = MainWindow.MdiChild(searchCriteria);
                 if (secondsPass > secondsForWait)
@@ -57,63 +62,17 @@ namespace ScreenObjectsHelpers.Windows
             return container;
         }
 
-        public bool IsElementAvaliable(UIItem item)
+        public void SetComboboxValue(ComboBox combobox, string comboboxValue)
         {
-            return item.Visible;
+            combobox.Select(comboboxValue);
+            Thread.Sleep(1000);
         }
 
-        public UIItem WaitWhileElementAvaliable(UIItem item, int maximumTimeToWait = 60)
+        public void SetTextboxContent(TextBox textbox, string content)
         {
-            int secondPassed = 0;
-            const int secondToWaitEachLoop = 5;
-            while (true)
-            {
-                var isItemVisible = item.Visible;
-                var isItemEnabled = item.Enabled;
-                if (secondPassed > maximumTimeToWait)
-                {
-                    throw new TimeoutException($"Element {item.ToString()} is not Visible or Disabled after {secondPassed} second");
-                }
-                if (isItemVisible && isItemEnabled) return item;
-                secondPassed += secondToWaitEachLoop;
-                Utils.ThreadWait(secondToWaitEachLoop * 5000); // convert in milliseconds 
-            }
-        }
-
-        public void ScrollHorizontalLeft(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Horizontal.ScrollLeftLarge();
-            }
-        }
-
-        public void ScrollHorizontalRigh(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Horizontal.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Horizontal.ScrollRightLarge();
-            }
-        }
-
-        public void ScrollVerticalDown(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Vertical.ScrollDown();
-            }
-        }
-
-        public void ScrollVerticalUp(Window window)
-        {
-            var isWindowScrolable = window.ScrollBars.Vertical.IsScrollable;
-            if (isWindowScrolable)
-            {
-                window.ScrollBars.Vertical.ScrollUp();
-            }
+            textbox.Focus();
+            Thread.Sleep(1000); 
+            textbox.SetValue(content);
         }
 
         public void CheckCheckbox(CheckBox checkbox)
@@ -152,5 +111,22 @@ namespace ScreenObjectsHelpers.Windows
             }
             return result;
         }
+
+        public virtual bool IsOkButtonEnabled()
+        {
+            return OKButton.Enabled;
+        }
+
+        public string GetTitle()
+        {
+            return MainWindow.Title;
+        }
+
+        public RepositoryTab ClickButtonToGetRepository(Button button)
+        {
+            ClickButton(button);
+            return new RepositoryTab(MainWindow);
+        }
+        #endregion
     }
 }

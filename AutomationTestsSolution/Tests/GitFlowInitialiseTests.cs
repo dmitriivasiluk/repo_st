@@ -25,7 +25,7 @@ namespace AutomationTestsSolution.Tests
         [TearDown]
         public override void TearDown()
         {
-            gitFlowInitWindow.ClickCancelButton();
+            gitFlowInitWindow.ClickButtonToGetRepository(gitFlowInitWindow.CancelButton);
             base.TearDown();
             RemoveTestFolder();
         }
@@ -39,37 +39,42 @@ namespace AutomationTestsSolution.Tests
         }
 
         [Test]
-        [Category ("GitFlow")]
-        [Ignore("Investigate stability issue")]
+        [Category("GitFlow")]
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckUseDefaultsButtonResetTextboxesTest));
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             gitFlowInitWindow.SetAllTextboxes(testString);
             gitFlowInitWindow.ClickUseDefaultsButton();
 
-            Assert.IsTrue(gitFlowInitWindow.IsDefaultBranchNameCorrect(gitFlowInitWindow.ProductionBranchTextbox, ConstantsList.defaultProductionBranch));
-            Assert.IsTrue(gitFlowInitWindow.IsDefaultBranchNameCorrect(gitFlowInitWindow.DevelopmentBranchTextbox, ConstantsList.defaultDevelopmentBranch));
-            Assert.IsTrue(gitFlowInitWindow.IsDefaultBranchNameCorrect(gitFlowInitWindow.FeatureBranchTextbox, ConstantsList.defaultFeatureBranch));
-            Assert.IsTrue(gitFlowInitWindow.IsDefaultBranchNameCorrect(gitFlowInitWindow.ReleaseBranchTextbox, ConstantsList.defaultReleaseBranch));
-            Assert.IsTrue(gitFlowInitWindow.IsDefaultBranchNameCorrect(gitFlowInitWindow.HotfixBranchTextbox, ConstantsList.defaultHotfixBranch));
+            Assert.AreEqual(gitFlowInitWindow.ProductionBranchTextbox.Text, ConstantsList.defaultProductionBranch);
+            Assert.AreEqual(gitFlowInitWindow.DevelopmentBranchTextbox.Text, ConstantsList.defaultDevelopmentBranch);
+            Assert.AreEqual(gitFlowInitWindow.FeatureBranchTextbox.Text, ConstantsList.defaultFeatureBranch);
+            Assert.AreEqual(gitFlowInitWindow.ReleaseBranchTextbox.Text, ConstantsList.defaultReleaseBranch);
+            Assert.AreEqual(gitFlowInitWindow.HotfixBranchTextbox.Text, ConstantsList.defaultHotfixBranch);
             Assert.IsTrue(gitFlowInitWindow.IsVersionTagEmpty());
         }
 
         [Test]
         [Category("GitFlow")]
-        [Ignore("Investigate stability issue")]
-        public void CheckWhetherDefaultBranchNamesCorrect()
+        [Category("General")]
+        [Category("StartWithRepoOpened")]
+        public void CheckDefaultBranchNamesTest()
         {
-            RepositoryTab mainWindow = new RepositoryTab(MainWindow);
+            ScreenshotsTaker.TakeScreenShot(nameof(CheckDefaultBranchNamesTest));
+            RepositoryTab mainWindow = new RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
-            Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.ProductionBranchTextbox, ConstantsList.defaultProductionBranch));
-            Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.DevelopmentBranchTextbox, ConstantsList.defaultDevelopmentBranch));
-            Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.FeatureBranchTextbox, ConstantsList.defaultFeatureBranch));
-            Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.ReleaseBranchTextbox, ConstantsList.defaultReleaseBranch));
-            Assert.IsTrue(gitFlowInitWindow.TextboxDefaultContent(gitFlowInitWindow.HotfixBranchTextbox, ConstantsList.defaultHotfixBranch));
+            Assert.AreEqual(gitFlowInitWindow.ProductionBranchTextbox.Text, ConstantsList.defaultProductionBranch);
+            Assert.AreEqual(gitFlowInitWindow.DevelopmentBranchTextbox.Text, ConstantsList.defaultDevelopmentBranch);
+            Assert.AreEqual(gitFlowInitWindow.FeatureBranchTextbox.Text, ConstantsList.defaultFeatureBranch);
+            Assert.AreEqual(gitFlowInitWindow.ReleaseBranchTextbox.Text, ConstantsList.defaultReleaseBranch);
+            Assert.AreEqual(gitFlowInitWindow.HotfixBranchTextbox.Text, ConstantsList.defaultHotfixBranch);
+
             Assert.IsTrue(gitFlowInitWindow.IsVersionTagEmpty());
         }
 

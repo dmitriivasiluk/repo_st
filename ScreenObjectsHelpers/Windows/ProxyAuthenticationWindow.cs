@@ -1,5 +1,4 @@
 ﻿using ScreenObjectsHelpers.Windows.Options;
-using System;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
@@ -18,11 +17,6 @@ namespace ScreenObjectsHelpers.Windows
             this.networkTab = networkTab;
         }
 
-        public override void ValidateWindow()
-        {
-            // Need verify opened tab in this method, need implementation! If validation is fail, throw exception!
-            Console.WriteLine("WAIT FOR OPENING _Proxy Authentication_ WINDOW");
-        }
 
         #region UIElements
         public TextBox UsernameTextBox => proxyAuthenticationWindow.Get<TextBox>(SearchCriteria.ByAutomationId("Username"));
@@ -33,7 +27,6 @@ namespace ScreenObjectsHelpers.Windows
 
         public Button LoginButton => proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("LoginButton"));
 
-        public Button CancelButton => proxyAuthenticationWindow.Get<Button>(SearchCriteria.ByAutomationId("CancelButton"));
         #endregion
 
         #region Methods
