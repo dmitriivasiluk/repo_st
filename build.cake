@@ -93,7 +93,7 @@ Task("Run-Unit-Tests-Core")
             + ",AutomationTestsSolution.Tests.ToolbarAddTabTests"
             + ",AutomationTestsSolution.Tests.ToolbarCloneTabTests"
             + ",AutomationTestsSolution.Tests.ToolbarCreateTabTestLocal"
-            + ",AutomationTestsSolution.Tests.ToolbarRemoteTabTests"
+            //+ ",AutomationTestsSolution.Tests.ToolbarRemoteTabTests"
             + ",AutomationTestsSolution.Tests.WelcomeWizardTests"
         });
 });
