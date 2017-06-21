@@ -53,3 +53,8 @@ on_finish:
     move "C:\Users\appveyor\Documents\attemptsCounter.txt" %APPVEYOR_BUILD_FOLDER%
 
     appveyor PushArtifact attemptsCounter.txt
+notifications:
+  - provider: Email
+    to:
+      - icherednyk@atlassian.com
+    subject: 'Build {{status}}: {{projectName}} {{buildVersion}}'
