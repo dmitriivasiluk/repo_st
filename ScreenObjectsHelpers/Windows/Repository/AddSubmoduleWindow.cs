@@ -43,7 +43,7 @@ namespace ScreenObjectsHelpers.Windows.Repository
         public NotAGitRepository SwitchToNotAGitRepositoryWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByText("Not a Git repository");
-            var notAGitRepoWindow = this.WaitMdiChildAppears(searchCriteria, 10);
+            var notAGitRepoWindow = this.WaitMdiChildAppears(searchCriteria);
             return new NotAGitRepository(MainWindow, this, notAGitRepoWindow);
         }
         #endregion
