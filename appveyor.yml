@@ -19,8 +19,8 @@ before_build:
     echo C:\projects\sourcetreeqaautomation\.appveyor\SeleniumAuth.exe
     
 build_script:
-- ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Run-Unit-Tests-Core
-
+- ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Build
+test:
 artifacts:
   - path: '**\screenshots\*.jpg'
 
