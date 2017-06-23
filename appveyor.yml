@@ -27,3 +27,16 @@ test:
 artifacts:
   - path: '**\screenshots\*.jpg'
 
+on_failure:
+- 7z a %APPVEYOR_BUILD_FOLDER%\screenshots.7z C:\Users\appveyor\Documents\*.jpg    
+- appveyor PushArtifact screenshots.7z
+on_finish:
+- cmd: >-
+    move "C:\Users\appveyor\Documents\attemptsCounter.txt" %APPVEYOR_BUILD_FOLDER%
+
+    appveyor PushArtifact attemptsCounter.txt
+notifications:
+  - provider: Email
+    to:
+      - icherednyk@atlassian.com
+    subject: 'Build {{status}}: {{projectName}} {{buildVersion}}'

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using AutomationTestsSolution.Helpers;
@@ -16,9 +17,14 @@ namespace AutomationTestsSolution.Tests
 {
     public abstract class BasicTest
     {
-        public static readonly string DefaultSourceTreeInstallPath = Path.Combine(TestContext.CurrentContext.TestDirectory, DateTime.Now.Ticks.ToString());
-        public static readonly string DefaultSourceTreeDownloadPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "downloads");
-        public static readonly string DefaultSourceTreeArtifactsPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "artifacts");
+        public static readonly string DefaultSourceTreeInstallPath =
+            Path.Combine(TestContext.CurrentContext.TestDirectory, DateTime.Now.Ticks.ToString());
+
+        public static readonly string DefaultSourceTreeDownloadPath =
+            Path.Combine(TestContext.CurrentContext.TestDirectory, "downloads");
+
+        public static readonly string DefaultSourceTreeArtifactsPath =
+            Path.Combine(TestContext.CurrentContext.TestDirectory, "artifacts");
 
         public static readonly Version DefaultSourceTreeVersion = new Version("2.1.2.5");
         public static readonly Version DefaulGitVersion = new Version("2.12.2.2");
@@ -30,12 +36,14 @@ namespace AutomationTestsSolution.Tests
 
         private bool ForceCleanRun = false;
 
+        bool sourceTreeWindowOpeded;
+
 
         [SetUp]
         public virtual void SetUp()
         {
             CheckRuntimeEnvironment();
-            
+
             // check we have a sourcetree install
             GetSourceTreeHandle();
 
@@ -65,6 +73,7 @@ namespace AutomationTestsSolution.Tests
         }
 
         protected IEnumerable<string> UserConfigPaths { get; private set; }
+
         protected virtual void PreConfigureSourceTree()
         {
             PreConfigureSourceTreeCore();
@@ -99,7 +108,8 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallHgEmbedded()
         {
-            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, DefaultHgVersion);
+            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath,
+                DefaultHgVersion);
             hgHelper.Download(ForceCleanRun);
             if (!hgHelper.InstallHg(ForceCleanRun))
             {
@@ -115,7 +125,8 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallHgSystem()
         {
-            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, DefaultHgVersion);
+            var hgHelper = new EmbeddedHgHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath,
+                SourceTreeAppPath, DefaultHgVersion);
             hgHelper.Download(ForceCleanRun);
             if (!hgHelper.InstallHg(ForceCleanRun))
             {
@@ -137,7 +148,8 @@ namespace AutomationTestsSolution.Tests
             var szHelper = new SevenZipHelper(SourceTreeAppPath);
 
             // TODO search for a GCM installer to avoid hardcoding the  version
-            var gcmPassThroughInstaller = Path.Combine(SourceTreeExtrasPath, $"PortableGcmPassthroughAskpass-{DefaulAskpassPassthroughVersion}.7z");
+            var gcmPassThroughInstaller = Path.Combine(SourceTreeExtrasPath,
+                $"PortableGcmPassthroughAskpass-{DefaulAskpassPassthroughVersion}.7z");
             if (!szHelper.Unzip(gcmPassThroughInstaller, SourceTreeUserDataHgExtrasPath, ForceCleanRun))
             {
                 Assert.Fail("Unable to install hg gcm passthrough");
@@ -146,7 +158,8 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallGitEmbedded()
         {
-            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath, SourceTreeAppPath, DefaulGitVersion);
+            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, SourceTreeUserDataPath,
+                SourceTreeAppPath, DefaulGitVersion);
             gitHelper.Download(ForceCleanRun);
             if (!gitHelper.InstallGit(ForceCleanRun))
             {
@@ -162,7 +175,8 @@ namespace AutomationTestsSolution.Tests
 
         private void InstallGitSystem()
         {
-            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath, SourceTreeAppPath, DefaulGitVersion);
+            var gitHelper = new EmbeddedGitHelper(DefaultSourceTreeDownloadPath, DefaultSourceTreeDownloadPath,
+                SourceTreeAppPath, DefaulGitVersion);
             gitHelper.Download(ForceCleanRun);
             if (!gitHelper.InstallGit(ForceCleanRun))
             {
@@ -198,7 +212,8 @@ namespace AutomationTestsSolution.Tests
             }
 
             // TODO search for a GCM installer to avoid hardcoding the  version
-            var gitlfsmediaInstaller = Path.Combine(SourceTreeExtrasPath, $"PortableGitLfsBitbucketMediaApi-{DefaulGitLfsMediaAdapaterVersion}.7z");
+            var gitlfsmediaInstaller = Path.Combine(SourceTreeExtrasPath,
+                $"PortableGitLfsBitbucketMediaApi-{DefaulGitLfsMediaAdapaterVersion}.7z");
             if (!szHelper.Unzip(gitlfsmediaInstaller, SourceTreeUserDataGitExtrasPath, ForceCleanRun))
             {
                 Assert.Fail("Unable to install git-lfs media adapter");
@@ -221,7 +236,9 @@ namespace AutomationTestsSolution.Tests
                 }
 
                 var accountsJson = Path.Combine(SourceTreeUserDataPath, "accounts.json");
-                client.DownloadFile("https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/sourcetree-test_preregistered_accounts.json", accountsJson);
+                client.DownloadFile(
+                    "https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/sourcetree-test_preregistered_accounts.json",
+                    accountsJson);
             }
         }
 
@@ -272,7 +289,8 @@ namespace AutomationTestsSolution.Tests
             }
 
             Directory.Move(Path.Combine(SourceTreeInstallTempPath, @"lib\net45"), SourceTreeAppPath);
-            return true;;
+            return true;
+            ;
         }
 
         private void CheckRuntimeEnvironment()
@@ -281,7 +299,7 @@ namespace AutomationTestsSolution.Tests
             SourceTreeInstallPath = stInstallPathEnvVar == null ? DefaultSourceTreeInstallPath : stInstallPathEnvVar;
 
             Version ver;
-            if(Version.TryParse(Environment.GetEnvironmentVariable("ST_TARGETVERSION"), out ver))
+            if (Version.TryParse(Environment.GetEnvironmentVariable("ST_TARGETVERSION"), out ver))
             {
                 SourceTreeTargetVersion = ver;
             }
@@ -307,7 +325,8 @@ namespace AutomationTestsSolution.Tests
                 Directory.CreateDirectory(DefaultSourceTreeDownloadPath);
             }
 
-            SourceTreeNuPkgPath = Path.Combine(DefaultSourceTreeDownloadPath, $"sourcetree.{SourceTreeTargetVersion}.nupkg");
+            SourceTreeNuPkgPath = Path.Combine(DefaultSourceTreeDownloadPath,
+                $"sourcetree.{SourceTreeTargetVersion}.nupkg");
 
             if (File.Exists(SourceTreeNuPkgPath) && !ForceCleanRun)
             {
@@ -317,7 +336,8 @@ namespace AutomationTestsSolution.Tests
 
             using (var client = new System.Net.WebClient())
             {
-                var url = $"https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/SourceTree-{SourceTreeTargetVersion}-full.nupkg";
+                var url =
+                    $"https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/SourceTree-{SourceTreeTargetVersion}-full.nupkg";
                 try
                 {
                     client.DownloadFile(
@@ -362,23 +382,68 @@ namespace AutomationTestsSolution.Tests
         protected Process SourceTreeProcess { get; private set; }
 
         public string SourceTreeInstallPath { get; private set; }
-        public string SourceTreeInstallTempPath { get { return Path.Combine(SourceTreeInstallPath, "temp"); } }
-        public string SourceTreeScreenShotsPath { get { return Path.Combine(DefaultSourceTreeArtifactsPath, "screenshots"); } }
-        public string SourceTreeAppPath { get { return Path.Combine(SourceTreeInstallPath, "app"); } }
-        public string SourceTreeExtrasPath { get { return Path.Combine(SourceTreeAppPath, "extras"); } }
+
+        public string SourceTreeInstallTempPath
+        {
+            get { return Path.Combine(SourceTreeInstallPath, "temp"); }
+        }
+
+        public string SourceTreeScreenShotsPath
+        {
+            get { return Path.Combine(DefaultSourceTreeArtifactsPath, "screenshots"); }
+        }
+
+        public string SourceTreeAppPath
+        {
+            get { return Path.Combine(SourceTreeInstallPath, "app"); }
+        }
+
+        public string SourceTreeExtrasPath
+        {
+            get { return Path.Combine(SourceTreeAppPath, "extras"); }
+        }
+
         public string SourceTreeNuPkgPath { get; private set; }
         public Version SourceTreeVersion { get; private set; }
         public Version SourceTreeTargetVersion { get; private set; }
-        public string SourceTreeExePath { get { return Path.Combine(SourceTreeAppPath, "SourceTree.exe"); } }
-        public string SourceTreeExeConfigPath { get { return Path.Combine(SourceTreeAppPath, "SourceTree.exe.config"); } }
-        public string SourceTreeUserDataPath {  get {  return Path.Combine(SourceTreeAppPath, @"AppData\local\Atlassian\SourceTree"); } }
 
-        public string SourceTreeUserDataGitExtrasPath { get { return Path.Combine(SourceTreeUserDataPath, @"git_extras"); } }
+        public string SourceTreeExePath
+        {
+            get { return Path.Combine(SourceTreeAppPath, "SourceTree.exe"); }
+        }
 
-        public string SourceTreeUserDataHgExtrasPath { get { return Path.Combine(SourceTreeUserDataPath, @"hg_extras"); } }
+        public string SourceTreeExeConfigPath
+        {
+            get { return Path.Combine(SourceTreeAppPath, "SourceTree.exe.config"); }
+        }
+
+        public string SourceTreeUserDataPath
+        {
+            get { return Path.Combine(SourceTreeAppPath, @"AppData\local\Atlassian\SourceTree"); }
+        }
+
+        public string SourceTreeUserDataGitExtrasPath
+        {
+            get { return Path.Combine(SourceTreeUserDataPath, @"git_extras"); }
+        }
+
+        public string SourceTreeUserDataHgExtrasPath
+        {
+            get { return Path.Combine(SourceTreeUserDataPath, @"hg_extras"); }
+        }
+
         public IEnumerable<string> SourceTreeUserConfigs { get; set; }
-        public string TestDataPath { get { return Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData"); } }
-        public string SourceTreeTestDataPath { get { return Path.Combine(SourceTreeInstallPath, "data"); } }
+
+        public string TestDataPath
+        {
+            get { return Path.Combine(TestContext.CurrentContext.TestDirectory, @"../../TestData"); }
+        }
+
+        public string SourceTreeTestDataPath
+        {
+            get { return Path.Combine(SourceTreeInstallPath, "data"); }
+        }
+
         public string SourceTreeDownloadPath { get; private set; }
 
         public static void ReplaceTextInFile(string pathToFile, string oldText, string newText)
@@ -394,28 +459,57 @@ namespace AutomationTestsSolution.Tests
         }
 
         protected void RunAndAttachToSourceTree()
-        { 
+        {
+            KillProcess();
+            RunSourceTree(SourceTreeExePath);
+
             var attempt = 0;
 
-            //do
-            //{
-            //    KillSourceTree();
-            //    RunSourceTree(SourceTreeExePath);
-            //    attempt++;
-            //}
-            //while (!IsSourceTreeWindowOpeded() && attempt < 5);
-            RunSourceTree(SourceTreeExePath);
+            while (!IsSourceTreeWindowOpeded() && attempt < 5)
+            {
+                KillProcess();
+                RunSourceTree(SourceTreeExePath);
+                attempt++;
+            }
+
+            AttemptsCounterLogger.AttemptCounter("Restart SourceTree ", TestContext.CurrentContext.Test.FullName,
+                attempt);
+
+            Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");
+            Console.WriteLine("Restart SourceTree: " + attempt);
+            Console.WriteLine("~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ~ - ");
+
+            Assert.True(sourceTreeWindowOpeded, "SourceTree window was not opeded");
+
+
             AttachToSourceTree();
         }
 
         public bool IsSourceTreeWindowOpeded()
         {
-            if (SourceTreeProcess.MainWindowTitle.Equals("SourceTree") || SourceTreeProcess.MainWindowTitle.Equals("Welcome"))
+            Thread.Sleep(2000);
+            SourceTreeProcess.Refresh();
+
+            var attempt = 0;
+
+            while (string.Equals(SourceTreeProcess.MainWindowTitle, "") && attempt < 15)
             {
-                return true;
+                Thread.Sleep(1000);
+                SourceTreeProcess.Refresh();
+                attempt++;
             }
 
-            return false;
+            AttemptsCounterLogger.AttemptCounter("SourceTree process refresh ", TestContext.CurrentContext.Test.FullName,
+                attempt);
+
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
+            Console.WriteLine("SourceTree process refresh: " + attempt);
+            Console.WriteLine("- - - - - - - - - - - - - - - - - - ");
+
+            sourceTreeWindowOpeded = (SourceTreeProcess.MainWindowTitle.Equals("SourceTree") ||
+                                      SourceTreeProcess.MainWindowTitle.Equals("Welcome"));
+
+            return sourceTreeWindowOpeded;
         }
 
         protected void SetFile(string sourceFile, string targetFile)
@@ -554,6 +648,30 @@ namespace AutomationTestsSolution.Tests
             }
 
             Directory.Delete(target_dir, false);
+        }
+
+        private void KillProcess()
+        {
+            foreach (var process in Process.GetProcessesByName("SourceTree"))
+            {
+                try
+                {
+                    process.CloseMainWindow();
+                    process.Kill();
+                    process.WaitForExit();
+                }
+                catch (Win32Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    throw new Win32Exception(e.Message);
+                }
+
+            }
         }
     }
 }

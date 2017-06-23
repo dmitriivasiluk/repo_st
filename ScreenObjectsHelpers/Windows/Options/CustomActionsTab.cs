@@ -76,7 +76,7 @@ namespace ScreenObjectsHelpers.Windows.Options
         public ConfirmDeletionDialogWindow SwitchToConfirmDeletionDialogWindow()
         {
             SearchCriteria searchCriteria = SearchCriteria.ByAutomationId("window");
-            var confirmDeletionDialog = this.WaitMdiChildAppears(searchCriteria, 10);
+            var confirmDeletionDialog = this.WaitMdiChildAppears(searchCriteria);
             return new ConfirmDeletionDialogWindow(customActionsTab, confirmDeletionDialog);
         }
         #endregion

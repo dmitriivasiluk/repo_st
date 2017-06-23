@@ -86,9 +86,9 @@ namespace AutomationTestsSolution.Tests
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "githubfaketesting", "123GitHubFake")]
         [Category("WelcomeWizard")]
         public void ConnectGitHubAccountTest(
-            string atlassianLoginEmail, 
-            string atlassianPassword, 
-            string gitHubLogin, 
+            string atlassianLoginEmail,
+            string atlassianPassword,
+            string gitHubLogin,
             string gitHubPassword)
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(ConnectGitHubAccountTest));
@@ -106,12 +106,12 @@ namespace AutomationTestsSolution.Tests
 
             string actualTitleOfNextStep = installWindow.DownloadingVersionText();
             // This is ensure that authentication was successful, because we are located on next step "Install tools"
-            Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems..."); 
+            Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake")]
         [Category("WelcomeWizard")]
-        public void ConnectBitbucketAccountTest (
+        public void ConnectBitbucketAccountTest(
             string atlassianLoginEmail,
             string atlassianPassword,
             string bitBucketLogin,
@@ -140,7 +140,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
         [Ignore("BitBucket server link needed")]
-        [Category("WelcomeWizard")]        
+        [Category("WelcomeWizard")]
         public void ConnectBitbucketServerAccountTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -266,7 +266,7 @@ namespace AutomationTestsSolution.Tests
         [Category("OAuth")]
         //[Ignore("Investigate stability issue")]
 
-        public void ConnectGitHubViaOAuthTest (
+        public void ConnectGitHubViaOAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword)
         {
@@ -326,12 +326,13 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(actualTitleOfNextStep, "Downloading version control systems...");
         }
 
-     [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "SourceTree")]
-     [Category("WelcomeWizard")]
+        [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "SourceTree")]
+        [Category("WelcomeWizard")]
+        [Ignore("Fix needed")]
         public void SkipSetupButtonClosesConfigurationTest(
-            string atlassianLoginEmail,
-            string atlassianPassword,
-            string expectedTitle)
+               string atlassianLoginEmail,
+               string atlassianPassword,
+               string expectedTitle)
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(SkipSetupButtonClosesConfigurationTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -435,7 +436,7 @@ namespace AutomationTestsSolution.Tests
 
             installWindow.ClickContinueButton();
 
-            Thread.Sleep(2000); 
+            Thread.Sleep(2000);
             bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(isRepositoryCloned);
@@ -537,7 +538,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "https://Server.com.ua", "incorrectLogin", "incorrectPassword", "bitbucket-public")]
         [Ignore("BitBucket server link needed")]
-        [Category("WelcomeWizard")]        
+        [Category("WelcomeWizard")]
         public void CloneBitBucketServerRepositoryUsingBasicAuthTest(
             string atlassianLoginEmail,
             string atlassianPassword,
@@ -621,7 +622,7 @@ namespace AutomationTestsSolution.Tests
 
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "bitbucketfaketest", "123BitBucketFake", "bitbucket-public")]
         [Category("WelcomeWizard")]
-        //[Ignore("Investigate stability issue")]
+        [Ignore("Fix needed")]
         public void SourceTreeOpensAfterFinishConfiguration(
             string atlassianLoginEmail,
             string atlassianPassword,
