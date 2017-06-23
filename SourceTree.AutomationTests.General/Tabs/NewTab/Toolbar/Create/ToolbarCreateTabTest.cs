@@ -314,7 +314,6 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
         [Category("CreateRepoLocal")]
         [Category("General")]
         [Category("StartWithNewTabOpened")]
-        //[Ignore("Not stable")]
         public void CheckLocalRepoCreateGitInExistRepoPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckLocalRepoCreateGitInExistRepoPositiveTest));

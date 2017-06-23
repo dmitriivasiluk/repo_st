@@ -155,7 +155,6 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
         [Category("CloneTab")]
         [Category("General")]
         [Category("StartWithNewTabOpened")]
-        //[Ignore("Investigate stability issue")]
         public void CheckGitRepoOpenedAfterCloneTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckGitRepoOpenedAfterCloneTest));
@@ -175,7 +174,6 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
         [Category("CloneTab")]
         [Category("General")]
         [Category("StartWithNewTabOpened")]
-        //[Ignore("Investigate stability issue")]
         public void CheckHgRepoOpenedAfterCloneTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckHgRepoOpenedAfterCloneTest));

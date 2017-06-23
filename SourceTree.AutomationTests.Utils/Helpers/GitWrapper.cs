@@ -14,6 +14,9 @@ namespace ScreenObjectsHelpers.Helpers
         private bool _disposed;
         private Dictionary<string, UsernamePasswordCredentials> _remoteUrlCredentials = new Dictionary<string, UsernamePasswordCredentials>();
 
+        public GitWrapper()
+        { }
+
         public GitWrapper(string pathToRepository, string usernameCommiter, string email)
         {
             Username = usernameCommiter;
@@ -113,6 +116,11 @@ namespace ScreenObjectsHelpers.Helpers
             if (_disposed) return;
             _disposed = true;
             _gitRepository.Dispose();
+        }
+
+        public void Init(string pathToTestGitFolder)
+        {
+            Repository.Init(pathToTestGitFolder);
         }
     }
 }

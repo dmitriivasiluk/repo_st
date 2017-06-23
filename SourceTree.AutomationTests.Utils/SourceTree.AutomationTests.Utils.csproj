@@ -44,6 +44,9 @@
       <HintPath>..\packages\LibGit2Sharp.0.23.1\lib\net40\LibGit2Sharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -60,7 +63,10 @@
       <HintPath>..\packages\System.Extended.3.4.16.616\lib\net40\System.Extended.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="TestStack.White, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
       <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
       <Private>True</Private>
@@ -88,11 +94,20 @@
   <ItemGroup>
     <Compile Include="Helpers\ConstantsList.cs" />
     <Compile Include="Helpers\AttemptsCounterLogger.cs" />
+    <Compile Include="Helpers\EmbeddedGitHelper.cs" />
+    <Compile Include="Helpers\EmbeddedHgHelper.cs" />
+    <Compile Include="Helpers\ExeConfig.cs" />
     <Compile Include="Helpers\MercurialWrapper.cs" />
+    <Compile Include="Helpers\OpenTabsXml.cs" />
+    <Compile Include="Helpers\ProcessHelper.cs" />
     <Compile Include="Helpers\ScreenshotsTaker.cs" />
+    <Compile Include="Helpers\SevenZipHelper.cs" />
+    <Compile Include="Helpers\Uninstall.cs" />
     <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Helpers\GitWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\AbstractWelcomeWizardTest.cs" />
+    <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="Windows\DownloadHgWindow.cs" />
     <Compile Include="Windows\AuthenticationWindow.cs" />
     <Compile Include="Windows\AboutWindow.cs" />

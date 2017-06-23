@@ -7,7 +7,7 @@ using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
 namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote
 {
-    class ToolbarRemoteTabTests : BasicTest
+    public class ToolbarRemoteTabTests : BasicTest
     {
 
         [TestCase("staccount", "123456test")]
@@ -99,7 +99,6 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote
         [Test]
         [Category("Authentication")]
         [Category("OAuth")]
-        //[Ignore ("Investigate stability issue")]
         public void AuthBitbucketHttpsOauthPositiveTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AuthBitbucketHttpsOauthPositiveTest));
@@ -115,24 +114,6 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote
 
         [Test]
         [Category("Authentication")]
-        [Category("OAuth")]
-        [Ignore("Investigate stability issue")]
-        public void AuthGithubHttpsOauthPositiveTest()
-        {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AuthGithubHttpsOauthPositiveTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);            
-            RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
-
-            var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.SetComboboxValue(addAccount.HostingSeviceComboBox, EditHostingAccountWindow.HostingService.GitHub);            
-            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.OAuth);
-            addAccount.ClickRefreshTokenButton();
-            
-            Assert.IsTrue(addAccount.IsValidationMessageDisplayed(addAccount.authOk));
-        }
-
-        [Test]
-        [Category("Authentication")]
         [Category("General")]
         public void AuthOkButtonDisabledTest()
         {
@@ -142,23 +123,6 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote
             var addAccount = remoteTab.ClickAddAccountButton();
 
             Assert.IsFalse(addAccount.OKButton.Enabled);
-        }
-
-        [TestCase("RandomUsername")]
-        [Category("Authentication")]
-        [Category("General")]
-        [Ignore("Investigate stability issue")]
-        public void AuthRefreshPasswordButtonEnabledTest(string login)
-        {
-            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AuthRefreshPasswordButtonEnabledTest));
-            LocalTab mainWindow = new LocalTab(MainWindow);
-            RemoteTab remoteTab = mainWindow.OpenTab<RemoteTab>();
-
-            var addAccount = remoteTab.ClickAddAccountButton();
-            addAccount.SetComboboxValue(addAccount.AuthenticationComboBox, EditHostingAccountWindow.Authentication.Basic);
-            addAccount.SetTextboxContent(addAccount.UsernameTextBox, login);            
-
-            Assert.IsTrue(addAccount.RefreshPasswordButton.Enabled);
         }
 
         [Test]

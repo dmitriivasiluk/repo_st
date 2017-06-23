@@ -1,14 +1,11 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using AutomationTestsSolution.Helpers;
+using AutomationTestsSolution.Tests;
 using LibGit2Sharp;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 
-namespace AutomationTestsSolution.Tests
+namespace ScreenObjectsHelpers.Tests
 {
     public abstract class AbstractWelcomeWizardTest : BasicTest
     {
