@@ -104,16 +104,16 @@
     </Compile>
     <Compile Include="Tests\BasicTest.cs" />
     <Compile Include="Tests\AbstractWelcomeWizardTest.cs" />
-    <Compile Include="Tests\GitFlowInitialiseTests.cs" />
-    <Compile Include="Tests\HelpMenuTests.cs" />
-    <Compile Include="Tests\CustomActionsTests.cs" />
-    <Compile Include="Tests\SubmodulesTests.cs" />
-    <Compile Include="Tests\SubtreesTests.cs" />
-    <Compile Include="Tests\ToolbarAddTabTests.cs" />
-    <Compile Include="Tests\ToolbarRemoteTabTests.cs" />
-    <Compile Include="Tests\ToolbarCloneTabTests.cs" />
-    <Compile Include="Tests\ToolbarCreateTabTest.cs" />
-    <Compile Include="Tests\WelcomeWizardTests.cs" />
+    <Compile Include="Tabs\RepositoryTab\Toolbar\GitFlow\GitFlowInitialiseTests.cs" />
+    <Compile Include="Menu\Help\HelpMenuTests.cs" />
+    <Compile Include="Menu\Tools\Options\CustomActions\CustomActionsTests.cs" />
+    <Compile Include="Menu\Repository\AddSubmodule\SubmodulesTests.cs" />
+    <Compile Include="Menu\Repository\AddLinkSubTree\SubtreesTests.cs" />
+    <Compile Include="Tabs\NewTab\Toolbar\Add\ToolbarAddTabTests.cs" />
+    <Compile Include="Tabs\NewTab\Toolbar\Remote\ToolbarRemoteTabTests.cs" />
+    <Compile Include="Tabs\NewTab\Toolbar\Clone\ToolbarCloneTabTests.cs" />
+    <Compile Include="Tabs\NewTab\Toolbar\Create\ToolbarCreateTabTest.cs" />
+    <Compile Include="WelcomeWizard\WelcomeWizardTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -133,6 +133,9 @@
       <Project>{a8d0a59b-a007-4fb6-997c-4a35b03aef8c}</Project>
       <Name>SourceTree.AutomationTests.Utils</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Menu\Tools\Options\Authentication\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

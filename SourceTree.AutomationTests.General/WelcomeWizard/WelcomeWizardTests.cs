@@ -1,13 +1,13 @@
-using System;
 using System.IO;
 using System.Threading;
+using AutomationTestsSolution.Tests;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows.Repository;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.WelcomeWizard
 {
     /// <summary>
     /// REQUIRMENTS TO RUN THIS TESTS:

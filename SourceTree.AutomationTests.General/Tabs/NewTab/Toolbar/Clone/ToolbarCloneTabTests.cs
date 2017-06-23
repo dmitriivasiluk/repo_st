@@ -1,12 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using System.Threading;
+using AutomationTestsSolution.Tests;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows.Repository;
-using System.Threading;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
 {
     class ToolbarCloneTabTests : BasicTest
     {
@@ -166,7 +166,7 @@ namespace AutomationTestsSolution.Tests
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);            
             var repoName = cloneTab.NameTextBox.Text;
 
-            RepositoryTab repoTab = cloneTab.ClickCloneButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = cloneTab.ClickCloneButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }
@@ -186,7 +186,7 @@ namespace AutomationTestsSolution.Tests
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
             var repoName = cloneTab.NameTextBox.Text;
 
-            RepositoryTab repoTab = cloneTab.ClickCloneButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = cloneTab.ClickCloneButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }

@@ -1,15 +1,13 @@
-﻿using LibGit2Sharp;
-using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using System;
-using System.IO;
-using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
+﻿using System.IO;
 using System.Threading;
 using AutomationTestsSolution.Helpers;
+using AutomationTestsSolution.Tests;
+using NUnit.Framework;
+using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.MenuFolder;
+using ScreenObjectsHelpers.Windows.Repository;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.Menu.Repository.AddLinkSubTree
 {
     class SubtreesTests : BasicTest
     {
@@ -24,7 +22,7 @@ namespace AutomationTestsSolution.Tests
         {
             RemoveTestFolder();
             CreateTestFolder();
-            Repository.Init(PathToClonedGitRepo);
+            LibGit2Sharp.Repository.Init(PathToClonedGitRepo);
 
             var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
             var openTabsXml = new OpenTabsXml(openTabsPath);
@@ -57,7 +55,7 @@ namespace AutomationTestsSolution.Tests
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             
-            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
+            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(RepositoryMenu.OperationsRepositoryMenu.AddLinkSubtree);
             
             Assert.IsFalse(addLinkSubtree.IsOkButtonEnabled());
         }
@@ -71,7 +69,7 @@ namespace AutomationTestsSolution.Tests
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonEnabledAfterCorrectDataSet));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
 
-            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
+            addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(RepositoryMenu.OperationsRepositoryMenu.AddLinkSubtree);
 
             addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, PathToClonedGitRepo);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);

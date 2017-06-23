@@ -1,10 +1,11 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using AutomationTestsSolution.Tests;
+using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
-using System.Threading;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote
 {
     class ToolbarRemoteTabTests : BasicTest
     {

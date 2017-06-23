@@ -1,12 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
+using AutomationTestsSolution.Tests;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using ScreenObjectsHelpers.Windows.Repository;
-using System.Threading;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
 {
     class ToolbarCreateTabTestLocal : BasicTest
     {
@@ -100,7 +101,7 @@ namespace AutomationTestsSolution.Tests
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
-            RepositoryTab repoTab = createTab.ClickCreateButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = createTab.ClickCreateButton();
             Thread.Sleep(2000);
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
@@ -122,7 +123,7 @@ namespace AutomationTestsSolution.Tests
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
-            RepositoryTab repoTab = createTab.ClickCreateButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = createTab.ClickCreateButton();
             Thread.Sleep(2000);
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
@@ -145,7 +146,7 @@ namespace AutomationTestsSolution.Tests
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            RepositoryTab repoTab = warning.ClickYesButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
@@ -189,7 +190,7 @@ namespace AutomationTestsSolution.Tests
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            RepositoryTab repoTab = warning.ClickYesButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
@@ -235,7 +236,7 @@ namespace AutomationTestsSolution.Tests
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            RepositoryTab repoTab = warning.ClickYesButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
@@ -280,7 +281,7 @@ namespace AutomationTestsSolution.Tests
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            RepositoryTab repoTab = warning.ClickYesButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
@@ -326,7 +327,7 @@ namespace AutomationTestsSolution.Tests
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            RepositoryTab repoTab = warning.ClickYesButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));

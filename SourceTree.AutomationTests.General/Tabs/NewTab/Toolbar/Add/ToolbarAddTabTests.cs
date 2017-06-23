@@ -1,12 +1,12 @@
-﻿using System;
+﻿using System.IO;
+using AutomationTestsSolution.Tests;
+using LibGit2Sharp;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
-using System.IO;
-using LibGit2Sharp;
 using ScreenObjectsHelpers.Windows.Repository;
+using ScreenObjectsHelpers.Windows.ToolbarTabs;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Add
 {
     class ToolbarAddTabTests : BasicTest
     {
@@ -147,7 +147,7 @@ namespace AutomationTestsSolution.Tests
             addTab.WorkingCopyPathTextBox.SetValue(PathToTestGitFolder);
             addTab.TriggerValidation();
             var repoName = addTab.NameTextBox.Text;
-            RepositoryTab repoTab = addTab.ClickAddButton();           
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = addTab.ClickAddButton();           
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }
@@ -165,7 +165,7 @@ namespace AutomationTestsSolution.Tests
             addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
             addTab.TriggerValidation();
             var repoName = addTab.NameTextBox.Text;
-            RepositoryTab repoTab = addTab.ClickAddButton();
+            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = addTab.ClickAddButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }

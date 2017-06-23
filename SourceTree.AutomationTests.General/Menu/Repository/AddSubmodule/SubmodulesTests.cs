@@ -1,15 +1,13 @@
-﻿using LibGit2Sharp;
-using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
-using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using AutomationTestsSolution.Helpers;
+using AutomationTestsSolution.Tests;
+using NUnit.Framework;
+using ScreenObjectsHelpers.Helpers;
+using ScreenObjectsHelpers.Windows.MenuFolder;
+using ScreenObjectsHelpers.Windows.Repository;
 
-namespace AutomationTestsSolution.Tests
+namespace AutomationTestsSolution.Menu.Repository.AddSubmodule
 {
     class SubmodulesTests : BasicTest
     {
@@ -46,7 +44,7 @@ namespace AutomationTestsSolution.Tests
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(RepositoryMenu.OperationsRepositoryMenu.AddSubmodule);
 
             Assert.IsFalse(addSubmoduleWindow.IsOkButtonEnabled());
         }
@@ -59,7 +57,7 @@ namespace AutomationTestsSolution.Tests
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonEnabledWithEnteredSourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(RepositoryMenu.OperationsRepositoryMenu.AddSubmodule);
 
             addSubmoduleWindow.SourcePathTextbox.SetValue(PathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
@@ -76,7 +74,7 @@ namespace AutomationTestsSolution.Tests
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(SourcePathFieldValidateWrongInputTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
-            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
+            addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(RepositoryMenu.OperationsRepositoryMenu.AddSubmodule);
 
             addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, testString);
             var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
@@ -88,7 +86,7 @@ namespace AutomationTestsSolution.Tests
         {
             RemoveTestFolder();
             CreateTestFolder();
-            Repository.Init(PathToClonedGitRepo);
+            LibGit2Sharp.Repository.Init(PathToClonedGitRepo);
             
             var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
             var openTabsXml = new OpenTabsXml(openTabsPath);
