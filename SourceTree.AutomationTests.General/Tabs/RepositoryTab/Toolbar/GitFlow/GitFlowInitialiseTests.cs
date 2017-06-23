@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using AutomationTestsSolution.Helpers;
-using AutomationTestsSolution.Tests;
 using LibGit2Sharp;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Repository;
 
-namespace AutomationTestsSolution.Tabs.RepositoryTab.Toolbar.GitFlow
+namespace SourceTree.AutomationTests.General.Tabs.RepositoryTab.Toolbar.GitFlow
 {
     class GitFlowInitialiseTests : BasicTest
     {
@@ -32,7 +32,7 @@ namespace AutomationTestsSolution.Tabs.RepositoryTab.Toolbar.GitFlow
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(PathToClonedGitRepo);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]
@@ -42,7 +42,7 @@ namespace AutomationTestsSolution.Tabs.RepositoryTab.Toolbar.GitFlow
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckUseDefaultsButtonResetTextboxesTest));
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab mainWindow = new ScreenObjectsHelpers.Windows.Repository.RepositoryTab(MainWindow);            
+            Utils.Windows.Menu.Repository.RepositoryTab mainWindow = new Utils.Windows.Menu.Repository.RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             gitFlowInitWindow.SetAllTextboxes(testString);
@@ -63,7 +63,7 @@ namespace AutomationTestsSolution.Tabs.RepositoryTab.Toolbar.GitFlow
         public void CheckDefaultBranchNamesTest()
         {
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckDefaultBranchNamesTest));
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab mainWindow = new ScreenObjectsHelpers.Windows.Repository.RepositoryTab(MainWindow);            
+            Utils.Windows.Menu.Repository.RepositoryTab mainWindow = new Utils.Windows.Menu.Repository.RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
             Assert.AreEqual(gitFlowInitWindow.ProductionBranchTextbox.Text, ConstantsList.defaultProductionBranch);

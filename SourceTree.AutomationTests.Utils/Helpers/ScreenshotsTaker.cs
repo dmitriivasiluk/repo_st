@@ -1,11 +1,11 @@
 ﻿using System;
-using TestStack.White;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
+using TestStack.White;
 
-namespace ScreenObjectsHelpers.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class ScreenshotsTaker
     {

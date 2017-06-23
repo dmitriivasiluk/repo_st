@@ -1,12 +1,11 @@
 ﻿using System.IO;
 using System.Threading;
-using AutomationTestsSolution.Tests;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 
-namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
+namespace SourceTree.AutomationTests.General.Tabs.NewTab.Toolbar.Clone
 {
     class ToolbarCloneTabTests : BasicTest
     {
@@ -30,8 +29,8 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(PathToClonedGitRepo);
-            Utils.RemoveDirectory(PathToClonedHgRepo);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToClonedGitRepo);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToClonedHgRepo);
         }
 
         [Test]
@@ -146,7 +145,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneMercurialRepoTest));
             cloneTab.ClickCloneButton();
 
-            bool isDotHgExistByPath = Utils.IsFolderMercurial(PathToClonedHgRepo);
+            bool isDotHgExistByPath = SourceTree.AutomationTests.Utils.Helpers.Utils.IsFolderMercurial(PathToClonedHgRepo);
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneMercurialRepoTest));
             Assert.IsTrue(isDotHgExistByPath);
         }
@@ -165,7 +164,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);            
             var repoName = cloneTab.NameTextBox.Text;
 
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = cloneTab.ClickCloneButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = cloneTab.ClickCloneButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }
@@ -184,7 +183,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Clone
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
             var repoName = cloneTab.NameTextBox.Text;
 
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = cloneTab.ClickCloneButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = cloneTab.ClickCloneButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }

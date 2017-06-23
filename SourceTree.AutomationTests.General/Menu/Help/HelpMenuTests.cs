@@ -1,11 +1,13 @@
-﻿using AutomationTestsSolution.Tests;
-using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
+﻿using NUnit.Framework;
 using ScreenObjectsHelpers.Windows;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows;
+using SourceTree.AutomationTests.Utils.Windows.Menu;
+using SourceTree.AutomationTests.Utils.Windows.MenuFolder;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 
-namespace AutomationTestsSolution.Menu.Help
+namespace SourceTree.AutomationTests.General.Menu.Help
 {
     class HelpMenuTests : BasicTest
     {

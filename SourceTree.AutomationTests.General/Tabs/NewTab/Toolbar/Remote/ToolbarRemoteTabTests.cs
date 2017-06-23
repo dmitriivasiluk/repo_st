@@ -1,11 +1,12 @@
 ﻿using System.Threading;
-using AutomationTestsSolution.Tests;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab.EditHostingAccountWindow;
 
-namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote
+namespace SourceTree.AutomationTests.General.Tabs.NewTab.Toolbar.Remote
 {
     public class ToolbarRemoteTabTests : BasicTest
     {

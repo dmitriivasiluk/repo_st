@@ -1,12 +1,11 @@
 ﻿using System.IO;
-using AutomationTestsSolution.Tests;
 using LibGit2Sharp;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 
-namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Add
+namespace SourceTree.AutomationTests.General.Tabs.NewTab.Toolbar.Add
 {
     class ToolbarAddTabTests : BasicTest
     {
@@ -27,9 +26,9 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Add
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(PathToTestGitFolder);
-            Utils.RemoveDirectory(PathToTestHgFolder);
-            Utils.RemoveDirectory(PathToEmptyFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToTestGitFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToTestHgFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToEmptyFolder);
         }
 
         private void CreateTestFolders()
@@ -147,7 +146,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Add
             addTab.WorkingCopyPathTextBox.SetValue(PathToTestGitFolder);
             addTab.TriggerValidation();
             var repoName = addTab.NameTextBox.Text;
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = addTab.ClickAddButton();           
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = addTab.ClickAddButton();           
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }
@@ -165,7 +164,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Add
             addTab.WorkingCopyPathTextBox.SetValue(PathToTestHgFolder);
             addTab.TriggerValidation();
             var repoName = addTab.NameTextBox.Text;
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = addTab.ClickAddButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = addTab.ClickAddButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
         }

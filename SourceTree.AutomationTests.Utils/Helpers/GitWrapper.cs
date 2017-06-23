@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using LibGit2Sharp;
 
-namespace ScreenObjectsHelpers.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class GitWrapper
     {

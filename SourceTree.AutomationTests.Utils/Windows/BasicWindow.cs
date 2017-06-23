@@ -1,14 +1,14 @@
-﻿using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
-using System;
+﻿using System;
 using System.Threading;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Repository;
 using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.ListBoxItems;
 using TestStack.White.UIItems.WindowItems;
 
-namespace ScreenObjectsHelpers.Windows
+namespace SourceTree.AutomationTests.Utils.Windows
 {
     /// <summary>
     /// This is the base page from which all other pages inherit.

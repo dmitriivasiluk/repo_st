@@ -1,11 +1,9 @@
 ﻿using System.IO;
-using AutomationTestsSolution.Helpers;
-using AutomationTestsSolution.Tests;
 using LibGit2Sharp;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
+using SourceTree.AutomationTests.Utils.Helpers;
 
-namespace ScreenObjectsHelpers.Tests
+namespace SourceTree.AutomationTests.Utils.Tests
 {
     public abstract class AbstractWelcomeWizardTest : BasicTest
     {
@@ -40,7 +38,7 @@ namespace ScreenObjectsHelpers.Tests
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(PathToClonedGitRepo);
+            Helpers.Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         protected override void RunAndAttach()
@@ -52,7 +50,7 @@ namespace ScreenObjectsHelpers.Tests
         protected void AttachToWelcomeWizard()
         {
             MainWindow = null;
-            MainWindow = Utils.FindNewWindow("Welcome");
+            MainWindow = Helpers.Utils.FindNewWindow("Welcome");
         }
 
         private void SetGlobalIgnore()

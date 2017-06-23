@@ -1,5 +1,5 @@
 ﻿
-namespace ScreenObjectsHelpers.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class ConstantsList
     {

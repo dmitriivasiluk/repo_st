@@ -1,12 +1,12 @@
-﻿using ScreenObjectsHelpers.Helpers;
-using System.Threading;
+﻿using System.Threading;
+using ScreenObjectsHelpers.Windows;
 using TestStack.White.InputDevices;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
-using static TestStack.White.WindowsAPI.KeyboardInput;
+using TestStack.White.WindowsAPI;
 
-namespace ScreenObjectsHelpers.Windows
+namespace SourceTree.AutomationTests.Utils.Windows
 {
     public class AuthenticationWindow : BasicWindow
     {
@@ -36,7 +36,7 @@ namespace ScreenObjectsHelpers.Windows
             Keyboard.Instance.Enter(password);
             ClickButton(NextButton);
             Thread.Sleep(1000);
-            Keyboard.Instance.PressSpecialKey(SpecialKeys.RETURN);
+            Keyboard.Instance.PressSpecialKey(KeyboardInput.SpecialKeys.RETURN);
             Thread.Sleep(8000);
             return new InstallationWindow(MainWindow);
         }

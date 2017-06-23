@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace AutomationTestsSolution.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class ExeConfig
     {

@@ -1,13 +1,14 @@
 ﻿using System.IO;
 using System.Threading;
-using AutomationTestsSolution.Tests;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using ScreenObjectsHelpers.Windows.Options;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Menu;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Tools.Options;
+using SourceTree.AutomationTests.Utils.Windows.MenuFolder;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 
-namespace AutomationTestsSolution.Menu.Tools.Options.CustomActions
+namespace SourceTree.AutomationTests.General.Menu.Tools.Options.CustomActions
 {
     class CustomActionsTests : BasicTest
     {

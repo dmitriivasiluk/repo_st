@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Automation;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Repository;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
+using TestStack.White;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
-using TestStack.White.UIItems.WindowItems;
-using TestStack.White;
-using System.Windows.Automation;
 using TestStack.White.UIItems.ListBoxItems;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
-using ScreenObjectsHelpers.Windows.Repository;
+using TestStack.White.UIItems.WindowItems;
 
-namespace ScreenObjectsHelpers.Windows
+namespace SourceTree.AutomationTests.Utils.Windows
 {
 
     public class InstallationWindow : BasicWindow
@@ -194,13 +193,13 @@ namespace ScreenObjectsHelpers.Windows
         public LocalTab SkipSetup()
         {
             ClickButton(SkipSetupButton);
-            Window mercurialWindow = Utils.FindNewWindow("SourceTree: Mercurial not found");
+            Window mercurialWindow = Helpers.Utils.FindNewWindow("SourceTree: Mercurial not found");
             if (mercurialWindow != null)
             {
                 Button IDontWantUseMercurial = mercurialWindow.Get<Button>(SearchCriteria.ByAutomationId("CommandLink_2003"));
                 IDontWantUseMercurial.Click();
             }
-            Window mainWindow = Utils.FindNewWindow("SourceTree");
+            Window mainWindow = Helpers.Utils.FindNewWindow("SourceTree");
             return new LocalTab(mainWindow);
         }
 
@@ -214,7 +213,7 @@ namespace ScreenObjectsHelpers.Windows
             {
                 // Empty, expect that Configuration window is closed (the latest step in configuration, clone) and SourceTree is opened 
             }
-            Window mainWindow = Utils.FindNewWindow("SourceTree");
+            Window mainWindow = Helpers.Utils.FindNewWindow("SourceTree");
             return new RepositoryTab(mainWindow);
         }
 
@@ -295,7 +294,7 @@ namespace ScreenObjectsHelpers.Windows
         public LocalTab clickNoButton()
         {
             YesButton.Click();
-            Window sourceTreeWindow = Utils.FindNewWindow("SourceTree");
+            Window sourceTreeWindow = Helpers.Utils.FindNewWindow("SourceTree");
             return new LocalTab(sourceTreeWindow);
         }
     }

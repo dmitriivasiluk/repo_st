@@ -1,12 +1,13 @@
 ﻿using System;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
 using System.Windows.Automation;
+using ScreenObjectsHelpers.Windows;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
 
-namespace ScreenObjectsHelpers.Windows
+namespace SourceTree.AutomationTests.Utils.Windows
 {
     public class AboutWindow : GeneralWindow
     {

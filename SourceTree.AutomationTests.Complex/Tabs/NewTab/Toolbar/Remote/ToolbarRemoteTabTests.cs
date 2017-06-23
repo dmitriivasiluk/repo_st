@@ -1,12 +1,12 @@
-﻿using AutomationTestsSolution.Tests;
-using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
+﻿using NUnit.Framework;
 using ScreenObjectsHelpers.Windows;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab.EditHostingAccountWindow;
 
 namespace SourceTree.AutomationTests.Complex.Tabs.NewTab.Toolbar.Remote
 {
-    class ToolbarRemoteTabTests : AutomationTestsSolution.Tabs.NewTab.Toolbar.Remote.ToolbarRemoteTabTests
+    class ToolbarRemoteTabTests : General.Tabs.NewTab.Toolbar.Remote.ToolbarRemoteTabTests
     {
         [Test]
         [Category("Authentication")]

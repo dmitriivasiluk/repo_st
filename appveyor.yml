@@ -21,6 +21,9 @@ before_build:
 build_script:
 - ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Build
 test:
+  assemblies:
+    only:
+      - '**\SourceTree.AutomationTests.General.dll'
   categories:
     only:
     - General

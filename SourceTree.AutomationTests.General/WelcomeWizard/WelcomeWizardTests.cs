@@ -1,14 +1,12 @@
 using System.IO;
 using System.Threading;
-using AutomationTestsSolution.Tests;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Tests;
 using ScreenObjectsHelpers.Windows;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows;
 
-namespace AutomationTestsSolution.WelcomeWizard
+namespace SourceTree.AutomationTests.General.WelcomeWizard
 {
     /// <summary>
     /// REQUIRMENTS TO RUN THIS TESTS:
@@ -42,12 +40,12 @@ namespace AutomationTestsSolution.WelcomeWizard
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, openSourceTreeTestFolder));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneOAuthGitHubTestFolder));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneOAuthBitBucketTestFolder));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketTestFolder));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicGitHubTestFolder));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketServerTestFolder));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, openSourceTreeTestFolder));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneOAuthGitHubTestFolder));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneOAuthBitBucketTestFolder));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketTestFolder));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicGitHubTestFolder));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketServerTestFolder));
         }
 
         [TestCase]
@@ -308,7 +306,7 @@ namespace AutomationTestsSolution.WelcomeWizard
             string nameOfRepo)
         {
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicGitHubTestFolder);
-            Utils.RemoveDirectory(pathToNewFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(pathToNewFolder);
 
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CloneGitHubRepositoryUsingBasicAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -337,7 +335,7 @@ namespace AutomationTestsSolution.WelcomeWizard
             installWindow.ClickContinueButton();
 
             Thread.Sleep(10000); // Time for cloning 
-            bool actualIsRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool actualIsRepositoryCloned = SourceTree.AutomationTests.Utils.Helpers.Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(actualIsRepositoryCloned);
         }
@@ -352,7 +350,7 @@ namespace AutomationTestsSolution.WelcomeWizard
             string nameOfRepo)
         {
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketTestFolder);
-            Utils.RemoveDirectory(pathToNewFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(pathToNewFolder);
 
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CloneBitBucketRepositoryUsingBasicAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -382,7 +380,7 @@ namespace AutomationTestsSolution.WelcomeWizard
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool isRepositoryCloned = SourceTree.AutomationTests.Utils.Helpers.Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(isRepositoryCloned);
         }

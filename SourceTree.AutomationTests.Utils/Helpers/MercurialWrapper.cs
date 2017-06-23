@@ -1,7 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
-namespace ScreenObjectsHelpers.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class MercurialWrapper
     {

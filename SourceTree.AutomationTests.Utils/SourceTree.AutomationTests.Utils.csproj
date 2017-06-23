@@ -7,8 +7,8 @@
     <ProjectGuid>{A8D0A59B-A007-4FB6-997C-4A35B03AEF8C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScreenObjectsHelpers</RootNamespace>
-    <AssemblyName>ScreenObjectsHelpers</AssemblyName>
+    <RootNamespace>SourceTree.AutomationTests.Utils</RootNamespace>
+    <AssemblyName>SourceTree.AutomationTests.Utils</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -112,47 +112,50 @@
     <Compile Include="Windows\AuthenticationWindow.cs" />
     <Compile Include="Windows\AboutWindow.cs" />
     <Compile Include="Windows\BasicWindow.cs" />
-    <Compile Include="Windows\EditCustomActionWindow.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\EditCustomActionWindow.cs" />
     <Compile Include="Windows\InstallationWindow.cs" />
-    <Compile Include="Windows\MenuFolder\ActionMenu\ActionsMenu.cs" />
-    <Compile Include="Windows\MenuFolder\ActionMenu\ResolveConflict.cs" />
-    <Compile Include="Windows\MenuFolder\RepositoryMenu.cs" />
-    <Compile Include="Windows\MenuFolder\ViewMenu.cs" />
-    <Compile Include="Windows\MenuFolder\EditMenu.cs" />
-    <Compile Include="Windows\MenuFolder\HelpMenu.cs" />
-    <Compile Include="Windows\MenuFolder\ToolsMenu.cs" />
-    <Compile Include="Windows\MenuFolder\FileMenu.cs" />
-    <Compile Include="Windows\MenuFolder\MenuBar.cs" />
-    <Compile Include="Windows\NewTabWindow.cs" />
-    <Compile Include="Windows\Options\CustomActionsTab.cs" />
-    <Compile Include="Windows\Options\NetworkTab.cs" />
-    <Compile Include="Windows\Options\MercurialTab.cs" />
-    <Compile Include="Windows\Options\DiffTab.cs" />
-    <Compile Include="Windows\Options\AuthenticationTab.cs" />
-    <Compile Include="Windows\Options\GeneralTab.cs" />
-    <Compile Include="Windows\Options\GitTab.cs" />
-    <Compile Include="Windows\Options\OptionsWindow.cs" />
+    <Compile Include="Windows\Menu\ActionsMenu.cs" />
+    <Compile Include="Windows\Menu\Action\ResolveConflict.cs" />
+    <Compile Include="Windows\Menu\RepositoryMenu.cs" />
+    <Compile Include="Windows\Menu\ViewMenu.cs" />
+    <Compile Include="Windows\Menu\EditMenu.cs" />
+    <Compile Include="Windows\Menu\HelpMenu.cs" />
+    <Compile Include="Windows\Menu\ToolsMenu.cs" />
+    <Compile Include="Windows\Menu\FileMenu.cs" />
+    <Compile Include="Windows\Menu\MenuBar.cs" />
+    <Compile Include="Windows\Tabs\NewTab\NewTabWindow.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\CustomActionsTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\NetworkTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\MercurialTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\DiffTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\AuthenticationTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\GeneralTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\GitTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\OptionsWindow.cs" />
     <Compile Include="Windows\GeneralWindow.cs" />
-    <Compile Include="Windows\Options\UpdatesTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\UpdatesTab.cs" />
     <Compile Include="Windows\ProxyAuthenticationWindow.cs" />
-    <Compile Include="Windows\Repository\AddLinkSubtreeWindow.cs" />
-    <Compile Include="Windows\Repository\AddSubmoduleWindow.cs" />
-    <Compile Include="Windows\Repository\FetchWindow.cs" />
-    <Compile Include="Windows\Repository\GitFlowInitialiseWindow.cs" />
-    <Compile Include="Windows\Repository\PullGitRepoWindow.cs" />
-    <Compile Include="Windows\Repository\RepositoryTab.cs" />
-    <Compile Include="Windows\Repository\StashShelveWindow.cs" />
-    <Compile Include="Windows\ToolbarTabs\AddTabWindows\OpenWorkingCopyWindow.cs" />
-    <Compile Include="Windows\ToolbarTabs\CreateTab.cs" />
-    <Compile Include="Windows\ToolbarTabs\EditHostingAccountWindow\AuthenticateWindow.cs" />
-    <Compile Include="Windows\ToolbarTabs\EditHostingAccountWindow\EditHostingAccountWindow.cs" />
-    <Compile Include="Windows\ToolbarTabs\LocalTab.cs" />
-    <Compile Include="Windows\ToolbarTabs\CloneTab.cs" />
-    <Compile Include="Windows\ToolbarTabs\AddTab.cs" />
-    <Compile Include="Windows\ToolbarTabs\RemoteTab.cs" />
+    <Compile Include="Windows\Menu\Repository\AddLinkSubtreeWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\AddSubmoduleWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\FetchWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\GitFlowInitialiseWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\PullGitRepoWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\RepositoryTab.cs" />
+    <Compile Include="Windows\Menu\Repository\StashShelveWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\AddTabWindows\OpenWorkingCopyWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\CreateTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\EditHostingAccountWindow\AuthenticateWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\EditHostingAccountWindow\EditHostingAccountWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\LocalTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\CloneTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\AddTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\RemoteTab.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows\Tabs\RepositoryTab\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

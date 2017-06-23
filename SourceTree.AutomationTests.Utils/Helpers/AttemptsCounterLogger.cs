@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ScreenObjectsHelpers.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class AttemptsCounterLogger
     {

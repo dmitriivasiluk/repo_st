@@ -1,13 +1,14 @@
 ﻿using System.IO;
 using System.Threading;
 using AutomationTestsSolution.Helpers;
-using AutomationTestsSolution.Tests;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.MenuFolder;
-using ScreenObjectsHelpers.Windows.Repository;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Menu;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Repository;
+using SourceTree.AutomationTests.Utils.Windows.MenuFolder;
 
-namespace AutomationTestsSolution.Menu.Repository.AddLinkSubTree
+namespace SourceTree.AutomationTests.General.Menu.Repository.AddLinkSubTree
 {
     class SubtreesTests : BasicTest
     {
@@ -43,7 +44,7 @@ namespace AutomationTestsSolution.Menu.Repository.AddLinkSubTree
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(PathToClonedGitRepo);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]

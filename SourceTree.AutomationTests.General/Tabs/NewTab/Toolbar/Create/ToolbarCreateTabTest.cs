@@ -1,13 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using AutomationTestsSolution.Tests;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Tests;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 
-namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
+namespace SourceTree.AutomationTests.General.Tabs.NewTab.Toolbar.Create
 {
     class ToolbarCreateTabTestLocal : BasicTest
     {
@@ -20,8 +19,8 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
         public override void TearDown()
         {
             base.TearDown();
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, gitRepoName));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, mercurialRepoName));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, gitRepoName));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, mercurialRepoName));
         }
 
         [Test]
@@ -101,7 +100,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = createTab.ClickCreateButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = createTab.ClickCreateButton();
             Thread.Sleep(2000);
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
@@ -123,7 +122,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.SetTextboxContent(createTab.DestinationPathTextBox, pathToRepo);
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = createTab.ClickCreateButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = createTab.ClickCreateButton();
             Thread.Sleep(2000);
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
@@ -146,7 +145,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
@@ -190,7 +189,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
@@ -236,7 +235,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
@@ -281,7 +280,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.Mercurial);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotHgFolder)));
@@ -326,7 +325,7 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
             createTab.UncheckCheckbox(createTab.CreateRemoteCheckBox);
             createTab.SetComboboxValue(createTab.RepoTypeComboBox, CreateTab.CVS.GitHub);
             WarningExistingEmptyFolder warning = createTab.ClickCreateButtonCallsWarning();
-            ScreenObjectsHelpers.Windows.Repository.RepositoryTab repoTab = warning.ClickYesButton();
+            Utils.Windows.Menu.Repository.RepositoryTab repoTab = warning.ClickYesButton();
             
             Assert.IsTrue(Directory.Exists(pathToRepo));
             Assert.IsTrue(Directory.Exists(Path.Combine(pathToRepo, ConstantsList.dotGitFolder)));
@@ -393,8 +392,8 @@ namespace AutomationTestsSolution.Tabs.NewTab.Toolbar.Create
 
         protected override void PerTestPreConfigureSourceTree()
         {
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, gitRepoName));
-            Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, mercurialRepoName));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, gitRepoName));
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(Path.Combine(SourceTreeTestDataPath, mercurialRepoName));
         }
     }
 }

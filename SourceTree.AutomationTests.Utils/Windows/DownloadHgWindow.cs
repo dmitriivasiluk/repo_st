@@ -1,7 +1,8 @@
-﻿using TestStack.White.UIItems;
+﻿using ScreenObjectsHelpers.Windows;
+using TestStack.White.UIItems;
 using TestStack.White.UIItems.WindowItems;
 
-namespace ScreenObjectsHelpers.Windows
+namespace SourceTree.AutomationTests.Utils.Windows
 {
     public class DownloadHgWindow : GeneralWindow
     {

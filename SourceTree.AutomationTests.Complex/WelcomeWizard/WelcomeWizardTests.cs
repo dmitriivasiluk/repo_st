@@ -1,11 +1,11 @@
 using System.IO;
 using System.Threading;
 using NUnit.Framework;
-using ScreenObjectsHelpers.Helpers;
-using ScreenObjectsHelpers.Tests;
 using ScreenObjectsHelpers.Windows;
-using ScreenObjectsHelpers.Windows.Repository;
-using ScreenObjectsHelpers.Windows.ToolbarTabs;
+using SourceTree.AutomationTests.Utils.Helpers;
+using SourceTree.AutomationTests.Utils.Windows;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Repository;
+using SourceTree.AutomationTests.Utils.Windows.Tabs.NewTab;
 
 namespace SourceTree.AutomationTests.Complex.WelcomeWizard
 {
@@ -19,7 +19,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
     /// 6. Putty agent is running on computer (when it is running, there is no prompt about adding ssh key)
     /// 7. There are global ignore files (Git/Mercurial) on computers
     /// </summary>
-    class WelcomeWizardTests : AutomationTestsSolution.WelcomeWizard.WelcomeWizardTests
+    class WelcomeWizardTests : General.WelcomeWizard.WelcomeWizardTests
     {
         [TestCase("testdesktopapplication@20minute.email", "123SourceTree", "http://HostURL.com", "username", "password")]
         [Category("WelcomeWizard")]
@@ -85,7 +85,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
             string nameOfRepo)
         {
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneOAuthGitHubTestFolder);
-            Utils.RemoveDirectory(pathToNewFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(pathToNewFolder);
 
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CloneGitHubRepositoryUsingOAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -114,7 +114,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool isRepositoryCloned = SourceTree.AutomationTests.Utils.Helpers.Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(isRepositoryCloned);
         }
@@ -131,7 +131,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
             string nameOfRepo)
         {
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneOAuthBitBucketTestFolder);
-            Utils.RemoveDirectory(pathToNewFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(pathToNewFolder);
 
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CloneBitBucketRepositoryUsingOAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -160,7 +160,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
             installWindow.ClickContinueButton();
 
             Thread.Sleep(2000);
-            bool isRepositoryCloned = Utils.IsFolderGit(pathToNewFolder);
+            bool isRepositoryCloned = SourceTree.AutomationTests.Utils.Helpers.Utils.IsFolderGit(pathToNewFolder);
 
             Assert.IsTrue(isRepositoryCloned);
         }
@@ -176,7 +176,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
             string nameOfRepo)
         {
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, cloneBasicBitBucketServerTestFolder);
-            Utils.RemoveDirectory(pathToNewFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(pathToNewFolder);
 
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CloneBitBucketServerRepositoryUsingBasicAuthTest));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);
@@ -221,7 +221,7 @@ namespace SourceTree.AutomationTests.Complex.WelcomeWizard
         {
             // Pre-condition
             string pathToNewFolder = Path.Combine(SourceTreeTestDataPath, openSourceTreeTestFolder);
-            Utils.RemoveDirectory(pathToNewFolder);
+            SourceTree.AutomationTests.Utils.Helpers.Utils.RemoveDirectory(pathToNewFolder);
 
             ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(SourceTreeOpensAfterFinishConfiguration));
             InstallationWindow installWindow = new InstallationWindow(MainWindow);

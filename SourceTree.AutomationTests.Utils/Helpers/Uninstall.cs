@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using System.Collections.Generic;
-using System.Collections;
 using Microsoft.Win32;
 
-namespace AutomationTestsSolution.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class Uninstall
     {

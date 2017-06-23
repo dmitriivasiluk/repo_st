@@ -1,4 +1,5 @@
-﻿using ScreenObjectsHelpers.Windows.Options;
+﻿using SourceTree.AutomationTests.Utils.Windows;
+using SourceTree.AutomationTests.Utils.Windows.Menu.Tools.Options;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;

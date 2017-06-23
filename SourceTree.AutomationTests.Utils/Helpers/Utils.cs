@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using TestStack.White;
 using TestStack.White.UIItems.WindowItems;
-using System.Linq;
 
-namespace ScreenObjectsHelpers.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class Utils
     {

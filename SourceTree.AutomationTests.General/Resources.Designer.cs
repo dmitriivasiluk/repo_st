@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AutomationTestsSolution {
+namespace SourceTree.AutomationTests.General {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace AutomationTestsSolution {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AutomationTestsSolution.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SourceTree.AutomationTests.General.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -59,11 +59,30 @@ namespace AutomationTestsSolution {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfCustomAction xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+        ///  &lt;CustomAction&gt;
+        ///    &lt;Caption&gt;customActionToBeEdited&lt;/Caption&gt;
+        ///    &lt;OpenInSeparateWindow&gt;false&lt;/OpenInSeparateWindow&gt;
+        ///    &lt;ShowFullOutput&gt;false&lt;/ShowFullOutput&gt;
+        ///    &lt;Target&gt;test&lt;/Target&gt;
+        ///  &lt;/CustomAction&gt;
+        ///&lt;/ArrayOfCustomAction&gt;.
+        /// </summary>
         internal static string customactions {
             get {
                 return ResourceManager.GetString("customactions", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot;?&gt;
+        ///&lt;ArrayOfString xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+        ///  &lt;string&gt;test_bbgitrepotoclone&lt;/string&gt;
+        ///&lt;/ArrayOfString&gt;.
+        /// </summary>
         internal static string opentabs_for_clear_repo {
             get {
                 return ResourceManager.GetString("opentabs_for_clear_repo", resourceCulture);

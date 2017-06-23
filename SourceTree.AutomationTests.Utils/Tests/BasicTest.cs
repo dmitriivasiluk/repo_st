@@ -5,15 +5,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Xml.Linq;
-using System.Xml.XPath;
-using AutomationTestsSolution.Helpers;
 using Castle.Core.Internal;
 using NUnit.Framework;
+using SourceTree.AutomationTests.Utils.Helpers;
 using TestStack.White.UIItems.WindowItems;
-using ScreenObjectsHelpers.Helpers;
 
-namespace AutomationTestsSolution.Tests
+namespace SourceTree.AutomationTests.Utils.Tests
 {
     public abstract class BasicTest
     {
@@ -533,7 +530,7 @@ namespace AutomationTestsSolution.Tests
         protected void AttachToSourceTree()
         {
             MainWindow = null;
-            MainWindow = Utils.FindNewWindow("SourceTree");
+            MainWindow = Helpers.Utils.FindNewWindow("SourceTree");
         }
 
         protected void RunSourceTree(string sourceTreeExe)

@@ -1,7 +1,6 @@
-﻿using System.Diagnostics;
-using System.IO;
+﻿using System.IO;
 
-namespace AutomationTestsSolution.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class SevenZipHelper
     {

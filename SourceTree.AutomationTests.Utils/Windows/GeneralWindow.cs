@@ -1,10 +1,10 @@
 ﻿using System;
+using SourceTree.AutomationTests.Utils.Windows.Menu;
 using TestStack.White.UIItems;
 using TestStack.White.UIItems.Finders;
 using TestStack.White.UIItems.WindowItems;
-using ScreenObjectsHelpers.Windows.MenuFolder;
 
-namespace ScreenObjectsHelpers.Windows
+namespace SourceTree.AutomationTests.Utils.Windows
 {
     /// <summary>
     /// This is general class for give other window common method like Menu Bar, workings with tab etc.

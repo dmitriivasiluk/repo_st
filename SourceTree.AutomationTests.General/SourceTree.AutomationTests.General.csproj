@@ -7,8 +7,8 @@
     <ProjectGuid>{F6239A52-6AD6-4B90-956D-61A204BA3E2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AutomationTestsSolution</RootNamespace>
-    <AssemblyName>Source</AssemblyName>
+    <RootNamespace>SourceTree.AutomationTests.General</RootNamespace>
+    <AssemblyName>SourceTree.AutomationTests.General</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -116,7 +116,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Menu\Tools\Options\Authentication\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace AutomationTestsSolution.Helpers
+namespace SourceTree.AutomationTests.Utils.Helpers
 {
     public class ProcessHelper
     {
