@@ -126,9 +126,6 @@
     <EmbeddedResource Include="Resources\customactions.xml" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\opentabs_for_clear_repo.xml" />
   </ItemGroup>
   <ItemGroup>
