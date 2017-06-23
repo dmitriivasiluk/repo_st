@@ -50,6 +50,13 @@ Task("Init")
 {
 });
 
+Task("Rebuild")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+});
+
 Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
@@ -110,7 +117,7 @@ Task("Run-Automation-Tests-Complex")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Build");
+    .IsDependentOn("Rebuild");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
