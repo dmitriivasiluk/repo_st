@@ -36,7 +36,11 @@ namespace AutomationTestsSolution.Helpers
             p.ErrorDataReceived += ErrorReceived;
             p.StartInfo = psi;
             p.Start();
-            p.WaitForExit(120000);
+            if (!p.WaitForExit(120000))
+            {
+                // did not finish
+                p.Kill();
+            }
             return p.ExitCode == 0;
         }
 
