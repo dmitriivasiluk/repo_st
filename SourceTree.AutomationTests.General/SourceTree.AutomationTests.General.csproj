@@ -119,12 +119,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScreenObjectsHelpers\ScreenObjectsHelpers.csproj">
-      <Project>{a8d0a59b-a007-4fb6-997c-4a35b03aef8c}</Project>
-      <Name>ScreenObjectsHelpers</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -136,6 +130,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\opentabs_for_clear_repo.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SourceTree.AutomationTests.Utils\SourceTree.AutomationTests.Utils.csproj">
+      <Project>{a8d0a59b-a007-4fb6-997c-4a35b03aef8c}</Project>
+      <Name>SourceTree.AutomationTests.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
