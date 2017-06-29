@@ -7,34 +7,29 @@ using System;
 using System.IO;
 using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using System.Threading;
+using AutomationTestsSolution.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
     class SubtreesTests : BasicTest
     {
         #region Test Variables
-        private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
-        private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        // opentabs configuration
-        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
-        private string resourceName = Resources.opentabs_for_clear_repo;
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
 
-        private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
         private AddLinkSubtreeWindow addLinkSubtree;
         #endregion
 
-        [SetUp]
-        public override void SetUp()
+        protected override void PerTestPreConfigureSourceTree()
         {
             RemoveTestFolder();
             CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
-            base.BackupConfigs();
-            base.UseTestConfigAndAccountJson(sourceTreeDataPath);
-            resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
-            File.WriteAllText(openTabsPath, resourceName);
-            base.RunAndAttachToSourceTree();
+            Repository.Init(PathToClonedGitRepo);
+
+            var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
+            var openTabsXml = new OpenTabsXml(openTabsPath);
+            openTabsXml.SetOpenTab(PathToClonedGitRepo);
+            openTabsXml.Save();
         }
 
         [TearDown]
@@ -46,11 +41,11 @@ namespace AutomationTestsSolution.Tests
         }
         private void CreateTestFolder()
         {
-            Directory.CreateDirectory(pathToClonedGitRepo);
+            Directory.CreateDirectory(PathToClonedGitRepo);
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]
@@ -59,7 +54,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonDisabledWithEmptySourcePath));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             
             addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
@@ -73,12 +68,12 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledAfterCorrectDataSet()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonEnabledAfterCorrectDataSet));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonEnabledAfterCorrectDataSet));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
 
             addLinkSubtree = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddLinkSubtreeWindow>(OperationsRepositoryMenu.AddLinkSubtree);
 
-            addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, pathToClonedGitRepo);
+            addLinkSubtree.SetTextboxContent(addLinkSubtree.SourcePathTextbox, PathToClonedGitRepo);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.LocalRelativePathTextbox, testString);
             Thread.Sleep(3000);
             addLinkSubtree.SetTextboxContent(addLinkSubtree.BranchCommitTextbox, testString);

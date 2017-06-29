@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using ScreenObjectsHelpers.Windows.ToolbarTabs;
@@ -11,24 +12,11 @@ namespace AutomationTestsSolution.Tests
     {
         #region Test Variables
         string gitRepoToClone = ConstantsList.gitRepoToClone;
-        string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
+        public string PathToClonedHgRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testHgRepoBookmarkName); } }
+
         string mercurialRepoToClone = ConstantsList.mercurialRepoToClone;
-        string pathToClonedMercurialRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedMercurialRepo);
         #endregion
-
-        /// <summary>        
-        /// Pre-conditions: 
-        /// Test repo folders are removed
-        /// Mercurial is installed
-        /// 2.0 Welcome - Disabled
-        /// </summary>
-        [SetUp]
-        public override void SetUp()
-        {
-            RemoveTestFolders();
-
-            base.SetUp();           
-        }
 
         [TearDown]
         public override void TearDown()
@@ -42,8 +30,8 @@ namespace AutomationTestsSolution.Tests
 
         private void RemoveTestFolders()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
-            Utils.RemoveDirectory(pathToClonedMercurialRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedHgRepo);
         }
 
         [Test]
@@ -52,7 +40,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void ValidateGitRepoLinkTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateGitRepoLinkTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(ValidateGitRepoLinkTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
             
@@ -67,7 +55,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void ValidateMercurialRepoLinkTest() // Mercurial should be installed
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateMercurialRepoLinkTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(ValidateMercurialRepoLinkTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -82,7 +70,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void ValidateInvalidRepoLinkTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(ValidateInvalidRepoLinkTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(ValidateInvalidRepoLinkTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -97,7 +85,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckNoPathSuppliedMessageDisplayed()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckNoPathSuppliedMessageDisplayed));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckNoPathSuppliedMessageDisplayed));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -112,7 +100,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckCloneButtonEnabledTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneButtonEnabledTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneButtonEnabledTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -128,15 +116,16 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckCloneGitRepoTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneGitRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneGitRepoTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, gitRepoToClone);
+            cloneTab.DestinationPathTextBox.SetValue(PathToClonedGitRepo);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.gitRepoType);
             cloneTab.ClickCloneButton();
 
-            var isFolderInitialized = GitWrapper.GetRepositoryByPath(pathToClonedGitRepo);            
+            var isFolderInitialized = GitWrapper.GetRepositoryByPath(PathToClonedGitRepo);            
 
             Assert.IsNotNull(isFolderInitialized);
         }
@@ -147,19 +136,18 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void CheckCloneMercurialRepoTest()  // Mercurial should be installed
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneMercurialRepoTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
             cloneTab.SetTextboxContent(cloneTab.SourcePathTextBox, mercurialRepoToClone);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
-
+            cloneTab.DestinationPathTextBox.SetValue(PathToClonedHgRepo);
             cloneTab.GetValidationMessage(CloneTab.LinkValidationMessage.mercurialRepoType);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneMercurialRepoTest));
             cloneTab.ClickCloneButton();
 
-            bool isDotHgExistByPath = Utils.IsFolderMercurial(pathToClonedMercurialRepo);
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckCloneMercurialRepoTest));
+            bool isDotHgExistByPath = Utils.IsFolderMercurial(PathToClonedHgRepo);
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckCloneMercurialRepoTest));
             Assert.IsTrue(isDotHgExistByPath);
         }
 
@@ -170,7 +158,7 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void CheckGitRepoOpenedAfterCloneTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckGitRepoOpenedAfterCloneTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckGitRepoOpenedAfterCloneTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -190,7 +178,7 @@ namespace AutomationTestsSolution.Tests
         //[Ignore("Investigate stability issue")]
         public void CheckHgRepoOpenedAfterCloneTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckHgRepoOpenedAfterCloneTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckHgRepoOpenedAfterCloneTest));
             LocalTab mainWindow = new LocalTab(MainWindow);            
             CloneTab cloneTab = mainWindow.OpenTab<CloneTab>();
 
@@ -201,6 +189,11 @@ namespace AutomationTestsSolution.Tests
             RepositoryTab repoTab = cloneTab.ClickCloneButton();
 
             Assert.IsTrue(repoTab.IsRepoTabTitledWithText(repoName));
+        }
+        
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            RemoveTestFolders();
         }
     }
 }

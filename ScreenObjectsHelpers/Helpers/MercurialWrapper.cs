@@ -5,26 +5,29 @@ namespace ScreenObjectsHelpers.Helpers
 {
     public class MercurialWrapper
     {
-        private static readonly string PathToEmbeddedHg = Environment.ExpandEnvironmentVariables(ConstantsList.pathToEmbeddedHg);
-        public const string HgInit = "init";
-
-
-        public static Tuple<string, string> HgRun(string command, string path)
+        private string _hgPath;
+        public MercurialWrapper(string hgPath)
         {
-            var args = string.Join(" ", command, path);
+            _hgPath = hgPath;
+        }
 
+        public bool Init(string pathToTestHgFolder)
+        {
             Process p = new Process();
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.FileName = PathToEmbeddedHg;
-            p.StartInfo.Arguments = args;
+            p.StartInfo.FileName = _hgPath;
+            p.StartInfo.Arguments = $"init {pathToTestHgFolder}";
             p.Start();
-            var error = p.StandardError.ReadToEnd();
-            var output = p.StandardOutput.ReadToEnd();
+            Error = p.StandardError.ReadToEnd();
+            Output = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
 
-           return new Tuple<string, string>(error, output);
+            return p.ExitCode == 0;
         }
+
+        public string Error { get; private set; }
+        public string Output { get; private set; }
     }
 }

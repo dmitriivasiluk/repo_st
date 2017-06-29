@@ -2,6 +2,7 @@
 using TestStack.White;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Threading;
 
 namespace ScreenObjectsHelpers.Helpers
@@ -12,9 +13,14 @@ namespace ScreenObjectsHelpers.Helpers
         // to include it to the name of screenshot file
         // e.g. TakeScreenShot(nameof(<name of test>))
         // or a frame name from StackTrace
-        // ScreenshotsTaker.TakeScreenShot(new StackTrace().GetFrame(0).GetMethod().Name);
-        public static void TakeScreenShot(string nameOfTest)
+        // ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, new StackTrace().GetFrame(0).GetMethod().Name);
+        public static void TakeScreenShot(string path, string nameOfTest)
         {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             Thread.Sleep(500);
             var prefix = "Test_";
             var timestamp = DateTime.Now.ToString("_MM.dd_HHmmss");
@@ -22,8 +28,6 @@ namespace ScreenObjectsHelpers.Helpers
             var extension = ".jpg";
 
             var filename = prefix + nameOfTest + timestamp + random + extension;
-
-            string path = Environment.ExpandEnvironmentVariables(@"%userprofile%\Documents\");
 
             ScreenCapture sc = new ScreenCapture();
             // capture entire screen, and save it to a file

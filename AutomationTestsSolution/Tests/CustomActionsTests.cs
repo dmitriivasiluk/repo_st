@@ -11,22 +11,12 @@ namespace AutomationTestsSolution.Tests
 {
     class CustomActionsTests : BasicTest
     {
-        [SetUp]
-        public override void SetUp()
-        {
-            var resourceName = Resources.customactions;
-            var customActionsFilePath = Environment.ExpandEnvironmentVariables(@"%localappdata%\Atlassian\SourceTree\customactions.xml");
-            RestoreFile(customActionsFilePath);
-            File.WriteAllText(customActionsFilePath, resourceName);
-            base.SetUp();
-        }
-
         [Test]
         [Category("CustomActions")]
         [Category("General")]
         public void AddCustomAction()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AddCustomAction));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AddCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -49,7 +39,7 @@ namespace AutomationTestsSolution.Tests
         [Category("General")]
         public void EditCustomAction()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(EditCustomAction));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(EditCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -71,7 +61,7 @@ namespace AutomationTestsSolution.Tests
         [Category("General")]
         public void DeleteCustomAction()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(DeleteCustomAction));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(DeleteCustomAction));
             LocalTab mainWindow = new LocalTab(MainWindow);
             OptionsWindow optionsWindows = mainWindow.OpenMenu<ToolsMenu>().OpenOptions();
             CustomActionsTab customActionsTab = optionsWindows.OpenTab<CustomActionsTab>();
@@ -87,6 +77,13 @@ namespace AutomationTestsSolution.Tests
             bool isCustomActionDeleted = customActionsTab.IsMenuCaptionExists(ConstantsList.customActionToBeDeleted);
 
             Assert.IsFalse(isCustomActionDeleted);
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            var resourceName = Resources.customactions;
+            var customActionsFilePath = Path.Combine(SourceTreeUserDataPath, "customactions.xml");
+            File.WriteAllText(customActionsFilePath, resourceName);
         }
     }
 }

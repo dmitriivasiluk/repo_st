@@ -7,35 +7,20 @@ using static ScreenObjectsHelpers.Windows.MenuFolder.RepositoryMenu;
 using System;
 using System.IO;
 using System.Threading;
+using AutomationTestsSolution.Helpers;
 
 namespace AutomationTestsSolution.Tests
 {
     class SubmodulesTests : BasicTest
     {
         #region Test Variables
-        private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
-        private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        // opentabs configuration
-        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
-        private string resourceName = Resources.opentabs_for_clear_repo;
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
 
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
         private AddSubmoduleWindow addSubmoduleWindow;
         #endregion
 
-        [SetUp]
-        public override void SetUp()
-        {
-            RemoveTestFolder();
-            CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
-            base.BackupConfigs();
-            base.UseTestConfigAndAccountJson(sourceTreeDataPath);
-            resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
-            File.WriteAllText(openTabsPath, resourceName);
-            base.RunAndAttachToSourceTree();
-        }
 
         [TearDown]
         public override void TearDown()
@@ -46,11 +31,11 @@ namespace AutomationTestsSolution.Tests
         }
         private void CreateTestFolder()
         {
-            Directory.CreateDirectory(pathToClonedGitRepo);
+            Directory.CreateDirectory(PathToClonedGitRepo);
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]
@@ -59,7 +44,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonDisabledWithEmptySourcePath()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonDisabledWithEmptySourcePath));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonDisabledWithEmptySourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
@@ -72,11 +57,11 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void IsOkButtonEnabledWithEnteredSourcePath()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(IsOkButtonEnabledWithEnteredSourcePath));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(IsOkButtonEnabledWithEnteredSourcePath));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
-            addSubmoduleWindow.SetTextboxContent(addSubmoduleWindow.SourcePathTextbox, pathToClonedGitRepo);
+            addSubmoduleWindow.SourcePathTextbox.SetValue(PathToClonedGitRepo);
             addSubmoduleWindow.LocalRelativePathTextbox.Focus();
             Thread.Sleep(4000);
 
@@ -89,7 +74,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void SourcePathFieldValidateWrongInputTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(SourcePathFieldValidateWrongInputTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(SourcePathFieldValidateWrongInputTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);
             addSubmoduleWindow = mainWindow.OpenMenu<RepositoryMenu>().ClickOperationToReturnWindow<AddSubmoduleWindow>(OperationsRepositoryMenu.AddSubmodule);
 
@@ -97,6 +82,18 @@ namespace AutomationTestsSolution.Tests
             var isValidationMessageCorrect = addSubmoduleWindow.GetValidationMessage(AddSubmoduleWindow.LinkValidationMessage.notValidPath);
 
             Assert.IsTrue(isValidationMessageCorrect);
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            RemoveTestFolder();
+            CreateTestFolder();
+            Repository.Init(PathToClonedGitRepo);
+            
+            var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
+            var openTabsXml = new OpenTabsXml(openTabsPath);
+            openTabsXml.SetOpenTab(PathToClonedGitRepo);
+            openTabsXml.Save();
         }
     }
 }

@@ -3,6 +3,7 @@ using NUnit.Framework;
 using ScreenObjectsHelpers.Helpers;
 using System.IO;
 using System;
+using AutomationTestsSolution.Helpers;
 using ScreenObjectsHelpers.Windows.Repository;
 
 namespace AutomationTestsSolution.Tests
@@ -10,30 +11,16 @@ namespace AutomationTestsSolution.Tests
     class GitFlowInitialiseTests : BasicTest
     {
         #region Test Variables
-        private string pathToClonedGitRepo = Environment.ExpandEnvironmentVariables(ConstantsList.pathToClonedGitRepo);
-        private string currentUserProfile = Environment.ExpandEnvironmentVariables(ConstantsList.currentUserProfile);
-        
+
+        public string PathToClonedGitRepo { get { return Path.Combine(SourceTreeTestDataPath, ConstantsList.testGitRepoBookmarkName); } }
+
         // opentabs configuration
-        private string openTabsPath = Environment.ExpandEnvironmentVariables(Path.Combine(ConstantsList.pathToDataFolder, ConstantsList.opentabsXml));
         private string resourceName = Resources.opentabs_for_clear_repo;
 
         private string userprofileToBeReplaced = ConstantsList.currentUserProfile;
         private string testString = "123";
         private GitFlowInitialiseWindow gitFlowInitWindow;
         #endregion
-
-        [SetUp]
-        public override void SetUp()
-        {
-            RemoveTestFolder();
-            CreateTestFolder();
-            Repository.Init(pathToClonedGitRepo);
-            base.BackupConfigs();
-            base.UseTestConfigAndAccountJson(sourceTreeDataPath);
-            resourceName = resourceName.Replace(userprofileToBeReplaced, currentUserProfile);
-            File.WriteAllText(openTabsPath, resourceName);
-            base.RunAndAttachToSourceTree();
-        }
 
         [TearDown]
         public override void TearDown()
@@ -44,11 +31,11 @@ namespace AutomationTestsSolution.Tests
         }
         private void CreateTestFolder()
         {
-            Directory.CreateDirectory(pathToClonedGitRepo);
+            Directory.CreateDirectory(PathToClonedGitRepo);
         }
         private void RemoveTestFolder()
         {
-            Utils.RemoveDirectory(pathToClonedGitRepo);
+            Utils.RemoveDirectory(PathToClonedGitRepo);
         }
 
         [Test]
@@ -57,7 +44,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void CheckUseDefaultsButtonResetTextboxesTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckUseDefaultsButtonResetTextboxesTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckUseDefaultsButtonResetTextboxesTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
@@ -78,7 +65,7 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithRepoOpened")]
         public void CheckDefaultBranchNamesTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(CheckDefaultBranchNamesTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(CheckDefaultBranchNamesTest));
             RepositoryTab mainWindow = new RepositoryTab(MainWindow);            
             gitFlowInitWindow = mainWindow.ClickGitFlowButton();
 
@@ -89,6 +76,21 @@ namespace AutomationTestsSolution.Tests
             Assert.AreEqual(gitFlowInitWindow.HotfixBranchTextbox.Text, ConstantsList.defaultHotfixBranch);
 
             Assert.IsTrue(gitFlowInitWindow.IsVersionTagEmpty());
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            // init repo
+            RemoveTestFolder();
+            CreateTestFolder();
+            Repository.Init(PathToClonedGitRepo);
+
+            // open tab
+            var openTabsPath = Path.Combine(SourceTreeUserDataPath, ConstantsList.opentabsXml);
+            var openTabsXml = new OpenTabsXml(openTabsPath);
+            openTabsXml.SetOpenTab(PathToClonedGitRepo);
+            openTabsXml.Save();
+
         }
     }
 }

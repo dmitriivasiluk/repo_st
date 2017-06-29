@@ -14,16 +14,20 @@ namespace AutomationTestsSolution.Tests
         [Category("StartWithNewTabOpened")]
         public void AboutWindowTest()
         {
-            ScreenshotsTaker.TakeScreenShot(nameof(AboutWindowTest));
+            ScreenshotsTaker.TakeScreenShot(SourceTreeScreenShotsPath, nameof(AboutWindowTest));
             LocalTab mainWindow = new LocalTab(MainWindow);
             AboutWindow aboutWindow = mainWindow.OpenMenu<HelpMenu>().OpenAbout();
 
             string aboutWindowHeader = aboutWindow.GetHeader();
             string copyrightCaption = aboutWindow.GetCopyrightCaption();
-            string appVersion = aboutWindow.GetAppVersion();
             Assert.AreEqual(aboutWindowHeader, ConstantsList.aboutWindowHeader);
             Assert.AreEqual(copyrightCaption, ConstantsList.copyrightCaption);
-            Assert.That(appVersion, Does.Contain(GetSourceTreeVersion()));
+            Assert.That(aboutWindow.HasAppVersion(SourceTreeVersion), Is.True);
+        }
+
+        protected override void PerTestPreConfigureSourceTree()
+        {
+            // nothing todo
         }
     }
 }

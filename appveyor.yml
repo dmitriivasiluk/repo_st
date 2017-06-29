@@ -4,47 +4,29 @@ os: Unstable
 version: 1.0.{build}
 init:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
-cache:
-  - packages
-install:
-- ps:  >-
-
-    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/2.1.2.5.7z 'C:\Users\appveyor\AppData\Local\sourcetree.7z'
-    
-    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/configs.7z 'C:\Users\appveyor\AppData\Local\configs.7z'
-    
-    Start-FileDownload https://bitbucket.org/atlassian/sourcetreeqaautomation/downloads/global_ignore.7z 'C:\Users\appveyor\Documents\ignore.7z'
-    
 before_build:
 - cmd: >-
-
-    set PATH=C:\Program Files\Git\mingw64\bin;%PATH%
-
-    git config --global core.excludesfile "%USERPROFILE%\.gitignore_global"
-
     git config --global user.email test@atlassian.com
     
     git config --global user.name QAAutomation
-    
-    nuget restore
-    
-    7z e C:\Users\appveyor\AppData\Local\sourcetree.7z -y -oC:\Users\appveyor\AppData\Local -spf       
-    
-    7z e C:\Users\appveyor\AppData\Local\configs.7z -y -oC:\Users\appveyor\AppData\Local -spf
 
-    cscript %localappdata%\configs\chrome_default.vbs
+    dir C:\projects\sourcetreeqaautomation\.appveyor
     
-    %windir%\system32\reg.exe import %localappdata%\configs\Disable_Explorer_Auto_Complete_popup.reg
+    cscript C:\projects\sourcetreeqaautomation\.appveyor\chrome_default.vbs
+    
+    %windir%\system32\reg.exe import C:\projects\sourcetreeqaautomation\.appveyor\Disable_Explorer_Auto_Complete_popup.reg
 
-    %localappdata%\configs\SeleniumAuth.exe
+    echo C:\projects\sourcetreeqaautomation\.appveyor\SeleniumAuth.exe
     
-    7z e C:\Users\appveyor\Documents\ignore.7z -y -oC:\Users\appveyor\Documents -spf
-build:
-  verbosity: minimal
+build_script:
+- ps: C:\projects\sourcetreeqaautomation\build.ps1 -Target Build
 test:
   categories:
     only:
     - General
+artifacts:
+  - path: '**\screenshots\*.jpg'
+
 on_failure:
 - 7z a %APPVEYOR_BUILD_FOLDER%\screenshots.7z C:\Users\appveyor\Documents\*.jpg    
 - appveyor PushArtifact screenshots.7z
