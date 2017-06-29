@@ -14,8 +14,8 @@ $ `git clone "git@bitbucket.org:atlassian/sourcetreeqaautomation.git"`
 
 ## Project Description
 
-### AutomationTestsSolution is used for creation and running automated test scripts
-
+### SourceTree.AutomationTests.Complex used for creation and running flaky and complex automated test scripts
+### SourceTree.AutomationTests.General is used for creation and running stable automated test scripts
 ### ScreenObjectsHelpers is used for creations of windows and helpers
 
 
