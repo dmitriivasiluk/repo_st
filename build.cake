@@ -50,6 +50,13 @@ Task("Init")
 {
 });
 
+Task("Rebuild")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+});
+
 Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
@@ -71,7 +78,7 @@ Task("Build")
     }
 });
 
-Task("Run-Unit-Tests-Core")
+Task("Run-Automation-Tests-General")
     .IsDependentOn("Build")
     .Does(() =>
 {
@@ -82,19 +89,26 @@ Task("Run-Unit-Tests-Core")
     //Environment.SetEnvironmentVariable("ST_USERCONFIG", userConfig );
 
     //Error("Using "+ testVersion + " @ " + exePath);
-    NUnit3("./**/bin/" + configuration + "/AutomationTest*.dll", 
+    NUnit3("./**/bin/" + configuration + "/SourceTree.AutomationTests.General*.dll", 
         new NUnit3Settings {
             NoResults = true,
-            Test = "AutomationTestsSolution.Tests.HelpMenuTests"
-            + ",AutomationTestsSolution.Tests.CustomActionsTests"
-            + ",AutomationTestsSolution.Tests.SubmodulesTests"
-            + ",AutomationTestsSolution.Tests.GitFlowInitialiseTests"
-            + ",AutomationTestsSolution.Tests.SubtreesTests"
-            + ",AutomationTestsSolution.Tests.ToolbarAddTabTests"
-            + ",AutomationTestsSolution.Tests.ToolbarCloneTabTests"
-            + ",AutomationTestsSolution.Tests.ToolbarCreateTabTestLocal"
-            //+ ",AutomationTestsSolution.Tests.ToolbarRemoteTabTests"
-            + ",AutomationTestsSolution.Tests.WelcomeWizardTests"
+        });
+});
+
+Task("Run-Automation-Tests-Complex")
+    .IsDependentOn("Build")
+    .Does(() =>
+{
+    //Environment.SetEnvironmentVariable("ST_EXE", exePath);
+    //Environment.SetEnvironmentVariable("ST_VERSION", testVersion.ToString() );
+    //Environment.SetEnvironmentVariable("ST_USERDATAFOLDER", userDataFolder );
+    //Environment.SetEnvironmentVariable("ST_TESTDATARUNTIMEFOLDER", testDataRuntimeFolder );
+    //Environment.SetEnvironmentVariable("ST_USERCONFIG", userConfig );
+
+    //Error("Using "+ testVersion + " @ " + exePath);
+    NUnit3("./**/bin/" + configuration + "/SourceTree.AutomationTests.Complex*.dll", 
+        new NUnit3Settings {
+            NoResults = true,
         });
 });
 
@@ -103,7 +117,7 @@ Task("Run-Unit-Tests-Core")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Build");
+    .IsDependentOn("Rebuild");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION

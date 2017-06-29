@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props" Condition="Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8D0A59B-A007-4FB6-997C-4A35B03AEF8C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SourceTree.AutomationTests.Utils</RootNamespace>
+    <AssemblyName>SourceTree.AutomationTests.Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LibGit2Sharp, Version=0.23.1.0, Culture=neutral, PublicKeyToken=7cbde695407f0333, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibGit2Sharp.0.23.1\lib\net40\LibGit2Sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.OCR, Version=1.4.16.1007, Culture=neutral, PublicKeyToken=675fb48d7a2b2d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.OCR.1.4.16.1007\lib\net40\System.Drawing.OCR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Extended, Version=3.4.16.616, Culture=neutral, PublicKeyToken=675fb48d7a2b2d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Extended.3.4.16.616\lib\net40\System.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TestStack.White, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.White.0.13.3\lib\net40\TestStack.White.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TestStack.White.Reporting, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.White.ScreenObjects.0.13.3\lib\net40\TestStack.White.Reporting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TestStack.White.ScreenObjects, Version=0.13.0.0, Culture=neutral, PublicKeyToken=2672efbf3e161801, processorArchitecture=MSIL">
+      <HintPath>..\packages\TestStack.White.ScreenObjects.0.13.3\lib\net40\TestStack.White.ScreenObjects.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+      </ItemGroup>
+    </When>
+    <Otherwise />
+  </Choose>
+  <ItemGroup>
+    <Compile Include="Helpers\ConstantsList.cs" />
+    <Compile Include="Helpers\AttemptsCounterLogger.cs" />
+    <Compile Include="Helpers\EmbeddedGitHelper.cs" />
+    <Compile Include="Helpers\EmbeddedHgHelper.cs" />
+    <Compile Include="Helpers\ExeConfig.cs" />
+    <Compile Include="Helpers\MercurialWrapper.cs" />
+    <Compile Include="Helpers\OpenTabsXml.cs" />
+    <Compile Include="Helpers\ProcessHelper.cs" />
+    <Compile Include="Helpers\ScreenshotsTaker.cs" />
+    <Compile Include="Helpers\SevenZipHelper.cs" />
+    <Compile Include="Helpers\Uninstall.cs" />
+    <Compile Include="Helpers\Utils.cs" />
+    <Compile Include="Helpers\GitWrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\AbstractWelcomeWizardTest.cs" />
+    <Compile Include="Tests\BasicTest.cs" />
+    <Compile Include="Windows\DownloadHgWindow.cs" />
+    <Compile Include="Windows\AuthenticationWindow.cs" />
+    <Compile Include="Windows\AboutWindow.cs" />
+    <Compile Include="Windows\BasicWindow.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\EditCustomActionWindow.cs" />
+    <Compile Include="Windows\InstallationWindow.cs" />
+    <Compile Include="Windows\Menu\ActionsMenu.cs" />
+    <Compile Include="Windows\Menu\Action\ResolveConflict.cs" />
+    <Compile Include="Windows\Menu\RepositoryMenu.cs" />
+    <Compile Include="Windows\Menu\ViewMenu.cs" />
+    <Compile Include="Windows\Menu\EditMenu.cs" />
+    <Compile Include="Windows\Menu\HelpMenu.cs" />
+    <Compile Include="Windows\Menu\ToolsMenu.cs" />
+    <Compile Include="Windows\Menu\FileMenu.cs" />
+    <Compile Include="Windows\Menu\MenuBar.cs" />
+    <Compile Include="Windows\Tabs\NewTab\NewTabWindow.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\CustomActionsTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\NetworkTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\MercurialTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\DiffTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\AuthenticationTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\GeneralTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\GitTab.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\OptionsWindow.cs" />
+    <Compile Include="Windows\GeneralWindow.cs" />
+    <Compile Include="Windows\Menu\Tools\Options\UpdatesTab.cs" />
+    <Compile Include="Windows\ProxyAuthenticationWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\AddLinkSubtreeWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\AddSubmoduleWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\FetchWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\GitFlowInitialiseWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\PullGitRepoWindow.cs" />
+    <Compile Include="Windows\Menu\Repository\RepositoryTab.cs" />
+    <Compile Include="Windows\Menu\Repository\StashShelveWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\AddTabWindows\OpenWorkingCopyWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\CreateTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\EditHostingAccountWindow\AuthenticateWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\EditHostingAccountWindow\EditHostingAccountWindow.cs" />
+    <Compile Include="Windows\Tabs\NewTab\LocalTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\CloneTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\AddTab.cs" />
+    <Compile Include="Windows\Tabs\NewTab\RemoteTab.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows\Tabs\RepositoryTab\" />
+  </ItemGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
+      <ItemGroup>
+        <Reference Include="Microsoft.VisualStudio.QualityTools.CodedUITestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITest.Extension, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="Microsoft.VisualStudio.TestTools.UITesting, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LibGit2Sharp.NativeBinaries.1.0.164\build\LibGit2Sharp.NativeBinaries.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

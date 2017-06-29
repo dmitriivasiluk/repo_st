@@ -37,3 +37,5 @@ $ `git clone "git@bitbucket.org:atlassian/sourcetreeqaautomation.git"`
 
 
 ### Automation ID should be created for All windows avaliable on the app, if there are no required Ids -issues should be run in jira 
+
+# commit to force a build
